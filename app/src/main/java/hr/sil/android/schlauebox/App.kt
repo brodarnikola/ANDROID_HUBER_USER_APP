@@ -24,9 +24,11 @@ package hr.sil.android.schlauebox
 import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
+import android.widget.Toast
 import com.esotericsoftware.minlog.Log
 import com.facebook.stetho.Stetho
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
 import hr.sil.android.ble.scanner.BLEDeviceScanner
@@ -199,6 +201,20 @@ class App : Application(), BLEScannerStateHolder {
 
         // Use a proper scope instead of GlobalScope
         CoroutineScope(Dispatchers.IO).launch {
+
+            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    log.info("Fetching FCM registration token failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new FCM registration token
+                val token = task.result
+
+                // Log and toast
+                log.info("token is ${token}")
+                Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
+            })
            // FirebaseApp.initializeApp(this@App)
             //delay(3000)
 //            val task = FirebaseMessaging.getInstance().token.awaitForResult()
