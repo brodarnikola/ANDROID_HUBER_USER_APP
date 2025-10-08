@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:id="@+id/main_parcel_locker_item_wrapper">
+
+    <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+        android:id="@+id/groupNameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"    />
+
+</LinearLayout>

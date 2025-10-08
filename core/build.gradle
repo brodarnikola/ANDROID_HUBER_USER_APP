@@ -1,0 +1,80 @@
+//apply plugin: 'com.android.library'
+//apply plugin: 'kotlin-android'
+
+plugins {
+    //id 'com.android.application'
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+//    id 'kotlin-kapt'
+//    id 'kotlin-parcelize'
+//    id 'com.google.dagger.hilt.android'
+    id 'kotlin-android'
+    id 'com.google.devtools.ksp'
+//    id 'com.google.gsm:google-services'
+}
+
+android {
+    namespace 'hr.sil.android.schlauebox.core'
+    compileSdkVersion 35
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 35
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        demo {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        //coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    // enable desugaring
+    //coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:$desugar_jdk_libs_version"
+
+    //kotlin stdlib
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.22"
+    //coroutines
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    //retrofit2 coroutine extensions
+    api 'ru.gildor.coroutines:kotlin-coroutines-retrofit:1.1.0'
+
+    // androidx
+    implementation 'androidx.preference:preference-ktx:1.2.0'
+
+    //SIL libraries
+    api('hr.sil.android.ble.scanner:scan_multi:2.6.2')// { changing = true }
+    api('hr.sil.android.blecommunicator:android_blecommunicator:2.8.0')// { changing = true }
+    api('hr.sil.android.rest:core:1.2.30')// { changing = true }
+    api('hr.sil.android:util:1.1.0')// { changing = true }
+
+    //logging
+    api "org.slf4j:slf4j-api:1.7.36"
+    api "org.slf4j:slf4j-android:1.7.36"
+
+
+
+}
+

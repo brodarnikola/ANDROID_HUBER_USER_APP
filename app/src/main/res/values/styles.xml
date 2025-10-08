@@ -1,0 +1,81 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/transparentColor</item>
+        <item name="colorAccent">@color/colorDarkAccent</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
+
+    <!-- Splash Screen theme. -->
+    <style name="SplashTheme" parent="AppTheme.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+    </style>
+
+    <style name="MainTheme" parent="AppTheme.NoActionBar">
+        <item name="android:statusBarColor">@color/colorGrayLight</item>
+        <item name="android:windowBackground">@drawable/bg_home</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+    </style>
+
+    <style name="SecondLevel" parent="AppTheme.NoActionBar">
+        <item name="android:statusBarColor">@color/colorGrayLight</item>
+        <item name="android:windowBackground">@drawable/bg_three</item>
+        <item name="colorPrimary">@color/transparentColor</item>
+    </style>
+
+
+    <style name="HelpContentTheme" parent="AppTheme.NoActionBar">
+        <item name="android:statusBarColor">@color/colorGrayLight</item>
+        <item name="colorPrimary">@color/transparentColor</item>
+    </style>
+
+    <style name="IntroTheme" parent="MainTheme">
+        <item name="android:statusBarColor">@color/colorDarkAccent</item>
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.NavigationView" parent="AppTheme">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+    <style name="HeaderToolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <!--Error label text style-->
+    <style name="MyErrorText" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="colorAccent">@color/colorDarkAccent</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+    </style>
+
+    <!--Input field style-->
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorDarkAccent</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+
+
+
+</resources>

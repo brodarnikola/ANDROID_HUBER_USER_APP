@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:layout_marginBottom="5dp"
+    android:background="@color/colorWhite30PercentTransparency"  >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clMasterDeviceIcon"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="2.0"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rlMasterDeviceData"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <ImageView
+            android:id="@+id/main_single_parcel_locker_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+            android:id="@+id/mpl_details_circle_value"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle"
+            android:gravity="center"
+            android:shadowColor="@android:color/white"
+            android:shadowRadius="10.0"
+
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+
+            android:layout_marginTop="-60dp"
+            android:layout_marginRight="5dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlMasterDeviceData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:paddingLeft="10dp"
+
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="6.5"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toStartOf="@+id/main_single_parcel_locker_arrow"
+        app:layout_constraintStart_toEndOf="@+id/clMasterDeviceIcon" >
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+            android:id="@+id/main_parcel_locker_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            android:textAllCaps="true"
+
+            android:gravity="left|center_vertical"
+            />
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+            android:id="@+id/main_parcel_locker_item_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textColor="@color/colorWhite"
+            android:textSize="11sp"
+            android:textAllCaps="true"
+
+            android:gravity="left|center_vertical"
+
+            android:layout_below="@+id/main_parcel_locker_item_name"
+            />
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewBoldFont
+            android:id="@+id/main_locker_availability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textColor="@color/colorBlack"
+            android:textSize="11sp"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+
+            android:gravity="left|center_vertical"
+
+            android:layout_below="@+id/main_parcel_locker_item_address"
+            />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/main_single_parcel_locker_arrow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/ic_chevron_right"
+
+        android:paddingLeft="20dp"
+
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1.5"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rlMasterDeviceData"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

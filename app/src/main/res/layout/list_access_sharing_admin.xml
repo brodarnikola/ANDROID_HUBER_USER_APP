@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:layout_marginBottom="5dp"
+    android:id="@+id/main_parcel_locker_item_wrapper"
+    android:background="@color/help_item">
+
+    <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewBoldFont
+        android:id="@+id/key_sharing_item_key_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/colorWhite"
+
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="8dp"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"Schlaue Box"</string>
+    <string name="app_generic_password">"Password"</string>
+    <string name="app_generic_enter_ble">"Not in proximity"</string>
+
+    <!-- Main screen -->
+    <string name="title_activity_main_home">"Home"</string>
+    <string name="locker_details_registration_body">"You currently don’t have access to this parcel lockers."</string>
+    <string name="app_generic_privacy_policy">"Terms &amp; conditions"</string>
+
+    <!-- @Stjepan, this is not the proposed text? -->
+    <string name="ttc_main_conditions">"We are committed to protecting your privacy and take the security of our clients information very seriously.
+
+Cookies Policy. Information and Use of Cookies.
+What are Cookies?
+Cookies are small amounts of information which some websites store on your computer to make it easier for you to log on to and use them during future visits. In reality, a cookie is a small text file which is stored by the user’s browser and contains data, not code, so it can’t contain a virus or spyware. This doesn’t mean that all cookies are harmless in intent, but they can only ever store information.
+
+How we use your information
+
+We ‘analytical’ cookies on this site to allow us to monitor website traffic and analyse how visitors use it via Google Analytics. This service tracks information about how visitors interact with the site, including the number of visitors to our website, where visitors have come to the website from and the pages they visit. We use this information to help us improve our website.
+
+Such information will not identify you personally it is statistical data about our visitors and their use of our website. This statistical data is completely anonymous and does not identify any personal details whatsoever.
+
+All computers have the ability to decline cookies. You can configure your web browser to refuse cookies, or to be informed if a cookie is set. You can find out how to do this by clicking help on your browser menu. By using our website, you agree that we can place these types of cookies on your device."</string>
+
+    <!-- Introduction -->
+    <string name="intro_welcome_slide_title">"Welcome"</string>
+    <string name="intro_welcome_slide_content">"Great, that you have decided for our Smart Locker. Please check out the most important features of the App!"</string>
+    <string name="intro_pickup_slide_title">"Pickup &amp; Send Parcel"</string>
+    <string name="intro_pickup_slide_content">"With our app you can easily pick up parcels delivered to you at any convenient time. Sending a parcel has never been easier and more convenient."</string>
+    <string name="intro_key_sharing_slide_title">"Access grant"</string>
+    <string name="intro_key_sharing_slide_content">"Are you not in proximity of your Smart Locker but need to collect or send a parcel? Generate a permanent or temporary access to your Smart Locker for your family or friend."</string>
+    <string name="intro_start_slide_content">"Already have an account?"</string>
+    <string name="intro_register_your_account">"Register Your Account"</string>
+    <string name="intro_register_show_password">"Show passwords"</string>
+    <string name="send_parcel_title">"Send parcel"</string>
+    <string name="sent_parcel_subtitle">"Sent parcel(s)"</string>
+    <string name="send_parcel_button_title">"Send parcel"</string>
+    <string name="key_sharing_content">"You currently didn’t share access to your parcel locker(s) with anyone."</string>
+    <string name="app_generic_key_sharing">"Share access"</string>
+    <string name="help_share_access_text">"• Start the \"Access sharing\" function in the app and press the \"+\" button
+• Enter the e-mail address of the selected person. You can also choose these from your contact details.
+• Select the type of access permission
+- Full with sharing permissions: User can pick up all your parcels and share access to others.
+- Only pickup parcel: user can pick up all your parcels.
+• Press the button \"Allow access\""</string>
+    <string name="help_send_parcel_text">"Make sure you have a stable internet connection, your Bluetooth is turned on, and you are near the smart box.
+• Start the function \"Send package\" in the app
+• Select the appropriate box size for your package
+• Enter the last 4 digits of the tracking number of your parcel service provider
+Alternatively, you can also create your own PIN and notify the person who picked it up
+• Deposit the package and close the door
+• Close the process with the button \"Exit\"
+Attention: Depositing the parcel ensures it is securely protected until it is picked up. Register this pickup with the Pick@home website of your delivery service and note the location of the parcel box facility and the pickupPIN for the courier."</string>
+    <string name="help_description_title">"Help"</string>
+    <string name="help_table_title">"Available topics"</string>
+    <string name="help_lbl_bottom">"For further questions send an E-Mail to:"</string>
+    <string name="help_link">"info@schlauebox.ch"</string>
+    <string name="help_pickup_parcel_content">"Make sure you have a stable internet connection, your Bluetooth is turned on, and you are near the smart box.
+• Start the function \"pick up package\" in the app
+• Lock icon \"red\": Press the lock icon to open the box
+• Take the package out and close the door
+• Close the process with the button \"Confirm\"
+If several boxes are occupied with Packages for you, they will open one at a time.
+• Lock symbol \"gray\": One or more of the above requirements are not met.
+• If you are not near your Smart Box, you can give a third party temporary access to selected packages. Enter the e-mail address in the field provided."</string>
+    <string name="peripheral_settings_share_access">"Share access to delivery (size: %s, created: %s)"</string>
+    <string name="peripheral_settings_remove_access">"Remove temporary access from %s for Delivery %s (created on: %s)"</string>
+    <string name="peripheral_settings_grant_access">"%s shared you access to delivery (size: %s, created: %s)"</string>
+    <string name="peripheral_settings_remove_access_success">"Successfully deleted access to locker %s"</string>
+    <string name="peripheral_settings_remove_access_error">"Error while deleting access to locker %s"</string>
+    <string name="app_generic_size">"Size: %s"</string>
+    <string name="nav_home_mpl_title">"Multiple"</string>
+    <string name="nav_home_spl_title">"Single"</string>
+    <string name="locker_details_registration_btn">"Request Access"</string>
+    <string name="locker_details_registration_pending_body">"Thank you! Your request was submitted. We’ll notify you once your access has been granted."</string>
+    <string name="nav_alarms_title">"Alarms"</string>
+    <string name="nav_pickup_parcel_content_lock">"Tap on the Lock icon to open."</string>
+    <string name="nav_pickup_parcel_content_unlock">"Please take your package and close locker door."</string>
+    <string name="nav_pickup_parcel_unlock">"Unlocked"</string>
+    <string name="nav_pickup_parcel_connecting">"Connecting"</string>
+    <string name="nav_pickup_parcel_connecting_please_wait">"Please wait..."</string>
+    <string name="nav_pickup_parcel_lock">"Locked"</string>
+    <string name="nav_send_parcel_title">"Send Parcel"</string>
+    <string name="nav_send_parcel_content_text">"The locker is now open. Please place your package and close the door."</string>
+    <string name="nav_send_parcel_error">"Send parcel failed. Please try again."</string>
+    <string name="nav_send_parcel_error_button">"Retry"</string>
+    <string name="nav_send_parcel_failed">"The opening of the locker was unsuccessful, please try again!"</string>
+    <string name="nav_settings_title">"Settings"</string>
+    <string name="nav_settings_user_details">"User details"</string>
+    <string name="nav_settings_language">"Language"</string>
+    <string name="nav_settings_app_language">"App language"</string>
+    <string name="nav_settings_change_password">"Change password"</string>
+    <string name="login_title">"Sign in"</string>
+    <string name="login_submit_title">"Sign in"</string>
+    <string name="register_submit_title">"Register"</string>
+    <string name="forgot_password_title">"Forgot Your Password?"</string>
+    <string name="forgot_password_description_title">"Please enter your registered email address so that we can send you a recovery PIN."</string>
+    <string name="forgot_password_send">"Send"</string>
+    <string name="access_sharing_title">"Add new access"</string>
+    <string name="access_sharing_new_user_title">"Add new access"</string>
+    <string name="access_sharing_new_user_allow">"Allow access"</string>
+    <string name="access_sharing_new_user_selection">"Select an email address from contacts"</string>
+    <string name="access_sharing_new_user_access_details">"Access Details"</string>
+    <string name="access_sharing_admin_role">"Full with sharing permissions"</string>
+    <string name="access_sharing_user_role">"Parcel pickup only"</string>
+    <string name="access_sharing_warning_message">"Are you sure you want to remove access to %s?"</string>
+    <string name="toast_access_sharing_remove_success">"Successfully removed user %s from group!"</string>
+    <string name="toast_access_sharing_remove_error">"Error while removing user access, please try again later!"</string>
+    <string name="app_generic_confirm">"Confirm"</string>
+    <string name="app_generic_cancel">"Cancel"</string>
+    <string name="app_generic_sign_in">"Sign in"</string>
+    <string name="app_generic_name">"Name"</string>
+    <string name="app_generic_phone">"Phone"</string>
+    <string name="app_generic_group">"Group name"</string>
+    <string name="app_generic_address">"Address"</string>
+    <string name="app_generic_email">"Email"</string>
+    <string name="app_generic_submit">"Submit"</string>
+    <string name="app_generic_notifications">"Notifications"</string>
+    <string name="app_generic_push_notifications">"Push notifications"</string>
+    <string name="app_generic_clear_all">"Clear all"</string>
+    <string name="app_generic_password_recovery">"Forgot Your Password?"</string>
+    <string name="app_generic_pickup_parcel">"Pickup parcel"</string>
+    <string name="pickup_parcel_title">"Pickup parcel"</string>
+    <string name="app_generic_send_parcel">"Send parcel"</string>
+    <string name="app_generic_access_sharing">"Access sharing"</string>
+    <string name="app_generic_next">"Next"</string>
+    <string name="app_generic_finish">"Finish"</string>
+    <string name="app_generic_help">"Help"</string>
+    <string name="app_generic_no_ble">"Please turn Bluetooth on"</string>
+    <string name="send_parcel_available">"%s available"</string>
+    <string name="reset_password_title">"Reset Your Password"</string>
+    <string name="reset_password_description_title">"Please enter your new password."</string>
+    <string name="reset_password_new">"New password"</string>
+    <string name="reset_password_pin">"Recovery pin*"</string>
+    <string name="reset_password_confirm">"Confirm password"</string>
+    <string name="reset_password_done">"Done"</string>
+    <string name="toast_pickup_parcel_error">"Error while connecting the MPL device please check device proximity and user id %i!"</string>
+    <string name="toast_pickup_parcel_confirm_pin">"Please enter the 4 last digits of your tracking number or generate your own PIN."</string>
+    <string name="access_sharing_admin_role_full">"Admin - Full with sharing permissions"</string>
+    <string name="default_notification_channel_id">"fcm_default_channel"</string>
+    <string name="default_notification_channel_name">"News"</string>
+
+    <!-- Retyping password field in input form for settings -->
+    <string name="nav_settings_retype_new_password">"Retype new password"</string>
+    <string name="access_sharing_share_choose_sharing">"Choose sharing method"</string>
+    <string name="access_sharing_share_app_text">"Hi! \n You have been invited to the system. Please use the following links to download application for your system.\n\n Download Android App from Google Play Store: \n %s. \n\n Download iOS App from App Store: \n %s \n\n Regards!"</string>
+    <string name="sent_parcel_error_delete">"Error while deleting the key for user %s, please try again!"</string>
+    <string name="app_generic_no_network">"No Internet connection"</string>
+    <string name="error_while_saving_user">"Error while saving user id %s please try again!"</string>
+    <string name="nav_settings_password_save_success">"Successfully recorded data for the user ID %s"</string>
+    <string name="mpl_details_saving_access_settings">"Error while sending request for access please check your internet connection"</string>
+    <string name="ttc_btn">"I accept terms &amp; conditions*"</string>
+    <string name="error_accept_terms_and_conditions">"Please accept terms and conditions"</string>
+    <string name="nav_ttc_title">"Terms &amp; Conditions"</string>
+    <string name="nav_settings_old_password">"Old"</string>
+    <string name="nav_settings_new_password">"New"</string>
+    <string name="nav_settings_retype_new">"Retype new"</string>
+    <string name="nav_send_parcel_enter_pin">"Enter your pin"</string>
+    <string name="nav_send_parcel_repeat_pin">"Repeat your pin"</string>
+    <string name="nav_send_parcel_size_warning">"Please select size of locker to delivery"</string>
+    <string name="app_generic_password_doesnt_match">"Passwords don't match"</string>
+    <string name="privacy_policy_contact_us_title">"Contact us"</string>
+    <string name="privacy_policy_submit_message_placeholder">"Type in your message here"</string>
+    <string name="send_parcel_description">"Please select locker size"</string>
+    <string name="edit_user_validation_blank_fields_exist">"Please enter all user information."</string>
+    <string name="edit_user_validation_current_password_invalid">"Current password not correct!"</string>
+    <string name="edit_user_validation_current_user_invalid">"Current user is not valid!"</string>
+    <string name="edit_user_validation_passwords_do_not_match">"Password is incorrect"</string>
+    <string name="edit_user_validation_password_min_6_characters">"Password must be at least 6 characters long."</string>
+    <string name="edit_user_validation_username_min_4_characters">"Username must be at least 4 characters long."</string>
+    <string name="edit_user_validation_terms_and_conditions_not_checked">"Please accept General Terms and Conditions and Privacy Statement."</string>
+    <string name="message_email_invalid">"Email address not valid!"</string>
+    <string name="nav_login_missing_account">"Don't have an account yet?"</string>
+    <string name="login_register_text">"Don’t have an account yet? Register"</string>
+    <string name="login_register_link">"Register"</string>
+    <string name="access_sharing_pop_up_title">"Share your key"</string>
+    <string name="access_sharing_group_selection">"Group"</string>
+    <string name="nav_ttc_subtitle">"Before proceeding, please read our T&amp;C:"</string>
+    <string name="settings_alert_langugage_changed">"App was reloded to change the language."</string>
+    <string name="app_generic_error">"Error"</string>
+    <string name="email_error">"You don't have email account setup."</string>
+    <string name="app_generic_skip">"Skip"</string>
+    <string name="register_error">"Error while registering the user"</string>
+    <string name="register_error_data">"Please check entered data"</string>
+    <string name="register_error_empty">"Please fill in all required fields"</string>
+    <string name="login_error_title">"Invalid username and/or password"</string>
+    <string name="login_error_incorrect">"Not valid username or password!"</string>
+    <string name="forgot_password_error">"Please enter your email address"</string>
+    <string name="reset_password_error">"Entered PIN is invalid"</string>
+    <string name="reset_password_succes">"Your password has been reset successfully"</string>
+    <string name="reset_password_resend_alert">"Mail sent. Please check your inbox"</string>
+    <string name="reset_password_error_empty">"Please fill in all the fields"</string>
+    <string name="reset_password_match_error">"Entered passwords do not match"</string>
+    <string name="pickup_parcel_fetch_error">"Failure while fetching pick at friend keys"</string>
+    <string name="locker_details_request_error">"Error while requesting access"</string>
+    <string name="pickup_parcel_cancel_error">"Failure while canceling pick at friend key"</string>
+    <string name="pickup_parcel_create_error">"User already has access"</string>
+    <string name="pickup_parcel_email_error">"Email is not valid"</string>
+    <string name="pickup_parcel_door_error">"Error while opening door"</string>
+    <string name="app_generic_enter_email">"Enter email address"</string>
+    <string name="app_generic_success">"Success"</string>
+    <string name="send_parcel_error_select">"Please select size"</string>
+    <string name="send_parcel_error_pin">"Please enter correct PIN"</string>
+    <string name="send_parcel_remove_error">"Error while deleting key"</string>
+    <string name="access_sharing_error_delete">"Error when deleting member"</string>
+    <string name="grant_access_error">"User not found. Click OK if you want to share the app"</string>
+    <string name="settings_update_error">"User profile update failed"</string>
+    <string name="settings_password_error">"Entered passwords do not match"</string>
+    <string name="settings_update_success">"All changes are saved"</string>
+    <string name="nav_settings_logout">"Logout"</string>
+    <string name="intro_start_title">"Let's start!"</string>
+    <string name="app_generic_time_created">"Created: %s"</string>
+    <string name="app_generic_parcel_pin">"Parcel PIN: %s"</string>
+
+    <!-- USER - Parcel pickup only. -->
+    <string name="access_sharing_user_role_full">"User - Parcel pickup only"</string>
+
+    <!-- App version %s -->
+    <string name="nav_settings_app_version">"App version %s"</string>
+    <string name="app_generic_help_link">"&lt;a href=\"mailto:info@schlauebox.ch\"&gt;info@schlauebox.ch&lt;/a&gt;"</string>
+
+    <!-- Activate -->
+    <string name="locker_details_activate_btn">"Activate"</string>
+    <string name="grant_access_error_exists">"User already has access"</string>
+    <string name="grant_acces_empty_email">"Please enter email address"</string>
+    <string name="access_sharing_my_group">"MY GROUP"</string>
+    <string name="access_sharing_other_group">"OTHER"</string>
+    <string name="locker_details_activate_body">"You currently don’t have access to this parcel locker."</string>
+    <string name="locker_details_deactivation_hint">"Are you sure you want to deactivate this locker?"</string>
+    <string name="locker_datails_deactivate">"Deactivate"</string>
+    <string name="locker_details_header">"Edit locker details"</string>
+
+    <!-- Fuzzy -->
+    <string name="app_generic_access_forbidden">"Access forbidden"</string>
+    <string name="app_generic_not_activated">"Not activated"</string>
+    <string name="locker_datails_save">"SAVE"</string>
+
+    <!-- Registration -->
+    <string name="registration_name">"Name &amp; Surname*"</string>
+
+    <!-- Registration -->
+    <string name="registration_address">"Address*"</string>
+
+    <!-- Registration -->
+    <string name="registration_email">"Email*"</string>
+
+    <!-- Registration -->
+    <string name="registration_password">"Password*"</string>
+
+    <!-- Registration -->
+    <string name="registration_repeat_password">"Repeat password*"</string>
+
+    <!-- Force open -->
+    <string name="app_generic_force_open">"Force open"</string>
+    <string name="locker_details_deactivation_key_error">"SPL can't be deactivated because of the active key"</string>
+    <string name="peripheral_settings_share_access_spl">"Share access to delivery (created: %s)"</string>
+    <string name="peripheral_settings_remove_access_spl">"Remove access to delivery (created: %s) given to %s"</string>
+    <string name="peripheral_settings_grant_access_spl">"%s shared you access to delivery (created: %s)"</string>
+
+    <!-- Delete p@f key created for [userName] -->
+    <string name="parcel_pickup_delete_key_title">"Delete p@f key created for %s"</string>
+
+    <!-- Are you sure you want to delete this key? -->
+    <string name="pickup_parcel_delete_content">"Are you sure you want to delete this key?"</string>
+    <string name="forgot_password_email_error">"Email doesn't exist in the system"</string>
+    <string name="help_remove_access_text">"•     In the App click the Button \"Access Sharing\"
+•     On the desired User click the \"-\" Button
+•     Confirm the deletion of this Access"</string>
+    <string name="help_return_shipment_text">"Register your Parcel to your desired Postal Service according to the Shipping company."</string>
+    <string name="help_return_shipment_category">"Return Parcel (Parcel-delivery-Service)"</string>
+    <string name="help_remove_access_category">"Cancel Access sharing"</string>
+    <string name="help_return_shipment_title">"Return Parcel"</string>
+
+    <!-- We have generated a new PIN for your delivery: -->
+    <string name="generated_pin_title">"We have generated a new PIN for your delivery:"</string>
+
+    <!-- Please write this PIN down under special delivery notes on your courier's pickup form. -->
+    <string name="generated_pin_description">"Please write this PIN down under special delivery notes on your courier's pickup form."</string>
+    <string name="group_name_correct_start">"Group name can not start with space."</string>
+    <string name="invite_user_title">"Your account details"</string>
+    <string name="invite_user_confirm_registration">"Confirm registration"</string>
+    <string name="registration_group">"Group*"</string>
+    <string name="password_need_to_be_different">"Password needs to be different then previous. Later you can change it again."</string>
+    <string name="ttc_btn_accept">"I accept terms &amp; conditions"</string>
+    <string name="pin_managment_title">"Select a PIN from the list or use the one we have generated for you."</string>
+    <string name="pin_managment_description">"Please write this PIN down under special delivery notes on your courier's pickup form."</string>
+    <string name="pin_managment_generate">"(generated)"</string>
+    <string name="pin_managment_input_edittext">"Enter pin name"</string>
+    <string name="pin_managment_name_not_empty">"Pin name can not be empty."</string>
+    <string name="pin_managment_delete_pin">"DELETE"</string>
+    <string name="registration_group_name">"Group name*"</string>
+    <string name="forgot_password_invited_error">"Please activate the account with the password you received in the mail."</string>
+    <string name="edit_user_validation_group_name_min_4_characters">"Group name must be at least 4 characters long."</string>
+    <string name="unable_to_cancel_picked_home">"You are not in proximity of device."</string>
+
+    <!-- Title of email in app sharing process -->
+    <string name="access_sharing_share_title">"SchalueBox app invitation"</string>
+
+    <!-- Fuzzy -->
+    <string name="app_generic_are_you_sure">"Are you sure?"</string>
+    <string name="allow_permission">"The application cannot be used until permissions are allowed."</string>
+    <string name="change_password_missing_fields">"To change password, please enter all information."</string>
+    <string name="your_account_is_deactivated">"Your account has been deactivated. Please contact your administrator."</string>
+
+    <!-- Fuzzy -->
+    <string name="login_error">"Email and password don't match, or your account has been disabled."</string>
+    <string name="no_location_services">"No location services"</string>
+    <string name="app_generic_ok">"OK"</string>
+    <string name="alert_consume_keys">"Please, empty your lockers before deactivating the device."</string>
+    <string name="alert_deactivation_modem_queue">"Device can't be deactivated right now, it is still trying to communicate with the Internet, if possible open the door to increase the reception or try again later."</string>
+    <string name="register_reduced_mobility">"Person with reduced mobility"</string>
+
+    <!-- Fuzzy -->
+    <string name="not_in_proximity_of_locker">"You are not in proximity of locker."</string>
+    <string name="something_went_wrong">"Something went wrong, please try again."</string>
+    <string name="main_locker_ble_connection_error">"Error while connecting the device"</string>
+    <string name="no_deliveris_to_locker_possible">"No deliveries to locker are possible until you enter your verification pin!"</string>
+    <string name="are_you_sure_logout">"Are you sure you want to logout?"</string>
+    <string name="locker_needs_cleaning">"This locker needs to be cleaned."</string>
+</resources>

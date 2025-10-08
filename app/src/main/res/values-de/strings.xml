@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"SchlaueBox"</string>
+    <string name="app_generic_password">"Passwort"</string>
+    <string name="app_generic_enter_ble">"Bitte begeben Sie sich in die Nähe der SchlaueBox"</string>
+
+    <!-- Main screen -->
+    <string name="title_activity_main_home">"Startseite"</string>
+    <string name="locker_details_registration_body">"Sie haben derzeit keinen Zugriff auf diese Paketfachanlage. Begeben Sie sich in die Nähe von SchlaueBox Multi und registrieren Sie sich."</string>
+    <string name="app_generic_privacy_policy">"Datenschutzrichtlinien"</string>
+    <string name="ttc_main_conditions">"Wir verpflichten uns zum Schutz Ihrer Privatsphäre und nehmen die Sicherheit der Informationen unserer Kunden sehr ernst.
+
+Cookie-Richtlinie. Information und Verwendung von Cookies.
+Was sind Cookies?
+Cookies sind kleine Mengen an Informationen, die einige Websites auf Ihrem Computer speichern, um Ihnen die Anmeldung zu erleichtern und sie bei zukünftigen Besuchen zu verwenden. In Wirklichkeit ist ein Cookie eine kleine Textdatei, die vom Browser des Benutzers gespeichert wird und Daten und keinen Code enthält, so dass es keinen Virus oder Spyware enthalten kann. Das bedeutet nicht, dass alle Cookies absichtlich harmlos sind, aber sie können nur Informationen speichern.
+
+Wie verwenden wir Ihre Informationen?
+Wir verwenden Cookies auf dieser Website, um den Traffic der Website zu überwachen und zu analysieren, wie Besucher sie über Google Analytics nutzen. Dieser Service verfolgt Informationen darüber, wie Besucher mit der Website interagieren, einschliesslich der Anzahl der Besucher auf unserer Website, wocher Besucher auf die Website gekommen sind und welche Seiten sie besucht haben. Wir verwenden diese Informationen, um unsere Website zu verbessern.
+
+Solche Informationen beinhalten keine persönliche Benutzerangaben, sondern statistische Daten über Besucher und deren Nutzung unserer Website. Diese statistischen Daten sind völlig anonym und beinhalten keinerlei personenbezogene Daten.
+
+Alle Computer haben die Möglichkeit, Cookies abzulehnen. Sie können Ihren Webbrowser so konfigurieren, dass er Cookies ablehnt oder informiert wird, wenn ein Cookie gesetzt wird. Wie das geht, erfahren Sie, wenn Sie in Ihrem Browser-Menü auf Hilfe klicken. Durch die Nutzung unserer Website erklären Sie sich damit einverstanden, dass wir diese Art von Cookies auf Ihrem Gerät ablegen können."</string>
+
+    <!-- Introduction -->
+    <string name="intro_welcome_slide_title">"Willkommen"</string>
+    <string name="intro_welcome_slide_content">"Schön, dass Sie sich für unsere SchlaueBox entschieden haben. Schauen Sie sich die wichtigsten Funktionen der App an!"</string>
+    <string name="intro_pickup_slide_title">"Abholung &amp; Paket senden"</string>
+    <string name="intro_pickup_slide_content">"Mit unserer App können Sie problemlos Pakete abholen, die Ihnen zu einem beliebigen Zeitpunkt geliefert werden.
+
+Das Versenden eines Pakets war noch nie einfacher und bequemer."</string>
+    <string name="intro_key_sharing_slide_title">"Zugriffsfreigabe"</string>
+    <string name="intro_key_sharing_slide_content">"Sind Sie nicht in der Nähe Ihrer SchlaueBox,
+müssen aber ein Paket abholen oder versenden?
+Generieren Sie einen permanenten oder temporären
+Zugriff auf Ihre Schlaue Box für Familienmitglieder oder Freunde."</string>
+    <string name="intro_start_slide_content">"Haben Sie schon ein Benutzerkonto?"</string>
+    <string name="intro_register_your_account">"Benutzerkonto anlegen"</string>
+    <string name="intro_register_show_password">"Passwort anzeigen"</string>
+    <string name="send_parcel_title">"Paket senden"</string>
+    <string name="sent_parcel_subtitle">"Versendete Pakete"</string>
+    <string name="send_parcel_button_title">"Paket schicken"</string>
+    <string name="key_sharing_content">"Sie haben derzeit keinen Zugriff auf Ihre SchlaueBox geteilt."</string>
+    <string name="app_generic_key_sharing">"Zugriffsfreigabe"</string>
+    <string name="help_share_access_text">"•     Starten Sie in der App die Funktion \"Zugriffsfreigabe\" und drücken Sie den \"+\"-Button
+•     Geben Sie die Mail-Adresse der ausgewählten Person ein. Ebenfalls können Sie diese aus Ihren Kontaktdaten wählen.
+•     Wählen Sie die Art der Zugriffsfreigabe aus
+- Voll mit Freigabeberechtigung: Nutzer kann alle Ihre Sendungen abholen und weiteren Personen die Zugriffsfreigabe erteilen.
+- Nur Paketabholung: Nutzer kann alle Ihre Sendungen abholen.
+•     Drücken Sie den Button \"Zugriff erlauben\""</string>
+    <string name="help_send_parcel_text">"Stellen Sie sicher, dass Sie eine stabile Internetverbindung haben, Ihr Bluetooth eingeschaltet ist und Sie sich in der Nähe der SchlaueBox befinden.
+•     Starten Sie in der App die Funktion \"Paket senden\"
+•     Wählen Sie die für Ihr Paket geeignete Boxengrösse aus
+•     Geben Sie die letzten 4 Ziffern der Tracking-Nummer Ihres Paketdienstleisters ein
+Alternativ können Sie auch einen eigenen PIN erstellen und diesen dem Abholer mitteilen
+•     Deponieren Sie das Paket und schliessen die Tür
+•     Schliessen Sie den Vorgang mit dem Button \"Beenden\" ab
+Wichtig: Das Deponieren des Pakets gewährleistet diesem einen sicheren Schutz bis zur Abholung. Diese Abholung melden Sie bei der Pick@home Website Ihres Lieferdienstes an und vermerken den Standort der Paketboxanlage und den Abholungs-PIN für den Kurier.
+"</string>
+    <string name="help_description_title">"Hilfe"</string>
+    <string name="help_table_title">"Verfügbare Themen"</string>
+    <string name="help_lbl_bottom">"Bei weiteren Fragen senden Sie eine E-Mail an:"</string>
+    <string name="help_link">"info@schlauebox.ch"</string>
+    <string name="help_pickup_parcel_content">"Stellen Sie sicher, dass Sie eine stabile Internetverbindung haben, Ihr Bluetooth eingeschaltet ist und Sie sich in der Nähe der SchlaueBox befinden.
+•     Starten Sie in der App die Funktion \"Paket abholen\"
+•     Schloss-Symbol \"rot\": Drücken Sie auf das Schloss-Symbol, um die Box zu öffnen
+•     Entnehmen Sie das Paket und schliessen Sie die Tür
+•     Schliessen Sie den Vorgang mit dem Button \"Bestätigen\" ab
+Sind mehrere Boxen mit Sendungen für Sie belegt, öffnen sich diese gleichzeitig.
+•     Schloss-Symbol \"grau\": Eine oder mehrere der oben genannten Voraussetzungen sind nicht erfüllt.
+•     Befinden Sie sich nicht in der Nähe Ihrer SchlaueBox, können Sie einer Drittperson eine temporäre Zugriffsfreigabe für ausgewählte Sendungen erteilen. Geben Sie die E-Mail-Adresse im dafür vorgesehenen Feld ein."</string>
+    <string name="peripheral_settings_share_access">"Freigabezugriff für Lieferung %s erteilen: %s"</string>
+    <string name="peripheral_settings_remove_access">"Entfernen Sie die temporäre Zugriffsfreigabe von %s für die Lieferung %s (Erstellt am: %s)"</string>
+    <string name="peripheral_settings_grant_access">"%s hat Ihnen Zugriff auf seine Lieferung gegeben (Grösse %s; Erstellt am: %s)"</string>
+    <string name="peripheral_settings_remove_access_success">"Zugriff auf SchlaueBox %s erfolgreich gelöscht"</string>
+    <string name="peripheral_settings_remove_access_error">"Fehler beim Löschen des Zugriffs auf SchlaueBox %s"</string>
+    <string name="app_generic_size">"Grösse: %s"</string>
+    <string name="nav_home_mpl_title">"Multi"</string>
+    <string name="nav_home_spl_title">"Single"</string>
+    <string name="locker_details_registration_btn">"Zugriff anfordern"</string>
+    <string name="locker_details_registration_pending_body">"Vielen Dank! Ihre Anfrage wurde übermittelt. Wir werden Sie benachrichtigen, sobald Ihr Zugang gewährt wurde."</string>
+    <string name="nav_alarms_title">"Alarme"</string>
+    <string name="nav_pickup_parcel_content_lock">"Tippen Sie auf das Schloss, um Ihre Box zu öffnen"</string>
+    <string name="nav_pickup_parcel_content_unlock">"Bitte entnehmen Sie Ihr Paket und schliessen Sie die Türe"</string>
+    <string name="nav_pickup_parcel_unlock">"Geöffnet"</string>
+    <string name="nav_pickup_parcel_connecting">"Verbinden"</string>
+    <string name="nav_pickup_parcel_connecting_please_wait">"Bitte warten..."</string>
+    <string name="nav_pickup_parcel_lock">"Geschlossen"</string>
+    <string name="nav_send_parcel_title">"Paket senden"</string>
+    <string name="nav_send_parcel_content_text">"Das Paketfach ist jetzt geöffnet. Bitte platzieren Sie Ihr Paket und schliessen Sie die Türe."</string>
+    <string name="nav_send_parcel_error">"Paketversand fehlgeschlagen Bitte versuchen Sie es erneut."</string>
+    <string name="nav_send_parcel_error_button">"Wiederholen"</string>
+    <string name="nav_send_parcel_failed">"Das Öffnen des Paketfachs war nicht erfolgreich, bitte versuchen Sie es erneut!"</string>
+    <string name="nav_settings_title">"Einstellungen"</string>
+    <string name="nav_settings_user_details">"Benutzerdetails"</string>
+    <string name="nav_settings_language">"Sprache"</string>
+    <string name="nav_settings_app_language">"Sprache der App"</string>
+    <string name="nav_settings_change_password">"Passwort ändern"</string>
+    <string name="login_title">"Einloggen"</string>
+    <string name="login_submit_title">"Einloggen"</string>
+    <string name="register_submit_title">"Registrieren"</string>
+    <string name="forgot_password_title">"Haben Sie Ihr Passwort vergessen?"</string>
+    <string name="forgot_password_description_title">"Bitte geben Sie die E-Mail-Adresse ein, mit welcher Sie registriert sind, damit wir Ihnen einen Wiederherstellungs-PIN zusenden können."</string>
+    <string name="forgot_password_send">"Senden"</string>
+    <string name="access_sharing_title">"Neue Zugriffsfreigabe hinzufügen"</string>
+    <string name="access_sharing_new_user_title">"Neue Zugriffsfreigabe hinzufügen"</string>
+    <string name="access_sharing_new_user_allow">"Zugriff erlauben"</string>
+    <string name="access_sharing_new_user_selection">"Wählen Sie eine E-Mail-Adresse aus Ihren Kontakten aus"</string>
+    <string name="access_sharing_new_user_access_details">"Zugangsdaten"</string>
+
+    <!-- What does this text mean? -->
+    <string name="access_sharing_admin_role">"Voll mit Freigabeberechtigung"</string>
+    <string name="access_sharing_user_role">"Nur Paketabholung"</string>
+    <string name="access_sharing_warning_message">"Möchten Sie den Zugriff für %s wirklich entfernen?"</string>
+    <string name="toast_access_sharing_remove_success">"Benutzer %s wurde erfolgreich aus der Gruppe entfernt!"</string>
+    <string name="toast_access_sharing_remove_error">"Fehler beim Entfernen des Benutzerzugriffs. Bitte versuchen Sie es später erneut."</string>
+    <string name="app_generic_confirm">"Bestätigen"</string>
+    <string name="app_generic_cancel">"Abbrechen"</string>
+    <string name="app_generic_sign_in">"Einloggen"</string>
+    <string name="app_generic_name">"Name"</string>
+    <string name="app_generic_phone">"Telefon"</string>
+    <string name="app_generic_group">"Gruppenname"</string>
+    <string name="app_generic_address">"Adresse"</string>
+    <string name="app_generic_email">"E-Mail"</string>
+    <string name="app_generic_submit">"Fertig"</string>
+    <string name="app_generic_notifications">"Benachrichtigungen"</string>
+    <string name="app_generic_push_notifications">"Mitteilungen"</string>
+    <string name="app_generic_clear_all">"Alles löschen"</string>
+    <string name="app_generic_password_recovery">"Haben Sie Ihr Passwort vergessen?"</string>
+    <string name="app_generic_pickup_parcel">"Paket abholen"</string>
+    <string name="pickup_parcel_title">"Paket abholen"</string>
+    <string name="app_generic_send_parcel">"Paket senden"</string>
+    <string name="app_generic_access_sharing">"Zugriffsfreigabe"</string>
+    <string name="app_generic_next">"Weiter"</string>
+    <string name="app_generic_finish">"Beenden"</string>
+    <string name="app_generic_help">"Hilfe"</string>
+    <string name="app_generic_no_ble">"Bitte Bluetooth einschalten"</string>
+    <string name="send_parcel_available">"%s verfügbar"</string>
+    <string name="reset_password_title">"Setzen Sie Ihr Passwort zurück"</string>
+    <string name="reset_password_description_title">"Bitte geben Sie Ihr neues Passwort ein"</string>
+    <string name="reset_password_new">"neues Passwort"</string>
+    <string name="reset_password_pin">"Widerherstellenungs-PIN*"</string>
+    <string name="reset_password_confirm">"Passwort bestätigen"</string>
+    <string name="reset_password_done">"Erledigt"</string>
+    <string name="toast_pickup_parcel_error">"Fehler beim Verbinden mit der SchlaueBox. Bitte überprüfen ob Sie immer noch in der Nähe der SchlaueBox sind sowie ob die Benutzer-ID %i stimmt!"</string>
+    <string name="toast_pickup_parcel_confirm_pin">"Bitte geben Sie die letzten 4 Ziffern Ihrer Tracking-Nummer ein oder erstellen Sie einen PIN."</string>
+    <string name="access_sharing_admin_role_full">"Admin - Voll mit Freigabeberechtigungen"</string>
+    <string name="default_notification_channel_id">"fcm_default_channel"</string>
+    <string name="default_notification_channel_name">"Nachrichten"</string>
+
+    <!-- Retyping password field in input form for settings -->
+    <string name="nav_settings_retype_new_password">"Neues Passwort wiederholen"</string>
+    <string name="access_sharing_share_choose_sharing">"Wählen Sie die Freigabemethode"</string>
+    <string name="access_sharing_share_app_text">"Hi! \n You have been invited to the system. Please use the following links to download application for your system.\n\n Download Android App from Google Play Store: \n %s. \n\n Download iOS App from App Store: \n %s \n\n Regards!"</string>
+    <string name="sent_parcel_error_delete">"Fehler beim Löschen des Schlüssels für Benutzer %s, bitte erneut versuchen!"</string>
+    <string name="app_generic_no_network">"Keine Internetverbindung"</string>
+    <string name="error_while_saving_user">"Fehler beim Speichern der Benutzer-ID %s, bitte erneut versuchen!"</string>
+    <string name="nav_settings_password_save_success">"Daten für Benutzer-ID %s wurden erfolgreich gespeichert"</string>
+    <string name="mpl_details_saving_access_settings">"Fehler beim Senden der Zugriffsanfrage. Bitte überprüfen Sie Ihre Internetverbindung"</string>
+    <string name="ttc_btn">"Ich akzeptiere die Nutzungsbedingungen*"</string>
+    <string name="error_accept_terms_and_conditions">"Bitte nehmen sie die Nutzungsbedingungen an"</string>
+    <string name="nav_ttc_title">"Nutzungsbedingungen"</string>
+    <string name="nav_settings_old_password">"Alt"</string>
+    <string name="nav_settings_new_password">"Neu"</string>
+    <string name="nav_settings_retype_new">"Wiederholen"</string>
+    <string name="nav_send_parcel_enter_pin">"Pin eingeben"</string>
+    <string name="nav_send_parcel_repeat_pin">"Pin wiederholen"</string>
+    <string name="nav_send_parcel_size_warning">"Bitte wählen Sie die gewünschte Grösse des Paketfachs aus."</string>
+    <string name="app_generic_password_doesnt_match">"Passwort stimmt nicht überein"</string>
+    <string name="privacy_policy_contact_us_title">"Kontaktieren Sie uns"</string>
+    <string name="privacy_policy_submit_message_placeholder">"Geben Sie hier Ihre Nachricht ein"</string>
+    <string name="send_parcel_description">"Bitte wählen Sie die Boxengrösse"</string>
+    <string name="edit_user_validation_blank_fields_exist">"Bitte geben Sie alle Benutzerinformationen ein."</string>
+    <string name="edit_user_validation_current_password_invalid">"Aktuelles Passwort nicht korrekt!"</string>
+    <string name="edit_user_validation_current_user_invalid">"Aktueller Benutzer ist nicht gültig!"</string>
+    <string name="edit_user_validation_passwords_do_not_match">"Das Passwort ist inkorrekt"</string>
+    <string name="edit_user_validation_password_min_6_characters">"Das Passwort muss mindestens 6 Zeichen lang sein"</string>
+    <string name="edit_user_validation_username_min_4_characters">"Der Benutzername muss mindestens 4 Zeichen lang sein"</string>
+    <string name="edit_user_validation_terms_and_conditions_not_checked">"Bitte akzeptieren Sie die Allgemeinen Geschäftsbedingungen und die Datenschutzerklärung."</string>
+    <string name="message_email_invalid">"Email Adresse nicht gültig!"</string>
+    <string name="nav_login_missing_account">"Du hast noch keinen Account?"</string>
+    <string name="login_register_text">"Du hast noch keinen Account? Registrieren"</string>
+    <string name="login_register_link">"Registrieren"</string>
+    <string name="access_sharing_pop_up_title">"Temporäre Zugriffsfreigabe"</string>
+    <string name="access_sharing_group_selection">"Gruppe"</string>
+    <string name="nav_ttc_subtitle">"Bevor Sie fortfahren lesen Sie bitte unsere AGBs:"</string>
+    <string name="settings_alert_langugage_changed">"App wurde neugeladen, um die Sprache zu ändern."</string>
+    <string name="app_generic_error">"Fehler"</string>
+    <string name="email_error">"Sie haben kein Email-Konto eingerichtet."</string>
+    <string name="app_generic_skip">"Überspringen"</string>
+    <string name="register_error">"Fehler beim Registrieren des Benutzers"</string>
+    <string name="register_error_data">"Bitte überprüfen Sie die eingegebenen Daten"</string>
+    <string name="register_error_empty">"Bitte füllen Sie alle Felder aus"</string>
+    <string name="login_error_title">"Ungültiger Benutzername und/oder Passwort"</string>
+    <string name="login_error_incorrect">"Nicht gültiger Benutzername oder Passwort!"</string>
+    <string name="forgot_password_error">"Geben Sie bitte Ihre Email-Adresse ein"</string>
+    <string name="reset_password_error">"Eingegebener Pin ist ungültig"</string>
+    <string name="reset_password_succes">"Ihr Passwort wurde erfolgreich zurückgesetzt"</string>
+    <string name="reset_password_resend_alert">"Email gesendet. Bitte überprüfen Sie Ihren Posteingang."</string>
+    <string name="reset_password_error_empty">"Bitte füllen Sie alle Felder aus"</string>
+    <string name="reset_password_match_error">"Die eingegebenen Passwörter stimmen nicht überein"</string>
+    <string name="pickup_parcel_fetch_error">"Fehler beim herunterladen des geteilten Schlüssels"</string>
+    <string name="locker_details_request_error">"Fehler beim Anfordern des Zugriffs"</string>
+    <string name="pickup_parcel_cancel_error">"Der geteilte Schlüssel konnte nicht wiederrufen werden."</string>
+    <string name="pickup_parcel_create_error">"Zugriff bereits freigegeben"</string>
+    <string name="pickup_parcel_email_error">"Email ist ungültig"</string>
+    <string name="pickup_parcel_door_error">"Fehler beim Öffnen der Tür"</string>
+    <string name="app_generic_enter_email">"Email Adresse eingeben"</string>
+    <string name="app_generic_success">"Erfolgreich"</string>
+    <string name="send_parcel_error_select">"Bitte Grösse auswählen"</string>
+    <string name="send_parcel_error_pin">"Bitte geben Sie den richtigen Pin ein"</string>
+    <string name="send_parcel_remove_error">"Fehler beim Löschen des Schlüssels"</string>
+    <string name="access_sharing_error_delete">"Fehler beim Löschen eines Mitglieds"</string>
+    <string name="grant_access_error">"Benutzer wurde nicht gefunden. Klicken Sie auf OK, wenn Sie die App teilen möchten."</string>
+    <string name="settings_update_error">"Aktualisierung des Benutzerprofils fehlgeschlagen"</string>
+    <string name="settings_password_error">"Die eingegebenen Passwörter stimmen nicht überein"</string>
+    <string name="settings_update_success">"Alle Änderungen werden gespeichert"</string>
+    <string name="nav_settings_logout">"Ausloggen"</string>
+    <string name="intro_start_title">"Lasst uns anfangen!"</string>
+    <string name="app_generic_time_created">"Erstellt am: %s"</string>
+    <string name="app_generic_parcel_pin">"Tracking-Nummer/PIN: %s"</string>
+
+    <!-- USER - Parcel pickup only. -->
+    <string name="access_sharing_user_role_full">"Benutzer - Nur Paketabholung"</string>
+
+    <!-- App version %s -->
+    <string name="nav_settings_app_version">"App-Version %s"</string>
+    <string name="app_generic_help_link">"&lt;a href=\"mailto:info@schlauebox.ch\"&gt;info@schlauebox.ch&lt;/a&gt;"</string>
+
+    <!-- Activate -->
+    <string name="locker_details_activate_btn">"Aktivieren"</string>
+    <string name="grant_access_error_exists">"Benutzer hat bereits Zugang"</string>
+    <string name="grant_acces_empty_email">"Bitte geben Sie Ihre Email-Adresse ein"</string>
+    <string name="access_sharing_my_group">"MEINE GRUPPE"</string>
+    <string name="access_sharing_other_group">"ANDERE"</string>
+    <string name="locker_details_activate_body">"Sie haben momentan keinen Zugriff zu dieser SchlaueBox"</string>
+    <string name="locker_details_deactivation_hint">"Sind Sie sicher dass Sie dieses SchlaueBox deaktivieren möchten?"</string>
+    <string name="locker_datails_deactivate">"Deaktivieren"</string>
+    <string name="locker_details_header">"SchlaueBox Einstellungen"</string>
+    <string name="app_generic_access_forbidden">"Zugriff verboten"</string>
+    <string name="app_generic_not_activated">"Nicht aktiviert"</string>
+    <string name="locker_datails_save">"Speichern"</string>
+
+    <!-- Registration -->
+    <string name="registration_name">"Name &amp; Nachname*"</string>
+
+    <!-- Registration -->
+    <string name="registration_address">"Adresse*"</string>
+
+    <!-- Registration -->
+    <string name="registration_email">"Email*"</string>
+
+    <!-- Registration -->
+    <string name="registration_password">"Passwort*"</string>
+
+    <!-- Registration -->
+    <string name="registration_repeat_password">"Passwort wiederholen"</string>
+
+    <!-- Force open -->
+    <string name="app_generic_force_open">"Öffnen erzwingen"</string>
+    <string name="locker_details_deactivation_key_error">"SchlaueBox kann nicht deaktiviert werden solange noch eine Lieferung ausstehend ist."</string>
+    <string name="peripheral_settings_share_access_spl">"Freigabezugriff für Lieferung erteilen: %s"</string>
+    <string name="peripheral_settings_remove_access_spl">"Entfernen Sie den Zugriff auf die Lieferung (erstellt: %s), die %s gegeben wurde"</string>
+    <string name="peripheral_settings_grant_access_spl">"%s hat ihnnen Zugriff auf die Zustellung freigegeben (erstellt: %s)"</string>
+
+    <!-- Delete p@f key created for [userName] -->
+    <string name="parcel_pickup_delete_key_title">"Möchten Sie die temporäre Zugriffsfreigabe für (%s) wirklich löschen?"</string>
+
+    <!-- Are you sure you want to delete this key? -->
+    <string name="pickup_parcel_delete_content">"Möchten Sie diesen Schlüssel wirklich löschen?"</string>
+    <string name="forgot_password_email_error">"Diese Email Adresse existiert nicht im System"</string>
+    <string name="help_remove_access_text">"•     Starten Sie in der App die Funktion \"Zugriffsfreigabe\"
+•     Drücken Sie beim gewünschten Nutzer den \"-\" Button
+•     Bestätigen Sie die Entfernung des Zugriffs"</string>
+    <string name="help_return_shipment_text">"Melden Sie Ihre Rücksendung gemäss Angaben des Versandhauses beim Paketdienstleister an."</string>
+    <string name="help_return_shipment_category">"Rücksendung anmelden (Paketdienstleister)"</string>
+    <string name="help_remove_access_category">"Zugriffsfreigabe aufheben"</string>
+    <string name="help_return_shipment_title">"Rücksendung anmelden"</string>
+
+    <!-- We have generated a new PIN for your delivery: -->
+    <string name="generated_pin_title">"Wir haben einen neuen PIN für Deine Sendung generiert:"</string>
+
+    <!-- Please write this PIN down under special delivery notes on your courier's pickup form. -->
+    <string name="generated_pin_description">"Bitte übermittle diesen PIN der Person/Firma, welche zur Abholung des Pakets beauftragt wurde."</string>
+    <string name="group_name_correct_start">"Der Gruppenname darf nicht mit einem Leerzeichen beginnen."</string>
+    <string name="invite_user_title">"Ihre Benutzer-Details"</string>
+    <string name="invite_user_confirm_registration">"Registrierung bestätigen"</string>
+    <string name="registration_group">"Gruppe*"</string>
+    <string name="password_need_to_be_different">"Das Passwort muss sich vom Vorherigen unterscheiden. Später können Sie es wieder ändern."</string>
+    <string name="ttc_btn_accept">"Ich akzeptiere die Nutzungsbedingungen"</string>
+    <string name="pin_managment_title">"Wählen Sie einen PIN aus der Liste oder verwenden Sie den PIN welchen wir für Sie generiert haben."</string>
+    <string name="pin_managment_description">"Bitte notieren Sie diesen PIN unter \"speziellen Abholanweisungen\" auf dem Abholformular Ihres Kuriers."</string>
+    <string name="pin_managment_generate">"(generiert)"</string>
+    <string name="pin_managment_input_edittext">"Pinname eingeben"</string>
+    <string name="pin_managment_name_not_empty">"Der Pinname darf nicht leer sein."</string>
+    <string name="pin_managment_delete_pin">"LÖSCHEN"</string>
+    <string name="registration_group_name">"Gruppenname*"</string>
+    <string name="forgot_password_invited_error">"Bitte überprüfen Sie Ihr E-Mail Postfach. Ihnen wurde ein Wiederherstellungs-PIN zugesendet. "</string>
+    <string name="edit_user_validation_group_name_min_4_characters">"Benutzername muss mindestens 4 Zeichen lang sein."</string>
+    <string name="unable_to_cancel_picked_home">"Sie befinden sich nicht in der Nähe des Gerätes."</string>
+
+    <!-- Title of email in app sharing process -->
+    <string name="access_sharing_share_title">"SchalueBox App Einladung"</string>
+
+    <!-- Fuzzy -->
+    <string name="app_generic_are_you_sure">"Sind Sie sicher?"</string>
+    <string name="allow_permission">"Die Application kann erst benutzt werden, wenn Berechtigungen erteilt wurden."</string>
+    <string name="change_password_missing_fields">"Um das Passwort zu ändern, geben Sie bitte alle Informationen ein."</string>
+    <string name="your_account_is_deactivated">"Ihr Konto wurde deaktiviert. Bitte kontaktieren Sie Ihren Administrator."</string>
+    <string name="login_error">"E-Mail und Passwort stimmen nicht überein, oder Ihr Konto wurde deaktiviert."</string>
+    <string name="no_location_services">"Kein Zugriff auf Ihren Standort"</string>
+    <string name="app_generic_ok">"OK"</string>
+    <string name="alert_consume_keys">"Bitte verbrauchen oder löschen Sie Schlüssel vor der Deaktivierung des Geräts"</string>
+    <string name="alert_deactivation_modem_queue">"Das Gerät kann im Moment nicht deaktiviert werden, es versucht immer noch mit dem Internet zu kommunizieren, wenn möglich können Sie die Türe öffnen um den Empfang zu erhöhen oder Sie versuchen es später nocheinmal."</string>
+    <string name="register_reduced_mobility">"Person mit eingeschränkter Mobilität"</string>
+
+    <!-- Fuzzy -->
+    <string name="not_in_proximity_of_locker">"Sie befinden sich nicht in der Nähe des Schrankes."</string>
+    <string name="something_went_wrong">"Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."</string>
+    <string name="main_locker_ble_connection_error">"Verbindungsproblem"</string>
+    <string name="no_deliveris_to_locker_possible">"Es sind keine Lieferungen möglich, bis Sie Ihre Verifizierungs-PIN eingeben!"</string>
+    <string name="are_you_sure_logout">"Sind Sie sicher, dass Sie sich abmelden möchten?"</string>
+    <string name="locker_needs_cleaning">"Dieses Schliessfach muss gereinigt werden."</string>
+</resources>

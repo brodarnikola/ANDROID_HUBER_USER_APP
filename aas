@@ -1,0 +1,2283 @@
+[33mcommit e0ad7950e2c7755ffc05bd1702c0319bb115b365[m[33m ([m[1;36mHEAD -> [m[1;32mdevelopment[m[33m, [m[1;31morigin/feature/MPL-205[m[33m, [m[1;31morigin/development[m[33m, [m[1;32mfeature/MPL-205[m[33m)[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Feb 20 16:28:56 2019 +0100
+
+    Fixing manage peripherals popup. WIP
+
+[33mcommit 075c5d296ddefa08035f28b402e7e5f582b028f3[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Feb 20 16:12:04 2019 +0100
+
+    Cleaning logs
+
+[33mcommit eb2d8f48d79e7442f2261b078b713b4366efc228[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Feb 20 15:49:30 2019 +0100
+
+    MPL-129 fixing parcel send UI WIP
+
+[33mcommit c721c2b5fe5f076395802595d4dba8da8d530ddf[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Feb 20 15:48:53 2019 +0100
+
+    Fixing strings
+
+[33mcommit 431172d9e76e82375afdea2fdce50b7922c29d7d[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Feb 20 15:48:28 2019 +0100
+
+    MPL-257 fixed managing users view
+
+[33mcommit 73ef10ecb5210302b247ceb342e9f35ed68cd076[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Feb 20 14:00:27 2019 +0100
+
+    MPL-204 - fix recycleview height
+
+[33mcommit 68706eae8f72eb8a07e45a25ad0d6a3df5ccdd1d[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Feb 20 13:26:57 2019 +0100
+
+    Fixing recylcler view on back from fragment details.
+
+[33mcommit 6e66ec1945b83288cac6d0931ffba8729be0f468[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Feb 20 11:59:06 2019 +0100
+
+    MPL list optimisations.
+
+[33mcommit c521c4dfa1712d4485e6b5238d67535feb20707a[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Feb 19 16:48:56 2019 +0100
+
+    Fixing merges
+
+[33mcommit 393b394975b4ba8bbcadffdbc529487225d905d0[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Feb 19 16:26:15 2019 +0100
+
+    Merge remote-tracking branch 'origin/feature/repairedPasswordUpdateActivity' into development
+
+[33mcommit 6c0323e37812280b552d4185db6296b662bd2d6a[m
+Merge: a434700 5063beb
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Feb 19 16:00:19 2019 +0100
+
+    Merge remote-tracking branch 'origin/feature/MPL/158' into development
+
+[33mcommit a4347005a36dea885f73f4a372b0b598bee542f3[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Feb 19 15:52:06 2019 +0100
+
+    Changing context usage
+
+[33mcommit 5f50d1c4532ec78646636b141edfc2b0bbabe226[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Feb 19 15:51:50 2019 +0100
+
+    Changing context usage
+
+[33mcommit 5063beb4d3327b98527c1f2d03ede8d3f0673639[m[33m ([m[1;31morigin/feature/MPL/158[m[33m)[m
+Author: brodarnikola <brodarnikola@gmail.com>
+Date:   Tue Feb 19 13:39:17 2019 +0100
+
+    Changed button for assigning MPL section
+
+[33mcommit db8a3f93ac14f748f6a752c31be4e7353fdb19a3[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Feb 15 15:28:46 2019 +0100
+
+    Add User SPL filter - WIP
+
+[33mcommit e1754a23203591eedbd02fa13bb29a3d3e31d483[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Feb 15 15:28:00 2019 +0100
+
+    Fixing strings
+
+[33mcommit 9ae45c0177ed82e9db1bc190b419f44e359ae075[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Feb 13 15:57:12 2019 +0100
+
+    SPL registration setup
+
+[33mcommit 5a6eb307669ced34d6b313b035878aa073bbb4a2[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Feb 13 15:26:59 2019 +0100
+
+    Fix exoperimental coroutines
+
+[33mcommit 3d42002464ffe05e86e55603f211bc844d163585[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Feb 13 15:26:13 2019 +0100
+
+    Migration to 1.3.20 coroutines
+
+[33mcommit 9b575faf8c4ba1ff5ff6a25c57e040b5f5ce32ec[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sat Feb 9 01:33:16 2019 +0100
+
+    Removing from list when deleting the item.
+
+[33mcommit 78868d3e5548a00018b4a92f346f8d6d34ae4706[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Feb 8 16:32:45 2019 +0100
+
+    Fixing overlaping
+
+[33mcommit 15325cccf6d64cee801cecfde10092a512d7295b[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Feb 8 16:10:35 2019 +0100
+
+    Merge branch 'development', Bump version
+
+[33mcommit 0a6960307b5398b54e4b37b2152fd55a6103da39[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Feb 8 16:09:36 2019 +0100
+
+    No BLE or wifi fix
+
+[33mcommit a1f9f4c850d21f05763927e557c0cacad1f6fa63[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Feb 8 16:00:10 2019 +0100
+
+    Fixing Pickup UI
+
+[33mcommit e0bf0ce3a3eba2f61bb8586d8ac0844170aede4e[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Feb 7 16:41:06 2019 +0100
+
+    Removing alarms - MPL114
+
+[33mcommit 013cd48a6468ccf064e2a7d41539a388330cfe35[m
+Merge: 428ca93 0b707eb
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Feb 7 16:05:25 2019 +0100
+
+    Merge branch 'master' into development
+
+[33mcommit 0b707ebb83ade882dfc59f8f976e6254bfffb1ee[m[33m ([m[1;31morigin/0.7.7[m[33m)[m
+Merge: 10a297f d935eb3
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Jan 30 15:32:00 2019 +0100
+
+    Merge branch '0.7.6'
+
+[33mcommit d935eb38cef7932ffcffc1b92caad815be34fd78[m[33m ([m[1;31morigin/0.7.6[m[33m)[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Jan 30 12:29:23 2019 +0100
+
+    Bump version
+
+[33mcommit 989afd86b4f7b1b2e8a0d315bd0de75a800bf9c4[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Jan 30 12:28:08 2019 +0100
+
+    Access sharing for ADMIN users changed
+
+[33mcommit 444b20c4e3b50e37e44004a02a3174bff3ee985f[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Jan 30 11:40:50 2019 +0100
+
+    Fixing delivery size selection
+
+[33mcommit 2b8fc293be18f8a7ab786c527b3ef37bfe62d742[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Jan 30 11:40:22 2019 +0100
+
+    Adding translations and styles
+
+[33mcommit 2c96de740ee14d6b56afff8b9d098d2b5103527f[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 29 14:36:50 2019 +0100
+
+    Merge branch 'development'
+    
+    Bump version
+
+[33mcommit 10a297fdaab874bccda54dac17e90185db3c0081[m
+Merge: 7eff0c5 428ca93
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 29 14:35:37 2019 +0100
+
+    Merge branch 'development'
+
+[33mcommit 428ca9360c3fb1821fc4e938b2c626ec87185e6b[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 29 14:35:26 2019 +0100
+
+    Fixing P@F pickup issue
+
+[33mcommit c7bf8964ea550b35745851de582e64570246da75[m
+Merge: 5a1fef8 7eff0c5
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 29 13:55:30 2019 +0100
+
+    Merge branch 'master' into development
+
+[33mcommit 7eff0c54259cd038c18055f068ad0553a4a5f75a[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: 7be6ce4 c8515cc
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 29 12:14:06 2019 +0100
+
+    Merge branch '0.7.4'
+
+[33mcommit c8515ccf7b2d3513cd2caf586f4d56335ae26a67[m[33m ([m[1;31morigin/0.7.4[m[33m)[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 29 12:13:32 2019 +0100
+
+    Fixing version name
+
+[33mcommit 79df8f343c4e9b965edacf4f5a2e57bb28a9d781[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 29 12:11:10 2019 +0100
+
+    Fixing button
+
+[33mcommit 9c3575ee6a306011cc3b0d7d1fe8e889c3204566[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 29 12:04:06 2019 +0100
+
+    Message Log screen fix
+
+[33mcommit 11ef013badd6ed7756dc1b984c7842c51e98a850[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 29 10:42:08 2019 +0100
+
+    Fixing demo links - beautifying Alerts
+
+[33mcommit 7be6ce430ff5eae83676804e8ba6b9beec842a44[m
+Merge: dc7c69e 5a1fef8
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 28 11:50:05 2019 +0100
+
+    Merge branch '0.7.4'
+
+[33mcommit 5a1fef84cbe537acf7ab321a3dfc336762ab497d[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 28 11:48:17 2019 +0100
+
+    User save preferences fixes
+
+[33mcommit f660383ba62a833bf6c836f4ddf1610eae72bd9e[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jan 25 01:51:43 2019 +0100
+
+    View all MPLs from backend
+
+[33mcommit ca9033ddcde61698da421afa463a49bc49a1dd8e[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jan 25 01:50:58 2019 +0100
+
+    fixing launch icon drawable
+
+[33mcommit 42d96117c7f24d4b16df3eaf952176621b7806a7[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jan 25 01:50:27 2019 +0100
+
+    Fixing launch icon
+
+[33mcommit 03a5dbc0d10832a6ad31c3d027b49b7e3fb91015[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Jan 24 16:17:11 2019 +0100
+
+    Multiple fixes
+
+[33mcommit 3acb495c5ceddbe6c63ed6e6888fd1c201ae596c[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Jan 24 01:59:57 2019 +0100
+
+    Managing peripherals fix
+
+[33mcommit 62afa29559777e5aee4943f240d5712b4b9f0029[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Jan 24 00:12:07 2019 +0100
+
+    MPL-112 fixing MPL data backend send
+
+[33mcommit 5a6aacfb8eb17c321aa4550570686d2397eb017b[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Jan 24 00:11:33 2019 +0100
+
+    Language change fixes, UI button fix
+
+[33mcommit eae07a990e6e9ba7fb6739bc3648a5ddd52cbd62[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Jan 23 22:40:01 2019 +0100
+
+    Fixing settings, add new translations
+
+[33mcommit 22064c294454e88f166633aef01a4479f40a84e7[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 22 16:51:05 2019 +0100
+
+    Adding new scanner
+
+[33mcommit 81c79d3450500e2ae998f8f7945fa138b1915dd2[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 22 16:50:55 2019 +0100
+
+    Adding new languages
+
+[33mcommit 2ac3dc42c2d7c02ab8a01d43055dc755339a51eb[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 22 16:50:01 2019 +0100
+
+    Fixing title
+
+[33mcommit 2d81a0eb4253194c3a5ee5991818dcb9c58de34c[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 22 16:49:45 2019 +0100
+
+    Code cleaning
+
+[33mcommit 24c1dab2e7dd816b785c203e3a86518775445e17[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 22 16:49:14 2019 +0100
+
+    Adding help
+
+[33mcommit 31adc0142e346d46f91794f271ab24bc055becf3[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 22 16:48:21 2019 +0100
+
+    Fixing header address
+
+[33mcommit e77d7410b00cc2532de28b08cd3bb8ade4bbda79[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 22 09:14:28 2019 +0100
+
+    Fixing Admin app imports to Experimental coorutines
+
+[33mcommit 0cde808b3d0c99e64d48f7659a947ae2bd38383e[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 22 09:06:13 2019 +0100
+
+    Fixing app keys - bump version
+
+[33mcommit b536047c2c58d5f3a8baa9abb7afe8e5d0d5944a[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 22 09:04:06 2019 +0100
+
+    Adding Italian version
+
+[33mcommit 247ce7e2b068df14ab0f45e679ffedf9f1771286[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 21 22:38:25 2019 +0100
+
+    UI fixes
+
+[33mcommit 19afab64abb7e6cea1ce94aa334b6e3eab83c273[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 21 22:38:11 2019 +0100
+
+    Expanding MPL master telemetry model
+
+[33mcommit 8054a95327ab9419d6ce2cc50f9c0def9f3d5f7d[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 21 22:37:33 2019 +0100
+
+    Margins fixes, cleaning
+
+[33mcommit 856cdb5695ba12a96525c8cf06b3c9a5e951b451[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 21 22:36:52 2019 +0100
+
+    Fixing crash on key delete
+
+[33mcommit 9ee23d8303e7689ab79848b4f20ee2a6b3aa86bf[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 21 22:36:40 2019 +0100
+
+    Fixing key availability view
+
+[33mcommit 5c22be07f87fd38f93a26f4773c7d165fa55a413[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 21 22:36:22 2019 +0100
+
+    Expanding key model
+
+[33mcommit 5614cef319e7576bd391c49104906e3a71b93a65[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 21 22:35:24 2019 +0100
+
+    Removing unused share button on top header
+
+[33mcommit 9ac7605526ecbe74ae177d5e41a6880a1b46b995[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 21 22:35:03 2019 +0100
+
+    Buttons styling - fixes
+
+[33mcommit 74aa577979d77dbebd6739733c3fdea9364afffc[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 21 22:34:39 2019 +0100
+
+    Revrt form automatic code inspections fixes
+
+[33mcommit 39f0db3d1c5a20c23dbefff0fb879de875a52677[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 21 22:31:16 2019 +0100
+
+    Thicker REd line
+
+[33mcommit 009255133495c83a0f3450067ba91013131f155c[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 21 22:30:29 2019 +0100
+
+    Adding telemetry in Locker details
+
+[33mcommit df8cd974129e31b6a410d6f2da52f6b2ec3643da[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 21 22:27:22 2019 +0100
+
+    Fixing languages
+
+[33mcommit aac9205777b25415cebd05fab26a121383b0d584[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 21 00:09:49 2019 +0100
+
+    Adding input fields checks
+
+[33mcommit bc0b0132875ea00dbb1ec531e22d3b76c6409483[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Jan 21 00:09:27 2019 +0100
+
+    Adding telemetry
+
+[33mcommit e91e05b75d95167c3f46a7e422e6dd4ce6a59bc7[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sat Jan 19 17:13:33 2019 +0100
+
+    Fixing header, buttons,margins UI fixes
+
+[33mcommit 6890b970e129a09d6bf413db94355c36b0d54c2c[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jan 18 23:40:57 2019 +0100
+
+    Fixing settings password labels
+
+[33mcommit 2e95c633a3c4acc3b48e6c4b60b2cc42cb656975[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jan 18 23:33:17 2019 +0100
+
+    Removing app version form header
+
+[33mcommit dc7c69e4dbff314ee12dffa46ca503fb045412ec[m
+Merge: 8fa29cf e080a9c
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jan 18 23:06:21 2019 +0100
+
+    Merge branch '0.5.0'
+
+[33mcommit e080a9cece9d96289c8dcf5670248d4c959b8673[m[33m ([m[1;31morigin/0.4.3[m[33m)[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jan 18 23:05:58 2019 +0100
+
+    Fixing Screen orientation - Admin MPL-55
+
+[33mcommit 59bc4eb510758d3b12c904be61d638f82b9869e5[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jan 18 17:23:14 2019 +0100
+
+    Login screen fixes MPL-169
+
+[33mcommit 53f639bc121c96f06d298959240f46b1ac462620[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jan 18 16:19:09 2019 +0100
+
+    Changing Theme on Login screen - Error popup test
+
+[33mcommit 7e711d206bf765c55cb959d75399ee9f752e1f7b[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jan 18 16:05:02 2019 +0100
+
+    Cleaning code, removing unused code
+
+[33mcommit ce29ae7136e54bcc43aad1d651e9abd22ab64258[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jan 18 16:01:48 2019 +0100
+
+    Adding languages and resources
+
+[33mcommit 3521dc0d4b7a4fbda9c5c23848c217fc0b1519ac[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jan 18 16:01:07 2019 +0100
+
+    Email validators, Dialog util
+
+[33mcommit 1ee54d90a740ececeb0820bbe47f90798abc6c57[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jan 18 00:12:06 2019 +0100
+
+    Adding new strings term
+
+[33mcommit 02211286ad2723a6e85ceae88969538aa974e0fd[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Jan 17 17:09:54 2019 +0100
+
+    Fixing HC languages
+
+[33mcommit f66276438ce3afa8b698606faa1082e5743055cc[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Jan 17 16:11:55 2019 +0100
+
+    Fixing cancel P@H
+    
+    Fixned MPL-48
+
+[33mcommit 06ec9ec3b78bb3d3fb7d0cdc10010e1c50431b15[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Jan 17 15:42:59 2019 +0100
+
+    Fixing delivery strings and button
+
+[33mcommit a48ad6661e32a032b970275a5a0afea913cbd2e0[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Jan 17 14:42:09 2019 +0100
+
+    Changing button style in app
+
+[33mcommit 6376ea506547f12e0385326565616ab35e745ef4[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Jan 17 14:41:43 2019 +0100
+
+    Terms and conditions service extension
+
+[33mcommit 38ab29b40bd943d2c2d4c26b41c05d6e189fbc8a[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Jan 17 14:40:28 2019 +0100
+
+    Terms and conditions implementation
+
+[33mcommit 8fa29cf141f0d63f545dd030bdf4de95d6ffac94[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 15 14:03:19 2019 +0100
+
+    Admin - Radio Access Technology
+
+[33mcommit 968d0d6e2fd19ee80f294b9c76c6ddb87fafee06[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 15 12:31:48 2019 +0100
+
+    Adding locales
+
+[33mcommit fd6f947fb7e9e0f7998677555892a63d23da2da7[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jan 15 00:47:54 2019 +0100
+
+    Adding status notivces equipment
+
+[33mcommit 61772d692fb7e16af1eb1c3f346e8fffc5d407a6[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jan 11 16:20:43 2019 +0100
+
+    Fixing languages
+
+[33mcommit ed35190e3c4d0a7d7a629d1d7d755ee7eea47bed[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Jan 10 23:56:34 2019 +0100
+
+    UI fixes
+
+[33mcommit 91191bd432599d40338b0bd0815d643300ce9ec4[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Jan 9 16:16:27 2019 +0100
+
+    Revert "Bump version"
+    
+    This reverts commit 21f048e8d62405a02a19e5c17a7477c9307a2404.
+
+[33mcommit 21f048e8d62405a02a19e5c17a7477c9307a2404[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Jan 9 16:16:27 2019 +0100
+
+    Bump version
+
+[33mcommit b9181c184f2bcf7067ec2dc7619918fc662366e7[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Jan 9 16:04:14 2019 +0100
+
+    Fixing crash because of missing framelayouts
+
+[33mcommit 3373cdbf121ca7e0a7868a8650890cb263b5a91f[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Jan 3 16:22:39 2019 +0100
+
+    MPL-118 - Fixing UI spaces and smaller enhancements
+
+[33mcommit 5a30e804d083dcdb5391194233e5ae6008f22fd5[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Dec 31 18:23:50 2018 +0100
+
+    MPL-118 Settings fixes - password change
+
+[33mcommit bf48df0466c705b9c235a9e6ec97f456d4dd2fe8[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Dec 31 01:01:42 2018 +0100
+
+    MPL-118 fixing Settings ui issues.
+
+[33mcommit 48a8cb96ce8c589a2a8461529fb2a0817b74cb90[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sun Dec 30 12:15:36 2018 +0100
+
+    MPL-118 Fixing Settings UI
+
+[33mcommit bde8ec59e47645c7d59c5c9d8263d4d2be9078f4[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sat Dec 29 09:17:32 2018 +0100
+
+    MPL-129 - UI, text fixes
+
+[33mcommit 26bba36b6382684dea195f557f6f514bfdfb9c02[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sat Dec 29 01:30:36 2018 +0100
+
+    Access sharing fixes MPL-125
+
+[33mcommit 7153e646002ae4541f03a4346808b265172b9aa0[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Dec 28 16:09:30 2018 +0100
+
+    MPL-133 - fixing Access rights button UI
+
+[33mcommit e2607b628fed73e4c6017124ae1b20cd760f1ccf[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Dec 28 01:42:10 2018 +0100
+
+    No Network / BLE fixes
+
+[33mcommit c27cbe17992cc2c846272f89633883b2a7101fbe[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Dec 28 00:38:22 2018 +0100
+
+    No Wifi No BLE layout implementation
+
+[33mcommit f656e91417435583d596485a9608d97469c87334[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Dec 27 00:31:31 2018 +0100
+
+    No wifi, No BLE initial imlpementation on Login screen.
+
+[33mcommit 12d5e954e6e61845a48c127b242ae821981bd5f1[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Dec 19 14:44:08 2018 +0100
+
+    Adding flavours
+
+[33mcommit 56dc8234d1f1f123cac91ac336f774c78a3b0b77[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Dec 19 03:05:50 2018 +0100
+
+    Setting up languages
+
+[33mcommit af42e51f948c20c8ef63073383cd87a435fc2350[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Dec 19 01:38:02 2018 +0100
+
+    Adding language switch
+
+[33mcommit b8a39d8e5fb1044997d2e3a56c914304742c493a[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sat Nov 17 23:36:41 2018 +0100
+
+    Fixing toast message when activity context is dead
+
+[33mcommit 0301969d29f95fdf3c3a7a90fef5967183db5f7b[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 31 12:53:49 2018 +0100
+
+    Group administration
+
+[33mcommit 9a2ee96e67535e7bcdad845902c5fcdaa1f63526[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 31 10:27:10 2018 +0100
+
+    Groups handling WIP
+
+[33mcommit f50b896ea741969495bcb3e81d2d00fb7b8528ae[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 31 08:44:32 2018 +0100
+
+    Fixing back button
+
+[33mcommit 1398190f5399dfe6a11a1839f5bf99566210ee3f[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 31 01:24:36 2018 +0100
+
+    Get group members
+
+[33mcommit 3c140c46c935f174fb0e6509d309fbb879fe856a[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 30 23:56:52 2018 +0100
+
+    Change group name
+
+[33mcommit b52fc323b89853e3a0f61a2598722befa4265737[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 30 23:18:13 2018 +0100
+
+    Fixing user save
+
+[33mcommit a8acf6f6bc9668d181d83d1fa16a665f37c026c8[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 30 23:04:18 2018 +0100
+
+    Fixing broken back button
+
+[33mcommit bb8d54786577ad1470d844c484e86526e61692b8[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 30 22:07:18 2018 +0100
+
+    Handling back button
+
+[33mcommit 25d0f35e06b3172de8adf11e4348b58080ebb7e3[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 30 16:45:13 2018 +0100
+
+    Admin UI fixes
+
+[33mcommit 5fa1b04d5f31e7e531bb6e85981125512189dcbc[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 30 13:54:10 2018 +0100
+
+    Disabling register button when device is not visible. Fixing edittext
+
+[33mcommit be1e0c9b8a7a7de6f4ae2b436eb43d0be198431c[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 30 11:33:40 2018 +0100
+
+    Fixing UI
+
+[33mcommit 7815f248c949633e1f1505521e4393d69df194a5[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Oct 29 13:41:27 2018 +0100
+
+    Register device on first startup
+
+[33mcommit cbaadf314302b4d2619d2e23cb3dcb1c0c40e5e5[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Oct 29 11:59:39 2018 +0100
+
+    Delete PAH keys
+
+[33mcommit 28a7d0eeb185182b54fd7f9d0d9a2852018e651f[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Oct 29 10:13:35 2018 +0100
+
+    Change send image
+
+[33mcommit 55789baf59e3a273206b30f6e07b12bdd7255819[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Oct 29 10:13:19 2018 +0100
+
+    Change send image
+
+[33mcommit 7c765b31d20bb9983dfad9c4de77ca3c1982c6f3[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Oct 29 10:07:16 2018 +0100
+
+    Support for CoAP configurations
+
+[33mcommit cfeacd41e58e4efbe1c3b133d4197c349bfae1e0[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sun Oct 28 23:12:50 2018 +0100
+
+    MPL-48 adding command for deleting P@H keys.
+
+[33mcommit 44660d745000416a4863cd74b84804ed4a5106c3[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sun Oct 28 22:33:51 2018 +0100
+
+    Gradle upgrade, Admin deviceRegistration
+
+[33mcommit 9925c26e6e005b6b4083457a606655628ee2af23[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 26 10:57:13 2018 +0200
+
+    Modem RSSI, STM version, notifications
+
+[33mcommit acbcc78f2d9b1470834a2b56b41af340a7503adb[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Oct 25 14:23:05 2018 +0200
+
+    MPL-24 Fixing to short message
+
+[33mcommit a6c2ab0daa74838b5baed36b18fff9597fb050b9[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Oct 25 14:18:19 2018 +0200
+
+    Protrait lock
+
+[33mcommit 587ed2a637845386e8c14e28e1f74ec2e51f52fc[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 24 17:06:07 2018 +0200
+
+    Removing white screen on startup
+
+[33mcommit c1c26ffd96eb59f2239b18e856e2f23990145a51[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 24 16:02:22 2018 +0200
+
+    Fixing splash screen.
+
+[33mcommit 6481511b76492bf21ad7f2a31bdc8c3e3bb7875f[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 24 12:18:22 2018 +0200
+
+    Change send icon
+
+[33mcommit ed1fdabe5a4d4495d02261f10c0d56a5483870a1[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 24 12:06:15 2018 +0200
+
+    Adding send parcel key access
+
+[33mcommit de75f8fae492cd79dfc38672b4199e9bebabb2e3[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 24 00:06:58 2018 +0200
+
+    PaH management WIP
+
+[33mcommit 1424dbee1e6b8c52111e8998d4e5a647d1fba717[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 23 14:20:03 2018 +0200
+
+    Delete paf key sharing
+
+[33mcommit 30016787bd3a62befd4eee8f0feb5678d29d1bca[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 23 11:52:41 2018 +0200
+
+    Fixing MPL item preview by key
+
+[33mcommit 00b76dfcd8be1737e7dc1cb6971df47b5636a619[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 23 11:39:55 2018 +0200
+
+    Fixing Key presentation management access
+
+[33mcommit 05908883685c51f7b96bb16b4d3421bb18233fd2[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 23 00:33:10 2018 +0200
+
+    Key presentation
+
+[33mcommit 779793b951b55568cf37673843e6077f7af76727[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sun Oct 21 16:01:17 2018 +0200
+
+    Pickup keys management
+
+[33mcommit 43fe759b034b6196b3de5475619d0ea818dac56f[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sat Oct 20 23:13:23 2018 +0200
+
+    Set pick at home WIP
+
+[33mcommit 1f0b8b67ab6ab76002bb341cc87db9a725db6a97[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sat Oct 20 22:45:09 2018 +0200
+
+    Add action status handler
+
+[33mcommit 6a125768c86fd4b51b80450e6d29bfc27a1b61ad[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sat Oct 20 20:22:02 2018 +0200
+
+    Extend MPLDevice filter
+
+[33mcommit 9420585be45ba95cf2937d170cce65daea7b8a42[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sat Oct 20 19:38:41 2018 +0200
+
+    Changing main MPL filter
+
+[33mcommit 2080d54bbac1d5fa6ce4d1a557b756fdfc307e6e[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 19 16:33:19 2018 +0200
+
+    Bump version
+
+[33mcommit e9be356634793a1f937bee1aae2e438f815ffd58[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 19 16:30:21 2018 +0200
+
+    Select registration size
+
+[33mcommit afc86f9b7a4a592d1f4622c5de47f00fb4045625[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 19 14:57:34 2018 +0200
+
+    Fixing peripheral administration
+
+[33mcommit 4ccfb7a582addc92748e6bccf5a5c8f6cf33a870[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Oct 18 15:21:41 2018 +0200
+
+    Adding background image
+
+[33mcommit 0f9b698c2e9f2902960fe0536727a1737cebaa09[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sun Oct 14 01:30:33 2018 +0200
+
+    Variables naming refactoring, add MPLDevice force  update
+
+[33mcommit 5c80071a51420fecbdd33e2cfcc2a2ccab73b641[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 12 16:23:08 2018 +0200
+
+    Removing logs
+
+[33mcommit cddfd532b35a215b2527aa9fe7656739238d14aa[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 12 16:10:25 2018 +0200
+
+    Manage registration fixing wrong visibility multiple issues
+
+[33mcommit c66350762b52fa0ea827512a0668effa4ed414b7[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 12 09:11:40 2018 +0200
+
+    Add Force open & discover command
+
+[33mcommit 31534dab252d76a18a881753e0d79507650da5f5[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 12 09:03:45 2018 +0200
+
+    Adding Force open & Discover peripheral UI
+
+[33mcommit 824d62ed8944df4e25da880751aea13cb8e0d206[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 12 08:51:38 2018 +0200
+
+    Prevent refreshing list on BLE event if device is connecting
+
+[33mcommit 1336af77994f2b93b1a590e2c51ef909eed9e09b[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 12 08:49:08 2018 +0200
+
+    Refreshing list after connection is done
+
+[33mcommit 446ed8c5706f0f08fba70eee99fef6d3397fd9cc[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 12 08:47:56 2018 +0200
+
+    Adding semaphore to prevent the refreshing list when is device connecting
+
+[33mcommit 71e40e3af94194947cab2f7523cad82d5cc667c9[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Oct 11 22:47:10 2018 +0200
+
+    Fixing adding / deleting peripherals
+
+[33mcommit b6768c441d83e1d93a1db6d0f645eca9da8a269f[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Oct 11 15:59:19 2018 +0200
+
+    Add new assets. Change peripheral icon based on status
+
+[33mcommit 43bcf57a719bd9b44daa2c031987bc538cfe42a0[m
+Merge: 28059a6 f4256d2
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Oct 11 15:09:20 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 28059a64a9f6c8d1e0d5b54b32987ebbda80d476[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Oct 11 15:09:10 2018 +0200
+
+    User permissions fixing. Assign user to ePaper
+
+[33mcommit f4256d21d45a4f8e18808002de789fbe911e7556[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Wed Oct 10 16:14:30 2018 +0200
+
+    add "forceOpenDoor" generic Admin BLECommunicator method
+
+[33mcommit 44dbc13c143d06fc38b6e2d404649964847a3d1e[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 10 00:07:12 2018 +0200
+
+    Internet connection check util
+
+[33mcommit fd94953e8c2029e4e3463dfcf741a6758ea76103[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 9 15:54:40 2018 +0200
+
+    Fixing access list.
+
+[33mcommit 735513e40fc9975a68120b7848f87d3664518325[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 5 21:04:26 2018 +0200
+
+    Bump version
+
+[33mcommit ab62b23f4160e655c24456fe41d95b8474d4553e[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 5 16:56:14 2018 +0200
+
+    Cache cleare improvement
+
+[33mcommit 40772b5a254577503ab8fc1c2816da2541f1409e[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 5 16:17:11 2018 +0200
+
+    Change Locker name & address fix
+
+[33mcommit 61f5857b8a9685f7f478e654fc4ab20a19d30962[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 5 16:16:50 2018 +0200
+
+    Adding badge for lockers on Home screen
+
+[33mcommit c14e4df58f11e014843d9e0090a5bb9e186d311f[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 5 16:16:19 2018 +0200
+
+    Removing "Clicked" Toast
+
+[33mcommit d1e4a342599485426ab2b1d7625809027d55a084[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 5 14:58:42 2018 +0200
+
+    Adding titles to MPL details
+
+[33mcommit 94cc2a63ff6a86903d67d7d245eac8c166999a45[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 5 14:28:04 2018 +0200
+
+    Change disabled pickup image
+
+[33mcommit f6f1286ed7508c82b4dd4b39afd562e8cba3b2d3[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 5 14:00:32 2018 +0200
+
+    Bump version for admin
+
+[33mcommit 5e1df114c03ef88a2bc72d708cc6500e38e1936e[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 5 13:52:25 2018 +0200
+
+    Adding ePaper update
+
+[33mcommit d53395c5498d2e072e0f3166c219ab5e214f6973[m
+Merge: cec3e4f d21fcee
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 5 13:29:49 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit cec3e4f3ba82a7a892d969cd5e4fd5e41df9b748[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 5 13:29:47 2018 +0200
+
+    Adding pickup disabled images
+
+[33mcommit d21fcee17188139b437ff4bf807bd4889df4bae3[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Fri Oct 5 12:57:05 2018 +0200
+
+    extend updateEpaper with forceDownload param
+
+[33mcommit bef29c4afad33aa7233480c5120d74db7e6d1d4e[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Oct 5 10:42:54 2018 +0200
+
+    Edit network configuration
+
+[33mcommit 31d264579430bbbb44b20094ee4f657282192a0c[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Oct 4 17:21:40 2018 +0200
+
+    Network configuration integration with BLE
+
+[33mcommit 428679375d7c7c22081972afcfbda34b06922d41[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Oct 4 15:51:35 2018 +0200
+
+    admin-app extend BLE communicator with network configuration
+
+[33mcommit ae034e047c17bd4f85a5363f695ea9cc605f149b[m
+Merge: f234610 6a4a7ec
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Oct 4 15:47:06 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit f23461024e43add297b70f0f3ad2eebbca335a41[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Oct 4 15:46:58 2018 +0200
+
+    Add network configuration service - UX
+
+[33mcommit 6a4a7ec5883b88b9b9d1fbb353335d9df3c43c5e[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Oct 4 14:36:12 2018 +0200
+
+    add forceUpdateEpaper to MPLAdmin BLE communicator
+
+[33mcommit 9fe1d7e4ce3cce1bd78dabaf5b63a14a5173e3c7[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 3 12:09:13 2018 +0200
+
+    Adding finish button on pickup
+
+[33mcommit ae9efeec0dee1ff347bce35028510f0f5dc722de[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 3 11:41:15 2018 +0200
+
+    Loading screen on pickup
+
+[33mcommit 66b2c9afa2763d621fefb43db43db3598ac0286b[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 3 11:40:04 2018 +0200
+
+    Cleaning unused imports
+
+[33mcommit 5f9332f607de840cecb29cdc36d8b4a54693c4b8[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 3 10:05:46 2018 +0200
+
+    removing debug folder from git
+
+[33mcommit 51a690bb566c3a542cbe39ced06658351909002c[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 3 10:05:22 2018 +0200
+
+    Fixing peripheral list
+
+[33mcommit 27828d12082d63324583c71707fb8c93dd0a7b78[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 3 10:04:53 2018 +0200
+
+    Code refactoring
+
+[33mcommit abb3ecea0d695e5a88da97f693ead3e60524f6c6[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 3 10:04:35 2018 +0200
+
+    Fixing Action key
+
+[33mcommit b8a0882ab92a43642849552ccfc4d1c3f6bd7185[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Oct 3 10:03:47 2018 +0200
+
+    P@H broken pin layout fix
+
+[33mcommit 9f107455195d82d2558bdcd504f9a56d28bf0e47[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 2 23:07:33 2018 +0200
+
+    Removing FAB button.
+
+[33mcommit 0227569b97f8251647f3eb87b330547c7902de37[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 2 23:06:48 2018 +0200
+
+    Peripheral registration refactoring
+
+[33mcommit 5928fbd4b6e91759aab6760aab914823e5a9d496[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 2 12:04:58 2018 +0200
+
+    Setting peripheral count status
+
+[33mcommit f5a443a155310d0297813e9a90a8a210d1e38855[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 2 11:29:05 2018 +0200
+
+    Add item click controll on registered devices
+
+[33mcommit 482f92b40faa295d3c98acbdd000b4e176ad5cf3[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 2 10:12:32 2018 +0200
+
+    Adding modem status
+
+[33mcommit 1a3a228402d6e3a5ca9eeaeada6a2cdd5f82ac78[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 2 02:31:14 2018 +0200
+
+    Adding loader on peripheral manager
+
+[33mcommit 8d425c69059de0249592520b0ef6beaed03a2317[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Oct 2 02:10:02 2018 +0200
+
+    Adding pending checks in cache.
+
+[33mcommit c57b619eb73086ec5297d2844a9b49387ad97a67[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Oct 1 23:57:21 2018 +0200
+
+    UI fixes with status pending, handing MPL master and slave logic
+
+[33mcommit f995e334edb8c25e929d6e369a1a6cf385173061[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Oct 1 23:55:25 2018 +0200
+
+    TODO add
+
+[33mcommit 003a9b0ce17c9135d7a15cc7229d1b1b148f7661[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Oct 1 23:55:11 2018 +0200
+
+    Fixing cast exception crash
+
+[33mcommit 8ef9d4fd503f881dc4ef1ed1a63140a3e27d9dcc[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Oct 1 23:54:32 2018 +0200
+
+    Adding testfairy
+
+[33mcommit 0d726bfea173d666b3ea1e8bd35cda43274f23b0[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Oct 1 23:54:14 2018 +0200
+
+    Adding new assets
+
+[33mcommit 9822cf74211cab6c5d796fa20943cf56b1aac1c2[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Oct 1 23:53:43 2018 +0200
+
+    Fragment name refactoring
+
+[33mcommit 43d2283450f70598e85024b4535a7e2578777066[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Oct 1 23:53:02 2018 +0200
+
+    Fixing settings crash
+
+[33mcommit 7564961a24a0f0fc4e30bf33ca15ec47360c42c0[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Oct 1 23:52:23 2018 +0200
+
+    Extending MPLApp statuses
+
+[33mcommit de0f7db9edf752867759c7f8b7cd01d8dffb6a49[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Oct 1 23:50:07 2018 +0200
+
+    Fixing constructor
+
+[33mcommit 655b0bd2d693583e999802c02bcf02828c9e7683[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Oct 1 23:49:11 2018 +0200
+
+    Adding testfairy tracking
+
+[33mcommit 18fcde812bbd22e0d37a8c524c65e2088bdfc82d[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sun Sep 30 17:08:29 2018 +0200
+
+    MasterAccess request pending state  UI
+
+[33mcommit fb36cd72ace9f32e2fafff5119ba5dfc19565c19[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sun Sep 30 15:49:21 2018 +0200
+
+    MasterActivity handling Master approval pending state
+
+[33mcommit 138ff41ce2ebfbb8738285861399c8c6092212b1[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sun Sep 30 00:04:14 2018 +0200
+
+    Adding rejection on MPL access request
+
+[33mcommit 3cacb1752af3329e5142a7fa00e2b7e8c6947813[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sat Sep 29 23:24:45 2018 +0200
+
+    Code refactoring
+
+[33mcommit 46e81458b449268ff5d43b3d3f50fab2bfe776a1[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sat Sep 29 23:06:23 2018 +0200
+
+    code refactoring, renaming spldetailsfragment
+
+[33mcommit 7b3677385da710bc30558d6940cada0d148cb56c[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sat Sep 29 22:58:09 2018 +0200
+
+    MPL access rights handling
+
+[33mcommit 4c4869518349f507eb1eb186765524c61b249d30[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 28 17:05:10 2018 +0200
+
+    Removing unused button
+
+[33mcommit 54673b85499c8f5d02ffdda86230023f7590915a[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 28 16:57:20 2018 +0200
+
+    Manage admin users
+
+[33mcommit e0af2455269e49e86e36afe8d970d68f2610d62a[m
+Merge: 3502e09 a808970
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 28 00:20:09 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 3502e0918f1aaa90ee88e63898cd28f9106b75b7[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 28 00:20:06 2018 +0200
+
+    Changing class name
+
+[33mcommit ec6a299df2d921704cbbe3228908f7e9d3c27972[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 28 00:18:45 2018 +0200
+
+    Handling available epaper sections
+
+[33mcommit a8089702471fccca15c684ca94499fea2acb2f9a[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Sep 27 17:10:23 2018 +0200
+
+    BLE comm - add discover slave function
+
+[33mcommit 0ada9a578d33833918efdad0374a5b433bbf5d43[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Sep 27 16:29:47 2018 +0200
+
+    Manage master access rights
+
+[33mcommit 681a57c1c433429ea64b1c366055f064931d53c5[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Sep 27 08:40:54 2018 +0200
+
+    Modify Master device settings
+
+[33mcommit 06c1a7cd2401751d35ce4150842a123c8bcb5778[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Sep 27 02:07:15 2018 +0200
+
+    Fixing brackets
+
+[33mcommit f7123cb84fe55db10dee6f9c67348a517c5062e1[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Sep 27 02:06:37 2018 +0200
+
+    Adding slave unit filter
+
+[33mcommit a2421da2d51c1a2a2d0fc2a3b98fd6202c74b3fb[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Sep 25 17:01:01 2018 +0200
+
+    Slave device status WIP
+
+[33mcommit 5cc08870f7f206532f2277ce3ac906bc2f0616e2[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Sep 25 15:53:40 2018 +0200
+
+    Peripheral deregistration
+
+[33mcommit 4aaaf2635f0f1a81d550d3b5e3fcb42775c2f025[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Sep 25 14:56:14 2018 +0200
+
+    Fixing shadow text
+
+[33mcommit 22571c89f620fb1cdfa4b71723c6134230166444[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Sep 25 14:54:37 2018 +0200
+
+    Fixing shadow text
+
+[33mcommit 2942fa5300e6193c772a72ef0963b443fe307c44[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Sep 25 14:40:07 2018 +0200
+
+    Merge peripherals which are registered and which are not.
+
+[33mcommit 842db484cc74bc6317cee98d6a8ec6bfec5f3c18[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Sep 25 14:04:20 2018 +0200
+
+    Handle Slave devices
+
+[33mcommit a27c5345d452407e635303748e0232d3c396dc29[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Sep 24 01:34:47 2018 +0200
+
+    Adding locker unit support
+
+[33mcommit 22ebd3108ebda78aab76b756ba405ccd6d556688[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 21 12:19:59 2018 +0200
+
+    adding userId in  delivery
+
+[33mcommit d318b8ea95dec74d0dad070be06f43f9a53a0443[m
+Merge: abc0db6 67c24c3
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 21 12:14:21 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit abc0db6ba0680a0a1df664504d502ad8580418f0[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 21 12:13:51 2018 +0200
+
+    Adding new SIL ble scanner
+
+[33mcommit 90f4ab5f523df417e4d7fba8b0ff2578d7bedd51[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 21 12:13:35 2018 +0200
+
+    removing spaces
+
+[33mcommit 32fd0b0ffde87c74ed11c4516ae9a1164dbac695[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 21 12:13:20 2018 +0200
+
+    change dev key
+
+[33mcommit 48e4cfbf01878cdb3e6d3286a1f8c41a2d356a10[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 21 12:13:03 2018 +0200
+
+    Crash if notification is consumed
+
+[33mcommit 4b074d38c864225dda69ae7c440bf63a610d64a7[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 21 12:12:38 2018 +0200
+
+    MPL settings details ui
+
+[33mcommit c8d57d058c5033f0b3648f1a0344b992cdbeb728[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 21 12:11:53 2018 +0200
+
+    Remove unsused code
+
+[33mcommit 68286888c12dbb3ac879edb2c41cad04e3ff2831[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 21 12:11:36 2018 +0200
+
+    MPL Settings Android manifest settings
+
+[33mcommit 03a33aea3e1a1fac54adccada4be3b6225d0662b[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 21 12:11:09 2018 +0200
+
+    Adding MPL device settings initial UI
+
+[33mcommit 67c24c3adbc6d2229b23650aadebfe7d0c20d166[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Sep 20 16:53:30 2018 +0200
+
+    extend BLE parcel send methods with endUserId parameter
+
+[33mcommit de67c2b9260cf4ad161e951326df1e8b4b8ada42[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Sep 20 12:50:29 2018 +0200
+
+    MPL listing
+
+[33mcommit 6b14fa4b9aa50f88aa7e082dc5b672661d8971e5[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Sep 20 12:50:01 2018 +0200
+
+    Adding assets in core
+
+[33mcommit e1337a270ce464c1d8d738f2ecdf654b46a5a309[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Sep 20 12:49:00 2018 +0200
+
+    Name refactoring
+
+[33mcommit 52bfa6d1a64d87cf175c877282cb0598b1e10b3b[m
+Merge: 0eab0de 39194b5
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Sep 20 11:00:57 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 0eab0ded409ac2469fb7353c1485aa69f0525723[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Sep 20 11:00:50 2018 +0200
+
+    Login with  WSAdmin
+
+[33mcommit 8dd06a8740a2483928018c77260d1ae12b936c8c[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Sep 20 10:59:50 2018 +0200
+
+    Removing unused code
+
+[33mcommit c09d88c8c2624a834a3e9d72077e424e40b04cfe[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Sep 20 10:59:27 2018 +0200
+
+    Adding customer name
+
+[33mcommit 39194b5d7eda0d5c5e073f3171c6a7d32c812666[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Sep 20 10:57:44 2018 +0200
+
+    fix admin url
+
+[33mcommit 072f736894e9e39f4dcf3779e5445529146a2e73[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Sep 20 10:57:43 2018 +0200
+
+    Organize imports
+
+[33mcommit 077cd60b5d589cfbaf1fea8b6171afe9fee50025[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Sep 20 10:55:39 2018 +0200
+
+    server spam fix
+
+[33mcommit 5a61303e43509e07adacfc9c70c6b8ee23b428c8[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Sep 20 10:49:03 2018 +0200
+
+    Adding acoount info
+
+[33mcommit 2ed3edeb069be6520ba9f1cba7d87e97b66b4089[m
+Merge: 5e828b3 6d76901
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Sep 19 16:34:10 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 5e828b39b60d9f2cf2eca13dec0ea136e98333c4[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Sep 19 16:34:00 2018 +0200
+
+    Initial UI + FCM setup WIP
+
+[33mcommit 6d76901e9feaed7b4419fc92a0a242e3c9cc0e49[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Tue Sep 18 17:27:07 2018 +0200
+
+    extend advertisement
+
+[33mcommit 1aa4ba05bb48219f4087a297a9bf5f5a43398f5c[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Tue Sep 18 16:12:50 2018 +0200
+
+    MPL admin app initial
+
+[33mcommit f3edd6d6db51196cdbb712f43bb67aad1bb1cee5[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Tue Sep 18 15:40:44 2018 +0200
+
+    add admin service and blecommunicator
+
+[33mcommit f66de8fe8e076d1faf3f1651d81ca6c7f4857fd4[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Tue Sep 18 15:40:18 2018 +0200
+
+    refactor preference store
+
+[33mcommit 7d9ccf267c7e152e2090efa953e494691eee9ba8[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Sep 18 14:14:07 2018 +0200
+
+    Comunicator refactoring
+
+[33mcommit 4e06d2ed0d2a2cf83a178363b88f855f8395e9bd[m
+Merge: e4d5298 06a22f5
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 14 11:21:33 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit e4d5298e51c93abd7c4703045bb73f48e3665aeb[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 14 11:21:22 2018 +0200
+
+    Cache refresh utils
+
+[33mcommit 06a22f5ce27b9ab091d85e039b088d0b801c443b[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Fri Sep 14 11:19:22 2018 +0200
+
+    communicator - reverse slave mac
+
+[33mcommit 36e96c8f7ae71fc39a4e39f3b5ac32b308075460[m
+Merge: 593d22e 55c404f
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 14 10:25:36 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 593d22e9d0d2afbef64017f12cfec9072dd1b138[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Sep 14 10:25:17 2018 +0200
+
+    Notification integration
+
+[33mcommit 55c404ffe1c25dcb62eef88207d8ce7f87ddcb0c[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Fri Sep 14 10:17:49 2018 +0200
+
+    increase ble read result timeout
+
+[33mcommit c7acc5300541f890972f17d13152b5060c8f5e71[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Sep 12 10:12:55 2018 +0200
+
+    Fixing update period to 10s
+
+[33mcommit 5eb30b24b75177099e07ee63f34dffe42be0883e[m
+Merge: 2aa93d6 588e9eb
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Sep 12 10:01:29 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 2aa93d620b5f2023f1d54e606f7348f95314e97f[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Sep 12 10:01:23 2018 +0200
+
+    Pickup handling business logic
+
+[33mcommit 588e9eb9a646c6257f5c6559d00081ff2af3f28e[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Wed Sep 12 10:00:41 2018 +0200
+
+    faster initial device store update
+
+[33mcommit 395c7e794ba1d54780a4b7a8f89cb5dcd6d12b0a[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Tue Sep 11 13:03:44 2018 +0200
+
+    extend BLECommunicator.requestParcelPickup with endUserId parameter
+
+[33mcommit 3ed44aec34d311fa2a91267095ed5aee3cbbba46[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Sep 11 12:24:35 2018 +0200
+
+    Pickup parcel fixes
+
+[33mcommit 7a8c1eeb237371e21b2ef724f4605d2d210589b2[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Sep 11 11:41:51 2018 +0200
+
+    Pickup parcel badge logic
+
+[33mcommit ee2e2cc89b255244c489b907df2a39f8ceee3f4d[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Sep 6 17:05:25 2018 +0200
+
+    switch mocked with real parameters between Activities
+
+[33mcommit 1fcd500583952d320f34fde532448580c5b1224c[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Sep 6 14:12:38 2018 +0200
+
+    Fragments refactoring to activity
+
+[33mcommit 42ded1c33dd7996a22ff0a1c3261d36fadceedfd[m
+Merge: c9ccb42 31ea4c2
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Sep 5 13:42:49 2018 +0200
+
+    Merge with master
+
+[33mcommit c9ccb4245873218dd728c4e9bfff5ac7180b24f8[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Sep 5 12:01:41 2018 +0200
+
+    Fragment to Activity refactoring
+
+[33mcommit 31ea4c2cddbd9d223735bfa07431934b7ae53886[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Tue Sep 4 14:51:49 2018 +0200
+
+    extract core to a separate module
+
+[33mcommit 528eb8782f6611a8de7924e39621f91eec8f4d40[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Tue Sep 4 14:07:15 2018 +0200
+
+    fix parcel pickup call
+
+[33mcommit 8d40f48f44b89b47eada6abbe1bd64146a299756[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Tue Sep 4 14:07:01 2018 +0200
+
+    read door open status
+
+[33mcommit 8877ad3c2a64384e11d6419e11ff333b0b358e51[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Sep 4 14:05:28 2018 +0200
+
+    Removing all cap letters on input
+
+[33mcommit 261ceff1971fa98dbeb4f6a6dee15c5ca896e7b8[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Sep 4 14:05:10 2018 +0200
+
+    Hide password
+
+[33mcommit ff59d5c4998a55666c0351c70542b077381db9a9[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Sep 3 16:52:10 2018 +0200
+
+    Password recovery function, back button refactoring
+
+[33mcommit 605026e0e04680b41d9fdd543e6b0ac5777c9abd[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Aug 31 17:11:31 2018 +0200
+
+    push subscription integration in register process
+
+[33mcommit 24a7d92c1bca9aff0db3ea15a584c1e09cdce2c6[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Aug 31 15:41:49 2018 +0200
+
+    Initial notification push implementation
+
+[33mcommit 0d36a6892ee66f27f2e9dd2b7492a960112ef0ec[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 30 16:43:49 2018 +0200
+
+    Handling user login error
+
+[33mcommit 6708b8d65712098c71fcfceef1a8d6f294313776[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 30 16:24:30 2018 +0200
+
+    Handling no parcels case
+
+[33mcommit 4c160de6b34dba0d0c89d54466b2490aebf00c43[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 30 14:08:28 2018 +0200
+
+    MPL integration with BLE and  Rest Core
+
+[33mcommit f9389a1618e91cdc62cf450b6d432fbe237d842e[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 30 12:07:45 2018 +0200
+
+    faster initial MPLDevice list update
+
+[33mcommit 8e64ccd12f0b56caba7884048fa532e2c791b372[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 30 11:46:43 2018 +0200
+
+    MPLDevice - available sizes updating logic fixed
+
+[33mcommit 99bb9ae90d171532b6205675625508f0a82d878e[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 30 11:31:40 2018 +0200
+
+    fix device store updating
+
+[33mcommit 60f13f33dea227f2031449a757266447bb47eb75[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Aug 29 23:09:08 2018 +0200
+
+    Remove unused imports
+
+[33mcommit bf84d7c03fad8b25d1511fb11b49c225d4838e6d[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Aug 29 23:08:33 2018 +0200
+
+    Log improvements
+
+[33mcommit f5adb53d8cdd8a29d5e5929f492d7eb4965d9b1d[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Aug 29 23:06:14 2018 +0200
+
+    Fetch MPL and parcel pickup WIP
+
+[33mcommit 6e905076d775d73f528d1cdb718265a80e05ba85[m
+Merge: aa1649c e5da50b
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Aug 29 21:08:54 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit aa1649c2af2ea920d1d9dfc39d38bd0a91802b95[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Aug 29 16:09:57 2018 +0200
+
+    Login, Logout, update user
+
+[33mcommit e5da50b14f6cceb52f091778df4649311ef5e902[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Wed Aug 29 10:19:00 2018 +0200
+
+    remove unused import
+
+[33mcommit 429fa998acab022684a583fdebfced542e9fb247[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Aug 28 17:08:51 2018 +0200
+
+    Registration integration
+
+[33mcommit 2924110e0852e833c569f3ea2eb2222d0171ca3b[m
+Merge: 1b560c2 43baaf2
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Aug 28 11:26:44 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 1b560c29353294e770f1b9aaec7617a113d370dd[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Aug 28 11:26:37 2018 +0200
+
+    Login setup
+
+[33mcommit 43baaf29b339794035d24e69d79c506ada7dce6b[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Tue Aug 28 11:03:39 2018 +0200
+
+    remove todo
+
+[33mcommit 8603e2446703201eeab5b20e8a6ade5e424865fd[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Tue Aug 28 11:02:24 2018 +0200
+
+    implement encryption for BLE communicator - currently disabled
+
+[33mcommit a17d436836b093a44454238d52000f82bfa2db1d[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Tue Aug 28 10:48:37 2018 +0200
+
+    combine remote and BLE available locker sizes for each master unit; periodically refresh MPLDeviceStore only if user is logged in; add DataCache clear method and call it on user login and logout
+
+[33mcommit f049a26d0589e106ad053f6cfbd1c20da5b329fa[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Mon Aug 27 18:28:04 2018 +0200
+
+    refactor-rename locker size
+
+[33mcommit 54e89350f24bb7b025fbef6eb09bf71d5715df94[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Mon Aug 27 17:34:31 2018 +0200
+
+    extend webservices - add getAvailableLockerSizes()
+
+[33mcommit b4f40326fbcfa4c0f6cfd4852014b85cedaad3e8[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Mon Aug 27 17:14:00 2018 +0200
+
+    update MPLDevice store; update BLE Communicator
+
+[33mcommit 4acd14b3e7412f77b35d093f279287a18bf939e0[m
+Merge: 7c39a96 8e9ad60
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Aug 27 16:16:40 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 8e9ad602874f0b5fd71d632f22e170b1966533bc[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Mon Aug 27 15:41:22 2018 +0200
+
+    update MPLDevice ble helper method
+
+[33mcommit 7c39a96a732462cc53b22deab4970ef0086ecbf8[m
+Merge: 1a9e76f eee0170
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Aug 27 15:39:13 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit eee017053d681ba8a0646cdb8e4e7cb11b53d800[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Mon Aug 27 15:37:48 2018 +0200
+
+    BLE communicator
+
+[33mcommit cb8eca9751ee98e96d328b6fc3ad6cce9ad41b98[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Mon Aug 27 14:42:30 2018 +0200
+
+    update user util
+
+[33mcommit 6c3922d5ea794ebaae6a65fd633fabbd2e0f111a[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Mon Aug 27 14:34:37 2018 +0200
+
+    add DataCache; update remote + ble merger
+
+[33mcommit 1850156d63ac7f9cf6a7ce31157244f5b2b8ad7d[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Mon Aug 27 14:04:36 2018 +0200
+
+    update remote + ble data merger
+
+[33mcommit 5f6eeb0499ca6401ada0c2d283c58f6920040e4b[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Mon Aug 27 13:18:50 2018 +0200
+
+    add and update webservices; refactor webservices; add WS webservices wrapper; update remote and BLE data join methods
+
+[33mcommit 0adb82f5e5823440c5331ecb996a7876c8012b65[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Fri Aug 24 16:39:50 2018 +0200
+
+    add more webservices
+
+[33mcommit 1a9e76face81f1e50385ed61e2d8a9b05c122ff6[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Aug 24 16:36:01 2018 +0200
+
+    Text changes
+
+[33mcommit 82713bb0dfe67210f8baf4d188144c14cb7e9100[m
+Merge: f2f0ef6 1c38569
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Aug 24 14:10:15 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit f2f0ef66ad5ff72da0f13f5059997ab973420f69[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Aug 24 14:10:11 2018 +0200
+
+    String fixes, settings wrapper alignment
+
+[33mcommit 1c385699c84475fd66e4f45b8c4975c4623b7500[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 23 16:53:22 2018 +0200
+
+    MPLDeviceStore - filter MPLDevices which have no remote data
+
+[33mcommit b64e16f7e1ed4430d02204b376d69576a6ecf573[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 23 16:48:18 2018 +0200
+
+    MPLDeviceStore initial
+
+[33mcommit 1d66033db4d7382e2022a22f402c9ac1a882957f[m
+Merge: b25fee1 b15921c
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 23 16:33:45 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit b25fee1f57fda8c1c21d42cd96aa4507aef6ffbc[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 23 16:33:40 2018 +0200
+
+    String naming refactoring
+
+[33mcommit b15921c64b62d01fbf996f64935d65b9843daea6[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 23 16:16:43 2018 +0200
+
+    refactor-move PreferenceStore
+
+[33mcommit b9fe5fedd785b766eb0c35a8f6855ffbb6dfc48b[m
+Merge: 9229693 30b6a78
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 23 16:15:01 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 9229693be4776c4a8e869d7d4109ee7271b934ae[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 23 16:14:44 2018 +0200
+
+    Cancel key sharing UX/UI
+
+[33mcommit 30b6a78b562b8d4b4f5d8944a8322b913b6c1450[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 23 16:14:38 2018 +0200
+
+    add MasterUnit GET service
+
+[33mcommit 4c0bf20305497bffdbee538cacb8633fe382899d[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 23 15:50:29 2018 +0200
+
+    web services initial
+
+[33mcommit 79f360e057a052e3d99077791a61a3834a98edca[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 23 15:40:28 2018 +0200
+
+    Add kotlin 1.2.61 version
+
+[33mcommit a9767125bdfcd4b3046213d85cf254d83ea7952c[m
+Merge: 30dee96 99481e8
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 23 15:28:41 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 30dee960afe4ec32a8ad98f17e04d2d277d004e4[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 23 15:28:36 2018 +0200
+
+    unused code refactoring
+
+[33mcommit 99481e877ff1659ca8fd0e697438945ee22f0058[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 23 15:27:13 2018 +0200
+
+    update gradle config
+
+[33mcommit a1be55de269cbe24a24ca332d80fcf925b6db9df[m
+Merge: 2186bfc 064d889
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 23 15:09:10 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 2186bfcc9166eee451425d782f1db64d23bc5188[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 23 15:09:06 2018 +0200
+
+    Key sharing UX final changes, refactoring unused code
+
+[33mcommit 064d889321aa42c5430fcd5cd6f42681617ea81c[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 23 14:56:21 2018 +0200
+
+    update scanner filters
+
+[33mcommit b07e5159292b5131d75a94cc396264a3e8fc5fb0[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 23 14:53:19 2018 +0200
+
+    remove sillogger
+
+[33mcommit 3e22c5b7eef688aec048627d49ba4e6294fb6e65[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 23 13:03:44 2018 +0200
+
+    App.kt refactored
+
+[33mcommit 08411d900f4199a96c93cb5fc90ee710b8f8be56[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 23 12:57:45 2018 +0200
+
+    removing unused code. - Code refactoring
+
+[33mcommit 957d7b9a58fca45a07b897c061466bb1ca2bbdea[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 23 12:54:37 2018 +0200
+
+    remove manual cursor close
+
+[33mcommit 3124e6a9e088d33376e7ba48c58d72719606e609[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 23 12:51:19 2018 +0200
+
+    key sharing add user frag. refactoring
+
+[33mcommit a8478d781e1c0a49c64d1f0d2f4ce0a30a515d2e[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 23 12:42:50 2018 +0200
+
+    move textview font extensions from main application class to a separate file
+
+[33mcommit f0f687b872e1245720a90ac5aae3b2907e3719e3[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 23 12:22:40 2018 +0200
+
+    remove duplicate dependencies; remove multiple different versions of dependencies; organize build files; extract dependency versions parameters; update kotlin;
+
+[33mcommit ae227e7b9f4f9ed3fc8be13b00684db4d8a31490[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Thu Aug 23 12:03:56 2018 +0200
+
+    update gradle plugin to v3.1.4
+
+[33mcommit b38a8fc006c39195e71b8c3fc0d5506ad8cc7aef[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Aug 22 16:56:25 2018 +0200
+
+    Key sharing - list of all keys
+
+[33mcommit ab19ffc450f110cc7e10978c8f4ee53cfad171be[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Aug 22 15:35:34 2018 +0200
+
+    KeySharing basic io navigation & add new user
+
+[33mcommit 664023db580750de0cd3377eb61fa83f61c03639[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Aug 22 15:34:42 2018 +0200
+
+    Sharing key - basic ui navigation & add new user
+
+[33mcommit d80dbcef284e93aa3c8b9bcc71f0b9747c5c4af9[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Mon Aug 20 18:23:58 2018 +0200
+
+    App introduction & registration
+
+[33mcommit 7f86000743322bc0518b06bf54b2675da0ad09f5[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Aug 17 16:55:20 2018 +0200
+
+    User settings
+
+[33mcommit 55c28ed628a076e31c351fd31d8ebe6b36676b3c[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Aug 14 16:23:54 2018 +0200
+
+    Settings wrapper changes
+
+[33mcommit b9f4dce2239820818cb1ce7b177566c94af09c56[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 9 16:31:06 2018 +0200
+
+    Adding terms and conditions UI
+
+[33mcommit a9755951cb27ee5f12a328bcbd81df50748782de[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 9 14:45:56 2018 +0200
+
+    remove unused imports
+
+[33mcommit ce034cb368c9f27e4c103d443700bdce80071fac[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Aug 9 14:45:06 2018 +0200
+
+    Adding alerts listinening UI, code refactoring
+
+[33mcommit f12af614b422616aedb60515984c0ad5a1636621[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Aug 8 16:34:25 2018 +0200
+
+    Notification list UI
+
+[33mcommit b0989ba2f62115f911fdcbd603f108ee53607f5b[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Aug 7 14:22:55 2018 +0200
+
+    Send parcel success handling UX
+
+[33mcommit e17cf77722f90d405caf364602ad5e1319007e7e[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sun Aug 5 16:28:27 2018 +0200
+
+    Parcel send item details
+
+[33mcommit 44f30815bcd49539a824e09d3b1a9f6f0886cc84[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sun Aug 5 00:07:41 2018 +0200
+
+    Send parcel check ping
+
+[33mcommit 6f1d1a7bdf2ee0c222c5a6a9102e2a4dfd4ce15f[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sat Aug 4 17:06:17 2018 +0200
+
+    Send parcel input dialog WIP
+
+[33mcommit ede77e7830ce2eb7e6ef30f74b67108ef7712d86[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Aug 1 16:14:44 2018 +0200
+
+    Send Parcel UX
+
+[33mcommit f785c4a6dcd2e7034e026080cc023b2461653861[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Jul 26 16:49:00 2018 +0200
+
+    Send parcel WIP
+
+[33mcommit 185b2c9d5dcd44cf2b27087aa70a4af2cc3abf28[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Jul 25 17:05:13 2018 +0200
+
+    Parcel pickup
+
+[33mcommit 4153d424c691ee914ac28db25ab7c5a22abdd063[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jul 24 16:05:58 2018 +0200
+
+    Parcel pickup WIP
+
+[33mcommit 10dc516ac2b498c8bbffaa2c47a249da6275e2cf[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jul 24 15:12:57 2018 +0200
+
+    Centring details of parcelItem
+
+[33mcommit 470310bed35fa50e7119d4ff313c6c50c23ed5fc[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Sat Jul 21 02:32:43 2018 +0200
+
+    Add SPL details
+
+[33mcommit 51f75aa1bc92687705dd861a4f77e47e5b68329b[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jul 20 17:08:31 2018 +0200
+
+    SPL on click Item Frame change WIP
+
+[33mcommit fcf9f2750db8f0acfbcf7140c93cd90ec33fceda[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jul 20 16:23:00 2018 +0200
+
+    Adding new assets, implementing FAB menu
+
+[33mcommit fc652b9dadca9f268bd09c0b206c9eb24b7afbf1[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Fri Jul 20 11:44:38 2018 +0200
+
+    Mpl availability UI
+
+[33mcommit 04162a9cf2166b9f89bd1732f5fbd9409f269af4[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Jul 19 17:09:22 2018 +0200
+
+    MPL UI implementation
+
+[33mcommit dbd66e720ffb3a54657ada91dbc42dc92df6911c[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Jul 18 17:06:40 2018 +0200
+
+    Fixing assets; ParcelLocker home layout
+
+[33mcommit 5a3d37f2ff1f01276e5c7515b8cf3de813bb45eb[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Tue Jul 17 16:35:35 2018 +0200
+
+    Home screen UI logic
+
+[33mcommit c2a82d6883f48ed11c24b14fb72bf7984aa80063[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Thu Jul 12 15:30:23 2018 +0200
+
+    Initial screen navigation setup
+
+[33mcommit 5592d0e6fba5090c66b3651d814bc5feb69b53e1[m
+Author: Stjepan Zuzul <szuzul@gmail.com>
+Date:   Wed Jul 11 17:04:37 2018 +0200
+
+    Added project assets
+
+[33mcommit ec0264d797052ccd8b69f1c6812a62bf92b754fb[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Mon May 7 13:18:35 2018 +0200
+
+    libraries updated
+
+[33mcommit a5597b90a72c98bedf426e292bb1996f450772ef[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Tue Apr 17 15:44:10 2018 +0200
+
+    simplify logging extensions
+
+[33mcommit 8c30c6fb671dda865c7eccdbabb20a34662c018f[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Tue Apr 17 15:42:53 2018 +0200
+
+    added logging using slf4j
+
+[33mcommit 970d430e2cf4a6f6c556ac7e91adecfd9df445d1[m
+Author: Mario Fatiga <mario.fatiga@gmail.com>
+Date:   Tue Apr 17 12:51:55 2018 +0200
+
+    initial commit

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Notifications -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <!-- Bluetooth -->
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" tools:node="remove" />
+    <permission
+        android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
+        android:protectionLevel="signature" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        tools:replace="android:allowBackup">
+        <activity
+            android:name=".view.ui.MainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme"
+            android:exported="false">
+            <intent-filter>
+                <action android:name=".MainActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.ui.intro.RegistrationActivity"
+            android:parentActivityName=".view.ui.intro.IntroductionSlidePagerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.ui.intro.IntroductionSlidePagerActivity" />
+        </activity>
+        <activity
+            android:name=".view.ui.intro.InviteUserActivity"
+            android:parentActivityName=".view.ui.intro.IntroductionSlidePagerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.ui.intro.IntroductionSlidePagerActivity" />
+        </activity>
+
+        <activity android:name=".view.ui.intro.TCInvitedUserActivity"
+            android:parentActivityName=".view.ui.intro.RegistrationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.ui.intro.RegistrationActivity" />
+        </activity>
+        <activity
+            android:name=".view.ui.home.activities.TtcActivity"
+            android:parentActivityName=".view.ui.intro.RegistrationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.ui.intro.RegistrationActivity" />
+        </activity>
+        <activity
+            android:name=".view.ui.intro.IntroductionSlidePagerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".view.ui.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".view.ui.PasswordRecoveryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".view.ui.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.ui.intro.PasswordUpdateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".view.ui.home.activities.AccessSharingActivity"
+            android:parentActivityName=".view.ui.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SecondLevel" />
+        <activity
+            android:name=".view.ui.home.activities.PickupParcelActivity"
+            android:parentActivityName=".view.ui.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SecondLevel" />
+        <activity
+            android:name=".view.ui.home.activities.AccessSharingAddUserActivity"
+            android:parentActivityName=".view.ui.home.activities.AccessSharingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SecondLevel" />
+        <activity
+            android:name=".view.ui.home.activities.SelectParcelSizeActivity"
+            android:parentActivityName=".view.ui.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SecondLevel"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.ui.home.activities.SendParcelDeliveryActivity"
+            android:parentActivityName=".view.ui.home.activities.SelectParcelSizeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SecondLevel" />
+        <activity android:name=".view.ui.BaseActivity" />
+        <activity
+            android:name=".view.ui.home.activities.SendParcelsOverviewActivity"
+            android:parentActivityName=".view.ui.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SecondLevel" />
+        <activity
+            android:name=".view.ui.home.activities.HelpActivity"
+            android:parentActivityName=".view.ui.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SecondLevel"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.ui.home.activities.HelpContentActivity"
+            android:parentActivityName=".view.ui.home.activities.HelpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SecondLevel"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.ui.home.activities.EditSplActivity"
+            android:parentActivityName=".view.ui.home.activities.AccessSharingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SecondLevel"
+            android:windowSoftInputMode="adjustPan" />
+
+        <service android:name=".fcm.MPLFireBaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+
+        <receiver
+            android:name=".listeners.InstallListener"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

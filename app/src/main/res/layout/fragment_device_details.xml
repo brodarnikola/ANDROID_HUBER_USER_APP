@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewBoldFont
+        android:id="@+id/mainAddressBoxUserName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+
+        android:textColor="@color/colorBlack"
+        android:textSize="15sp"
+
+        android:maxLines="2"
+        android:ellipsize="end"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_home_header"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/profile_address_background"
+
+        app:layout_constraintTop_toBottomOf="@+id/mainAddressBoxUserName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+            android:id="@+id/mainAddressBoxAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+
+            android:textColor="@color/colorBlack"
+            android:textSize="15sp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/spl_edit_button"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"/>
+
+        <ImageButton
+            android:id="@+id/spl_edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit"
+            android:background="@drawable/profile_icon_background"
+
+            android:visibility="gone"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+
+            android:layout_marginRight="10dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mpl_item_details_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@+id/main_home_header"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/home_spl_details_pickup_parcel_wrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/home_spl_details_key_share"
+            app:layout_constraintRight_toLeftOf="@+id/home_spl_details_send_parcel"
+            app:layout_constraintVertical_chainStyle="spread">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_alignParentLeft="true">
+
+                <ImageButton
+                    android:id="@+id/home_spl_details_pickup_parcel_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_pickup_parcel"
+                    android:background="@null"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+                <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+                    android:id="@+id/home_spl_details_pickup_parcel_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_generic_pickup_parcel"
+                    android:textColor="@color/colorWhite"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/home_spl_details_pickup_parcel_button"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+
+                    android:layout_marginBottom="20dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+                android:id="@+id/mpl_details_circle_value"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/circle"
+                android:gravity="center"
+                android:shadowColor="@android:color/white"
+                android:shadowRadius="10.0"
+                android:text="4"
+
+                android:visibility="gone"
+
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+
+                android:layout_marginLeft="132dp" />
+
+        </RelativeLayout>
+
+
+        <ImageButton
+            android:id="@+id/home_spl_details_send_parcel"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:background="@null"
+            android:src="@drawable/ic_pickup_parcel"
+
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/home_spl_details_pickup_parcel_wrapper"
+            app:layout_constraintBottom_toTopOf="@+id/home_spl_details_help"
+
+            app:layout_constraintVertical_chainStyle="spread"/>
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+            android:id="@+id/home_spl_details_send_parcel_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_generic_send_parcel"
+            android:textColor="@color/colorWhite"
+
+            app:layout_constraintRight_toRightOf="@+id/home_spl_details_send_parcel"
+            app:layout_constraintLeft_toLeftOf="@+id/home_spl_details_send_parcel"
+            app:layout_constraintBottom_toBottomOf="@+id/home_spl_details_send_parcel"
+            android:layout_marginBottom="20dp"/>
+
+
+
+
+        <ImageButton
+            android:id="@+id/home_spl_details_key_share"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@drawable/ic_key_sharing"
+            android:background="@null"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_spl_details_pickup_parcel_wrapper"
+            app:layout_constraintRight_toLeftOf="@+id/home_spl_details_help"
+            app:layout_constraintBottom_toTopOf="@+id/locker_details_telemetry_wrapper"
+
+            app:layout_constraintVertical_chainStyle="spread"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+            android:id="@+id/home_mpl_details_access_sharing_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_generic_access_sharing"
+            android:textColor="@color/colorWhite"
+
+            app:layout_constraintRight_toRightOf="@+id/home_spl_details_key_share"
+            app:layout_constraintLeft_toLeftOf="@+id/home_spl_details_key_share"
+            app:layout_constraintBottom_toBottomOf="@+id/home_spl_details_key_share"
+            android:layout_marginBottom="20dp"/>
+
+
+        <ImageButton
+            android:id="@+id/home_spl_details_help"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@drawable/ic_help"
+            android:background="@null"
+
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_spl_details_send_parcel"
+            app:layout_constraintLeft_toRightOf="@+id/home_spl_details_key_share"
+            app:layout_constraintBottom_toTopOf="@+id/locker_details_telemetry_wrapper"
+
+            app:layout_constraintVertical_chainStyle="spread"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+            android:id="@+id/home_mpl_details_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_generic_help"
+            android:textColor="@color/colorWhite"
+
+            app:layout_constraintRight_toRightOf="@+id/home_spl_details_help"
+            app:layout_constraintLeft_toLeftOf="@+id/home_spl_details_help"
+            app:layout_constraintBottom_toBottomOf="@+id/home_spl_details_help"
+            android:layout_marginBottom="20dp"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/locker_details_telemetry_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@+id/home_spl_details_help"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
+
+            android:background="@color/colorDarkAccent"
+            android:paddingLeft="16dp"
+            android:paddingTop="8dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="8dp">
+
+            <LinearLayout
+                android:id="@+id/locker_details_humidity_wrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_humidity"/>
+
+                <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+                    android:id="@+id/locker_details_humidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginStart="4dp"
+                    android:layout_gravity="center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/locker_details_temperature_wrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/locker_details_humidity_wrapper"
+                app:layout_constraintRight_toLeftOf="@+id/locker_details_pressure_wrapper"
+                app:layout_constraintHorizontal_chainStyle="spread">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_temperature"/>
+
+                <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+                    android:id="@+id/locker_details_temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginStart="4dp"
+                    android:layout_gravity="center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/locker_details_pressure_wrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/locker_details_temperature_wrapper"
+                app:layout_constraintRight_toLeftOf="@+id/locker_details_rssi_wrapper"
+                app:layout_constraintHorizontal_chainStyle="spread">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_air_pressure"/>
+
+                <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+                    android:id="@+id/locker_details_pressure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginStart="4dp"
+                    android:layout_gravity="center_vertical"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/locker_details_rssi_wrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_signal_strength"/>
+
+                <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+                    android:id="@+id/locker_details_rssi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginStart="4dp"
+                    android:layout_gravity="center_vertical"/>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/no_access_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/main_home_header"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone">
+
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewMediumFont
+            android:id="@+id/no_rights_access"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+
+            android:text="@string/locker_details_registration_body"
+            android:textSize="16sp"
+            android:textColor="@color/colorWhite"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <hr.sil.android.schlauebox.fonts.ButtonWithFont
+            android:id="@+id/send_parcel_force_open"
+            android:layout_width="220dp"
+            android:layout_height="35dp"
+
+            android:layout_marginBottom="10dp"
+
+            android:text="@string/app_generic_force_open"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toTopOf="@+id/request_mpl_access"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/force_open_progress"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:visibility="gone"
+
+            app:layout_constraintBottom_toTopOf="@+id/request_mpl_access"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="10dp"/>
+
+
+        <hr.sil.android.schlauebox.fonts.ButtonWithFont
+            android:id="@+id/request_mpl_access"
+            android:layout_width="220dp"
+            android:layout_height="35dp"
+            android:text="@string/locker_details_registration_btn"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/activate_progress"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:visibility="gone"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="10dp"/>
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+            android:id="@+id/request_mpl_access_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/locker_details_registration_pending_body"
+            android:textColor="@color/colorWhite"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <ImageView
+                style="@style/HeaderToolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/schlauebox_logo" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize">
+
+        <View
+            android:id="@+id/toolbar_spliter"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+
+            android:background="@color/colorPinkishGray"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewBoldFont
+            android:id="@+id/pickup_parcel_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+
+            android:text="@string/pickup_parcel_title"
+            android:textColor="@color/colorBlack"
+            android:textSize="22sp"
+            android:textStyle="bold"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_spliter" />
+
+        <ImageButton
+            android:id="@+id/pickup_parcel_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="20dp"
+            android:background="@color/transparentColor"
+
+            android:src="@drawable/ic_locked"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/pickup_parcel_header" />
+
+        <ProgressBar
+            android:id="@+id/pickup_parcel_progress_bar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+
+            android:layout_marginTop="90dp"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            app:layout_constraintRight_toRightOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/pickup_parcel_header" />
+
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewBoldFont
+            android:id="@+id/pickup_parcel_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:letterSpacing="0.3"
+            android:paddingLeft="15dp"
+
+            android:paddingRight="15dp"
+            android:text="@string/nav_pickup_parcel_lock"
+            android:textAllCaps="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pickup_parcel_image" />
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+            android:id="@+id/pickup_parcel_state_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+
+            android:text="@string/nav_pickup_parcel_content_lock"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pickup_parcel_state"
+
+            app:layout_constraintVertical_chainStyle="spread" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pickup_parcel_keys"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            android:layout_marginTop="10dp"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pickup_parcel_state_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintVertical_chainStyle="spread"/>
+
+        <hr.sil.android.schlauebox.fonts.ButtonWithFont
+            android:id="@+id/send_parcel_force_open"
+            android:layout_width="200dp"
+            android:layout_height="35dp"
+
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_button"
+
+            android:text="@string/app_generic_force_open"
+            android:textColor="@color/colorWhite"
+
+            app:layout_constraintTop_toBottomOf="@+id/pickup_parcel_state_text"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
+
+            android:visibility="gone" />
+
+        <hr.sil.android.schlauebox.fonts.ButtonWithFont
+            android:id="@+id/pickup_parcel_finish"
+            android:layout_width="200dp"
+            android:layout_height="35dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+
+            android:background="@drawable/rounded_button"
+            android:text="@string/app_generic_confirm"
+
+            android:textColor="@color/colorWhite"
+
+            app:layout_constraintTop_toBottomOf="@+id/send_parcel_force_open"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+
+            android:visibility="gone" />
+
+
+        <LinearLayout
+            android:id="@+id/llClean"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pickup_parcel_finish"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.1"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@+id/ivClean"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_needs_cleaning" />
+
+            <CheckBox
+                android:id="@+id/lockerCleaningCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="10dp"
+
+                android:textColor="@color/colorWhite"
+                android:textAllCaps="true"
+                android:text="@string/locker_needs_cleaning"
+                android:layout_marginLeft="15dp"  />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBarLockerCleaning"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toBottomOf="@+id/llClean"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:visibility="gone"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <FrameLayout
+        android:id="@+id/no_internet_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.8"
+        android:background="@drawable/bg_wifi_internet"
+        android:clickable="false"
+        android:visibility="gone">
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/app_generic_no_network"
+            android:textAllCaps="true"
+            android:textColor="@color/colorWhite" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/no_ble_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.8"
+        android:background="@drawable/bg_bluetooth"
+        android:clickable="false"
+        android:visibility="gone">
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/app_generic_no_ble"
+            android:textAllCaps="true"
+            android:textColor="@color/colorWhite" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/no_location_gps_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.8"
+        android:background="@drawable/rectangle_transparent_dark"
+        android:clickable="true"
+        android:visibility="gone">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivNoLocationImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="70dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_no_location_services"/>
+
+            <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:text="@string/no_location_services"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivNoLocationImage" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
+
+
+

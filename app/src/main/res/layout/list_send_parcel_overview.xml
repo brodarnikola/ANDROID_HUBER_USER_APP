@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:layout_marginBottom="3dp"
+    android:background="@color/help_item_transparent"  >
+
+
+    <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+        android:id="@+id/key_sharing_item_key_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+
+        android:layout_marginLeft="8dp"
+
+        android:layout_alignParentTop="true"
+        />
+
+    <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+        android:id="@+id/key_sharing_item_key_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textColor="@color/colorWhite"
+        android:textSize="12sp"
+
+        android:layout_marginLeft="8dp"
+
+        android:layout_below="@+id/key_sharing_item_key_header"
+        />
+
+    <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+        android:id="@+id/key_sharing_time_created"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textColor="@color/colorWhite"
+        android:textSize="12sp"
+
+        android:layout_marginLeft="8dp"
+
+        android:layout_below="@+id/key_sharing_item_key_content"
+        />
+
+
+    <ImageButton
+        android:id="@+id/key_sharing_item_key_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_cancel_access"
+        android:background="@color/transparentColor"
+
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>

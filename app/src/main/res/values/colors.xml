@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#e93947</color>
+    <color name="colorDarkAccent">#b92732</color>
+    <color name="colorPrimaryDisabled">#c8c4c4</color>
+
+
+    <color name="colorBlack">#000000</color>
+    <color name="colorCharcoalGray">#333234</color>
+    <color name="colorPinkishGray">#c8c4c4</color>
+    <color name="colorError">#9a0000</color>
+    <color name="help_item">#4a4a4a</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGray">#666666</color>
+
+    <color name="colorWhite30PercentTransparency">#4cffffff</color>
+    <color name="colorGrayLight">#33333234</color>
+    <color name="app_ripple">#99FFFFFF</color>
+    <color name="transparentColor">#00000000</color>
+    <color name="help_item_transparent">#664a4a4a</color>
+    <color name="colorErrorTransparent">#88FF0000</color>
+
+    <color name="pinManagmentLayout">#b7b7b7</color>
+    <color name="pin_managment_20_percent">#334a4a4a</color>
+    <color name="pin_managment_40_percent">#664a4a4a</color>
+
+</resources>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "737936812777",
+    "firebase_url": "https://schlauebox-242913.firebaseio.com",
+    "project_id": "schlauebox-242913",
+    "storage_bucket": "schlauebox-242913.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737936812777:android:63413ebc1b3fcd6b",
+        "android_client_info": {
+          "package_name": "hr.sil.android.schlauebox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "737936812777-rk7pvp3thcl92fp95n8rgsvo5gt3pbpf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh3D1sWUAXCisPlVKq2O7Bqg2YEx55DQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "737936812777-rk7pvp3thcl92fp95n8rgsvo5gt3pbpf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

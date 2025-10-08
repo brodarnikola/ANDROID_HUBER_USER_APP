@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:paddingTop="16dp"
+
+    android:background="@color/colorWhite">
+
+    <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+        android:id="@+id/tvDialogDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+
+        android:gravity="center"
+        android:text="@string/unable_to_cancel_picked_home"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <hr.sil.android.schlauebox.fonts.ButtonWithFont
+        android:id="@+id/btnConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+
+        android:text="OK"
+        android:textColor="@color/colorDarkAccent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDialogDescription" />
+
+    <View
+        app:layout_constraintTop_toBottomOf="@+id/btnConfirm"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

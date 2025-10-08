@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="7dp"
+    android:layout_marginBottom="3dp"
+    android:id="@+id/main_parcel_locker_item_wrapper">
+
+    <RelativeLayout
+        android:id="@+id/pin_management_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+            android:id="@+id/pin_management_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+
+            android:layout_marginLeft="8dp"
+
+            android:layout_alignParentTop="true" />
+
+        <RelativeLayout
+            android:id="@+id/pin_management_new_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:visibility="gone"
+
+            android:background="@drawable/rounded_pin_managment_layout"
+
+            android:layout_below="@+id/pin_management_number"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="7dp">
+
+            <hr.sil.android.schlauebox.fonts.EdittextWithFont
+                android:id="@+id/pin_management_new_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="40dp"
+                android:maxLines="1"
+                android:background="@null"
+                android:hint="@string/pin_managment_input_edittext"/>
+
+            <ImageButton
+                android:id="@+id/pin_management_save_pin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check_circle"
+                android:background="@color/transparentColor"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"/>
+
+        </RelativeLayout>
+
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+            android:id="@+id/pin_management_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textColor="@color/colorBlack"
+            android:textSize="12sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingRight="40dp"
+
+            android:layout_marginLeft="8dp"
+
+            android:layout_below="@+id/pin_management_number"/>
+
+        <ImageButton
+            android:id="@+id/key_sharing_item_key_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_cancel_access"
+            android:background="@color/transparentColor"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/pin_management_delete_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:visibility="gone"
+
+        android:layout_below="@+id/pin_management_top_layout"
+
+        android:layout_marginTop="-2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"   >
+
+
+        <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+            android:id="@+id/main_parcel_locker_item_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textColor="@color/colorBlack"
+            android:textSize="12sp"
+            android:text="@string/app_generic_are_you_sure"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true" />
+
+        <hr.sil.android.schlauebox.fonts.ButtonWithFont
+            android:id="@+id/pin_management_cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp"
+            android:text="@string/app_generic_cancel"
+            android:background="@color/colorPrimary"
+
+            android:layout_below="@+id/main_parcel_locker_item_id"
+            android:layout_toLeftOf="@+id/pin_management_delete_button" />
+
+        <hr.sil.android.schlauebox.fonts.ButtonWithFont
+            android:id="@+id/pin_management_delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp"
+            android:text="@string/pin_managment_delete_pin"
+            android:background="@color/colorPrimary"
+
+            android:layout_below="@+id/main_parcel_locker_item_id"
+            android:layout_alignParentRight="true"
+
+            android:layout_marginLeft="20dp"/>
+
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:visibility="gone"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="3dp"
+    android:background="@color/help_item_transparent"
+    android:paddingLeft="8dp"
+    android:paddingTop="5dp"
+    android:paddingRight="8dp"
+    android:paddingBottom="5dp">
+
+
+    <hr.sil.android.smartlockers.enduser.fonts.view.fonts.TextViewRegularFont
+        android:id="@+id/key_sharing_item_key_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="8dp"
+
+        android:layout_marginRight="35dp"
+        android:textColor="@color/colorWhite"
+
+        android:textSize="14sp" />
+
+    <ImageButton
+        android:id="@+id/peripheral_settings_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+
+        android:layout_marginRight="4dp"
+
+        android:background="@color/transparentColor"
+        android:src="@drawable/ic_cancel_access" />
+
+    <ImageButton
+        android:id="@+id/peripheral_settings_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="4dp"
+
+        android:background="@color/transparentColor"
+        android:src="@drawable/ic_share" />
+
+
+</RelativeLayout>
