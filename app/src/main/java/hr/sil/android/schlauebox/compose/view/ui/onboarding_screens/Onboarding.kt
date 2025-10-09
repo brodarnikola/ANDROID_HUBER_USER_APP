@@ -63,6 +63,8 @@ import hr.sil.android.schlauebox.compose.view.ui.theme.Primary90
 import androidx.compose.material3.MaterialTheme as Material3
 
 import hr.sil.android.schlauebox.R
+import hr.sil.android.schlauebox.compose.view.ui.theme.CustomGray7
+import hr.sil.android.schlauebox.compose.view.ui.theme.Tertiary80
 
 
 @Composable
@@ -151,11 +153,14 @@ fun SecondOnboardingScreen(
     Surface(
         modifier = modifier
             .fillMaxSize()
+            .background(color = CustomGray7, shape = RoundedCornerShape(10.dp))
+            .border(2.dp, Primary60, shape = RoundedCornerShape(10.dp))
     ) {
         ConstraintLayout(
             modifier = modifier
                 .fillMaxSize()
                 .background(AppTheme.colors.introductionBackgroundColor)
+                .border(2.dp, Tertiary80, shape = RoundedCornerShape(10.dp))
         ) {
             val (mainContent, bottomButton) = createRefs()
 

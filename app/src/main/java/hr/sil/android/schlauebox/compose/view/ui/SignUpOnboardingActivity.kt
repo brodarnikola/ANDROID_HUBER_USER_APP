@@ -1,7 +1,6 @@
 
 package hr.sil.android.schlauebox.compose.view.ui
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -11,8 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 //import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
-import hr.sil.android.schlauebox.compose.view.ui.theme.HuberTheme
-import hr.sil.android.schlauebox.view.ui.MainActivity
+import hr.sil.android.schlauebox.compose.view.ui.theme.AppTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -54,7 +52,7 @@ class SignUpOnboardingActivity : AppCompatActivity() {
 //                finish()
 //            } else {
                 setContent {
-                    HuberTheme {
+                    AppTheme {
                         SignUpOnboardingApp(viewModel)
                     }
                 }

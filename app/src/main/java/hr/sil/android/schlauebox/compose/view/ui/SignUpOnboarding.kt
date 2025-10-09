@@ -20,19 +20,16 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+
+
+
+//import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.google.accompanist.navigation.animation.composable
+//import com.google.accompanist.navigation.animation.composable
+
 import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.SecondOnboardingScreen
 
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.material.icons.outlined.Search
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.navArgument
-import com.google.accompanist.navigation.animation.composable
+
 import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.FirstOnboardingScreen
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -44,32 +41,38 @@ fun NavGraphBuilder.addSignUpOnboardingGraph(
     navigateUpWhatsApp: () -> Unit,
     signUpOnboardingViewModel: SignUpOnboardingViewModel
 ) {
-    composable(SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route, popEnterTransition = {
-        slideInHorizontally(initialOffsetX = { -1800 })
-    }) {
-        FirstOnboardingScreen(
-            modifier = modifier,
-            nextScreen = nextScreen
-        )
-//        SecondOnboardingScreen(
-//            titleText = stringResource(R.string.login_title),
-//            descriptionText = stringResource(R.string.login_title),
-//            buttonText = stringResource(id = R.string.login_title),
-//            textAlign = TextAlign.Center,
-//            firstImage = R.drawable.bg_home,
+    composable(
+        SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route,
+        popEnterTransition = {
+            slideInHorizontally(initialOffsetX = { -1800 })
+        }
+    ) {
+//        FirstOnboardingScreen(
 //            modifier = modifier,
-//            nextScreen = nextScreen,
-//            nextScreenRoute = SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route
+//            nextScreen = nextScreen
 //        )
+        SecondOnboardingScreen(
+            titleText = stringResource(R.string.login_title),
+            descriptionText = stringResource(R.string.login_title),
+            buttonText = stringResource(id = R.string.login_title),
+            textAlign = TextAlign.Center,
+            firstImage = R.drawable.bg_home,
+            modifier = modifier,
+            nextScreen = nextScreen,
+            nextScreenRoute = SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route
+        )
     }
 
-    composable(SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route, popEnterTransition = {
-        slideInHorizontally(initialOffsetX = { -1800 })
-    }) {
+    composable(
+        SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route,
+        popEnterTransition = {
+            slideInHorizontally(initialOffsetX = { -1800 })
+        }
+    ) {
         SecondOnboardingScreen(
-            titleText = stringResource(R.string.connected_apps),
-            descriptionText = stringResource(R.string.setup_your_account),
-            buttonText = stringResource(id = R.string.next),
+            titleText = stringResource(R.string.login_title),
+            descriptionText = stringResource(R.string.login_title),
+            buttonText = stringResource(id = R.string.login_title),
             textAlign = TextAlign.Start,
             pageNumber = "1",
             firstImage = R.drawable.bg_home,

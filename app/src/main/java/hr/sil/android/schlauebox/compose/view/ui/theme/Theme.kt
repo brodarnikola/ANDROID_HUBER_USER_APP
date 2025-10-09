@@ -1,10 +1,10 @@
 package hr.sil.android.schlauebox.compose.view.ui.theme
 
-import android.app.Activity
 import android.os.Build
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+
+import androidx.compose.material3.MaterialTheme as Material3
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -19,12 +19,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
-import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 
@@ -574,14 +570,22 @@ private val LocalAppColors =
     staticCompositionLocalOf<AppColors> { error("No LocalCinnamonColorsPalette provided") }
 
 
+val IsAppInDarkTheme = compositionLocalOf<Boolean> { error("No IsAppInDarkTheme provided") }
+
 
 @Composable
-fun HuberTheme(
+fun AppTheme(
     isDarkTheme: Boolean = isSystemInDarkTheme(),
     isDynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
 
+    val colors =
+        if (isDarkTheme) {
+            DarkColorPalette
+        } else {
+            LightColorPalette
+        }
 
     val dynamicColor = isDynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val colorScheme = when {
@@ -601,10 +605,21 @@ fun HuberTheme(
         sysUiController.setSystemBarsColor(color = colorScheme.background)
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+//    MaterialTheme(
+//        colorScheme = colorScheme,
+//        typography = Typography,
+//        content = content
+//    )
+
+    ProvideAppColors(colors) {
+        CompositionLocalProvider(IsAppInDarkTheme provides isDarkTheme) {
+            Material3(
+                colorScheme = colorScheme,
+                typography = AppTypography,
+                shapes = SunbirdShapes,
+                content = content
+            )
+        }
+    }
 
 }
