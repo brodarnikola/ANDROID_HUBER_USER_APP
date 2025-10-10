@@ -31,6 +31,7 @@ import androidx.navigation.navigation
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.components.HuberScaffold
+import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.FirstOnboardingScreen
 import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.SecondOnboardingScreen
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTheme
 
@@ -89,20 +90,18 @@ fun NavGraphBuilder.navGraph(
 ) {
     composable(
         SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route,
-//        popEnterTransition = {
-//            slideInHorizontally(initialOffsetX = { -1800 })
-//        }
     ) {
 //        FirstOnboardingScreen(
 //            modifier = modifier,
 //            nextScreen = nextScreen
 //        )
-        SecondOnboardingScreen(
-            titleText = stringResource(R.string.login_title),
-            descriptionText = stringResource(R.string.login_title),
-            buttonText = stringResource(id = R.string.login_title),
+        FirstOnboardingScreen(
+            titleText = stringResource(R.string.intro_welcome_slide_title),
+            descriptionText = stringResource(R.string.intro_welcome_slide_content),
+            buttonText = stringResource(id = R.string.app_generic_next),
             textAlign = TextAlign.Center,
-            firstImage = R.drawable.bg_home,
+            firstImage = R.drawable.img_onboarding_welcome,
+            pageNumber = "1",
             modifier = modifier,
             nextScreen = nextScreen,
             nextScreenRoute = SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route
@@ -111,18 +110,49 @@ fun NavGraphBuilder.navGraph(
 
     composable(
         SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route,
-//        popEnterTransition = {
-//            slideInHorizontally(initialOffsetX = { -1800 })
-//        }
     ) {
         SecondOnboardingScreen(
-            titleText = stringResource(R.string.login_title),
-            descriptionText = stringResource(R.string.login_title),
-            buttonText = stringResource(id = R.string.login_title),
+            titleText = stringResource(R.string.intro_pickup_slide_title),
+            descriptionText = stringResource(R.string.intro_pickup_slide_content),
+            buttonText = stringResource(id = R.string.app_generic_next),
             textAlign = TextAlign.Start,
-            pageNumber = "1",
-            firstImage = R.drawable.bg_home,
-            secondeImage = R.drawable.bg_home,
+            pageNumber = "2",
+            firstImage = R.drawable.img_onboarding_send,
+            secondeImage = R.drawable.schlauebox_logo_invert,
+            modifier = modifier,
+            nextScreen = nextScreen,
+            nextScreenRoute = SignUpOnboardingSections.THIRD_ONBOARDING_SCREEN.route
+        )
+    }
+
+    composable(
+        SignUpOnboardingSections.THIRD_ONBOARDING_SCREEN.route,
+    ) {
+        SecondOnboardingScreen(
+            titleText = stringResource(R.string.intro_key_sharing_slide_title),
+            descriptionText = stringResource(R.string.intro_key_sharing_slide_content),
+            buttonText = stringResource(id = R.string.app_generic_next),
+            textAlign = TextAlign.Start,
+            pageNumber = "3",
+            firstImage = R.drawable.img_onboarding_key,
+            secondeImage = R.drawable.schlauebox_logo_invert,
+            modifier = modifier,
+            nextScreen = nextScreen,
+            nextScreenRoute = SignUpOnboardingSections.FOURTH_ONBOARDING_SCREEN.route
+        )
+    }
+
+    composable(
+        SignUpOnboardingSections.FOURTH_ONBOARDING_SCREEN.route,
+    ) {
+        SecondOnboardingScreen(
+            titleText = stringResource(R.string.intro_pickup_slide_title),
+            descriptionText = stringResource(R.string.intro_pickup_slide_content),
+            buttonText = stringResource(id = R.string.app_generic_sign_in),
+            textAlign = TextAlign.Start,
+            pageNumber = "4",
+            firstImage = R.drawable.img_onboarding_start,
+            secondeImage = R.drawable.schlauebox_logo_invert,
             modifier = modifier,
             nextScreen = nextScreen,
             nextScreenRoute = SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route

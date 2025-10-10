@@ -37,6 +37,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.RectangleShape
@@ -63,81 +64,13 @@ import hr.sil.android.schlauebox.compose.view.ui.theme.Primary90
 import androidx.compose.material3.MaterialTheme as Material3
 
 import hr.sil.android.schlauebox.R
+import hr.sil.android.schlauebox.compose.view.ui.theme.Black
 import hr.sil.android.schlauebox.compose.view.ui.theme.CustomGray7
+import hr.sil.android.schlauebox.compose.view.ui.theme.Green
 import hr.sil.android.schlauebox.compose.view.ui.theme.Tertiary80
-
 
 @Composable
 fun FirstOnboardingScreen(
-    modifier: Modifier = Modifier,
-    nextScreen: (route: String) -> Unit = {}
-) {
-    Surface(
-        modifier = modifier
-            .fillMaxSize()
-    ) {
-        ConstraintLayout(
-            modifier = modifier
-                .fillMaxSize()
-                .background(AppTheme.colors.introductionBackgroundColor)
-        ) {
-            val (mainContent, bottomButton) = createRefs()
-
-            Column(Modifier
-                .constrainAs(mainContent) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(bottomButton.top)
-                    start.linkTo(parent.start, margin = 24.dp)
-                    end.linkTo(parent.end, margin = 24.dp)
-
-                    height = Dimension.fillToConstraints
-                }
-                .padding(horizontal = 20.dp)
-                .verticalScroll(rememberScrollState()),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Spacer(modifier = Modifier.heightIn(min = 20.dp))
-                ResizableImage(imageRes = R.drawable.bg_onboarding)
-                Spacer(modifier = Modifier.heightIn(min = 20.dp))
-                androidx.compose.material3.Text(
-                    text = stringResource(R.string.access_sharing_admin_role),
-                    color = Material3.colorScheme.onPrimary, // Material3.colorScheme.onSurface, // onboarding screens - default color
-                    style = Material3.typography.headlineMedium.copy(textAlign = TextAlign.Center),
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.heightIn(min = 16.dp))
-                androidx.compose.material3.Text(
-                    text = stringResource(R.string.access_sharing_admin_role),
-                    style = Material3.typography.bodyLarge,
-                    color = Material3.colorScheme.onSurfaceVariant, // onboarding screens - default color
-                    textAlign = TextAlign.Center
-                )
-            }
-
-            NewDesignButton(
-                modifier = Modifier
-                    .constrainAs(bottomButton) {
-                        top.linkTo(mainContent.bottom)
-                        bottom.linkTo(parent.bottom, margin = 20.dp)
-                        start.linkTo(parent.start, margin = 24.dp)
-                        end.linkTo(parent.end, margin = 24.dp)
-                        width = Dimension.fillToConstraints
-                        height = Dimension.wrapContent
-                    }
-                    .semantics {
-                        contentDescription = "onboardingButtonGetStarted"
-                    },
-                title = stringResource(R.string.access_sharing_admin_role),
-                onClick = {
-                    //nextScreen(SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route)
-                }
-            )
-        }
-    }
-}
-
-@Composable
-fun SecondOnboardingScreen(
     modifier: Modifier = Modifier,
     nextScreen: (route: String) -> Unit = {},
     titleText: String,
@@ -153,14 +86,12 @@ fun SecondOnboardingScreen(
     Surface(
         modifier = modifier
             .fillMaxSize()
-            .background(color = CustomGray7, shape = RoundedCornerShape(10.dp))
-            .border(2.dp, Primary60, shape = RoundedCornerShape(10.dp))
+            .background(hr.sil.android.schlauebox.compose.view.ui.theme.White)
     ) {
         ConstraintLayout(
             modifier = modifier
                 .fillMaxSize()
-                .background(AppTheme.colors.introductionBackgroundColor)
-                .border(2.dp, Tertiary80, shape = RoundedCornerShape(10.dp))
+                .background(hr.sil.android.schlauebox.compose.view.ui.theme.White)
         ) {
             val (mainContent, bottomButton) = createRefs()
 
@@ -168,43 +99,49 @@ fun SecondOnboardingScreen(
                 .constrainAs(mainContent) {
                     top.linkTo(parent.top)
                     bottom.linkTo(bottomButton.top)
-                    start.linkTo(parent.start, margin = 24.dp)
-                    end.linkTo(parent.end, margin = 24.dp)
+                    start.linkTo(parent.start )
+                    end.linkTo(parent.end)
 
                     height = Dimension.fillToConstraints
                 }
-                .padding(horizontal = 20.dp)
+                //.padding(horizontal = 20.dp)
                 .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Image(
-                    painter = painterResource(id = firstImage),
-                    contentDescription = null,
+                Box(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+
+                    Image(
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.FillBounds,
+                        painter = painterResource(id = firstImage),
+                        contentDescription = null,
 //                    contentScale = ContentScale.FillBounds
-                )
-                Spacer(modifier = Modifier.heightIn(min = 20.dp))
+                    )
+                    Image(
+                        modifier = Modifier.align(Alignment.Center).padding(bottom = 240.dp),
+                        painter = painterResource(id = R.drawable.schlauebox_logo_invert),
+                        contentDescription = null,
+//                    contentScale = ContentScale.FillBounds
+                    )
+                }
+                Spacer(modifier = Modifier.heightIn(min = 40.dp))
                 androidx.compose.material3.Text(
                     text = titleText,
-                    color = White, // Material3.colorScheme.onSurface, // onboarding screens - default color
+                    color = Black, // Material3.colorScheme.onSurface, // onboarding screens - default color
                     style = Material3.typography.headlineMedium.copy(textAlign = TextAlign.Center),
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(horizontal = 10.dp)
                 )
                 Spacer(modifier = Modifier.heightIn(min = 16.dp))
                 androidx.compose.material3.Text(
                     text = descriptionText,
                     style = Material3.typography.bodyLarge,
-                    color = Neutral90, // Material3.colorScheme.onSurfaceVariant, // onboarding screens - default color
-                    textAlign = textAlign // TextAlign.Start
+                    color = Black, // Material3.colorScheme.onSurfaceVariant, // onboarding screens - default color
+                    textAlign = textAlign, // TextAlign.Start,
+                    modifier = Modifier.padding(horizontal = 20.dp)
                 )
-                if( secondeImage != null ) {
-                    Spacer(modifier = Modifier.heightIn(min = 16.dp))
-                    Image(
-                        modifier = Modifier.height(260.dp).width(160.dp),
-                        painter = painterResource(id = secondeImage),
-                        contentDescription = null,
-                        contentScale = ContentScale.FillBounds
-                    )
-                }
             }
 
             Column(
@@ -230,18 +167,155 @@ fun SecondOnboardingScreen(
                         androidx.compose.material3.Text(
                             text = pageNumber,
                             style = Material3.typography.labelLarge,
-                            color = White, // Material3.colorScheme.onPrimary, // onboarding screens - default color
+                            color = Black, // Material3.colorScheme.onPrimary, // onboarding screens - default color
                             textAlign = TextAlign.Start
                         )
                         androidx.compose.material3.Text(
-                            text = " / 3",
+                            text = " / 5",
                             style = Material3.typography.labelLarge,
-                            color = Primary90, // onboarding screens - default color
+                            color = Black, // onboarding screens - default color
                             textAlign = TextAlign.Start
                         )
                     }
                 }
-                Spacer(modifier = Modifier.heightIn(min = 1.dp))
+                Spacer(modifier = Modifier.heightIn(min = 10.dp))
+                FilledTonalButton(
+                    onClick = {
+                        nextScreen(nextScreenRoute)
+                    },
+                    modifier = Modifier
+                        .heightIn(min = 20.dp)
+                        .fillMaxWidth(),
+                    colors = androidx.compose.material3.ButtonDefaults.filledTonalButtonColors(
+                        containerColor = Primary60, // Material3.colorScheme.primary,
+                        contentColor = Material3.colorScheme.onPrimary,
+                        disabledContainerColor = Material3.colorScheme.onSurface.copy(alpha = 0.12f)
+                    )
+                ) {
+                    androidx.compose.material3.Text(
+                        text = buttonText,
+                        color = White,
+                        style = Material3.typography.labelLarge,
+                        modifier = Modifier
+                            .padding(vertical = 5.dp)
+                    )
+                }
+            }
+        }
+    }
+}
+
+
+@Composable
+fun SecondOnboardingScreen(
+    modifier: Modifier = Modifier,
+    nextScreen: (route: String) -> Unit = {},
+    titleText: String,
+    descriptionText: String,
+    textAlign: TextAlign = TextAlign.Center,
+    buttonText: String = "",
+    pageNumber: String? = null,
+    firstImage: Int,
+    secondeImage: Int? = null,
+    nextScreenRoute: String
+) {
+
+    Surface(
+        modifier = modifier
+            .fillMaxSize()
+            .background(hr.sil.android.schlauebox.compose.view.ui.theme.White)
+    ) {
+        ConstraintLayout(
+            modifier = modifier
+                .fillMaxSize()
+                .background(hr.sil.android.schlauebox.compose.view.ui.theme.White)
+        ) {
+            val (mainContent, bottomButton) = createRefs()
+
+            Column(Modifier
+                .constrainAs(mainContent) {
+                    top.linkTo(parent.top)
+                    bottom.linkTo(bottomButton.top)
+                    start.linkTo(parent.start )
+                    end.linkTo(parent.end)
+
+                    height = Dimension.fillToConstraints
+                }
+                //.padding(horizontal = 20.dp)
+                .verticalScroll(rememberScrollState()),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Box(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+
+                    Image(
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.FillBounds,
+                        painter = painterResource(id = firstImage),
+                        contentDescription = null,
+//                    contentScale = ContentScale.FillBounds
+                    )
+                    Image(
+                        modifier = Modifier.align(Alignment.Center).padding(bottom = 240.dp),
+                        painter = painterResource(id = R.drawable.schlauebox_logo_invert),
+                        contentDescription = null,
+//                    contentScale = ContentScale.FillBounds
+                    )
+                }
+                Spacer(modifier = Modifier.heightIn(min = 40.dp))
+                androidx.compose.material3.Text(
+                    text = titleText,
+                    color = Black, // Material3.colorScheme.onSurface, // onboarding screens - default color
+                    style = Material3.typography.headlineMedium.copy(textAlign = TextAlign.Center),
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(horizontal = 10.dp)
+                )
+                Spacer(modifier = Modifier.heightIn(min = 16.dp))
+                androidx.compose.material3.Text(
+                    text = descriptionText,
+                    style = Material3.typography.bodyLarge,
+                    color = Black, // Material3.colorScheme.onSurfaceVariant, // onboarding screens - default color
+                    textAlign = textAlign, // TextAlign.Start,
+                    modifier = Modifier.padding(horizontal = 20.dp)
+                )
+            }
+
+            Column(
+                modifier = Modifier
+                    .constrainAs(bottomButton) {
+                        top.linkTo(mainContent.bottom)
+                        bottom.linkTo(parent.bottom, margin = 20.dp)
+                        start.linkTo(parent.start, margin = 24.dp)
+                        end.linkTo(parent.end, margin = 24.dp)
+                        width = Dimension.fillToConstraints
+                        height = Dimension.wrapContent
+                    }
+                    .semantics {
+                        contentDescription = "onboardingButtonGetStarted"
+                    },
+            ) {
+
+                if( pageNumber != null ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        androidx.compose.material3.Text(
+                            text = pageNumber,
+                            style = Material3.typography.labelLarge,
+                            color = Black, // Material3.colorScheme.onPrimary, // onboarding screens - default color
+                            textAlign = TextAlign.Start
+                        )
+                        androidx.compose.material3.Text(
+                            text = " / 5",
+                            style = Material3.typography.labelLarge,
+                            color = Black, // onboarding screens - default color
+                            textAlign = TextAlign.Start
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.heightIn(min = 10.dp))
                 FilledTonalButton(
                     onClick = {
                         nextScreen(nextScreenRoute)
