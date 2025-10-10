@@ -97,7 +97,8 @@ fun NavGraphBuilder.navGraph(
 //            nextScreen = nextScreen
 //        )
         HorizontalPager(
-            modifier = modifier
+            modifier = modifier,
+            nextScreen = nextScreen
         )
 //        FirstOnboardingScreen(
 //            titleText = stringResource(R.string.intro_welcome_slide_title),
@@ -145,12 +146,12 @@ fun NavGraphBuilder.navGraph(
             secondeImage = R.drawable.schlauebox_logo_invert,
             modifier = modifier,
             nextScreen = nextScreen,
-            nextScreenRoute = SignUpOnboardingSections.THIRD_ONBOARDING_SCREEN.route
+            nextScreenRoute = SignUpOnboardingSections.LOGIN_SCREEN.route
         )
     }
 
     composable(
-        SignUpOnboardingSections.THIRD_ONBOARDING_SCREEN.route,
+        SignUpOnboardingSections.LOGIN_SCREEN.route,
     ) {
         SecondOnboardingScreen(
             titleText = stringResource(R.string.intro_key_sharing_slide_title),
