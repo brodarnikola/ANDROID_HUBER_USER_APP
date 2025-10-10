@@ -24,11 +24,14 @@ package hr.sil.android.schlauebox
 import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
+import android.widget.Toast
 import com.esotericsoftware.minlog.Log
 import com.facebook.stetho.Stetho
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
+import dagger.hilt.android.HiltAndroidApp
 import hr.sil.android.ble.scanner.BLEDeviceScanner
 import hr.sil.android.ble.scanner.exception.BLEScanException
 import hr.sil.android.ble.scanner.scan_multi.BLEGenericDeviceDataFactory
@@ -64,6 +67,7 @@ import java.util.*
 /**
  * @author mfatiga
  */
+@HiltAndroidApp
 class App : Application(), BLEScannerStateHolder {
     private val log = logger()
 
@@ -195,24 +199,23 @@ class App : Application(), BLEScannerStateHolder {
         startScanner()
 
 
-        FirebaseApp.initializeApp(this)
+        //FirebaseApp.initializeApp(this)
 
         // Use a proper scope instead of GlobalScope
         CoroutineScope(Dispatchers.IO).launch {
-           // FirebaseApp.initializeApp(this@App)
             //delay(3000)
-//            val task = FirebaseMessaging.getInstance().token.awaitForResult()
-//            if (!task.isSuccessful) {
-//                log.info("getInstanceId failed", task.exception)
-//            }
-//            // Get new Instance ID token
-//            val token = task.result
-//            if (token != null) {
-//                log.info("FCM token: $token")
-//                MPLFireBaseMessagingService.sendRegistrationToServer(token)
-//            } else {
-//                log.error("Error while fetching the FCM token!")
-//            }
+            val task = FirebaseMessaging.getInstance().token.awaitForResult()
+            if (!task.isSuccessful) {
+                log.info("getInstanceId failed", task.exception)
+            }
+            // Get new Instance ID token
+            val token = task.result
+            if (token != null) {
+                log.info("FCM token: $token")
+                MPLFireBaseMessagingService.sendRegistrationToServer(token)
+            } else {
+                log.error("Error while fetching the FCM token!")
+            }
         }
 
 
