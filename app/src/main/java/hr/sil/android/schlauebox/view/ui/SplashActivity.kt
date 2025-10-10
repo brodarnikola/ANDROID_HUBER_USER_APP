@@ -80,19 +80,21 @@ class SplashActivity : AppCompatActivity() {
         super.onResume()
 
         GlobalScope.launch {
-            log.info("Started to fetch token")
-            val task = FirebaseMessaging.getInstance().token.awaitForResult()
-            if (!task.isSuccessful) {
-                log.info("getInstanceId failed", task.exception)
-            }
-            // Get new Instance ID token
-            val token = task.result
-            if (token != null) {
-                log.info("FCM token: $token")
-                MPLFireBaseMessagingService.sendRegistrationToServer(token)
-            } else {
-                log.error("Error while fetching the FCM token!")
-            }
+//            log.info("Started to fetch token")
+//            val task = FirebaseMessaging.getInstance().token.awaitForResult()
+//
+//            log.info("Started to fetch token 22 ${task}")
+//            if (!task.isSuccessful) {
+//                log.info("getInstanceId failed", task.exception)
+//            }
+//            // Get new Instance ID token
+//            val token = task.result
+//            if (token != null) {
+//                log.info("FCM token: $token")
+//                MPLFireBaseMessagingService.sendRegistrationToServer(token)
+//            } else {
+//                log.error("Error while fetching the FCM token!")
+//            }
         }
     }
 

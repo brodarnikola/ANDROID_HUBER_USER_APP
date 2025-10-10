@@ -4,6 +4,7 @@
 
     <!-- Notifications -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- Bluetooth -->
     <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
@@ -93,8 +94,10 @@
             android:name=".view.ui.PasswordRecoveryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/IntroTheme" />
+        <!--<activity
+            android:name=".view.ui.SplashActivity"-->
         <activity
-            android:name=".view.ui.SplashActivity"
+            android:name=".compose.view.ui.SignUpOnboardingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
             android:exported="true">
