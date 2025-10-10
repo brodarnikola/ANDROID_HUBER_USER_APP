@@ -32,6 +32,7 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.components.HuberScaffold
 import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.FirstOnboardingScreen
+import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.HorizontalPager
 import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.SecondOnboardingScreen
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTheme
 
@@ -90,6 +91,29 @@ fun NavGraphBuilder.navGraph(
 ) {
     composable(
         SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route,
+    ) {
+//        FirstOnboardingScreen(
+//            modifier = modifier,
+//            nextScreen = nextScreen
+//        )
+        HorizontalPager(
+            modifier = modifier
+        )
+//        FirstOnboardingScreen(
+//            titleText = stringResource(R.string.intro_welcome_slide_title),
+//            descriptionText = stringResource(R.string.intro_welcome_slide_content),
+//            buttonText = stringResource(id = R.string.app_generic_next),
+//            textAlign = TextAlign.Center,
+//            firstImage = R.drawable.img_onboarding_welcome,
+//            pageNumber = "1",
+//            modifier = modifier,
+//            nextScreen = nextScreen,
+//            nextScreenRoute = SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route
+//        )
+    }
+
+    composable(
+        SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route,
     ) {
 //        FirstOnboardingScreen(
 //            modifier = modifier,

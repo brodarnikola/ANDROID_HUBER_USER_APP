@@ -1,18 +1,10 @@
 package hr.sil.android.schlauebox.compose.view.ui.onboarding_screens
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,54 +12,289 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
-import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import hr.sil.android.schlauebox.compose.view.ui.components.NewDesignButton
-import hr.sil.android.schlauebox.compose.view.ui.components.ResizableImage
-import hr.sil.android.schlauebox.compose.view.ui.theme.AppTheme
-import hr.sil.android.schlauebox.compose.view.ui.theme.Neutral90
-import hr.sil.android.schlauebox.compose.view.ui.theme.Primary60
-import hr.sil.android.schlauebox.compose.view.ui.theme.Primary90
-import androidx.compose.material3.MaterialTheme as Material3
-
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.theme.Black
-import hr.sil.android.schlauebox.compose.view.ui.theme.CustomGray7
-import hr.sil.android.schlauebox.compose.view.ui.theme.Green
-import hr.sil.android.schlauebox.compose.view.ui.theme.Tertiary80
+import hr.sil.android.schlauebox.compose.view.ui.theme.Primary60
+import androidx.compose.material3.MaterialTheme as Material3
+
+
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun HorizontalPager(
+    modifier: Modifier,
+
+    ) {
+    val pagerState = rememberPagerState()
+    val slideStringTitle = remember { mutableStateOf("") }
+    val slideStringDesc = remember { mutableStateOf("") }
+    val slideImage = remember { mutableIntStateOf(-1) }
+
+    Surface(
+        modifier = modifier
+            .fillMaxSize()
+            .background(hr.sil.android.schlauebox.compose.view.ui.theme.White)
+    ) {
+        ConstraintLayout(
+            modifier = modifier
+                .fillMaxSize()
+                .background(hr.sil.android.schlauebox.compose.view.ui.theme.White)
+        ) {
+
+
+            val (mainContent, bottomButton) = createRefs()
+
+            Column(
+                Modifier
+                    .constrainAs(mainContent) {
+                        top.linkTo(parent.top)
+                        bottom.linkTo(bottomButton.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+
+                        height = Dimension.fillToConstraints
+                    }
+                    //.padding(horizontal = 20.dp)
+                    .verticalScroll(rememberScrollState()),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                HorizontalPager(
+                    modifier = Modifier
+                        .padding(start = 8.dp, end = 8.dp, top = 18.dp, bottom = 12.dp)
+                        .fillMaxSize(),
+                    //.height(70.dp),
+                    count = 4,
+                    state = pagerState
+                ) { page ->
+                    when (page) {
+                        0 -> slideStringTitle.value =
+                            stringResource(R.string.intro_welcome_slide_title)
+
+                        1 -> slideStringTitle.value =
+                            stringResource(R.string.intro_pickup_slide_title)
+
+                        2 -> slideStringTitle.value =
+                            stringResource(R.string.intro_key_sharing_slide_title)
+
+                        3 -> slideStringTitle.value =
+                            stringResource(R.string.intro_welcome_slide_content)
+                    }
+
+                    when (page) {
+                        0 -> slideStringDesc.value =
+                            stringResource(R.string.intro_welcome_slide_content)
+
+                        1 -> slideStringDesc.value =
+                            stringResource(R.string.intro_pickup_slide_content)
+
+                        2 -> slideStringDesc.value =
+                            stringResource(R.string.intro_key_sharing_slide_content)
+
+                        3 -> slideStringDesc.value =
+                            stringResource(R.string.intro_welcome_slide_content)
+                    }
+
+                    when (page) {
+                        0 -> slideImage.intValue = R.drawable.img_onboarding_start
+                        1 -> slideImage.intValue = R.drawable.img_onboarding_pickup
+                        2 -> slideImage.intValue = R.drawable.img_onboarding_key
+                        3 -> slideImage.intValue = R.drawable.img_onboarding_start
+                    }
+
+                    Box(
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+
+                        Image(
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.FillBounds,
+                            painter = painterResource(id = slideImage.intValue),
+                            contentDescription = null,
+//                    contentScale = ContentScale.FillBounds
+                        )
+                        Image(
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .padding(bottom = 240.dp),
+                            painter = painterResource(id = R.drawable.schlauebox_logo_invert),
+                            contentDescription = null,
+//                    contentScale = ContentScale.FillBounds
+                        )
+                    }
+                    Spacer(modifier = Modifier.heightIn(min = 40.dp))
+                    androidx.compose.material3.Text(
+                        text = slideStringTitle.value,
+                        color = Black, // Material3.colorScheme.onSurface, // onboarding screens - default color
+                        style = Material3.typography.headlineMedium.copy(textAlign = TextAlign.Center),
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(horizontal = 10.dp)
+                    )
+                    Spacer(modifier = Modifier.heightIn(min = 16.dp))
+                    androidx.compose.material3.Text(
+                        text = slideStringDesc.value,
+                        style = Material3.typography.bodyLarge,
+                        color = Black, // Material3.colorScheme.onSurfaceVariant, // onboarding screens - default color
+                        textAlign = TextAlign.Start, // TextAlign.Start,
+                        modifier = Modifier.padding(horizontal = 20.dp)
+                    )
+                }
+
+                Column(
+                    modifier = Modifier
+                        .constrainAs(bottomButton) {
+                            top.linkTo(mainContent.bottom)
+                            bottom.linkTo(parent.bottom, margin = 20.dp)
+                            start.linkTo(parent.start, margin = 24.dp)
+                            end.linkTo(parent.end, margin = 24.dp)
+                            width = Dimension.fillToConstraints
+                            height = Dimension.wrapContent
+                        }
+                        .semantics {
+                            contentDescription = "onboardingButtonGetStarted"
+                        },
+                ) {
+
+                    if (page != 100) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            androidx.compose.material3.Text(
+                                text = page.toString(),
+                                style = Material3.typography.labelLarge,
+                                color = Black, // Material3.colorScheme.onPrimary, // onboarding screens - default color
+                                textAlign = TextAlign.Start
+                            )
+                            androidx.compose.material3.Text(
+                                text = " / 4",
+                                style = Material3.typography.labelLarge,
+                                color = Black, // onboarding screens - default color
+                                textAlign = TextAlign.Start
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.heightIn(min = 10.dp))
+//                    FilledTonalButton(
+//                        onClick = {
+//                            nextScreen(nextScreenRoute)
+//                        },
+//                        modifier = Modifier
+//                            .heightIn(min = 20.dp)
+//                            .fillMaxWidth(),
+//                        colors = androidx.compose.material3.ButtonDefaults.filledTonalButtonColors(
+//                            containerColor = Primary60, // Material3.colorScheme.primary,
+//                            contentColor = Material3.colorScheme.onPrimary,
+//                            disabledContainerColor = Material3.colorScheme.onSurface.copy(alpha = 0.12f)
+//                        )
+//                    ) {
+//                        androidx.compose.material3.Text(
+//                            text = buttonText,
+//                            color = White,
+//                            style = Material3.typography.labelLarge,
+//                            modifier = Modifier
+//                                .padding(vertical = 5.dp)
+//                        )
+//                    }
+                }
+
+//        Column(
+//            modifier = Modifier.fillMaxSize(),
+//            horizontalAlignment = CenterHorizontally,
+//            verticalArrangement = Arrangement.Center
+//        ) {
+//            Text(
+//                text = stringResource(id = slideString.value),
+//                fontFamily = FontFamily(Font(  R.font.sf_pro_display_medium)),
+//                fontSize = 24.sp,
+//                lineHeight = 28.sp,
+//                textAlign = TextAlign.Center,
+//                color = Black
+//            )
+//        }
+
+                DotsIndicator(
+                    totalDots = 4,
+                    selectedIndex = pagerState.currentPage,
+                    selectedColor = colorResource(id = R.color.colorPrimary),
+                    unSelectedColor = colorResource(id = R.color.colorGray)
+                )
+
+            }
+        }
+    }
+}
+
+@Composable
+fun DotsIndicator(
+    totalDots: Int,
+    selectedIndex: Int,
+    selectedColor: Color,
+    unSelectedColor: Color,
+) {
+
+    LazyRow(
+        horizontalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    ) {
+        items(totalDots) { index ->
+            if (index == selectedIndex) {
+                Box(
+                    modifier = Modifier
+                        .size(8.dp)
+                        .clip(CircleShape)
+                        .background(selectedColor)
+                )
+            } else {
+                Box(
+                    modifier = Modifier
+                        .size(8.dp)
+                        .clip(CircleShape)
+                        .background(unSelectedColor)
+                )
+            }
+
+            if (index != totalDots - 1) {
+                Spacer(modifier = Modifier.padding(horizontal = 4.dp))
+            }
+        }
+    }
+}
 
 @Composable
 fun FirstOnboardingScreen(
@@ -95,17 +322,18 @@ fun FirstOnboardingScreen(
         ) {
             val (mainContent, bottomButton) = createRefs()
 
-            Column(Modifier
-                .constrainAs(mainContent) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(bottomButton.top)
-                    start.linkTo(parent.start )
-                    end.linkTo(parent.end)
+            Column(
+                Modifier
+                    .constrainAs(mainContent) {
+                        top.linkTo(parent.top)
+                        bottom.linkTo(bottomButton.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
 
-                    height = Dimension.fillToConstraints
-                }
-                //.padding(horizontal = 20.dp)
-                .verticalScroll(rememberScrollState()),
+                        height = Dimension.fillToConstraints
+                    }
+                    //.padding(horizontal = 20.dp)
+                    .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Box(
@@ -120,7 +348,9 @@ fun FirstOnboardingScreen(
 //                    contentScale = ContentScale.FillBounds
                     )
                     Image(
-                        modifier = Modifier.align(Alignment.Center).padding(bottom = 240.dp),
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .padding(bottom = 240.dp),
                         painter = painterResource(id = R.drawable.schlauebox_logo_invert),
                         contentDescription = null,
 //                    contentScale = ContentScale.FillBounds
@@ -159,7 +389,7 @@ fun FirstOnboardingScreen(
                     },
             ) {
 
-                if( pageNumber != null ) {
+                if (pageNumber != null) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.Center
@@ -232,17 +462,18 @@ fun SecondOnboardingScreen(
         ) {
             val (mainContent, bottomButton) = createRefs()
 
-            Column(Modifier
-                .constrainAs(mainContent) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(bottomButton.top)
-                    start.linkTo(parent.start )
-                    end.linkTo(parent.end)
+            Column(
+                Modifier
+                    .constrainAs(mainContent) {
+                        top.linkTo(parent.top)
+                        bottom.linkTo(bottomButton.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
 
-                    height = Dimension.fillToConstraints
-                }
-                //.padding(horizontal = 20.dp)
-                .verticalScroll(rememberScrollState()),
+                        height = Dimension.fillToConstraints
+                    }
+                    //.padding(horizontal = 20.dp)
+                    .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Box(
@@ -257,7 +488,9 @@ fun SecondOnboardingScreen(
 //                    contentScale = ContentScale.FillBounds
                     )
                     Image(
-                        modifier = Modifier.align(Alignment.Center).padding(bottom = 240.dp),
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .padding(bottom = 240.dp),
                         painter = painterResource(id = R.drawable.schlauebox_logo_invert),
                         contentDescription = null,
 //                    contentScale = ContentScale.FillBounds
@@ -296,7 +529,7 @@ fun SecondOnboardingScreen(
                     },
             ) {
 
-                if( pageNumber != null ) {
+                if (pageNumber != null) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.Center
