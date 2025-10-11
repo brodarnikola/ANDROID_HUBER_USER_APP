@@ -202,6 +202,7 @@ class LoginActivity : BaseActivity(noWifiViewId = R.id.no_internet_layout) {
     }*/
 
     override fun onBackPressed() {
+        super.onBackPressed()
         val intent = Intent(this@LoginActivity, IntroductionSlidePagerActivity::class.java)
         intent.putExtra("Back", true)
         startActivity(intent)
