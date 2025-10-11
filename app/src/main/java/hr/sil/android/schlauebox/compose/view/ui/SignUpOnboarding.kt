@@ -93,6 +93,7 @@ enum class SignUpOnboardingSections(
     FIRST_ONBOARDING_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/firstOnboarding"),
     SECOND_ONBOARDING_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/secondOnboarding"),
     LOGIN_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/loginScreen"),
+    FORGOT_PASSWORD_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/forgotPasswordScreen"),
     FOURTH_ONBOARDING_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/fourthOnboarding"),
     FIFTH_ONBOARDING_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/fifthOnboarding"),
 //    PRO_ONBOARDING_SCREEN(R.string.btn_continue, Icons.Outlined.Search, "splash/proOnboarding"),

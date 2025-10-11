@@ -29,11 +29,12 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.sunbird.ui.setup.login.ForgotPasswordScreen
 import com.sunbird.ui.setup.login.LoginScreen
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.components.HuberScaffold
 import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.FirstOnboardingScreen
-import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.HorizontalPager 
+import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.HorizontalPager
 import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.SecondOnboardingScreen
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTheme
 
@@ -104,37 +105,28 @@ fun NavGraphBuilder.navGraph(
     ) {
         LoginScreen(
              modifier = modifier,
-            viewModel = hiltViewModel(),
-            //navigateUp = navigateUp,
-
-             //nextScreen = nextScreen,
-//             onLoginClick = {
-//
-//             },
-//             onForgotPasswordClick = {
-//
-//             },
-//             onShowPasswordClick = {
-//
-//             }
-
+             viewModel = hiltViewModel(),
+             navigateUp = {
+                 navigateUp()
+             },
+             nextScreen = { route ->
+                nextScreen(route)
+             }
         )
     }
 
     composable(
-        SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route,
+        SignUpOnboardingSections.FORGOT_PASSWORD_SCREEN.route,
     ) {
-        SecondOnboardingScreen(
-            titleText = stringResource(R.string.intro_pickup_slide_title),
-            descriptionText = stringResource(R.string.intro_pickup_slide_content),
-            buttonText = stringResource(id = R.string.app_generic_next),
-            textAlign = TextAlign.Start,
-            pageNumber = "2",
-            firstImage = R.drawable.img_onboarding_send,
-            secondeImage = R.drawable.schlauebox_logo_invert,
+        ForgotPasswordScreen(
             modifier = modifier,
-            nextScreen = nextScreen,
-            nextScreenRoute = SignUpOnboardingSections.LOGIN_SCREEN.route
+            viewModel = hiltViewModel(),
+            navigateUp = {
+                navigateUp()
+            },
+            nextScreen = { route ->
+                nextScreen(route)
+            }
         )
     }
 
