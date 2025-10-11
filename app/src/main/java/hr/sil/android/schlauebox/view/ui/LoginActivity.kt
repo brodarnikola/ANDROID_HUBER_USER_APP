@@ -65,8 +65,8 @@ class LoginActivity : BaseActivity(noWifiViewId = R.id.no_internet_layout) {
 //                params.centerHorizontally()
                 binding.tvShowPasswords.layoutParams = params
 
-                GlobalScope.launch(/*parentJob*/) {
-
+//                GlobalScope.launch(/*parentJob*/) {
+//
 //                    if (NetworkChecker.isInternetConnectionAvailable()) {
 //
 //
@@ -115,7 +115,7 @@ class LoginActivity : BaseActivity(noWifiViewId = R.id.no_internet_layout) {
 //                            binding.btnLogin.visibility = View.VISIBLE
 //                        }
 //                    }
-                }
+                //}
             }
             else {
 //                if (correctPassword) {
