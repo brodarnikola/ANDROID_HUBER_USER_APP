@@ -16,7 +16,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.text.style.TextAlign
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
@@ -30,13 +29,16 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.sunbird.ui.setup.login.ForgotPasswordScreen
+import com.sunbird.ui.setup.login.ForgotPasswordViewModel
 import com.sunbird.ui.setup.login.LoginScreen
+import com.sunbird.ui.setup.login.LoginViewModel
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.components.HuberScaffold
 import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.FirstOnboardingScreen
 import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.HorizontalPager
 import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.SecondOnboardingScreen
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTheme
+import hr.sil.android.schlauebox.util.SettingsHelper
 
 
 @OptIn(ExperimentalAnimationApi::class, ExperimentalComposeUiApi::class)
@@ -58,9 +60,16 @@ fun SignUpOnboardingApp(
             val modifier = Modifier
             // Box required because there is no background in transition moment when changing screens
             Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
+                val firstScreen = SettingsHelper.firstRun
+                val routeFirstScreen = if (firstScreen) {
+                    SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route
+                }
+                else {
+                    SignUpOnboardingSections.LOGIN_SCREEN.route
+                }
                 NavHost(
                     navController = appState.navController,
-                    startDestination = SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route,
+                    startDestination = routeFirstScreen,
                     modifier = Modifier.padding(innerPaddingModifier)
                 ) {
                     navGraph(
@@ -91,21 +100,21 @@ fun NavGraphBuilder.navGraph(
     goToSecondOnboardingScreen: (route: String) -> Unit,
     navigateUp:() -> Unit
 ) {
-//    composable(
-//        SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route,
-//    ) {
-//        HorizontalPager(
-//            modifier = modifier,
-//            nextScreen = nextScreen
-//        )
-//    }
-
     composable(
         SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route,
     ) {
+        HorizontalPager(
+            modifier = modifier,
+            nextScreen = nextScreen
+        )
+    }
+
+    composable(
+        SignUpOnboardingSections.LOGIN_SCREEN.route,
+    ) {
         LoginScreen(
              modifier = modifier,
-             viewModel = hiltViewModel(),
+             viewModel = LoginViewModel(),
              navigateUp = {
                  navigateUp()
              },
@@ -120,7 +129,7 @@ fun NavGraphBuilder.navGraph(
     ) {
         ForgotPasswordScreen(
             modifier = modifier,
-            viewModel = hiltViewModel(),
+            viewModel = ForgotPasswordViewModel(),
             navigateUp = {
                 navigateUp()
             },
@@ -131,7 +140,7 @@ fun NavGraphBuilder.navGraph(
     }
 
     composable(
-        SignUpOnboardingSections.LOGIN_SCREEN.route,
+        SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route,
     ) {
         SecondOnboardingScreen(
             titleText = stringResource(R.string.intro_key_sharing_slide_title),

@@ -109,13 +109,13 @@ fun LoginScreen(
     }
 
     // used to prepopulate email address if user registered on Register screen
-    LaunchedEffect(key1 = Unit) {
+    //LaunchedEffect(key1 = Unit) {
 //        val userEmail = viewModel.getUserEmail()
 //        if (userEmail.isNotEmpty()) {
 //            email = userEmail
 //            errorMessageEmail = ""
 //        }
-    }
+    //}
 
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
@@ -401,7 +401,8 @@ fun LoginScreen(
                         LoginScreenEvent.OnLogin(
                             email = email,
                             password = password,
-                            context = context
+                            context = context,
+                            activity = activity
                         )
                     )
                 }

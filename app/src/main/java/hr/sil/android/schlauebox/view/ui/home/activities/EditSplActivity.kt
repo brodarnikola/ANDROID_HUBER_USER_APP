@@ -10,7 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.DataCache
+//import hr.sil.android.schlauebox.cache.DataCache
 import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.remote.model.RCreatedLockerKey
 import hr.sil.android.schlauebox.core.remote.model.RMasterUnit
@@ -154,9 +154,18 @@ class EditSplActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_layout
     private suspend fun deactivateSPLOnlyOnBackend() {
         val deactivateSplPlusBackend = WSUser.deactivateSPL(macAddress.macRealToClean())
         if( deactivateSplPlusBackend ) {
-            DataCache.clearMasterUnitCache()
-            DataCache.clearLockerInfoCache()
-            DataCache.getDevicesInfo(true)
+            //DataCache.clearMasterUnitCache()
+            //DataCache.clearLockerInfoCache()
+            //DataCache.getDevicesInfo(true)
+
+            log.info("Ble entires ${MPLDeviceStore.devices.values.joinToString { it.macAddress }}")
+            val entries = MPLDeviceStore.devices.values.map { it.macAddress.macRealToClean() }
+            if (entries.isNotEmpty()) {
+                log.info("All Ble entires ${MPLDeviceStore.remoteInfoKeys}")
+                WSUser.getDevicesInfo(MPLDeviceStore.remoteInfoKeys)
+            } else
+                listOf()
+
             DeviceStoreRemoteUpdater.forceUpdate()
         }
         withContext(Dispatchers.Main) {

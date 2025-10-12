@@ -21,7 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.firebase.messaging.FirebaseMessaging
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.DataCache
+//import hr.sil.android.schlauebox.cache.DataCache
 import hr.sil.android.schlauebox.databinding.ActivityLoginBinding
 import hr.sil.android.schlauebox.databinding.ActivitySplashBinding
 import hr.sil.android.schlauebox.fcm.MPLFireBaseMessagingService
@@ -107,7 +107,7 @@ class SplashActivity : AppCompatActivity() {
         }
         GlobalScope.launch(Dispatchers.Main) {
             MPLDeviceStore.clear()
-            DataCache.getDevicesInfo(true)
+            //DataCache.getDevicesInfo(true)
 
             DeviceStoreRemoteUpdater.forceUpdate()
             hideError()

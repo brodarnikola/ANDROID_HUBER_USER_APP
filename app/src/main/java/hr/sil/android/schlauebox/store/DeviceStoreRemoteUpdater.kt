@@ -21,7 +21,8 @@
 
 package hr.sil.android.schlauebox.store
 
-import hr.sil.android.schlauebox.cache.DataCache
+//import hr.sil.android.schlauebox.cache.DataCache
+import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.remote.model.RLockerInfo
 import hr.sil.android.schlauebox.core.remote.model.RLockerKey
 import hr.sil.android.schlauebox.core.remote.model.RMasterUnit
@@ -75,10 +76,10 @@ object DeviceStoreRemoteUpdater {
     }
 
     private suspend fun doUpdate() {
-        val allActiveKeys = DataCache.getActiveKeys()
+        val allActiveKeys =  WSUser.getActiveKeys() ?: listOf() // DataCache.getActiveKeys()
         val masterUnitsInfo = mapOf<String, RLockerInfo>()
 
-        val units = DataCache.getMasterUnits(true)
+        val units = WSUser.getMasterUnits() ?: listOf() //  DataCache.getMasterUnits(true)
         if( units.size == 0 ) {
             log.info("Master unit size from backend is: ${units.size}")
         }

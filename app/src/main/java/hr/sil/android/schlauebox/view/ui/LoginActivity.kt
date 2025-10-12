@@ -10,7 +10,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.status.InstallationKeyHandler
+//import hr.sil.android.schlauebox.cache.status.InstallationKeyHandler
 import hr.sil.android.schlauebox.core.remote.model.UserStatus
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.databinding.ActivityLoginBinding

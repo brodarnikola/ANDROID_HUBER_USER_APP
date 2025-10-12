@@ -59,6 +59,7 @@ import hr.sil.android.schlauebox.compose.view.ui.SignUpOnboardingDestinations
 import hr.sil.android.schlauebox.compose.view.ui.SignUpOnboardingSections
 import hr.sil.android.schlauebox.compose.view.ui.theme.Black
 import hr.sil.android.schlauebox.compose.view.ui.theme.Primary60
+import hr.sil.android.schlauebox.util.SettingsHelper
 import androidx.compose.material3.MaterialTheme as Material3
 
 
@@ -173,6 +174,7 @@ fun HorizontalPager(
                         Spacer(modifier = Modifier.heightIn(min = 40.dp))
                         FilledTonalButton(
                             onClick = {
+                                SettingsHelper.firstRun = false
                                 nextScreen(SignUpOnboardingSections.LOGIN_SCREEN.route)
                             },
                             modifier = Modifier

@@ -93,13 +93,13 @@ fun ForgotPasswordScreen(
 
 
     // used to prepopulate email address if user registered on Register screen
-    LaunchedEffect(key1 = Unit) {
+    //LaunchedEffect(key1 = Unit) {
 //        val userEmail = viewModel.getUserEmail()
 //        if (userEmail.isNotEmpty()) {
 //            email = userEmail
 //            errorMessageEmail = ""
 //        }
-    }
+    //}
 
     val context = LocalContext.current
 

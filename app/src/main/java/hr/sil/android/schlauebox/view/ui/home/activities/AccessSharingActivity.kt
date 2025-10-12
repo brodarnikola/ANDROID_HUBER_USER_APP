@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.clans.fab.FloatingActionButton
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.DataCache
+import hr.sil.android.schlauebox.core.remote.WSUser
+//import hr.sil.android.schlauebox.cache.DataCache
 import hr.sil.android.schlauebox.core.remote.model.*
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.core.util.macRealToClean
@@ -92,11 +93,12 @@ class AccessSharingActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_
             if (internetConnection)
                 addOwnerGroupAndAdminGroupToRecylerView()
 
-            val adminOwnerShipGroup: Collection<RGroupInfo> = DataCache.getGroupMemberships()
+            val adminOwnerShipGroup: Collection<RGroupInfo> = WSUser.getGroupMemberships() ?: mutableListOf() //DataCache.getGroupMemberships()
             val adminDataList: MutableList<RGroupInfo> = mutableListOf()
 
             for (items in adminOwnerShipGroup) {
-                val usersFromGroup: Collection<RGroupInfo> = DataCache.groupMemberships(items.groupId.toLong())
+                val usersFromGroup =   WSUser.getGroupMembershipsById(items.groupId.toLong()) ?: mutableListOf()
+                //val usersFromGroup: Collection<RGroupInfo> = DataCache.groupMemberships(items.groupId.toLong())
                 adminDataList.addAll(usersFromGroup)
             }
 
@@ -123,7 +125,7 @@ class AccessSharingActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_
 
     private suspend fun dislaySplDevices() {
 
-        val ownerResult: MutableList<REndUserGroupMember> = DataCache.getGroupMembers().toMutableList()
+        val ownerResult: MutableList<REndUserGroupMember> = WSUser.getGroupMembers()?.toMutableList() ?: mutableListOf() //DataCache.getGroupMembers().toMutableList()
         var oneOwnerUserFound: Boolean = false
         // First I'm adding all data from owner list to finalMembersArray
         if (ownerResult.isNotEmpty()) {
@@ -161,7 +163,7 @@ class AccessSharingActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_
             }
         }
 
-        val dataGroupMemberShip = DataCache.getGroupMemberships().toMutableList()
+        val dataGroupMemberShip = WSUser.getGroupMemberships()?: mutableListOf() // DataCache.getGroupMemberships().toMutableList()
 
         if (dataGroupMemberShip.isNotEmpty()) {
 
@@ -187,7 +189,7 @@ class AccessSharingActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_
                     finalMembersArray.add(nameOfAdminGroup)
                 }
                 else if (items.master_mac == macCleanAddress) {
-                    val groupDataList: Collection<RGroupInfo> = DataCache.groupMemberships(items.groupId.toLong())
+                    val groupDataList: Collection<RGroupInfo> =  WSUser.getGroupMembershipsById(items.groupId.toLong()) ?: mutableListOf() // DataCache.groupMemberships(items.groupId.toLong())
 
                     if (groupDataList.size > 0) {
 
@@ -255,7 +257,7 @@ class AccessSharingActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_
 
     private suspend fun displayMplDevices() {
 
-        val ownerResult: MutableList<REndUserGroupMember> = DataCache.getGroupMembers().toMutableList()
+        val ownerResult: MutableList<REndUserGroupMember> =  WSUser.getGroupMembers()?.toMutableList() ?: mutableListOf() // DataCache.getGroupMembers().toMutableList()
         var oneOwnerUserFound: Boolean = false
         // First I'm adding all data from owner list to finalMembersArray
         if (ownerResult.isNotEmpty()) {
@@ -290,7 +292,7 @@ class AccessSharingActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_
             }
         }
 
-        val dataGroupMemberShip = DataCache.getGroupMemberships().toMutableList()
+        val dataGroupMemberShip = WSUser.getGroupMemberships()?: mutableListOf() //DataCache.getGroupMemberships().toMutableList()
 
         if (dataGroupMemberShip.isNotEmpty()) {
 
@@ -316,7 +318,7 @@ class AccessSharingActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_
                     finalMembersArray.add(nameOfAdminGroup)
                 }
                 else if( items.master_mac == macCleanAddress ) {
-                    val groupDataList: Collection<RGroupInfo> = DataCache.groupMemberships(items.groupId.toLong())
+                    val groupDataList: Collection<RGroupInfo> = WSUser.getGroupMembershipsById(items.groupId.toLong()) ?: mutableListOf() //DataCache.groupMemberships(items.groupId.toLong())
                     if (groupDataList.size > 0) {
                         val groupMembersData: MutableList<RGroupDisplayMembersChild> = mutableListOf()
                         val nameOfAdminGroup = RGroupDisplayMembersAdmin()

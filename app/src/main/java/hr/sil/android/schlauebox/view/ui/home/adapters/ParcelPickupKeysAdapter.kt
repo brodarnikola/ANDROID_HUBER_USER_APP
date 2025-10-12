@@ -7,7 +7,8 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.DataCache
+import hr.sil.android.schlauebox.core.remote.WSUser
+//import hr.sil.android.schlauebox.cache.DataCache
 import hr.sil.android.schlauebox.core.remote.model.RCreatedLockerKey
 import hr.sil.android.schlauebox.core.remote.model.RLockerKeyPurpose
 import hr.sil.android.schlauebox.core.remote.model.RMasterUnitType
@@ -141,7 +142,7 @@ class ParcelPickupKeysAdapter(val updateKeys: () -> Unit, val type: RMasterUnitT
         }
 
         suspend private fun isUserMemberOfGroup(email: String, masterId: Int): Boolean {
-            val groups = DataCache.getGroupMembers()
+            val groups = WSUser.getGroupMembers() ?: mutableListOf() //DataCache.getGroupMembers()
             val groupMemberships = groups.filter { it.email == email }
             return groupMemberships.isNotEmpty()
         }
