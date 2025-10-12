@@ -54,9 +54,11 @@ import androidx.constraintlayout.compose.Dimension
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import com.sunbird.ui.setup.login.LoginScreenEvent
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.SignUpOnboardingDestinations
 import hr.sil.android.schlauebox.compose.view.ui.SignUpOnboardingSections
+import hr.sil.android.schlauebox.compose.view.ui.components.NewDesignButton
 import hr.sil.android.schlauebox.compose.view.ui.theme.Black
 import hr.sil.android.schlauebox.compose.view.ui.theme.Primary60
 import hr.sil.android.schlauebox.util.SettingsHelper
@@ -124,7 +126,7 @@ fun HorizontalPager(
 
                 when (page) {
                     0 -> slideImage.intValue = R.drawable.img_onboarding_start
-                    1 -> slideImage.intValue = R.drawable.img_onboarding_pickup
+                    1 -> slideImage.intValue = R.drawable.img_onboarding_send
                     2 -> slideImage.intValue = R.drawable.img_onboarding_key
                     3 -> slideImage.intValue = R.drawable.img_onboarding_start
                 }
@@ -172,29 +174,22 @@ fun HorizontalPager(
                         )
                     } else {
                         Spacer(modifier = Modifier.heightIn(min = 40.dp))
-                        FilledTonalButton(
+
+                        NewDesignButton(
+                            modifier = Modifier
+                                .semantics {
+                                    contentDescription = "signInButtonLoginScreen"
+                                }
+                                .heightIn(min = 20.dp)
+                                .padding(horizontal = 50.dp)
+                                .fillMaxWidth(),
+                            title = stringResource(R.string.login_title),
                             onClick = {
                                 SettingsHelper.firstRun = false
                                 nextScreen(SignUpOnboardingSections.LOGIN_SCREEN.route)
                             },
-                            modifier = Modifier
-                                .heightIn(min = 20.dp)
-                                .padding(horizontal = 50.dp)
-                                .fillMaxWidth(),
-                            colors = androidx.compose.material3.ButtonDefaults.filledTonalButtonColors(
-                                containerColor = Primary60, // Material3.colorScheme.primary,
-                                contentColor = Material3.colorScheme.onPrimary,
-                                disabledContainerColor = Material3.colorScheme.onSurface.copy(alpha = 0.12f)
-                            )
-                        ) {
-                            androidx.compose.material3.Text(
-                                text = "Go to next screen",
-                                color = White,
-                                style = Material3.typography.labelLarge,
-                                modifier = Modifier
-                                    .padding(vertical = 5.dp)
-                            )
-                        }
+                            enabled = true,
+                        ) 
                     }
                 }
             }

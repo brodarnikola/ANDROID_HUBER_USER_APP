@@ -394,7 +394,6 @@ fun LoginScreen(
 
                 if (emailValidation.isNotBlank() || passwordValidation.isNotBlank()) {
                     errorMessageEmail = emailValidation.ifBlank { "" }
-                    errorMessagePassword = passwordValidation.ifBlank { "" }
                 } else {
                     isButtonEnabled = false
                     viewModel.onEvent(
@@ -411,34 +410,4 @@ fun LoginScreen(
         )
 
     }
-
-//    }
-
-//    when (val res = viewModel.state.value) {
-//        is Resource.Initial -> LoginScreen(viewModel, modifier, nextScreen, navigateUp)
-//        is Resource.Loading -> {
-//            LoginScreen(viewModel, modifier, nextScreen, navigateUp)
-//            DialogOnlyWithSpinnerInCenter()
-//        }
-//
-//        is Resource.Success -> {
-//            nextScreen(SignUpOnboardingSections.NOTIFICATIONS_PERMISSION_LOGIN.route)
-//        }
-//
-//        is Resource.FirebaseFailureException -> {
-//            Timber.d(" LOGIN EXCEPTION: ${res.error}, error: ${res.error}")
-//            if (res.error == "Register") {
-//                navigateUp(SignUpOnboardingSections.CONNECT_I_MESSAGES.route)
-//            } else {
-//                val sematincsTagError = when {
-//                    res.error?.contains("The password is invalid or the") == true -> "InvalidPasswordErrorMsg"
-//                    else -> "UserIDErrorMsg"
-//                }
-//                LoginScreen(viewModel, modifier, nextScreen, navigateUp)
-//                DisplaySnackBar(uiResource = viewModel.state.value, snackBarMessage = res.error, sematincsTagError = sematincsTagError)
-//            }
-//        }
-//
-//        else -> {}
-//    }
 }
