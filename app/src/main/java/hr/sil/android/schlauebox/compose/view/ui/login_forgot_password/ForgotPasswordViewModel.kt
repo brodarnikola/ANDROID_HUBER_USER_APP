@@ -7,6 +7,7 @@
  */
 package com.sunbird.ui.setup.login
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
@@ -19,6 +20,7 @@ import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.remote.model.UserStatus
 import hr.sil.android.schlauebox.core.util.DeviceInfo
+import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.preferences.PreferenceStore
 import hr.sil.android.schlauebox.util.AppUtil
 import hr.sil.android.schlauebox.util.SettingsHelper
@@ -35,10 +37,13 @@ import hr.sil.android.schlauebox.utils.UiEvent.*
 import hr.sil.android.schlauebox.utils.isEmailValid
 import hr.sil.android.schlauebox.view.ui.MainActivity
 import hr.sil.android.schlauebox.view.ui.intro.TCInvitedUserActivity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class ForgotPasswordViewModel  : BaseViewModel<ForgotPasswordUiState, ForgotPasswordEvent>() {
+class ForgotPasswordViewModel : BaseViewModel<ForgotPasswordUiState, ForgotPasswordEvent>() {
+
+    val log = logger()
 
     override fun initialState(): ForgotPasswordUiState {
         return ForgotPasswordUiState()
@@ -48,34 +53,29 @@ class ForgotPasswordViewModel  : BaseViewModel<ForgotPasswordUiState, ForgotPass
         when (event) {
             is ForgotPasswordEvent.OnForgotPasswordRequest -> {
 
-                viewModelScope.launch {
+                viewModelScope.launch(Dispatchers.IO) {
                     _state.update { it.copy(loading = true) }
-                    val userStatus = UserUtil.loginCheckUserStatus(
-                        event.email,
-                        event.password
+                    val response = UserUtil.passwordRecovery(
+                        event.email
                     )
                     _state.update { it.copy(loading = false) }
-                    if (userStatus == UserStatus.ACTIVE) {
-                        //InstallationKeyHandler.key.clear()
-                        if (user?.hasAcceptedTerms == false) {
-                            SettingsHelper.userPasswordWithoutEncryption = event.password
-                            sendUiEvent(LoginScreenUiEvent.NavigateToTCInvitedUserActivityScreen)
-                        } else {
-                            SettingsHelper.userPasswordWithoutEncryption = event.password
-                            SettingsHelper.userRegisterOrLogin = true
-                            sendUiEvent(LoginScreenUiEvent.NavigateToMainActivityScreen)
 
-                        }
-                    } else if (userStatus == UserStatus.INVITED) {
-                        sendUiEvent(LoginScreenUiEvent.NavigateToTCInvitedUserActivityScreen)
+                    log.info("Response code: ${response.code()}, is successfully: ${response.isSuccessful}, body is: ${response.body()}")
+
+                    if (response.isSuccessful) {
+//                        sendUiEvent(ForgotPasswordUiEvent.NavigateToNextScreen)
+                        val startIntent = Intent(event.context, MainActivity::class.java)
+                        event.context.startActivity(startIntent)
+                        event.activity.finish()
                     } else {
                         sendUiEvent(
                             ShowToast(
-                                "Email and password don't match, or your account has been disabled.",
+                                "Email doesn't exist in the system",
                                 Toast.LENGTH_SHORT
                             )
                         )
                     }
+
                 }
 
 //                viewModelScope.launch {
@@ -99,7 +99,6 @@ class ForgotPasswordViewModel  : BaseViewModel<ForgotPasswordUiState, ForgotPass
         return emailError
     }
 
-
 }
 
 data class ForgotPasswordUiState(
@@ -107,10 +106,14 @@ data class ForgotPasswordUiState(
 )
 
 sealed class ForgotPasswordEvent() {
-    data class OnForgotPasswordRequest(val email: String, val password: String, val context: Context) : ForgotPasswordEvent()
+    data class OnForgotPasswordRequest(
+        val email: String,
+        val context: Context,
+        val activity: Activity
+    ) : ForgotPasswordEvent()
 }
 
-sealed class  ForgotPasswordUiEvent(): UiEvent {
+sealed class ForgotPasswordUiEvent() : UiEvent {
     object NavigateToNextScreen : LoginScreenUiEvent()
 
     object NavigateBack : LoginScreenUiEvent()

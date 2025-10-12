@@ -350,8 +350,8 @@ fun LoginScreen(
                             contentDescription = "forgotPasswordButtonLoginScreen"
                         },
                     onClick = {
-                        viewModel.onEvent(LoginScreenEvent.OnForgottenPassword)
-//                        nextScreen(SignUpOnboardingSections.FORGOT_PASSWORD.route)
+                       // viewModel.onEvent(LoginScreenEvent.OnForgottenPassword)
+                        nextScreen(SignUpOnboardingSections.FORGOT_PASSWORD_SCREEN.route)
                     }
                 ) {
                     Text(

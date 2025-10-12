@@ -111,11 +111,11 @@ fun ForgotPasswordScreen(
                     Toast.makeText(context, event.message, event.toastLength).show()
                 }
 
-                is LoginScreenUiEvent.NavigateBack -> {
-                    navigateUp(SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route)
+                is ForgotPasswordUiEvent.NavigateBack -> {
+                    navigateUp(SignUpOnboardingSections.LOGIN_SCREEN.route)
                 }
 
-                is LoginScreenUiEvent.NavigateToForgotPasswordScreen -> {
+                is ForgotPasswordUiEvent.NavigateToNextScreen -> {
                     nextScreen(SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route)
                 }
             }
@@ -283,13 +283,7 @@ fun ForgotPasswordScreen(
                     errorMessageEmail = emailValidation.ifBlank { "" }
                 } else {
                     isButtonEnabled = false
-//                    viewModel.onEvent(
-//                        LoginScreenEvent.OnLogin(
-//                            email = email,
-//                            password = password,
-//                            context = context
-//                        )
-//                    )
+                    viewModel.onEvent(ForgotPasswordEvent.OnForgotPasswordRequest(email, context, activity))
                 }
             },
             enabled = isButtonEnabled,
