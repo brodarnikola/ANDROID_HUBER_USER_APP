@@ -1,17 +1,21 @@
 
 package hr.sil.android.schlauebox.compose.view.ui
 
+import androidx.annotation.StringRes
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
@@ -29,6 +33,8 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.sunbird.ui.setup.login.ForgotPasswordScreen
+import com.sunbird.ui.setup.login.ForgotPasswordUpdateScreen
+import com.sunbird.ui.setup.login.ForgotPasswordUpdateViewModel
 import com.sunbird.ui.setup.login.ForgotPasswordViewModel
 import com.sunbird.ui.setup.login.LoginScreen
 import com.sunbird.ui.setup.login.LoginViewModel
@@ -140,6 +146,21 @@ fun NavGraphBuilder.navGraph(
     }
 
     composable(
+        SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route,
+    ) {
+        ForgotPasswordUpdateScreen(
+            modifier = modifier,
+            viewModel = ForgotPasswordUpdateViewModel(),
+            navigateUp = {
+                navigateUp()
+            },
+            nextScreen = { route ->
+                nextScreen(route)
+            }
+        )
+    }
+
+    composable(
         SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route,
     ) {
         SecondOnboardingScreen(
@@ -216,3 +237,24 @@ fun NavGraphBuilder.navGraph(
 //        )
 //    }
 //}
+
+
+
+enum class SignUpOnboardingSections(
+    @StringRes val title: Int,
+    val icon: ImageVector,
+    val route: String
+) {
+    FIRST_ONBOARDING_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/firstOnboarding"),
+    SECOND_ONBOARDING_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/secondOnboarding"),
+    LOGIN_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/loginScreen"),
+    FORGOT_PASSWORD_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/forgotPasswordScreen"),
+    FORGOT_PASSWORD_UPDATE_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/forgotPasswordUpdateScreen"),
+    FOURTH_ONBOARDING_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/fourthOnboarding"),
+    FIFTH_ONBOARDING_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/fifthOnboarding"),
+//    PRO_ONBOARDING_SCREEN(R.string.btn_continue, Icons.Outlined.Search, "splash/proOnboarding"),
+//    INTRODUCTION(R.string.btn_continue, Icons.Outlined.Search, "splash/introduction"),
+//    LOGIN(R.string.btn_continue, Icons.Outlined.Search, "splash/login"),
+//    FORGOT_PASSWORD(R.string.btn_continue, Icons.Outlined.Search, "splash/forgotPassword"),
+//    FORGOT_PASSWORD_SUCCESS(R.string.btn_continue, Icons.Outlined.Search,
+}

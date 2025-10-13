@@ -33,5 +33,5 @@ interface UiEvent {
 //    data class Error(val message: String): UiEvent //
     data class ShowToast(val message: String, val toastLength: Int = Toast.LENGTH_SHORT): UiEvent
 //    data class ShowDialog(val message: String): EventForUI
-//    data class Navigate(val route: String): UiEvent
+    data class Navigate(val route: String): UiEvent
 }

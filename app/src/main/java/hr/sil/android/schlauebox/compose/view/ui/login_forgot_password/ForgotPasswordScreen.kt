@@ -58,6 +58,7 @@ import hr.sil.android.schlauebox.compose.view.ui.components.NewDesignButton
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTypography
 import hr.sil.android.schlauebox.compose.view.ui.theme.DarkModeTransparent
 import hr.sil.android.schlauebox.compose.view.ui.theme.White
+import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.utils.UiEvent
 import androidx.compose.material3.MaterialTheme as Material3
 
@@ -104,19 +105,29 @@ fun ForgotPasswordScreen(
     val context = LocalContext.current
 
     LaunchedEffect(key1 = Unit) {
+        val log = logger()
         viewModel.uiEvents.collect { event ->
             when (event) {
+
                 is UiEvent.ShowToast -> {
+                    log.info("Response code 55")
                     isButtonEnabled = true
                     Toast.makeText(context, event.message, event.toastLength).show()
                 }
 
+                is UiEvent.Navigate -> {
+                    log.info("Response code 44")
+                    nextScreen(event.route)
+                }
+
                 is ForgotPasswordUiEvent.NavigateBack -> {
+                    log.info("Response code 77")
                     navigateUp(SignUpOnboardingSections.LOGIN_SCREEN.route)
                 }
 
                 is ForgotPasswordUiEvent.NavigateToNextScreen -> {
-                    nextScreen(SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route)
+                    log.info("Response code 33")
+                    nextScreen(SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route)
                 }
             }
         }

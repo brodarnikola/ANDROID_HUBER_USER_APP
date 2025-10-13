@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.lifecycle.viewModelScope
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.App
+import hr.sil.android.schlauebox.compose.view.ui.SignUpOnboardingSections
 //import hr.sil.android.schlauebox.cache.DataCache
 //import hr.sil.android.schlauebox.cache.status.InstallationKeyHandler
 import hr.sil.android.schlauebox.core.remote.WSUser
@@ -41,7 +42,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class ForgotPasswordViewModel : BaseViewModel<ForgotPasswordUiState, ForgotPasswordEvent>() {
+class ForgotPasswordViewModel()  : BaseViewModel<ForgotPasswordUiState, ForgotPasswordEvent>() {
 
     val log = logger()
 
@@ -53,7 +54,7 @@ class ForgotPasswordViewModel : BaseViewModel<ForgotPasswordUiState, ForgotPassw
         when (event) {
             is ForgotPasswordEvent.OnForgotPasswordRequest -> {
 
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch {
                     _state.update { it.copy(loading = true) }
                     val response = UserUtil.passwordRecovery(
                         event.email
@@ -63,10 +64,12 @@ class ForgotPasswordViewModel : BaseViewModel<ForgotPasswordUiState, ForgotPassw
                     log.info("Response code: ${response.code()}, is successfully: ${response.isSuccessful}, body is: ${response.body()}")
 
                     if (response.isSuccessful) {
-//                        sendUiEvent(ForgotPasswordUiEvent.NavigateToNextScreen)
-                        val startIntent = Intent(event.context, MainActivity::class.java)
-                        event.context.startActivity(startIntent)
-                        event.activity.finish()
+                        log.info("Response code 22: ${response.code()}, is successfully: ${response.isSuccessful}, body is: ${response.body()}")
+                        //sendUiEvent(ForgotPasswordUiEvent.NavigateToNextScreen)
+                        sendUiEvent(Navigate( SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route))
+//                        val startIntent = Intent(event.context, MainActivity::class.java)
+//                        event.context.startActivity(startIntent)
+//                        event.activity.finish()
                     } else {
                         sendUiEvent(
                             ShowToast(
@@ -114,7 +117,7 @@ sealed class ForgotPasswordEvent() {
 }
 
 sealed class ForgotPasswordUiEvent() : UiEvent {
-    object NavigateToNextScreen : LoginScreenUiEvent()
+    object NavigateToNextScreen : ForgotPasswordUiEvent()
 
-    object NavigateBack : LoginScreenUiEvent()
+    object NavigateBack : ForgotPasswordUiEvent()
 }

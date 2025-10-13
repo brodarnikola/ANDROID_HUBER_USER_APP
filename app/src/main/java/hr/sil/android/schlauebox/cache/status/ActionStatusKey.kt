@@ -18,7 +18,7 @@ class ActionStatusKey {
             GlobalScope.launch(Dispatchers.Default) {
                 delay(SCHEDULE_PERIOD - delayReduction)
                 try {
-                    ActionStatusHandler.actionStatusDb.del(instanceKey)
+                    //ActionStatusHandler.actionStatusDb.del(instanceKey)
                 } catch (ex: Exception) {
 
                 }

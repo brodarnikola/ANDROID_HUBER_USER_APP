@@ -40,7 +40,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.*
 
-class LoginViewModel : BaseViewModel<LoginScreenUiState, LoginScreenEvent>() {
+class LoginViewModel() : BaseViewModel<LoginScreenUiState, LoginScreenEvent>() {
 
     val log = logger()
 
@@ -70,10 +70,10 @@ class LoginViewModel : BaseViewModel<LoginScreenUiState, LoginScreenEvent>() {
                             log.info("event.password is: $event.password")
                             SettingsHelper.userPasswordWithoutEncryption = event.password
                             SettingsHelper.userRegisterOrLogin = true
-                            val startIntent = Intent(event.context, MainActivity::class.java)
-                            event.context.startActivity(startIntent)
-                            event.activity.finish()
-                            //sendUiEvent(LoginScreenUiEvent.NavigateToMainActivityScreen)
+//                            val startIntent = Intent(event.context, MainActivity::class.java)
+//                            event.context.startActivity(startIntent)
+//                            event.activity.finish()
+                            sendUiEvent(LoginScreenUiEvent.NavigateToMainActivityScreen)
                         }
                     } else if (userStatus == UserStatus.INVITED) {
                         sendUiEvent(LoginScreenUiEvent.NavigateToTCInvitedUserActivityScreen)

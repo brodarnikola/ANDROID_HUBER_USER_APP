@@ -84,20 +84,3 @@ fun NavGraphBuilder.addSignUpOnboardingGraph(
 
 }
 
-enum class SignUpOnboardingSections(
-    @StringRes val title: Int,
-    val icon: ImageVector,
-    val route: String
-) {
-    FIRST_ONBOARDING_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/firstOnboarding"),
-    SECOND_ONBOARDING_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/secondOnboarding"),
-    LOGIN_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/loginScreen"),
-    FORGOT_PASSWORD_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/forgotPasswordScreen"),
-    FOURTH_ONBOARDING_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/fourthOnboarding"),
-    FIFTH_ONBOARDING_SCREEN(R.string.login_title, Icons.Outlined.Search, "splash/fifthOnboarding"),
-//    PRO_ONBOARDING_SCREEN(R.string.btn_continue, Icons.Outlined.Search, "splash/proOnboarding"),
-//    INTRODUCTION(R.string.btn_continue, Icons.Outlined.Search, "splash/introduction"),
-//    LOGIN(R.string.btn_continue, Icons.Outlined.Search, "splash/login"),
-//    FORGOT_PASSWORD(R.string.btn_continue, Icons.Outlined.Search, "splash/forgotPassword"),
-//    FORGOT_PASSWORD_SUCCESS(R.string.btn_continue, Icons.Outlined.Search,
-}

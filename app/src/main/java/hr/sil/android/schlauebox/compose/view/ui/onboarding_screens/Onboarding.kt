@@ -189,7 +189,7 @@ fun HorizontalPager(
                                 nextScreen(SignUpOnboardingSections.LOGIN_SCREEN.route)
                             },
                             enabled = true,
-                        ) 
+                        )
                     }
                 }
             }
