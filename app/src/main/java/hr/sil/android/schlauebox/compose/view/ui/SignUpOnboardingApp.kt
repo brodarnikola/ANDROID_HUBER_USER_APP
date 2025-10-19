@@ -3,35 +3,27 @@ package hr.sil.android.schlauebox.compose.view.ui
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
-import androidx.compose.ui.text.style.TextAlign
-import androidx.lifecycle.Lifecycle
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import androidx.navigation.navigation
-import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.sunbird.ui.setup.login.ForgotPasswordScreen
 import com.sunbird.ui.setup.login.ForgotPasswordUpdateScreen
 import com.sunbird.ui.setup.login.ForgotPasswordUpdateViewModel
@@ -40,9 +32,7 @@ import com.sunbird.ui.setup.login.LoginScreen
 import com.sunbird.ui.setup.login.LoginViewModel
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.components.HuberScaffold
-import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.FirstOnboardingScreen
 import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.HorizontalPager
-import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.SecondOnboardingScreen
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTheme
 import hr.sil.android.schlauebox.util.SettingsHelper
 
@@ -73,35 +63,96 @@ fun SignUpOnboardingApp(
                 else {
                     SignUpOnboardingSections.LOGIN_SCREEN.route
                 }
-                NavHost(
-                    navController = appState.navController,
-                    startDestination = routeFirstScreen,
-                    modifier = Modifier.padding(innerPaddingModifier)
-                ) {
-                    navGraph(
-                        navBackStackEntry = navBackStackEntry,
-                        modifier = modifier,
-                        nextScreen = appState::navigateToRoute,
-                        goToFirstOnboardingScreen =  { route ->
-                            //appState.navigateToAnimatedCreditCard(route = route)
-                        },
-                        goToSecondOnboardingScreen =  { route ->
-                            //appState.navigateToMovieDetails(route = route, movieId = movieId)
-                        },
-                        navigateUp = {
-                            appState.upPress()
-                        }
-                    )
-                }
+                NavigationStack(routeFirstScreen, modifier)
+//                NavHost(
+//                    navController = appState.navController,
+//                    startDestination = routeFirstScreen,
+//                    modifier = Modifier.padding(innerPaddingModifier)
+//                ) {
+//                    navGraph(
+//                        navBackStackEntry = navBackStackEntry,
+//                        modifier = modifier,
+//                        nextScreen = appState::navigateToRoute,
+//                        goToFirstOnboardingScreen =  { route ->
+//                            //appState.navigateToAnimatedCreditCard(route = route)
+//                        },
+//                        goToSecondOnboardingScreen =  { route ->
+//                            //appState.navigateToMovieDetails(route = route, movieId = movieId)
+//                        },
+//                        navigateUp = {
+//                            appState.upPress()
+//                        }
+//                    )
+//                }
             }
         }
+    }
+}
+
+@Composable
+fun NavigationStack(routeFirstScreen: String, modifier: Modifier) {
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = routeFirstScreen) {
+        composable(
+            SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route,
+        ) {
+            HorizontalPager(
+                modifier = modifier,
+                nextScreen = { route ->
+                    if (route != navController.currentDestination?.route) {
+                        navController.navigate(route)
+                            //launchSingleTop = true
+                            //restoreState = true
+
+                            // Pop up backstack to the first destination and save state. This makes going back
+                            // to the start destination when pressing back in any other bottom tab.
+                            // popUpTo(findStartDestination(navController.graph).id) { saveState = true }
+
+                    }
+                    //nextScreen(route, navBackStackEntry)
+                }
+            )
+        }
+        composable(
+            SignUpOnboardingSections.LOGIN_SCREEN.route,
+        ) {
+            LoginScreen(
+                modifier = modifier,
+                viewModel = hiltViewModel(),
+                navigateUp = {
+                    //navigateUp()
+                },
+                nextScreen = { route ->
+                    if (route != navController.currentDestination?.route) {
+                        navController.navigate(route)
+                    }
+                    //nextScreen(route, navBackStackEntry)
+                }
+            )
+        }
+        composable(
+            SignUpOnboardingSections.FORGOT_PASSWORD_SCREEN.route,
+        ) {
+            ForgotPasswordScreen(
+                modifier = modifier,
+                viewModel = hiltViewModel(),
+                navigateUp = {
+                    //navigateUp()
+                },
+                nextScreen = { route ->
+                    //nextScreen(route, navBackStackEntry )
+                }
+            )
+        }
+
     }
 }
 
 fun NavGraphBuilder.navGraph(
     navBackStackEntry: State<NavBackStackEntry?>,
     modifier: Modifier,
-    nextScreen: (route: String) -> Unit,
+    nextScreen: (route: String, navBackStackEntry: State<NavBackStackEntry?>) -> Unit,
     goToFirstOnboardingScreen: (route: String ) -> Unit,
     goToSecondOnboardingScreen: (route: String) -> Unit,
     navigateUp:() -> Unit
@@ -111,7 +162,9 @@ fun NavGraphBuilder.navGraph(
     ) {
         HorizontalPager(
             modifier = modifier,
-            nextScreen = nextScreen
+            nextScreen = { route ->
+                nextScreen(route, navBackStackEntry)
+            }
         )
     }
 
@@ -125,7 +178,7 @@ fun NavGraphBuilder.navGraph(
                  navigateUp()
              },
              nextScreen = { route ->
-                nextScreen(route)
+                nextScreen(route, navBackStackEntry)
              }
         )
     }
@@ -140,7 +193,7 @@ fun NavGraphBuilder.navGraph(
                 navigateUp()
             },
             nextScreen = { route ->
-                nextScreen(route)
+                nextScreen(route, navBackStackEntry )
             }
         )
     }
@@ -155,44 +208,44 @@ fun NavGraphBuilder.navGraph(
                 navigateUp()
             },
             nextScreen = { route ->
-                nextScreen(route)
+                nextScreen(route, navBackStackEntry )
             }
         )
     }
 
-    composable(
-        SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route,
-    ) {
-        SecondOnboardingScreen(
-            titleText = stringResource(R.string.intro_key_sharing_slide_title),
-            descriptionText = stringResource(R.string.intro_key_sharing_slide_content),
-            buttonText = stringResource(id = R.string.app_generic_next),
-            textAlign = TextAlign.Start,
-            pageNumber = "3",
-            firstImage = R.drawable.img_onboarding_key,
-            secondeImage = R.drawable.schlauebox_logo_invert,
-            modifier = modifier,
-            nextScreen = nextScreen,
-            nextScreenRoute = SignUpOnboardingSections.FOURTH_ONBOARDING_SCREEN.route
-        )
-    }
-
-    composable(
-        SignUpOnboardingSections.FOURTH_ONBOARDING_SCREEN.route,
-    ) {
-        SecondOnboardingScreen(
-            titleText = stringResource(R.string.intro_pickup_slide_title),
-            descriptionText = stringResource(R.string.intro_pickup_slide_content),
-            buttonText = stringResource(id = R.string.app_generic_sign_in),
-            textAlign = TextAlign.Start,
-            pageNumber = "4",
-            firstImage = R.drawable.img_onboarding_start,
-            secondeImage = R.drawable.schlauebox_logo_invert,
-            modifier = modifier,
-            nextScreen = nextScreen,
-            nextScreenRoute = SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route
-        )
-    }
+//    composable(
+//        SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route,
+//    ) {
+//        SecondOnboardingScreen(
+//            titleText = stringResource(R.string.intro_key_sharing_slide_title),
+//            descriptionText = stringResource(R.string.intro_key_sharing_slide_content),
+//            buttonText = stringResource(id = R.string.app_generic_next),
+//            textAlign = TextAlign.Start,
+//            pageNumber = "3",
+//            firstImage = R.drawable.img_onboarding_key,
+//            secondeImage = R.drawable.schlauebox_logo_invert,
+//            modifier = modifier,
+//            nextScreen = nextScreen,
+//            nextScreenRoute = SignUpOnboardingSections.FOURTH_ONBOARDING_SCREEN.route
+//        )
+//    }
+//
+//    composable(
+//        SignUpOnboardingSections.FOURTH_ONBOARDING_SCREEN.route,
+//    ) {
+//        SecondOnboardingScreen(
+//            titleText = stringResource(R.string.intro_pickup_slide_title),
+//            descriptionText = stringResource(R.string.intro_pickup_slide_content),
+//            buttonText = stringResource(id = R.string.app_generic_sign_in),
+//            textAlign = TextAlign.Start,
+//            pageNumber = "4",
+//            firstImage = R.drawable.img_onboarding_start,
+//            secondeImage = R.drawable.schlauebox_logo_invert,
+//            modifier = modifier,
+//            nextScreen = nextScreen,
+//            nextScreenRoute = SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route
+//        )
+//    }
 
 //    composable(SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route) {
 //        MoviesScreen(

@@ -33,6 +33,7 @@ import hr.sil.android.schlauebox.util.backend.UserUtil.userMemberships
 import hr.sil.android.schlauebox.utils.BaseViewModel
 import hr.sil.android.schlauebox.utils.NetworkResult
 import hr.sil.android.schlauebox.utils.UiEvent
+import hr.sil.android.schlauebox.utils.UiEvent.*
 import hr.sil.android.schlauebox.utils.isEmailValid
 import hr.sil.android.schlauebox.view.ui.MainActivity
 import hr.sil.android.schlauebox.view.ui.intro.TCInvitedUserActivity
@@ -40,12 +41,16 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.*
 
-class LoginViewModel() : BaseViewModel<LoginScreenUiState, LoginScreenEvent>() {
+class LoginViewModel : BaseViewModel<LoginScreenUiState, LoginScreenEvent>() {
 
     val log = logger()
 
     override fun initialState(): LoginScreenUiState {
         return LoginScreenUiState()
+    }
+
+    init {
+        log.info("collecting event: start new viewmodel")
     }
 
     override fun onEvent(event: LoginScreenEvent) {
@@ -67,7 +72,7 @@ class LoginViewModel() : BaseViewModel<LoginScreenUiState, LoginScreenEvent>() {
                             SettingsHelper.userPasswordWithoutEncryption = event.password
                             sendUiEvent(LoginScreenUiEvent.NavigateToTCInvitedUserActivityScreen)
                         } else {
-                            log.info("event.password is: $event.password")
+                            log.info("event.password is: ${event.password}")
                             SettingsHelper.userPasswordWithoutEncryption = event.password
                             SettingsHelper.userRegisterOrLogin = true
 //                            val startIntent = Intent(event.context, MainActivity::class.java)
@@ -79,7 +84,7 @@ class LoginViewModel() : BaseViewModel<LoginScreenUiState, LoginScreenEvent>() {
                         sendUiEvent(LoginScreenUiEvent.NavigateToTCInvitedUserActivityScreen)
                     } else {
                         sendUiEvent(
-                            UiEvent.ShowToast(
+                            ShowToast(
                                 "Email and password don't match, or your account has been disabled.",
                                 Toast.LENGTH_SHORT
                             )
@@ -126,12 +131,12 @@ data class LoginScreenUiState(
     val loading: Boolean = false
 )
 
-sealed class LoginScreenEvent() {
-    data class OnLogin(val email: String, val password: String, val context: Context, val activity: Activity) : LoginScreenEvent()
-    object OnForgottenPassword : LoginScreenEvent()
+sealed interface LoginScreenEvent {
+    data class OnLogin(val email: String, val password: String, val context: Context, val activity: Activity) : LoginScreenEvent
+    object OnForgottenPassword : LoginScreenEvent
 }
 
-sealed class LoginScreenUiEvent(): UiEvent {
+sealed class LoginScreenUiEvent: UiEvent {
     object NavigateToNextScreen : LoginScreenUiEvent()
     object NavigateToTCInvitedUserActivityScreen : LoginScreenUiEvent()
 

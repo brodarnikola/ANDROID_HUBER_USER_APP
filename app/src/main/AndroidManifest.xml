@@ -34,6 +34,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:replace="android:allowBackup">
+
+        <activity
+            android:name=".compose.view.ui.SignUpOnboardingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".view.ui.MainActivity"
             android:launchMode="singleTop"
@@ -96,17 +108,6 @@
             android:theme="@style/IntroTheme" />
         <!--<activity
             android:name=".view.ui.SplashActivity"-->
-        <activity
-            android:name=".compose.view.ui.SignUpOnboardingActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".view.ui.intro.PasswordUpdateActivity"
             android:screenOrientation="portrait"

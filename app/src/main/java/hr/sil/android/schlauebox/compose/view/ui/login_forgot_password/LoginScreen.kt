@@ -59,6 +59,7 @@ import hr.sil.android.schlauebox.compose.view.ui.components.NewDesignButton
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTypography
 import hr.sil.android.schlauebox.compose.view.ui.theme.Black
 import hr.sil.android.schlauebox.compose.view.ui.theme.DarkModeTransparent
+import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.utils.UiEvent
 import hr.sil.android.schlauebox.view.ui.MainActivity
 import hr.sil.android.schlauebox.view.ui.intro.TCInvitedUserActivity
@@ -122,7 +123,11 @@ fun LoginScreen(
     val context = LocalContext.current
 
     LaunchedEffect(key1 = Unit) {
+        val log = logger()
+        log.info("collecting events: start ${viewModel.uiEvents}")
+        log.info("collecting events: viewModel ${viewModel}")
         viewModel.uiEvents.collect { event ->
+            log.info("collecting event: ${event}")
             when (event) {
 
                 is LoginScreenUiEvent.NavigateToTCInvitedUserActivityScreen -> {

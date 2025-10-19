@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
@@ -14,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 //import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
+import dagger.hilt.android.AndroidEntryPoint
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTheme
 import hr.sil.android.schlauebox.core.remote.WSUser
@@ -32,7 +34,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class SignUpOnboardingActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class SignUpOnboardingActivity : ComponentActivity() {
 
     private val log = logger()
     val SPLASH_START = "SPLASH_START"

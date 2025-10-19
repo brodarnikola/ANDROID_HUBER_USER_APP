@@ -13,6 +13,7 @@ import android.content.Intent
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.compose.view.ui.SignUpOnboardingSections
@@ -41,8 +42,10 @@ import hr.sil.android.schlauebox.view.ui.intro.TCInvitedUserActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ForgotPasswordViewModel()  : BaseViewModel<ForgotPasswordUiState, ForgotPasswordEvent>() {
+@HiltViewModel
+class ForgotPasswordViewModel @Inject constructor()  : BaseViewModel<ForgotPasswordUiState, ForgotPasswordEvent>() {
 
     val log = logger()
 
@@ -65,8 +68,8 @@ class ForgotPasswordViewModel()  : BaseViewModel<ForgotPasswordUiState, ForgotPa
 
                     if (response.isSuccessful) {
                         log.info("Response code 22: ${response.code()}, is successfully: ${response.isSuccessful}, body is: ${response.body()}")
-                        //sendUiEvent(ForgotPasswordUiEvent.NavigateToNextScreen)
-                        sendUiEvent(Navigate( SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route))
+                        sendUiEvent(ForgotPasswordUiEvent.NavigateToNextScreen(SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route))
+                       sendUiEvent(Navigate( SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route))
 //                        val startIntent = Intent(event.context, MainActivity::class.java)
 //                        event.context.startActivity(startIntent)
 //                        event.activity.finish()
@@ -108,7 +111,7 @@ data class ForgotPasswordUiState(
     val loading: Boolean = false
 )
 
-sealed class ForgotPasswordEvent() {
+sealed class ForgotPasswordEvent {
     data class OnForgotPasswordRequest(
         val email: String,
         val context: Context,
@@ -116,8 +119,8 @@ sealed class ForgotPasswordEvent() {
     ) : ForgotPasswordEvent()
 }
 
-sealed class ForgotPasswordUiEvent() : UiEvent {
-    object NavigateToNextScreen : ForgotPasswordUiEvent()
+sealed class ForgotPasswordUiEvent : UiEvent {
+    data class NavigateToNextScreen(val route: String) : ForgotPasswordUiEvent()
 
     object NavigateBack : ForgotPasswordUiEvent()
 }

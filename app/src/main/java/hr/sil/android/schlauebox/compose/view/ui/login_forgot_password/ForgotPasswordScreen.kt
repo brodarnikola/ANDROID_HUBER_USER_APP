@@ -7,6 +7,7 @@
  */
 package com.sunbird.ui.setup.login
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -62,6 +63,8 @@ import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.utils.UiEvent
 import androidx.compose.material3.MaterialTheme as Material3
 
+
+@SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ForgotPasswordScreen(
@@ -106,7 +109,9 @@ fun ForgotPasswordScreen(
 
     LaunchedEffect(key1 = Unit) {
         val log = logger()
+        log.info("collecting events: start")
         viewModel.uiEvents.collect { event ->
+            log.info("collecting event: ${event}")
             when (event) {
 
                 is UiEvent.ShowToast -> {
