@@ -70,7 +70,7 @@ import androidx.compose.material3.MaterialTheme as Material3
 fun ForgotPasswordScreen(
     modifier: Modifier = Modifier,
     viewModel: ForgotPasswordViewModel,
-    nextScreen: (route: String) -> Unit = {},
+    nextScreen: (email: String) -> Unit = {},
     navigateUp: (route: String) -> Unit = {}
 ) {
     val state = viewModel.state.collectAsStateWithLifecycle().value
@@ -120,11 +120,6 @@ fun ForgotPasswordScreen(
                     Toast.makeText(context, event.message, event.toastLength).show()
                 }
 
-                is UiEvent.Navigate -> {
-                    log.info("Response code 44")
-                    nextScreen(event.route)
-                }
-
                 is ForgotPasswordUiEvent.NavigateBack -> {
                     log.info("Response code 77")
                     navigateUp(SignUpOnboardingSections.LOGIN_SCREEN.route)
@@ -132,7 +127,7 @@ fun ForgotPasswordScreen(
 
                 is ForgotPasswordUiEvent.NavigateToNextScreen -> {
                     log.info("Response code 33")
-                    nextScreen(SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route)
+                    nextScreen(email)
                 }
             }
         }

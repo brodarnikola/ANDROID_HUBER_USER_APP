@@ -77,14 +77,14 @@ class SignUpAppState(
     fun navigateToRoute(route: String, navBackStackEntry: State<NavBackStackEntry?>) {
         //if(navBackStackEntry.value?.lifecycleIsResumed() == true)
             if (route != currentRoute) {
-                navController.navigate(route) {
-                    launchSingleTop = true
+                navController.navigate(route)
+                    //launchSingleTop = true
                     //restoreState = true
 
                     // Pop up backstack to the first destination and save state. This makes going back
                     // to the start destination when pressing back in any other bottom tab.
                     // popUpTo(findStartDestination(navController.graph).id) { saveState = true }
-                }
+
             }
     }
 

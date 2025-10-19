@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.MaterialTheme
@@ -140,13 +141,42 @@ fun NavigationStack(routeFirstScreen: String, modifier: Modifier) {
                 navigateUp = {
                     //navigateUp()
                 },
-                nextScreen = { route ->
+                nextScreen = { email ->
+                    if (route != navController.currentDestination?.route) {
+                        navController.navigate(SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route + "/$email")
+                    }
+
                     //nextScreen(route, navBackStackEntry )
                 }
             )
         }
 
+        composable(
+            "${SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route}/{${NavArguments.EMAIL}}",
+            arguments = listOf(navArgument(NavArguments.EMAIL) {
+                type = NavType.StringType
+            })
+            //SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route,
+        ) {
+            ForgotPasswordUpdateScreen(
+                modifier = modifier,
+                viewModel = hiltViewModel(),
+                navigateUp = {
+                    //navigateUp()
+                },
+                nextScreen = { route ->
+                    if (route != navController.currentDestination?.route) {
+                        navController.navigate(route)
+                    }
+                }
+            )
+        }
+
     }
+}
+
+object NavArguments {
+    const val EMAIL = "emailAddress"
 }
 
 fun NavGraphBuilder.navGraph(
@@ -198,20 +228,20 @@ fun NavGraphBuilder.navGraph(
         )
     }
 
-    composable(
-        SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route,
-    ) {
-        ForgotPasswordUpdateScreen(
-            modifier = modifier,
-            viewModel = ForgotPasswordUpdateViewModel(),
-            navigateUp = {
-                navigateUp()
-            },
-            nextScreen = { route ->
-                nextScreen(route, navBackStackEntry )
-            }
-        )
-    }
+//    composable(
+//        SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route,
+//    ) {
+//        ForgotPasswordUpdateScreen(
+//            modifier = modifier,
+//            viewModel = ForgotPasswordUpdateViewModel(),
+//            navigateUp = {
+//                navigateUp()
+//            },
+//            nextScreen = { route ->
+//                nextScreen(route, navBackStackEntry )
+//            }
+//        )
+//    }
 
 //    composable(
 //        SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route,

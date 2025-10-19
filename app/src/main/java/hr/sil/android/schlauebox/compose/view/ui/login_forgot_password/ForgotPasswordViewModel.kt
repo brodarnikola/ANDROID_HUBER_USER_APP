@@ -69,7 +69,6 @@ class ForgotPasswordViewModel @Inject constructor()  : BaseViewModel<ForgotPassw
                     if (response.isSuccessful) {
                         log.info("Response code 22: ${response.code()}, is successfully: ${response.isSuccessful}, body is: ${response.body()}")
                         sendUiEvent(ForgotPasswordUiEvent.NavigateToNextScreen(SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route))
-                       sendUiEvent(Navigate( SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route))
 //                        val startIntent = Intent(event.context, MainActivity::class.java)
 //                        event.context.startActivity(startIntent)
 //                        event.activity.finish()

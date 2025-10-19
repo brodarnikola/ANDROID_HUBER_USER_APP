@@ -13,7 +13,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.util.backend.UserUtil
@@ -25,13 +27,21 @@ import hr.sil.android.schlauebox.view.ui.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ForgotPasswordUpdateViewModel()  : BaseViewModel<ForgotPasswordUpdateUiState, ForgotPasswordUpdateEvent>() {
+@HiltViewModel
+class ForgotPasswordUpdateViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle)  : BaseViewModel<ForgotPasswordUpdateUiState, ForgotPasswordUpdateEvent>() {
 
     val log = logger()
+    private var email: String = ""
 
     override fun initialState(): ForgotPasswordUpdateUiState {
         return ForgotPasswordUpdateUiState()
+    }
+
+    init {
+        email = savedStateHandle.get<String>("emailAddress") ?: ""
     }
 
     override fun onEvent(event: ForgotPasswordUpdateEvent) {
@@ -40,22 +50,21 @@ class ForgotPasswordUpdateViewModel()  : BaseViewModel<ForgotPasswordUpdateUiSta
 
                 viewModelScope.launch(Dispatchers.IO) {
                     _state.update { it.copy(loading = true) }
-                    val response = UserUtil.passwordRecovery(
-                        event.email
+                    val response = UserUtil.passwordReset(
+                        email,
+                        event.pin,
+                        event.password
                     )
                     _state.update { it.copy(loading = false) }
 
-                    log.info("Response code: ${response.code()}, is successfully: ${response.isSuccessful}, body is: ${response.body()}")
+                    log.info("Response: ${response},   ")
 
-                    if (response.isSuccessful) {
-//                        sendUiEvent(ForgotPasswordUiEvent.NavigateToNextScreen)
-                        val startIntent = Intent(event.context, MainActivity::class.java)
-                        event.context.startActivity(startIntent)
-                        event.activity.finish()
+                    if (response) {
+                        sendUiEvent(ForgotPasswordUpdateUiEvent.NavigateToNextScreen)
                     } else {
                         sendUiEvent(
                             ShowToast(
-                                "Email doesn't exist in the system",
+                                "Please check your data",
                                 Toast.LENGTH_SHORT
                             )
                         )
@@ -66,15 +75,35 @@ class ForgotPasswordUpdateViewModel()  : BaseViewModel<ForgotPasswordUpdateUiSta
         }
     }
 
-    fun getEmailError(email: String, context: Context): String {
-        var emailError = ""
-        if (email.isBlank()) {
-            emailError = context.getString(R.string.forgot_password_error)
-        } else if (!email.isEmailValid()) {
-            emailError = context.getString(R.string.pickup_parcel_email_error)
+    fun getPasswordError(password: String, context: Context): String {
+        var passwordError = ""
+        if (password.isBlank()) {
+            passwordError = "Password can not be empty"
+        } else if ( password.length < 6) {
+            passwordError = context.getString(R.string.edit_user_validation_password_min_6_characters)
         }
 
-        return emailError
+        return passwordError
+    }
+
+    fun getRepeatPasswordError(password: String, repeatPassword: String, context: Context): String {
+        var passwordError = ""
+        if (repeatPassword.isBlank()) {
+            passwordError = "Password can not be empty"
+        } else if ( password != repeatPassword) {
+            passwordError = "Password needs to be the same"
+        }
+
+        return passwordError
+    }
+
+    fun getPinError(pin: String, context: Context): String {
+        var pinError = ""
+        if (pin.isBlank()) {
+            pinError = "Pin can not be empty"
+        }
+
+        return pinError
     }
 
 }
@@ -85,7 +114,8 @@ data class ForgotPasswordUpdateUiState(
 
 sealed class ForgotPasswordUpdateEvent() {
     data class OnForgotPasswordUpdateRequest(
-        val email: String,
+        val password: String,
+        val pin: String,
         val context: Context,
         val activity: Activity
     ) : ForgotPasswordUpdateEvent()

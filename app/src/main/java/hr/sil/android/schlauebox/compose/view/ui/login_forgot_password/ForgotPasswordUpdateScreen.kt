@@ -8,6 +8,7 @@
 package com.sunbird.ui.setup.login
 
 import android.app.Activity
+import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -31,20 +32,22 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -77,17 +80,24 @@ fun ForgotPasswordUpdateScreen(
     val imageCheck = painterResource(id = R.drawable.ic_register_email)
     val imageInfo = painterResource(id = R.drawable.ic_register_email)
 
-    var email by remember {
+    var password = rememberSaveable {
         mutableStateOf("")
     }
-    var isButtonEnabled by remember {
+    var repeatPassword = rememberSaveable {
+        mutableStateOf("")
+    }
+    var pin = rememberSaveable {
+        mutableStateOf("")
+    }
+    var isButtonEnabled = rememberSaveable {
         mutableStateOf(true)
     }
-    var errorMessageEmail by remember {
-        mutableStateOf<String?>(null)
-    }
 
-    val emailLabelStyle = remember {
+    val errorMessagePassword = rememberSaveable { mutableStateOf<String?>(null) }
+    val errorMessageRepeatPassword = rememberSaveable { mutableStateOf<String?>(null) }
+    val errorMessagePin = rememberSaveable { mutableStateOf<String?>(null) }
+
+    val passwordLabelStyle = remember {
         mutableStateOf(AppTypography.labelLarge)
     }
 
@@ -97,16 +107,16 @@ fun ForgotPasswordUpdateScreen(
         viewModel.uiEvents.collect { event ->
             when (event) {
                 is UiEvent.ShowToast -> {
-                    isButtonEnabled = true
+                    isButtonEnabled.value = true
                     Toast.makeText(context, event.message, event.toastLength).show()
                 }
 
                 ForgotPasswordUpdateUiEvent.NavigateBack -> {
-                    navigateUp(SignUpOnboardingSections.LOGIN_SCREEN.route)
+                    navigateUp(SignUpOnboardingSections.FORGOT_PASSWORD_SCREEN.route)
                 }
 
                 ForgotPasswordUpdateUiEvent.NavigateToNextScreen -> {
-                    nextScreen(SignUpOnboardingSections.SECOND_ONBOARDING_SCREEN.route)
+                    nextScreen(SignUpOnboardingSections.LOGIN_SCREEN.route)
                 }
             }
         }
@@ -140,7 +150,10 @@ fun ForgotPasswordUpdateScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth().background(colorResource(R.color.colorPrimary)).padding(vertical = 15.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(colorResource(R.color.colorPrimary))
+                        .padding(vertical = 15.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
@@ -153,7 +166,7 @@ fun ForgotPasswordUpdateScreen(
                 }
                 Text(
                     modifier = Modifier.padding(horizontal = 24.dp, vertical = 20.dp),
-                    text = stringResource(R.string.forgot_password_description_title),
+                    text = stringResource(R.string.reset_password_description_title),
                     fontSize = 16.sp,
                     style = AppTypography.bodyLarge,
                     color = colorResource(R.color.colorBlack),
@@ -161,81 +174,47 @@ fun ForgotPasswordUpdateScreen(
                 //endregion
                 Spacer(modifier = Modifier.height(5.dp))
                 //region EmailTextField
-                TextField(
-                    value = email,
-                    placeholder = {
-                        Text(
-                            text = stringResource(R.string.app_generic_email),
-                            color = Material3.colorScheme.onSurfaceVariant,
-                            style = emailLabelStyle.value
-                        )
-                    },
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        textColor = Material3.colorScheme.onSurface,
-                        focusedBorderColor = colorResource(R.color.colorPrimary),
-                        unfocusedBorderColor = Material3.colorScheme.outline,
-                        cursorColor = colorResource(R.color.colorPrimary),
-                        backgroundColor = DarkModeTransparent
-                    ),
-                    onValueChange = {
-                        email = it
-                        val checkErrorMessageEmail = viewModel.getEmailError(it, context)
-                        errorMessageEmail =
-                            if (checkErrorMessageEmail !== "") checkErrorMessageEmail else ""
-                    },
-                    modifier = Modifier
-                        .semantics {
-                            contentDescription = "emailTextFieldLoginScreen"
-                        }
-                        .onFocusChanged {
-                            if (it.isFocused) {
-                                emailLabelStyle.value = AppTypography.bodySmall
-                            } else {
-                                emailLabelStyle.value = AppTypography.bodyLarge
-                            }
-                        }
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    maxLines = 1,
-                    singleLine = true,
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Email,
-                        imeAction = ImeAction.Next
-                    ),
-                    trailingIcon = {
-                        if (errorMessageEmail != null && errorMessageEmail !== "") {
-                            Icon(
-                                painter = imageInfo,
-                                contentDescription = null,
-                                tint = Material3.colorScheme.error,
-                                modifier = Modifier
-                                    .width(25.dp)
-                                    .semantics {
-                                        contentDescription = "loginExclamationMark"
-                                    }
-                            )
-                        } else if (errorMessageEmail != null && email.contains("@")) {
-                            Icon(
-                                painter = imageCheck,
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .width(25.dp)
-                                    .semantics { contentDescription = "loginCheckMark" }
-                            )
-                        }
-                        else {
-                            Icon(
-                                painter = imageInfo,
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .width(25.dp)
-                                    .semantics {
-                                        contentDescription = "loginExclamationMark"
-                                    }
-                            )
-                        }
-                    }
+
+                CreateTextField(
+                    valueState = password,
+                    errorMessageState = errorMessagePassword,
+                    labelText = stringResource(R.string.reset_password_description_title),
+                    imageInfo = imageInfo,
+                    imageCheck = imageCheck,
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Next,
+                    onValidate = { input, ctx -> viewModel.getPasswordError(input, ctx) },
+                    labelStyleState = passwordLabelStyle
                 )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                CreateTextField(
+                    valueState = repeatPassword,
+                    errorMessageState = errorMessageRepeatPassword,
+                    labelText = "Repeat password",
+                    imageInfo = imageInfo,
+                    imageCheck = imageCheck,
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Next,
+                    onValidate = { input, ctx -> viewModel.getRepeatPasswordError(password.value, input, ctx) },
+                    labelStyleState = passwordLabelStyle
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                CreateTextField(
+                    valueState = pin,
+                    errorMessageState = errorMessagePin,
+                    labelText = "Enter pin",
+                    imageInfo = imageInfo,
+                    imageCheck = imageCheck,
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Done,
+                    onValidate = { input, ctx -> viewModel.getPinError(input, ctx) },
+                    labelStyleState = passwordLabelStyle
+                )
+
                 //endregion
                 Spacer(modifier = Modifier.height(40.dp))
 
@@ -267,16 +246,101 @@ fun ForgotPasswordUpdateScreen(
                 },
             title = stringResource(R.string.forgot_password_send),
             onClick = {
-                val emailValidation = viewModel.getEmailError(email, context)
+                val emailValidation = viewModel.getPasswordError(password.value, context)
+                val repeatPassswordError = viewModel.getRepeatPasswordError(password.value, repeatPassword.value, context)
+                val pinError = viewModel.getPinError(pin.value, context)
 
-                if (emailValidation.isNotBlank()  ) {
-                    errorMessageEmail = emailValidation.ifBlank { "" }
-                } else {
-                    isButtonEnabled = false
-                    viewModel.onEvent(ForgotPasswordUpdateEvent.OnForgotPasswordUpdateRequest(email, context, activity))
+
+                if (emailValidation.isBlank() && repeatPassswordError.isBlank() && pinError.isBlank() ) {
+                    isButtonEnabled.value = false
+                    viewModel.onEvent(ForgotPasswordUpdateEvent.OnForgotPasswordUpdateRequest(password.value, pin.value, context, activity))
                 }
             },
-            enabled = isButtonEnabled,
+            enabled = isButtonEnabled.value,
         )
     }
+}
+
+@Composable
+fun CreateTextField(
+    valueState: MutableState<String>,
+    errorMessageState: MutableState<String?>,
+    labelText: String,
+    imageInfo: Painter,
+    imageCheck: Painter,
+    keyboardType: KeyboardType,
+    imeAction: ImeAction,
+    onValidate: (String, Context) -> String,
+    labelStyleState: MutableState<TextStyle>,
+    modifier: Modifier = Modifier
+) {
+    val context = LocalContext.current
+
+    TextField(
+        value = valueState.value,
+        placeholder = {
+            Text(
+                text = labelText,
+                color = Material3.colorScheme.onSurfaceVariant,
+                style = labelStyleState.value
+            )
+        },
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            textColor = Material3.colorScheme.onSurface,
+            focusedBorderColor = colorResource(R.color.colorPrimary),
+            unfocusedBorderColor = Material3.colorScheme.outline,
+            cursorColor = colorResource(R.color.colorPrimary),
+            backgroundColor = DarkModeTransparent
+        ),
+        onValueChange = {
+            valueState.value = it
+            val validationMessage = onValidate(it, context)
+            errorMessageState.value = if (validationMessage.isNotEmpty()) validationMessage else ""
+        },
+        modifier = modifier
+            .semantics { contentDescription = "textField_$labelText" }
+            .onFocusChanged {
+                if (it.isFocused) {
+                    labelStyleState.value = AppTypography.bodySmall
+                } else {
+                    labelStyleState.value = AppTypography.bodyLarge
+                }
+            }
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        maxLines = 1,
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(
+            keyboardType = keyboardType,
+            imeAction = imeAction
+        ),
+        trailingIcon = {
+            when {
+                !errorMessageState.value.isNullOrBlank() -> {
+                    Icon(
+                        painter = imageInfo,
+                        contentDescription = null,
+                        tint = Material3.colorScheme.error,
+                        modifier = Modifier.width(25.dp)
+                    )
+                }
+
+                valueState.value.contains("@") -> {
+                    Icon(
+                        painter = imageCheck,
+                        contentDescription = null,
+                        modifier = Modifier.width(25.dp)
+                    )
+                }
+
+                else -> {
+                    Icon(
+                        painter = imageInfo,
+                        contentDescription = null,
+                        modifier = Modifier.width(25.dp)
+                    )
+                }
+            }
+        }
+    )
 }
