@@ -38,10 +38,10 @@ import hr.sil.android.schlauebox.R
 
 
 private val AppFontFamily = FontFamily(
-    Font(R.font.inter_regular, FontWeight.Normal),
-    Font(R.font.inter_medium, FontWeight.Medium),
-    Font(R.font.inter_semi_bold, FontWeight.SemiBold),
-    Font(R.font.inter_bold, FontWeight.Bold),
+    Font(R.font.montserrat_regular, FontWeight.Normal),
+    Font(R.font.montserrat_medium, FontWeight.Medium),
+    Font(R.font.montserrat_semibold, FontWeight.SemiBold),
+    Font(R.font.montserrat_semibold, FontWeight.Bold),
 )
 
 private val defaultTypography = Typography()

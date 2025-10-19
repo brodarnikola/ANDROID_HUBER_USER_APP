@@ -34,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -41,6 +42,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import hr.sil.android.schlauebox.compose.view.ui.theme.DarkColorScheme
 import hr.sil.android.schlauebox.compose.view.ui.theme.LightColorScheme
+
+import hr.sil.android.schlauebox.R
 
 
 import androidx.compose.material3.MaterialTheme as Material3
@@ -68,9 +71,9 @@ fun NewDesignButton(
                 .heightIn(min = 40.dp)
                 .widthIn(min = 248.dp),
             colors = ButtonDefaults.filledTonalButtonColors(
-                containerColor = Material3.colorScheme.primary,
-                contentColor = if(enabled) Material3.colorScheme.onPrimary else if(!isSystemInDarkTheme()) Material3.colorScheme.primary.copy(alpha = 0.12f) else Material3.colorScheme.primary,
-                disabledContainerColor = Material3.colorScheme.onSurface.copy(alpha = 0.12f)
+                containerColor = colorResource(R.color.colorDarkAccent),
+                contentColor = if(enabled) colorResource(R.color.colorDarkAccent) else colorResource(R.color.pin_managment_40_percent), //Material3.colorScheme.primary,
+                disabledContainerColor = colorResource(R.color.pin_managment_40_percent)
             ),
             enabled = enabled
         ) {

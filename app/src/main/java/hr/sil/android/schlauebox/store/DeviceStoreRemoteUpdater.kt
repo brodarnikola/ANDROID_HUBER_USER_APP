@@ -21,7 +21,8 @@
 
 package hr.sil.android.schlauebox.store
 
-import hr.sil.android.schlauebox.cache.DataCache
+//import hr.sil.android.schlauebox.cache.DataCache
+import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.remote.model.RLockerInfo
 import hr.sil.android.schlauebox.core.remote.model.RLockerKey
 import hr.sil.android.schlauebox.core.remote.model.RMasterUnit
@@ -40,9 +41,16 @@ import java.util.concurrent.atomic.AtomicBoolean
 object DeviceStoreRemoteUpdater {
     private val log = logger()
 
-    private const val UPDATE_PERIOD = 10000L
+    private const val UPDATE_PERIOD = 10_000L // 10 seconds
+    private const val BACKEND_FETCH_PERIOD = 60_000L // 30 seconds
 
     private val running = AtomicBoolean(false)
+    private val inHandleUpdate = AtomicBoolean(false)
+
+    // Keep the last fetch timestamp
+    private var lastBackendFetch = 0L
+    private var cachedActiveKeys: List<RLockerKey> = emptyList()
+    private var cachedMasterUnits: List<RMasterUnit> = emptyList()
 
     fun run() {
         if (running.compareAndSet(false, true)) {
@@ -53,7 +61,6 @@ object DeviceStoreRemoteUpdater {
                     } catch (ex: Exception) {
                         log.error("Periodic remote-update failed...", ex)
                     }
-
                     delay(UPDATE_PERIOD)
                 }
             }
@@ -64,7 +71,6 @@ object DeviceStoreRemoteUpdater {
         handleUpdate()
     }
 
-    private val inHandleUpdate = AtomicBoolean(false)
     private suspend fun handleUpdate() {
         if (inHandleUpdate.compareAndSet(false, true)) {
             if (UserUtil.isUserLoggedIn()) {
@@ -75,26 +81,35 @@ object DeviceStoreRemoteUpdater {
     }
 
     private suspend fun doUpdate() {
-        val allActiveKeys = DataCache.getActiveKeys()
-        val masterUnitsInfo = mapOf<String, RLockerInfo>()
+        val now = System.currentTimeMillis()
 
-        val units = DataCache.getMasterUnits(true)
-        if( units.size == 0 ) {
-            log.info("Master unit size from backend is: ${units.size}")
+        // Fetch from backend only every 30 seconds
+        if (now - lastBackendFetch >= BACKEND_FETCH_PERIOD) {
+            log.info("Fetching master units and keys from backend...")
+            cachedActiveKeys = WSUser.getActiveKeys() ?: emptyList()
+            cachedMasterUnits = WSUser.getMasterUnits() ?: emptyList()
+            lastBackendFetch = now
+        } else {
+            log.debug("Using cached master units and keys (no backend call)")
         }
-        log.info("Master unit size = ${units.size} , ${masterUnitsInfo.values.joinToString { it.mac }}")
+
+        if (cachedMasterUnits.isEmpty()) {
+            log.info("Master unit size from backend is: ${cachedMasterUnits.size}")
+        }
+
+        log.info(
+            "Master unit size = ${cachedMasterUnits.size}, " +
+                    "${cachedMasterUnits.joinToString { it.mac }}"
+        )
 
         MPLDeviceStore.updateFromRemote(
-                units.map { masterUnit ->
-                    MasterUnitWithKeys(
-                            masterUnit = masterUnit,
-                            activeKeys = allActiveKeys.filter { lockerKey ->
-                                lockerKey.lockerMasterId == masterUnit.id
-                            },
-                            availableLockerSizes = listOf()
-                    )
-                }
+            cachedMasterUnits.map { masterUnit ->
+                MasterUnitWithKeys(
+                    masterUnit = masterUnit,
+                    activeKeys = cachedActiveKeys.filter { it.lockerMasterId == masterUnit.id },
+                    availableLockerSizes = emptyList()
+                )
+            }
         )
     }
-
 }

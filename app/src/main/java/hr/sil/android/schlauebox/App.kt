@@ -37,8 +37,8 @@ import hr.sil.android.ble.scanner.exception.BLEScanException
 import hr.sil.android.ble.scanner.scan_multi.BLEGenericDeviceDataFactory
 import hr.sil.android.ble.scanner.scan_multi.model.BLEDeviceType
 import hr.sil.android.rest.core.configuration.ServiceConfig
-import hr.sil.android.schlauebox.cache.DataCache
-import hr.sil.android.schlauebox.cache.status.ActionStatusHandler
+//import hr.sil.android.schlauebox.cache.DataCache
+//import hr.sil.android.schlauebox.cache.status.ActionStatusHandler
 import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.remote.model.RLanguage
 import hr.sil.android.schlauebox.core.remote.model.RPinManagement
@@ -159,19 +159,19 @@ class App : Application(), BLEScannerStateHolder {
         stethoClient = OkHttpClient.Builder().addInterceptor(StethoInterceptor()).build()
 
         log.info("Starting...")
-        ActionStatusHandler.checkClasses(this)
+        //ActionStatusHandler.checkClasses(this)
         isFirstStart = handleFirstStartup()
 
 
         log.info("Checking cache for external cache class modifications...")
-        DataCache.checkClasses(this)
+        //DataCache.checkClasses(this)
 
         log.info("Initializing web services...")
         WSConfig.initialize(this.applicationContext)
 
 
 
-        ActionStatusHandler.run()
+        //ActionStatusHandler.run()
 
         deviceScanner.setAdvertisementFilters(BLEDeviceType.MPL_MASTER.filters() + BLEDeviceType.MPL_SLAVE.filters() + BLEDeviceType.SPL.filters() + BLEDeviceType.SPL_PLUS.filters() + BLEDeviceType.MPL_TABLET.filters())
         deviceScanner.addDeviceEventListener { events ->

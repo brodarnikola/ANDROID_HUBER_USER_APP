@@ -12,7 +12,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.status.ActionStatusHandler
+//import hr.sil.android.schlauebox.cache.status.ActionStatusHandler
 import hr.sil.android.schlauebox.cache.status.ActionStatusKey
 import hr.sil.android.schlauebox.cache.status.ActionStatusType
 import hr.sil.android.schlauebox.core.remote.model.InstalationType
@@ -122,7 +122,7 @@ class SendParcelDeliveryActivity : BaseActivity(R.id.no_ble_layout, R.id.no_inte
                             val action = ActionStatusKey().apply {
                                 keyId = locker.macAddress + ActionStatusType.SPL_OCCUPATION
                             }
-                            ActionStatusHandler.actionStatusDb.put(action)
+                            //ActionStatusHandler.actionStatusDb.put(action)
                         }
                     }
                 } else {

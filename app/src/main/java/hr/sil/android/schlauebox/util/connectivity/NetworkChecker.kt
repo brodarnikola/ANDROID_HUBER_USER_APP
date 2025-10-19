@@ -23,7 +23,7 @@ package hr.sil.android.schlauebox.util.connectivity
 
 import com.esotericsoftware.minlog.Log
 import hr.sil.android.schlauebox.App
-import hr.sil.android.schlauebox.cache.status.ActionStatusHandler.log
+//import hr.sil.android.schlauebox.cache.status.ActionStatusHandler.log
 import hr.sil.android.util.network.NetworkConnectivity
 import kotlinx.coroutines.*
 
@@ -107,7 +107,7 @@ object NetworkChecker {
             val urlConnection = URL("https://clients3.google.com/generate_204").openConnection() as HttpURLConnection
             urlConnection.responseCode == 204 && urlConnection.contentLength == 0
         } catch (exc: Exception) {
-            log.error(exc.message, exc)
+            //log.error(exc.message, exc)
             false
         }
     }

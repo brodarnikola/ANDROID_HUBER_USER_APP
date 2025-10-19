@@ -54,24 +54,25 @@ class MainActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_layout, R
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (!UserUtil.isUserLoggedIn()) {
-//            setContentView(_RelativeLayout(this).apply {
-//                progressBar {
-//                    isIndeterminate = true
-//                }.lparams {
-//                    centerInParent()
+//        if (!UserUtil.isUserLoggedIn()) {
+////            setContentView(_RelativeLayout(this).apply {
+////                progressBar {
+////                    isIndeterminate = true
+////                }.lparams {
+////                    centerInParent()
+////                }
+////            })
+//            GlobalScope.launch(Dispatchers.Main) {
+//                if (UserUtil.login(SettingsHelper.usernameLogin)) {
+//                    continueOnCreate(savedInstanceState)
+//                } else {
+//                    logout()
 //                }
-//            })
-            GlobalScope.launch(Dispatchers.Main) {
-                if (UserUtil.login(SettingsHelper.usernameLogin)) {
-                    continueOnCreate(savedInstanceState)
-                } else {
-                    logout()
-                }
-            }
-        } else {
-            continueOnCreate(savedInstanceState)
-        }
+//            }
+//        } else {
+//            continueOnCreate(savedInstanceState)
+//        }
+        continueOnCreate(savedInstanceState)
 
     }
 

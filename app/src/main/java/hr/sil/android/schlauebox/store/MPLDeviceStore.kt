@@ -26,7 +26,7 @@ import hr.sil.android.ble.scanner.model.device.BLEDevice
 import hr.sil.android.ble.scanner.scan_multi.model.BLEDeviceData
 import hr.sil.android.ble.scanner.scan_multi.properties.advv2.common.MPLDeviceStatus
 import hr.sil.android.schlauebox.App
-import hr.sil.android.schlauebox.cache.DataCache
+//import hr.sil.android.schlauebox.cache.DataCache
 import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.remote.model.RLockerInfo
 import hr.sil.android.schlauebox.core.util.logger

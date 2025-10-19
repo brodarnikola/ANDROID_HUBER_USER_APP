@@ -14,8 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.BuildConfig
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.DataCache
 import hr.sil.android.schlauebox.cache.DatabaseHandler
+//import hr.sil.android.schlauebox.cache.DataCache
+//import hr.sil.android.schlauebox.cache.DatabaseHandler
 import hr.sil.android.schlauebox.core.ble.comm.model.LockerFlagsUtil
 import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.remote.model.*
@@ -145,7 +146,7 @@ class PickupParcelActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_l
 
                 GlobalScope.launch {
 
-                    DataCache.clearCacheAfterPickAtFriend()
+                    //DataCache.clearCacheAfterPickAtFriend()
 
                     MPLDeviceStore.clear()
                     DeviceStoreRemoteUpdater.forceUpdate()

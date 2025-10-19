@@ -10,7 +10,7 @@ import android.view.Window
 import androidx.fragment.app.DialogFragment
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.DataCache
+//import hr.sil.android.schlauebox.cache.DataCache
 import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.databinding.DialogSharePickupKeyBinding
@@ -101,7 +101,7 @@ class SharePickupKeyDialog constructor(val keyId: Int, val masterId: Int, val pi
     }
 
     suspend private fun isUserMemberOfGroup(email: String, masterId: Int): Boolean {
-        val groups = DataCache.getGroupMembers()
+        val groups = WSUser.getGroupMembers() ?: mutableListOf() //DataCache.getGroupMembers()
         val groupMemberships = groups.filter { it.email == email }
         return groupMemberships.isNotEmpty()
     }

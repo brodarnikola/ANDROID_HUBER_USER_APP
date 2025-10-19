@@ -18,7 +18,7 @@ import androidx.core.content.ContextCompat
 //import com.google.android.material.textfield.TextInputLayout
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.DataCache
+//import hr.sil.android.schlauebox.cache.DataCache
 import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.remote.model.RLanguage
 import hr.sil.android.schlauebox.core.util.DeviceInfo
@@ -123,7 +123,7 @@ class InviteUserActivity : BaseActivity(noWifiViewId = R.id.no_internet_layout) 
         super.onResume()
         GlobalScope.launch {
             if (baseContext != null) {
-                val languagesList = DataCache.getLanguages(true)
+                val languagesList = WSUser.getLanguages() ?: listOf() //DataCache.getLanguages(true)
                 languageData = languagesList.find { it.id == UserUtil.userInvitedTempdata?.languageId }
                         ?: RLanguage()
             }

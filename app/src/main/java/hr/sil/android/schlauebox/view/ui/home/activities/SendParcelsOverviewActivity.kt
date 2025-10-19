@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.Button
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.status.ActionStatusHandler
+//import hr.sil.android.schlauebox.cache.status.ActionStatusHandler
 import hr.sil.android.schlauebox.cache.status.ActionStatusType
 import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.remote.model.RMasterUnitType
@@ -219,7 +219,7 @@ class SendParcelsOverviewActivity : BaseActivity(R.id.no_ble_layout, R.id.no_int
             val listOfKeys = WSUser.getActivePaHCreatedKeys()?.filter {
                 it.getMasterBLEMacAddress() == macAddress
             }?.toMutableList() ?: mutableListOf()
-            listOfKeys.filter { ActionStatusHandler.actionStatusDb.get(it.lockerId.toString() + ActionStatusType.PAH_ACCESS_CANCEL) == null }.toMutableList()
+            //listOfKeys.filter { ActionStatusHandler.actionStatusDb.get(it.lockerId.toString() + ActionStatusType.PAH_ACCESS_CANCEL) == null }.toMutableList()
             withContext(Dispatchers.Main) {
  
                 mplRecycleView.layoutManager = LinearLayoutManager(this@SendParcelsOverviewActivity, LinearLayoutManager.VERTICAL, false)
