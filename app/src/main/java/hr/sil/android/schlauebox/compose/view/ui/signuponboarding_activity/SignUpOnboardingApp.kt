@@ -1,11 +1,9 @@
-
-package hr.sil.android.schlauebox.compose.view.ui
+package hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.MaterialTheme
@@ -27,11 +25,11 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.sunbird.ui.setup.login.ForgotPasswordScreen
 import com.sunbird.ui.setup.login.ForgotPasswordUpdateScreen
-import com.sunbird.ui.setup.login.ForgotPasswordUpdateViewModel
 import com.sunbird.ui.setup.login.ForgotPasswordViewModel
 import com.sunbird.ui.setup.login.LoginScreen
 import com.sunbird.ui.setup.login.LoginViewModel
 import hr.sil.android.schlauebox.R
+import hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity.SignUpOnboardingViewModel
 import hr.sil.android.schlauebox.compose.view.ui.components.HuberScaffold
 import hr.sil.android.schlauebox.compose.view.ui.onboarding_screens.HorizontalPager
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTheme

@@ -1,8 +1,6 @@
-package hr.sil.android.schlauebox.compose.view.ui
+package hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -10,25 +8,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-//import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import hr.sil.android.schlauebox.App
+import hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity.SignUpOnboardingViewModel
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTheme
-import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.util.logger
-import hr.sil.android.schlauebox.core.util.macRealToClean
 import hr.sil.android.schlauebox.preferences.PreferenceStore
-import hr.sil.android.schlauebox.store.DeviceStoreRemoteUpdater
-import hr.sil.android.schlauebox.store.MPLDeviceStore
 import hr.sil.android.schlauebox.util.SettingsHelper
 import hr.sil.android.schlauebox.util.backend.UserUtil
-import hr.sil.android.schlauebox.view.ui.LoginActivity
 import hr.sil.android.schlauebox.view.ui.MainActivity
-import hr.sil.android.schlauebox.view.ui.intro.IntroductionSlidePagerActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -125,7 +114,7 @@ class SignUpOnboardingActivity : ComponentActivity() {
 
                         val startIntent =
                             Intent(this@SignUpOnboardingActivity, MainActivity::class.java)
-                        startIntent.putExtra(SPLASH_START, App.ref.isFirstStart)
+                        startIntent.putExtra(SPLASH_START, App.Companion.ref.isFirstStart)
                         startActivity(startIntent)
                         finish()
                     } else {
@@ -152,7 +141,7 @@ class SignUpOnboardingActivity : ComponentActivity() {
                     //LoginActivity::class.java
                 }
                 Log.i("SplashActivity", "This is second start")
-                App.ref.isFirstStart = false
+                App.Companion.ref.isFirstStart = false
             }
 
 //            val startIntent = Intent(this@SignUpOnboardingActivity, startupClass)

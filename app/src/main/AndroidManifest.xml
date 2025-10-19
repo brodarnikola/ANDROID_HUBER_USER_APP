@@ -36,7 +36,7 @@
         tools:replace="android:allowBackup">
 
         <activity
-            android:name=".compose.view.ui.SignUpOnboardingActivity"
+            android:name=".compose.view.ui.signuponboarding_activity.SignUpOnboardingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
             android:exported="true">

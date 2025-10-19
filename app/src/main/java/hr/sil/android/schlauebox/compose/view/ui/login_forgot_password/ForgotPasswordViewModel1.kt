@@ -14,7 +14,7 @@
 //import android.widget.Toast
 //import androidx.lifecycle.viewModelScope
 //import hr.sil.android.schlauebox.R
-//import hr.sil.android.schlauebox.compose.view.ui.SignUpOnboardingSections
+//import hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity.SignUpOnboardingSections
 //import hr.sil.android.schlauebox.core.util.logger
 //import hr.sil.android.schlauebox.util.backend.UserUtil
 //import hr.sil.android.schlauebox.utils.SecondBaseViewModel

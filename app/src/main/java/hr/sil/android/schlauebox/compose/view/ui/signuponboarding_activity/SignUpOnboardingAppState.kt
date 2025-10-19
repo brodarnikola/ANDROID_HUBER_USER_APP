@@ -1,5 +1,4 @@
-
-package hr.sil.android.schlauebox.compose.view.ui
+package hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity
 
 
 import android.content.res.Resources
@@ -16,9 +15,6 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavDestination
-import androidx.navigation.NavGraph
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import kotlinx.coroutines.CoroutineScope

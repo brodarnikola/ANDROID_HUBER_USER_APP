@@ -10,11 +10,9 @@ package com.sunbird.ui.setup.login
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.widget.Toast
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,7 +30,6 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -62,7 +59,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.compose.view.ui.SignUpOnboardingSections
 import hr.sil.android.schlauebox.compose.view.ui.components.NewDesignButton
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTypography
 import hr.sil.android.schlauebox.compose.view.ui.theme.DarkModeTransparent

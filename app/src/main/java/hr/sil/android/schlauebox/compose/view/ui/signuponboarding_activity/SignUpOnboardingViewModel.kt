@@ -1,12 +1,6 @@
-package hr.sil.android.schlauebox.compose.view.ui
+package hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity
 
-import android.content.Context
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import javax.inject.Inject
 
 class SignUpOnboardingViewModel : ViewModel() {
 
