@@ -10,6 +10,7 @@ package com.sunbird.ui.setup.login
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,7 +30,14 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -65,13 +73,13 @@ import androidx.compose.material3.MaterialTheme as Material3
 
 
 @SuppressLint("StateFlowValueCalledInComposition")
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun ForgotPasswordScreen(
     modifier: Modifier = Modifier,
     viewModel: ForgotPasswordViewModel,
     nextScreen: (email: String) -> Unit = {},
-    navigateUp: (route: String) -> Unit = {}
+    navigateUp: () -> Unit = {}
 ) {
     val state = viewModel.state.collectAsStateWithLifecycle().value
 
@@ -122,7 +130,7 @@ fun ForgotPasswordScreen(
 
                 is ForgotPasswordUiEvent.NavigateBack -> {
                     log.info("Response code 77")
-                    navigateUp(SignUpOnboardingSections.LOGIN_SCREEN.route)
+                    navigateUp()
                 }
 
                 is ForgotPasswordUiEvent.NavigateToNextScreen -> {
@@ -160,18 +168,76 @@ fun ForgotPasswordScreen(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth().background(colorResource(R.color.colorPrimary)).padding(vertical = 15.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = stringResource(R.string.forgot_password_title),
-                        fontSize = 20.sp,
-                        style = AppTypography.bodyLarge,
-                        color = colorResource(R.color.colorWhite),
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = stringResource(R.string.forgot_password_title),
+                            fontSize = 20.sp,
+                            style = AppTypography.bodyLarge,
+                            modifier = Modifier
+                                .padding(horizontal = 20.dp),
+                                //.height(40.dp)
+                                //.weight(1f),
+                            color = colorResource(R.color.colorWhite),
+                        )
+                        //Text(text = stringResource(R.string.reset_password_description_title))
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { navigateUp() }) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = ""
+                            )
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = colorResource(R.color.colorPrimary),
+                        titleContentColor = colorResource(R.color.colorWhite),
+                        navigationIconContentColor = colorResource(R.color.colorBlack)
                     )
-                }
+                )
+
+
+//                Row(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .background(colorResource(R.color.colorPrimary))
+//                        .padding(vertical = 8.dp, horizontal = 12.dp),
+//                    verticalAlignment = Alignment.CenterVertically,
+//                    horizontalArrangement = Arrangement.SpaceBetween
+//                ) {
+//                    // Back arrow
+//                    IconButton(onClick = { navigateUp() }) {
+//                        Icon(
+//                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+//                            contentDescription = "Back",
+//                            tint = colorResource(R.color.colorBlack)
+//                        )
+//                    }
+//
+//                    Text(
+//                        text = stringResource(R.string.forgot_password_title),
+//                        fontSize = 20.sp,
+//                        style = AppTypography.bodyLarge,
+//                        modifier = Modifier
+//                            //.height(40.dp)
+//                            .weight(1f),
+//                        color = colorResource(R.color.colorWhite),
+//                    )
+//
+//                    // Center logo
+////                    Image(
+////                        painter = painterResource(id = R.drawable.schlauebox_logo),
+////                        contentDescription = "App Logo",
+////                        modifier = Modifier
+////                            .height(40.dp)
+////                            .weight(1f)
+////                    )
+//
+//                    // Spacer to balance layout
+//                    //Spacer(modifier = Modifier.width(48.dp))
+//                }
+
                 Text(
                     modifier = Modifier.padding(horizontal = 24.dp, vertical = 20.dp),
                     text = stringResource(R.string.forgot_password_description_title),
@@ -243,8 +309,7 @@ fun ForgotPasswordScreen(
                                     .width(25.dp)
                                     .semantics { contentDescription = "loginCheckMark" }
                             )
-                        }
-                        else {
+                        } else {
                             Icon(
                                 painter = imageInfo,
                                 contentDescription = null,
@@ -290,11 +355,17 @@ fun ForgotPasswordScreen(
             onClick = {
                 val emailValidation = viewModel.getEmailError(email, context)
 
-                if (emailValidation.isNotBlank()  ) {
+                if (emailValidation.isNotBlank()) {
                     errorMessageEmail = emailValidation.ifBlank { "" }
                 } else {
                     isButtonEnabled = false
-                    viewModel.onEvent(ForgotPasswordEvent.OnForgotPasswordRequest(email, context, activity))
+                    viewModel.onEvent(
+                        ForgotPasswordEvent.OnForgotPasswordRequest(
+                            email,
+                            context,
+                            activity
+                        )
+                    )
                 }
             },
             enabled = isButtonEnabled,

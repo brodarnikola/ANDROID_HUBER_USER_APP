@@ -122,13 +122,12 @@ fun NavigationStack(routeFirstScreen: String, modifier: Modifier) {
                 modifier = modifier,
                 viewModel = hiltViewModel(),
                 navigateUp = {
-                    //navigateUp()
+                    navController.popBackStack()
                 },
                 nextScreen = { route ->
                     if (route != navController.currentDestination?.route) {
                         navController.navigate(route)
                     }
-                    //nextScreen(route, navBackStackEntry)
                 }
             )
         }
@@ -139,7 +138,7 @@ fun NavigationStack(routeFirstScreen: String, modifier: Modifier) {
                 modifier = modifier,
                 viewModel = hiltViewModel(),
                 navigateUp = {
-                    //navigateUp()
+                    navController.popBackStack()
                 },
                 nextScreen = { email ->
                     if (route != navController.currentDestination?.route) {
@@ -162,7 +161,7 @@ fun NavigationStack(routeFirstScreen: String, modifier: Modifier) {
                 modifier = modifier,
                 viewModel = hiltViewModel(),
                 navigateUp = {
-                    //navigateUp()
+                    navController.popBackStack()
                 },
                 nextScreen = { route ->
                     if (route != navController.currentDestination?.route) {

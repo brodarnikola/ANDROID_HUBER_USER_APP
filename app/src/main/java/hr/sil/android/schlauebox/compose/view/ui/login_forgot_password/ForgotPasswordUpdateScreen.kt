@@ -10,6 +10,7 @@ package com.sunbird.ui.setup.login
 import android.app.Activity
 import android.content.Context
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,7 +30,14 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -64,21 +72,21 @@ import hr.sil.android.schlauebox.compose.view.ui.theme.White
 import hr.sil.android.schlauebox.utils.UiEvent
 import androidx.compose.material3.MaterialTheme as Material3
 
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun ForgotPasswordUpdateScreen(
     modifier: Modifier = Modifier,
     viewModel: ForgotPasswordUpdateViewModel,
     nextScreen: (route: String) -> Unit = {},
-    navigateUp: (route: String) -> Unit = {}
+    navigateUp: () -> Unit = {}
 ) {
     val state = viewModel.state.collectAsStateWithLifecycle().value
 
     val activity = LocalContext.current as Activity
 
     // Properties
-    val imageCheck = painterResource(id = R.drawable.ic_register_email)
-    val imageInfo = painterResource(id = R.drawable.ic_register_email)
+    val imageCheck = painterResource(id = R.drawable.ic_password)
+    val imageInfo = painterResource(id = R.drawable.ic_password)
 
     var password = rememberSaveable {
         mutableStateOf("")
@@ -112,7 +120,7 @@ fun ForgotPasswordUpdateScreen(
                 }
 
                 ForgotPasswordUpdateUiEvent.NavigateBack -> {
-                    navigateUp(SignUpOnboardingSections.FORGOT_PASSWORD_SCREEN.route)
+                    navigateUp()
                 }
 
                 ForgotPasswordUpdateUiEvent.NavigateToNextScreen -> {
@@ -149,21 +157,32 @@ fun ForgotPasswordUpdateScreen(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(colorResource(R.color.colorPrimary))
-                        .padding(vertical = 15.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = stringResource(R.string.reset_password_description_title),
-                        fontSize = 20.sp,
-                        style = AppTypography.bodyLarge,
-                        color = colorResource(R.color.colorWhite),
+
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = "Please enter your new password",
+                            fontSize = 20.sp,
+                            style = AppTypography.bodyLarge,
+                            modifier = Modifier
+                                .padding(horizontal = 20.dp),
+                            color = colorResource(R.color.colorWhite),
+                        )
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { navigateUp() }) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = ""
+                            )
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = colorResource(R.color.colorPrimary),
+                        titleContentColor = colorResource(R.color.colorWhite),
+                        navigationIconContentColor = colorResource(R.color.colorBlack)
                     )
-                }
+                )
                 Text(
                     modifier = Modifier.padding(horizontal = 24.dp, vertical = 20.dp),
                     text = stringResource(R.string.reset_password_description_title),
