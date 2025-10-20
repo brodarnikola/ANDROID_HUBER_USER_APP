@@ -44,25 +44,6 @@ class MainActivity1 : BaseActivity(R.id.no_ble_layout, R.id.no_internet_layout, 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        if (!UserUtil.isUserLoggedIn()) {
-////            setContentView(_RelativeLayout(this).apply {
-////                progressBar {
-////                    isIndeterminate = true
-////                }.lparams {
-////                    centerInParent()
-////                }
-////            })
-//            GlobalScope.launch(Dispatchers.Main) {
-//                if (UserUtil.login(SettingsHelper.usernameLogin)) {
-//                    continueOnCreate(savedInstanceState)
-//                } else {
-//                    logout()
-//                }
-//            }
-//        } else {
-//            continueOnCreate(savedInstanceState)
-//        }
         continueOnCreate(savedInstanceState)
 
     }
@@ -79,29 +60,6 @@ class MainActivity1 : BaseActivity(R.id.no_ble_layout, R.id.no_internet_layout, 
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         setNotification()
-//        binding.mainBottomHeaderId.setOnNavigationItemSelectedListener { item: MenuItem ->
-//            val selectedNavFragment = NavFragment.values().firstOrNull { it.navItemIndex == item.itemId }
-//            val fragmentManager = supportFragmentManager
-//            // this will clear the back stack and displays no animation on the screen
-//            fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-//            if (selectedNavFragment != null) setNavFragment(selectedNavFragment)
-//            else when (item.itemId) {
-//                R.id.navigation_home -> {
-//                    setNavFragment(NavFragment.HOME, true)
-//                }
-//
-//                R.id.navigation_tc -> {
-//                    setNavFragment(NavFragment.TCC, true)
-//                }
-//
-//                R.id.navigation_settings -> {
-//                    setNavFragment(NavFragment.SETTINGS, true)
-//                }
-//
-//            }
-//
-//            true
-//        }
         //get start fragment
         val startNavFragment = NavFragment.HOME
 
@@ -205,15 +163,6 @@ class MainActivity1 : BaseActivity(R.id.no_ble_layout, R.id.no_internet_layout, 
                     channelName, NotificationManager.IMPORTANCE_LOW))
         }
 
-        // If a notification message is tapped, any data accompanying the notification
-        // message is available in the intent extras. In this sample the launcher
-        // intent is fired when the notification is tapped, so any accompanying data would
-        // be handled here. If you want a different intent fired, set the click_action
-        // field of the notification message to the desired intent. The launcher intent
-        // is used when no click_action is specified.
-        //
-        // Handle possible data accompanying notification message.
-        // [START handle_data_extras]
         if (intent.extras != null) {
             for (key in intent.extras!!.keySet()) {
                 val value = intent.extras!!.get(key)

@@ -26,13 +26,94 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+import hr.sil.android.schlauebox.App
+import hr.sil.android.schlauebox.core.model.MPLDeviceType
+import hr.sil.android.schlauebox.core.remote.model.RMasterUnitType
+import hr.sil.android.schlauebox.data.ItemHomeScreen
+import hr.sil.android.schlauebox.events.MPLDevicesUpdatedEvent
+import hr.sil.android.schlauebox.events.UnauthorizedUserEvent
+import hr.sil.android.schlauebox.store.MPLDeviceStore 
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+
 @HiltViewModel
-class HomeScreenViewModel @Inject constructor()  : BaseViewModel<HomeScreenUiState, HomeScreenEvent>() {
+class NavHomeViewModel @Inject constructor()  : BaseViewModel<NavHomeUiState, HomeScreenEvent>() {
 
     val log = logger()
 
-    override fun initialState(): HomeScreenUiState {
-        return HomeScreenUiState()
+    private val _uiState = MutableStateFlow(NavHomeUiState())
+    val uiState: StateFlow<NavHomeUiState> = _uiState.asStateFlow()
+
+    init {
+        App.ref.eventBus.register(this)
+        loadUserInfo()
+    }
+
+    private fun loadUserInfo() {
+        _uiState.value = _uiState.value.copy(
+            userName = UserUtil.user?.name ?: "",
+            address = UserUtil.user?.address ?: ""
+        )
+    }
+
+    fun loadDevices() {
+        viewModelScope.launch {
+            val items = getItemsForRecyclerView()
+            _uiState.value = _uiState.value.copy(devices = items)
+        }
+    }
+
+    private fun getItemsForRecyclerView(): List<ItemHomeScreen> {
+        val items = mutableListOf<ItemHomeScreen>()
+
+        val (splList, mplList) = MPLDeviceStore.devices.values
+            .filter {
+                val isThisDeviceAvailable = when {
+                    UserUtil.user?.testUser == true -> true
+                    else -> it.isProductionReady == true
+                }
+                it.masterUnitType != RMasterUnitType.UNKNOWN && isThisDeviceAvailable
+            }
+            .partition {
+                it.masterUnitType == RMasterUnitType.SPL ||
+                        it.type == MPLDeviceType.SPL ||
+                        it.masterUnitType == RMasterUnitType.SPL_PLUS ||
+                        it.type == MPLDeviceType.SPL_PLUS
+            }
+
+        if (splList.isNotEmpty()) {
+            val header = ItemHomeScreen.Header()
+            header.headerTitle = "SPL Devices" // Use string resource
+            items.add(header)
+            items.addAll(splList.map { ItemHomeScreen.Child(it) })
+        }
+
+        if (mplList.isNotEmpty()) {
+            val header = ItemHomeScreen.Header()
+            header.headerTitle = "MPL Devices" // Use string resource
+            items.add(header)
+            items.addAll(mplList.map { ItemHomeScreen.Child(it) })
+        }
+
+        return items
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMplDeviceNotify(event: MPLDevicesUpdatedEvent) {
+        loadDevices()
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onUnauthorizedUser(event: UnauthorizedUserEvent) {
+        _uiState.value = _uiState.value.copy(isUnauthorized = true)
+    }
+    
+    override fun initialState(): NavHomeUiState {
+        return NavHomeUiState()
     }
 
     override fun onEvent(event: HomeScreenEvent) {
@@ -88,8 +169,13 @@ class HomeScreenViewModel @Inject constructor()  : BaseViewModel<HomeScreenUiSta
 
 }
 
-data class HomeScreenUiState(
-    val loading: Boolean = false
+data class NavHomeUiState(
+    val loading: Boolean = false,
+
+    val userName: String = "",
+    val address: String = "",
+    val devices: List<ItemHomeScreen> = emptyList(),
+    val isUnauthorized: Boolean = false
 )
 
 sealed class HomeScreenEvent {

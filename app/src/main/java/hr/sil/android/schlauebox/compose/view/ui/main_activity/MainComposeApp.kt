@@ -41,7 +41,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navArgument
-import hr.sil.android.schlauebox.compose.view.ui.home_screens.HomeScreen
+import hr.sil.android.schlauebox.compose.view.ui.home_screens.NavHomeScreen
 import kotlin.collections.forEachIndexed
 import kotlin.text.contains
 
@@ -147,7 +147,7 @@ fun NavGraphBuilder.mainNavGraph(
     navigateUp:() -> Unit
 ) {
     composable(MainDestinations.HOME) {
-        HomeScreen(
+        NavHomeScreen(
             viewModel = hiltViewModel(), // viewModel,
 //            onMovieClick = { movieId ->
 //                if (navBackStackEntry.value?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
