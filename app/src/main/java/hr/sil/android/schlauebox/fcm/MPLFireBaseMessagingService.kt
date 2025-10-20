@@ -8,7 +8,7 @@ import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.util.AppUtil
 import hr.sil.android.schlauebox.util.NotificationHelper
-import hr.sil.android.schlauebox.view.ui.MainActivity
+import hr.sil.android.schlauebox.view.ui.MainActivity1
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -69,7 +69,7 @@ open class MPLFireBaseMessagingService : FirebaseMessagingService() {
         val type = result["type"]?:""
         log.info("Push notification type is: ${type} .. is it true: ${type=="DEFAULT"}")
         if(type=="DEFAULT"){
-            NotificationHelper.createNotification(result["subject"], result["body"], MainActivity::class.java)
+            NotificationHelper.createNotification(result["subject"], result["body"], MainActivity1::class.java)
         }
 
         GlobalScope.launch {

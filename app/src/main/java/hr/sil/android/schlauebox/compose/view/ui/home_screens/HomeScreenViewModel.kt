@@ -5,7 +5,7 @@
  *
  * Created by Cinnamon.
  */
-package hr.sil.android.schlauebox.compose.view.ui.login_forgot_password
+package hr.sil.android.schlauebox.compose.view.ui.home_screens
 
 import android.app.Activity
 import android.content.Context
@@ -27,17 +27,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ForgotPasswordViewModel @Inject constructor()  : BaseViewModel<ForgotPasswordUiState, ForgotPasswordEvent>() {
+class HomeScreenViewModel @Inject constructor()  : BaseViewModel<HomeScreenUiState, HomeScreenEvent>() {
 
     val log = logger()
 
-    override fun initialState(): ForgotPasswordUiState {
-        return ForgotPasswordUiState()
+    override fun initialState(): HomeScreenUiState {
+        return HomeScreenUiState()
     }
 
-    override fun onEvent(event: ForgotPasswordEvent) {
+    override fun onEvent(event: HomeScreenEvent) {
         when (event) {
-            is ForgotPasswordEvent.OnForgotPasswordRequest -> {
+            is HomeScreenEvent.OnForgotPasswordRequest -> {
 
                 viewModelScope.launch {
                     _state.update { it.copy(loading = true) }
@@ -50,7 +50,7 @@ class ForgotPasswordViewModel @Inject constructor()  : BaseViewModel<ForgotPassw
 
                     if (response.isSuccessful) {
                         log.info("Response code 22: ${response.code()}, is successfully: ${response.isSuccessful}, body is: ${response.body()}")
-                        sendUiEvent(ForgotPasswordUiEvent.NavigateToNextScreen(SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route))
+                        sendUiEvent(HomeScreenUiEvent.NavigateToNextScreen(SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route))
 //                        val startIntent = Intent(event.context, MainActivity1::class.java)
 //                        event.context.startActivity(startIntent)
 //                        event.activity.finish()
@@ -88,20 +88,20 @@ class ForgotPasswordViewModel @Inject constructor()  : BaseViewModel<ForgotPassw
 
 }
 
-data class ForgotPasswordUiState(
+data class HomeScreenUiState(
     val loading: Boolean = false
 )
 
-sealed class ForgotPasswordEvent {
+sealed class HomeScreenEvent {
     data class OnForgotPasswordRequest(
         val email: String,
         val context: Context,
         val activity: Activity
-    ) : ForgotPasswordEvent()
+    ) : HomeScreenEvent()
 }
 
-sealed class ForgotPasswordUiEvent : UiEvent {
-    data class NavigateToNextScreen(val route: String) : ForgotPasswordUiEvent()
+sealed class HomeScreenUiEvent : UiEvent {
+    data class NavigateToNextScreen(val route: String) : HomeScreenUiEvent()
 
-    object NavigateBack : ForgotPasswordUiEvent()
+    object NavigateBack : HomeScreenUiEvent()
 }

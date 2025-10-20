@@ -89,7 +89,7 @@ class LoginActivity : BaseActivity(noWifiViewId = R.id.no_internet_layout) {
 //                                } else {
 //                                    SettingsHelper.userPasswordWithoutEncryption = binding.etPassword.text.toString()
 //                                    SettingsHelper.userRegisterOrLogin = true
-//                                    val startIntent = Intent(this@LoginActivity, MainActivity::class.java)
+//                                    val startIntent = Intent(this@LoginActivity, MainActivity1::class.java)
 //                                    startActivity(startIntent)
 //                                    finish()
 //                                }

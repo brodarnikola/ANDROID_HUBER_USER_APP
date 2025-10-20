@@ -3,37 +3,28 @@ package hr.sil.android.schlauebox.view.ui
 import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.provider.Settings
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.databinding.ActivityMainBinding
 import hr.sil.android.schlauebox.events.UnauthorizedUserEvent
-import hr.sil.android.schlauebox.util.SettingsHelper
-import hr.sil.android.schlauebox.util.backend.UserUtil
-import hr.sil.android.schlauebox.util.backend.UserUtil.logout
 import hr.sil.android.schlauebox.view.ui.home.fragment.NavHomeFragment
 import hr.sil.android.schlauebox.view.ui.settings.NavSettingsFragment
 import hr.sil.android.schlauebox.view.ui.tcc.NavTccFragment
 import hr.sil.android.view_util.extensions.hideKeyboard
 import hr.sil.android.view_util.permission.DroidPermission
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
 
-class MainActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_layout, R.id.no_location_gps_layout) {
+class MainActivity1 : BaseActivity(R.id.no_ble_layout, R.id.no_internet_layout, R.id.no_location_gps_layout) {
 
     private val log = logger()
 

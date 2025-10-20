@@ -7,16 +7,12 @@ import android.view.MenuItem
 import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.databinding.ActivityLoginBinding
 import hr.sil.android.schlauebox.databinding.ActivityTcinvitedUserBinding
 import hr.sil.android.schlauebox.util.SettingsHelper
 import hr.sil.android.schlauebox.util.backend.UserUtil
 import hr.sil.android.schlauebox.view.ui.LoginActivity
-import hr.sil.android.schlauebox.view.ui.MainActivity
+import hr.sil.android.schlauebox.view.ui.MainActivity1
 import kotlinx.coroutines.*
 
 
@@ -53,7 +49,7 @@ class TCInvitedUserActivity : AppCompatActivity() {
                         UserUtil.acceptedTerms()
                         SettingsHelper.userRegisterOrLogin = true
                         withContext(Dispatchers.Main) {
-                            val startIntent = Intent(this@TCInvitedUserActivity, MainActivity::class.java)
+                            val startIntent = Intent(this@TCInvitedUserActivity, MainActivity1::class.java)
                             startActivity(startIntent)
                             finish()
                         }

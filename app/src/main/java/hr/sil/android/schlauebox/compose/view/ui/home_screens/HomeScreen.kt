@@ -5,30 +5,47 @@
  *
  * Created by Cinnamon.
  */
-package hr.sil.android.schlauebox.compose.view.ui.login_forgot_password
+package hr.sil.android.schlauebox.compose.view.ui.home_screens
 
+import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Intent
 import android.widget.Toast
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Icon
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.MaterialTheme as Material3
-import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -36,32 +53,32 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity.SignUpOnboardingSections
 import hr.sil.android.schlauebox.compose.view.ui.components.NewDesignButton
-import hr.sil.android.schlauebox.compose.view.ui.main_activity.MainActivity
+import hr.sil.android.schlauebox.compose.view.ui.login_forgot_password.ForgotPasswordEvent
+import hr.sil.android.schlauebox.compose.view.ui.login_forgot_password.ForgotPasswordUiEvent
+import hr.sil.android.schlauebox.compose.view.ui.login_forgot_password.ForgotPasswordViewModel
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTypography
 import hr.sil.android.schlauebox.compose.view.ui.theme.DarkModeTransparent
+import hr.sil.android.schlauebox.compose.view.ui.theme.White
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.utils.UiEvent
-import hr.sil.android.schlauebox.view.ui.MainActivity1
-import hr.sil.android.schlauebox.view.ui.intro.TCInvitedUserActivity
+import androidx.compose.material3.MaterialTheme as Material3
 
-@OptIn(ExperimentalComposeUiApi::class)
+
+@SuppressLint("StateFlowValueCalledInComposition")
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(
+fun HomeScreen(
     modifier: Modifier = Modifier,
-    viewModel: LoginViewModel,
-    nextScreen: (route: String) -> Unit = {},
-    navigateUp: (route: String) -> Unit = {}
+    viewModel: HomeScreenViewModel,
+    nextScreen: (email: String) -> Unit = {},
+    navigateUp: () -> Unit = {}
 ) {
     val state = viewModel.state.collectAsStateWithLifecycle().value
 
@@ -70,17 +87,9 @@ fun LoginScreen(
     // Properties
     val imageCheck = painterResource(id = R.drawable.ic_register_email)
     val imageInfo = painterResource(id = R.drawable.ic_register_email)
-    val imageVisibilityOn = painterResource(id = R.drawable.ic_password)
-    val imageVisibilityOff = painterResource(id = R.drawable.ic_password)
 
     var email by remember {
         mutableStateOf("")
-    }
-    var password by remember {
-        mutableStateOf("")
-    }
-    var passwordVisible by rememberSaveable {
-        mutableStateOf(false)
     }
     var isButtonEnabled by remember {
         mutableStateOf(true)
@@ -88,17 +97,11 @@ fun LoginScreen(
     var errorMessageEmail by remember {
         mutableStateOf<String?>(null)
     }
-    var errorMessagePassword by remember {
-        mutableStateOf<String?>(null)
-    }
 
     val emailLabelStyle = remember {
         mutableStateOf(AppTypography.labelLarge)
     }
 
-    val passwordLabelStyle = remember {
-        mutableStateOf(AppTypography.bodyLarge)
-    }
 
     // used to prepopulate email address if user registered on Register screen
     //LaunchedEffect(key1 = Unit) {
@@ -109,44 +112,29 @@ fun LoginScreen(
 //        }
     //}
 
-    val keyboardController = LocalSoftwareKeyboardController.current
-    val focusManager = LocalFocusManager.current
     val context = LocalContext.current
 
     LaunchedEffect(key1 = Unit) {
         val log = logger()
-        log.info("collecting events: start ${viewModel.uiEvents}")
-        log.info("collecting events: viewModel ${viewModel}")
+        log.info("collecting events: start")
         viewModel.uiEvents.collect { event ->
             log.info("collecting event: ${event}")
             when (event) {
 
-                is LoginScreenUiEvent.NavigateToTCInvitedUserActivityScreen -> {
-                    val startIntent = Intent(context, TCInvitedUserActivity::class.java)
-                    startIntent.putExtra("email", email)
-                    startIntent.putExtra("password", password)
-                    startIntent.putExtra("goToMainActivity", true)
-                    context.startActivity(startIntent)
-                    activity.finish()
-                }
-
-                is LoginScreenUiEvent.NavigateToMainActivityScreen -> {
-                    val startIntent = Intent(context, MainActivity::class.java)
-                    context.startActivity(startIntent)
-                    activity.finish()
-                }
-
-                is LoginScreenUiEvent.NavigateBack -> {
-                    navigateUp(SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route)
-                }
-
-                is LoginScreenUiEvent.NavigateToForgotPasswordScreen -> {
-                    nextScreen(SignUpOnboardingSections.FORGOT_PASSWORD_SCREEN.route)
-                }
-
                 is UiEvent.ShowToast -> {
+                    log.info("Response code 55")
                     isButtonEnabled = true
                     Toast.makeText(context, event.message, event.toastLength).show()
+                }
+
+                is ForgotPasswordUiEvent.NavigateBack -> {
+                    log.info("Response code 77")
+                    navigateUp()
+                }
+
+                is ForgotPasswordUiEvent.NavigateToNextScreen -> {
+                    log.info("Response code 33")
+                    nextScreen(email)
                 }
             }
         }
@@ -155,7 +143,7 @@ fun LoginScreen(
     ConstraintLayout(
         modifier = modifier
             .fillMaxSize()
-            .background(hr.sil.android.schlauebox.compose.view.ui.theme.White)
+            .background(White)
     ) {
         val (mainContent, bottomButton) = createRefs()
 
@@ -179,20 +167,85 @@ fun LoginScreen(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth().background(colorResource(R.color.colorPrimary)).padding(vertical = 15.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = stringResource(R.string.login_title),
-                        fontSize = 20.sp,
-                        style = AppTypography.bodyLarge,
-                        color = colorResource(R.color.colorWhite),
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = stringResource(R.string.forgot_password_title),
+                            fontSize = 20.sp,
+                            style = AppTypography.bodyLarge,
+                            modifier = Modifier
+                                .padding(horizontal = 20.dp),
+                                //.height(40.dp)
+                                //.weight(1f),
+                            color = colorResource(R.color.colorWhite),
+                        )
+                        //Text(text = stringResource(R.string.reset_password_description_title))
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { navigateUp() }) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = ""
+                            )
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = colorResource(R.color.colorPrimary),
+                        titleContentColor = colorResource(R.color.colorWhite),
+                        navigationIconContentColor = colorResource(R.color.colorBlack)
                     )
-                }
+                )
+
+
+//                Row(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .background(colorResource(R.color.colorPrimary))
+//                        .padding(vertical = 8.dp, horizontal = 12.dp),
+//                    verticalAlignment = Alignment.CenterVertically,
+//                    horizontalArrangement = Arrangement.SpaceBetween
+//                ) {
+//                    // Back arrow
+//                    IconButton(onClick = { navigateUp() }) {
+//                        Icon(
+//                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+//                            contentDescription = "Back",
+//                            tint = colorResource(R.color.colorBlack)
+//                        )
+//                    }
+//
+//                    Text(
+//                        text = stringResource(R.string.forgot_password_title),
+//                        fontSize = 20.sp,
+//                        style = AppTypography.bodyLarge,
+//                        modifier = Modifier
+//                            //.height(40.dp)
+//                            .weight(1f),
+//                        color = colorResource(R.color.colorWhite),
+//                    )
+//
+//                    // Center logo
+////                    Image(
+////                        painter = painterResource(id = R.drawable.schlauebox_logo),
+////                        contentDescription = "App Logo",
+////                        modifier = Modifier
+////                            .height(40.dp)
+////                            .weight(1f)
+////                    )
+//
+//                    // Spacer to balance layout
+//                    //Spacer(modifier = Modifier.width(48.dp))
+//                }
+
+                Text(
+                    modifier = Modifier.padding(horizontal = 24.dp, vertical = 20.dp),
+                    text = stringResource(R.string.forgot_password_description_title),
+                    fontSize = 16.sp,
+                    style = AppTypography.bodyLarge,
+                    color = colorResource(R.color.colorBlack),
+                )
                 //endregion
-                Spacer(modifier = Modifier.height(35.dp))
+                Spacer(modifier = Modifier.height(5.dp))
                 //region EmailTextField
                 TextField(
                     value = email,
@@ -200,7 +253,7 @@ fun LoginScreen(
                         Text(
                             text = stringResource(R.string.app_generic_email),
                             color = Material3.colorScheme.onSurfaceVariant,
-                            style = passwordLabelStyle.value
+                            style = emailLabelStyle.value
                         )
                     },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -255,8 +308,7 @@ fun LoginScreen(
                                     .width(25.dp)
                                     .semantics { contentDescription = "loginCheckMark" }
                             )
-                        }
-                        else {
+                        } else {
                             Icon(
                                 painter = imageInfo,
                                 contentDescription = null,
@@ -271,92 +323,6 @@ fun LoginScreen(
                 )
                 //endregion
                 Spacer(modifier = Modifier.height(40.dp))
-                TextField(
-                    value = password,
-                    onValueChange = {
-                        password = it
-                        val checkErrorMessage = viewModel.getPasswordError(it, context)
-                        errorMessagePassword = if (checkErrorMessage !== "") {
-                            checkErrorMessage
-                        } else {
-                            ""
-                        }
-                    },
-                    placeholder = {
-                        Text(
-                            text = stringResource(R.string.app_generic_password),
-                            color = Material3.colorScheme.onSurfaceVariant,
-                            style = passwordLabelStyle.value
-                        )
-                    },
-                    singleLine = true,
-                    visualTransformation = if (passwordVisible) VisualTransformation.None
-                    else PasswordVisualTransformation(),
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Password,
-                        imeAction = ImeAction.Done
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onDone = {
-                            keyboardController?.hide()
-                            focusManager.clearFocus()
-                        }
-                    ),
-                    modifier = Modifier
-                        .semantics {
-                            contentDescription = "passwordTextFieldLoginScreen"
-                        }
-                        .onFocusChanged {
-                            if (it.isFocused) {
-                                passwordLabelStyle.value = AppTypography.bodySmall
-                            } else {
-                                passwordLabelStyle.value = AppTypography.bodyLarge
-                            }
-                        }
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    shape = RoundedCornerShape(50.dp),
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        textColor = Material3.colorScheme.onSurface,
-                        focusedBorderColor = colorResource(R.color.colorPrimary),
-                        unfocusedBorderColor = Material3.colorScheme.outline,
-                        cursorColor = colorResource(R.color.colorPrimary),
-                        backgroundColor = colorResource(R.color.transparentColor)
-                    ),
-                    trailingIcon = {
-                        val visibilityImage = if (passwordVisible)
-                            imageVisibilityOn else imageVisibilityOff
-                        IconButton(onClick = {
-                            passwordVisible = !passwordVisible
-                        }) {
-                            Icon(
-                                painter = visibilityImage,
-                                contentDescription = null,
-                                modifier = Modifier.width(25.dp)
-                            )
-                        }
-                    },
-                )
-                //region PasswordTextField
-                //endregion
-                Spacer(modifier = Modifier.height(34.dp))
-                //region ForgotPasswordButton
-                TextButton(
-                    modifier = Modifier
-                        .semantics {
-                            contentDescription = "forgotPasswordButtonLoginScreen"
-                        },
-                    onClick = {
-                       // viewModel.onEvent(LoginScreenEvent.OnForgottenPassword)
-                        nextScreen(SignUpOnboardingSections.FORGOT_PASSWORD_SCREEN.route)
-                    }
-                ) {
-                    Text(
-                        text = stringResource(R.string.forgot_password_title),
-                        color = Material3.colorScheme.onSurfaceVariant,
-                        style = passwordLabelStyle.value
-                    )
-                }
 
                 if (state.loading) {
                     CircularProgressIndicator(
@@ -384,21 +350,19 @@ fun LoginScreen(
                 .semantics {
                     contentDescription = "signInButtonLoginScreen"
                 },
-            title = stringResource(R.string.login_title),
+            title = stringResource(R.string.forgot_password_send),
             onClick = {
                 val emailValidation = viewModel.getEmailError(email, context)
-                val passwordValidation = viewModel.getPasswordError(password, context)
 
-                if (emailValidation.isNotBlank() || passwordValidation.isNotBlank()) {
+                if (emailValidation.isNotBlank()) {
                     errorMessageEmail = emailValidation.ifBlank { "" }
                 } else {
                     isButtonEnabled = false
                     viewModel.onEvent(
-                        LoginScreenEvent.OnLogin(
-                            email = email,
-                            password = password,
-                            context = context,
-                            activity = activity
+                        HomeScreenEvent.OnForgotPasswordRequest(
+                            email,
+                            context,
+                            activity
                         )
                     )
                 }
@@ -407,4 +371,34 @@ fun LoginScreen(
         )
 
     }
+
+//    }
+
+//    when (val res = viewModel.state.value) {
+//        is Resource.Initial -> LoginScreen(viewModel, modifier, nextScreen, navigateUp)
+//        is Resource.Loading -> {
+//            LoginScreen(viewModel, modifier, nextScreen, navigateUp)
+//            DialogOnlyWithSpinnerInCenter()
+//        }
+//
+//        is Resource.Success -> {
+//            nextScreen(SignUpOnboardingSections.NOTIFICATIONS_PERMISSION_LOGIN.route)
+//        }
+//
+//        is Resource.FirebaseFailureException -> {
+//            Timber.d(" LOGIN EXCEPTION: ${res.error}, error: ${res.error}")
+//            if (res.error == "Register") {
+//                navigateUp(SignUpOnboardingSections.CONNECT_I_MESSAGES.route)
+//            } else {
+//                val sematincsTagError = when {
+//                    res.error?.contains("The password is invalid or the") == true -> "InvalidPasswordErrorMsg"
+//                    else -> "UserIDErrorMsg"
+//                }
+//                LoginScreen(viewModel, modifier, nextScreen, navigateUp)
+//                DisplaySnackBar(uiResource = viewModel.state.value, snackBarMessage = res.error, sematincsTagError = sematincsTagError)
+//            }
+//        }
+//
+//        else -> {}
+//    }
 }

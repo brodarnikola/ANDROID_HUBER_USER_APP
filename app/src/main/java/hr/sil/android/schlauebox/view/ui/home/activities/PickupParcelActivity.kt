@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +21,6 @@ import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.remote.model.*
 import hr.sil.android.schlauebox.core.util.*
 import hr.sil.android.schlauebox.data.DeliveryKey
-import hr.sil.android.schlauebox.databinding.ActivityLoginBinding
 import hr.sil.android.schlauebox.databinding.ActivityParcelPickupBinding
 import hr.sil.android.schlauebox.events.MPLDevicesUpdatedEvent
 import hr.sil.android.schlauebox.events.UnauthorizedUserEvent
@@ -33,15 +31,13 @@ import hr.sil.android.schlauebox.util.NotificationHelper
 import hr.sil.android.schlauebox.util.backend.UserUtil
 import hr.sil.android.schlauebox.view.ui.BaseActivity
 import hr.sil.android.schlauebox.view.ui.LoginActivity
-import hr.sil.android.schlauebox.view.ui.MainActivity
+import hr.sil.android.schlauebox.view.ui.MainActivity1
 import hr.sil.android.schlauebox.view.ui.home.adapters.ParcelPickupKeysAdapter
 import hr.sil.android.util.general.extensions.hexToByteArray
 import kotlinx.coroutines.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.lang.Math.abs
-import java.text.ParseException
-import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -152,7 +148,7 @@ class PickupParcelActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_l
                     DeviceStoreRemoteUpdater.forceUpdate()
 
                     withContext(Dispatchers.Main) {
-                        val startIntent = Intent(this@PickupParcelActivity, MainActivity::class.java)
+                        val startIntent = Intent(this@PickupParcelActivity, MainActivity1::class.java)
                         startActivity(startIntent)
                         finish()
                     }

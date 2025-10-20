@@ -5,13 +5,12 @@
  *
  * Created by Cinnamon.
  */
-package com.sunbird.ui.setup.login
+package hr.sil.android.schlauebox.compose.view.ui.login_forgot_password
 
 //import hr.sil.android.schlauebox.cache.DataCache
 //import hr.sil.android.schlauebox.cache.status.InstallationKeyHandler
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -22,8 +21,6 @@ import hr.sil.android.schlauebox.util.backend.UserUtil
 import hr.sil.android.schlauebox.utils.BaseViewModel
 import hr.sil.android.schlauebox.utils.UiEvent
 import hr.sil.android.schlauebox.utils.UiEvent.ShowToast
-import hr.sil.android.schlauebox.utils.isEmailValid
-import hr.sil.android.schlauebox.view.ui.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch

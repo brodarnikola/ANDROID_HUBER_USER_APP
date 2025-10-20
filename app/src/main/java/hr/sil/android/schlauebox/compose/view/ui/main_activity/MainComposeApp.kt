@@ -41,6 +41,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navArgument
+import hr.sil.android.schlauebox.compose.view.ui.home_screens.HomeScreen
 import kotlin.collections.forEachIndexed
 import kotlin.text.contains
 
@@ -145,15 +146,16 @@ fun NavGraphBuilder.mainNavGraph(
     goToAnimatedCreditCard: (route: String) -> Unit,
     navigateUp:() -> Unit
 ) {
-//    composable(MainDestinations.HOME) {
-//        MoviesScreen(
-//            viewModel = hiltViewModel(), // viewModel,
+    composable(MainDestinations.HOME) {
+        HomeScreen(
+            viewModel = hiltViewModel(), // viewModel,
 //            onMovieClick = { movieId ->
 //                if (navBackStackEntry.value?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
 //                    goToMovieDetails(MainDestinations.MOVIE_DETAILS,  movieId)
 //                }
-//            })
-//    }
+//            }
+        )
+    }
 //    composable(
 //        "${MainDestinations.MOVIE_DETAILS}/{${NavArguments.MOVIE_ID}}",
 //        arguments = listOf(navArgument(NavArguments.MOVIE_ID) {
