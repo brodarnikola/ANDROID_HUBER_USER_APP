@@ -8,6 +8,7 @@
 package hr.sil.android.schlauebox.compose.view.ui.home_screens
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import hr.sil.android.schlauebox.R
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -39,10 +41,22 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.viewmodel.compose.viewModel
+import hr.sil.android.ble.scanner.scan_multi.properties.advv2.common.MPLDeviceStatus
+import hr.sil.android.schlauebox.cache.DatabaseHandler
+import hr.sil.android.schlauebox.core.model.MPLDeviceType
+import hr.sil.android.schlauebox.core.remote.model.InstalationType
+import hr.sil.android.schlauebox.core.remote.model.RLockerKeyPurpose
+import hr.sil.android.schlauebox.core.remote.model.RMasterUnitType
 import hr.sil.android.schlauebox.data.ItemHomeScreen
+import hr.sil.android.schlauebox.store.model.MPLDevice
+
+
+import hr.sil.android.schlauebox.store.MPLDeviceStore
 
 
 @SuppressLint("StateFlowValueCalledInComposition")
@@ -74,13 +88,6 @@ fun NavHomeScreen(
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            // Header with user info
-            UserAddressHeader(
-                userName = uiState.userName,
-                address = uiState.address,
-                modifier = Modifier.padding(top = 40.dp, start = 16.dp, end = 16.dp)
-            )
-
             // Profile icon overlay
             Box(
                 modifier = Modifier.fillMaxWidth(),
@@ -88,6 +95,14 @@ fun NavHomeScreen(
             ) {
                 ProfileIcon()
             }
+
+            // Header with user info
+            UserAddressHeader(
+                userName = uiState.userName,
+                address = uiState.address,
+                modifier = Modifier.padding(top = 40.dp, start = 16.dp, end = 16.dp)
+            )
+
 
             // Device list or empty state
             if (uiState.devices.isEmpty()) {
@@ -157,7 +172,7 @@ private fun ProfileIcon(
         modifier = modifier
             .size(50.dp)
             .clip(CircleShape)
-            .background(Color.White), // Adjust based on profile_icon_background
+            .background(colorResource(R.color.colorDarkAccent)), // Adjust based on profile_icon_background
         contentAlignment = Alignment.Center
     ) {
         Image(
@@ -186,7 +201,9 @@ private fun DeviceList(
                 is ItemHomeScreen.Child -> {
                     DeviceChildItem(
                         device = item,
-                        //onClick = { onDeviceClick(item) }
+                        onClick = {
+                           // onDeviceClick(item)
+                        }
                     )
                 }
             }
@@ -213,27 +230,259 @@ private fun DeviceHeaderItem(
 @Composable
 private fun DeviceChildItem(
     device: ItemHomeScreen.Child,
-    //onClick: () -> Unit,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    // Implement your device item UI here based on your existing adapter layout
-    // This is a placeholder - adjust based on your MplSplAdapter implementation
-    Box(
+    val context = LocalContext.current
+    val parcelLocker = MPLDeviceStore.devices[device.mplOrSplDevice?.macAddress]
+
+    if (parcelLocker == null) return
+
+    val deviceState = remember(parcelLocker) {
+        calculateDeviceState(parcelLocker, context)
+    }
+
+    Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-            .background(
-                color = Color.DarkGray,
-                shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp)
-            )
-            .padding(16.dp)
+            .padding(horizontal = 10.dp, vertical = 5.dp)
+            .background( colorResource(R.color.colorWhite30PercentTransparency) )
+            .clickable(enabled = !deviceState.unavailable, onClick = onClick),
+            //.padding(10.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = device.mplOrSplDevice?.name ?: "Unknown Device",
-            color = Color.White,
-            fontSize = 16.sp
-        )
+        // Device Icon Section with Badge
+        Box(
+            modifier = Modifier
+                .size(55.dp)
+                .weight(2f),
+            contentAlignment = Alignment.Center
+        ) {
+            // Main device icon
+            Image(
+                painter = painterResource(id = deviceState.iconResId),
+                contentDescription = "Device Icon",
+                modifier = Modifier.size(45.dp)
+            )
+
+            // Notification badge (circle with count)
+            if (deviceState.notificationCount > 0) {
+                Box(
+                    modifier = Modifier
+                        .size(20.dp)
+                        .align(Alignment.TopEnd)
+                        .offset(x = 5.dp, y = (-5).dp)
+                        .background(
+                            color = Color.Red,
+                            shape = CircleShape
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = deviceState.notificationCount.toString(),
+                        color = Color.White,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Normal
+                    )
+                }
+            }
+        }
+
+        // Device Data Section
+        Column(
+            modifier = Modifier
+                .weight(6.5f)
+                .padding(start = 10.dp),
+            verticalArrangement = Arrangement.spacedBy(2.dp)
+        ) {
+            // Device Name
+            if (deviceState.showName && deviceState.name.isNotEmpty()) {
+                Text(
+                    text = deviceState.name.uppercase(),
+                    color = Color.White,
+                    fontSize = 13.sp,
+                    //fontWeight = FontWeight.Normal
+                )
+            }
+
+            // Device Address
+            if (deviceState.showAddress && deviceState.address.isNotEmpty()) {
+                Text(
+                    text = deviceState.address.uppercase(),
+                    color = Color.White,
+                    fontSize = 10.sp,
+                    //fontWeight = FontWeight.Normal
+                )
+            }
+
+            // Locker Availability
+            if (deviceState.showAvailability && deviceState.availabilityText.isNotEmpty()) {
+                Text(
+                    text = deviceState.availabilityText.uppercase(),
+                    color = Color.Black,
+                    fontSize = 10.sp,
+                    //fontWeight = FontWeight.Bold
+                )
+            }
+        }
+
+        // Arrow Icon
+        if (deviceState.showArrow) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_chevron_right),
+                contentDescription = "Navigate",
+                modifier = Modifier
+                    .weight(1.5f)
+                    .padding(start = 20.dp)
+            )
+        } else {
+            Spacer(modifier = Modifier.weight(1.5f))
+        }
     }
+}
+
+// Data class to hold device UI state
+private data class DeviceState(
+    val iconResId: Int,
+    val name: String,
+    val address: String,
+    val availabilityText: String,
+    val showName: Boolean,
+    val showAddress: Boolean,
+    val showAvailability: Boolean,
+    val showArrow: Boolean,
+    val unavailable: Boolean,
+    val notificationCount: Int
+)
+
+// Calculate device state based on all conditions
+private fun calculateDeviceState(parcelLocker: MPLDevice, context: Context): DeviceState {
+    // Calculate notification count
+    val lockerKeys = parcelLocker.activeKeys.filter {
+        it.purpose != RLockerKeyPurpose.UNKNOWN && it.purpose != RLockerKeyPurpose.PAH
+    }
+    val usedKeys = DatabaseHandler.deliveryKeyDb.get(parcelLocker.macAddress)?.keyIds ?: listOf()
+    val notificationCount = lockerKeys.map { it.id }.subtract(usedKeys.asIterable()).size
+
+    var unavailable = false
+    var showAvailability = false
+    var availabilityText = ""
+    var name = parcelLocker.name
+    var address = parcelLocker.address
+    var showArrow = true
+
+    // Determine icon based on device type and state
+    val iconResId = when {
+        // MPL Master Device
+        (parcelLocker.installationType == InstalationType.DEVICE &&
+                parcelLocker.masterUnitType == RMasterUnitType.MPL) ||
+                parcelLocker.type == MPLDeviceType.MASTER -> {
+            when {
+                parcelLocker.isInBleProximity &&
+                        parcelLocker.hasUserRightsOnLocker() &&
+                        parcelLocker.mplMasterDeviceStatus == MPLDeviceStatus.REGISTERED -> {
+                    showAvailability = true
+                    availabilityText = parcelLocker.availableLockers.joinToString(" ") {
+                        "${it.size}: ${it.count}"
+                    }
+                    R.drawable.ic_available_mpl
+                }
+                !parcelLocker.isInBleProximity && parcelLocker.hasUserRightsOnLocker() -> {
+                    showAvailability = true
+                    availabilityText = parcelLocker.availableLockers.joinToString(" ") {
+                        "${it.size}: ${it.count}"
+                    }
+                    R.drawable.ic_locker_yellow
+                }
+                parcelLocker.isInBleProximity && !parcelLocker.hasUserRightsOnLocker() -> {
+                    R.drawable.ic_unregistered_mpl
+                }
+                else -> {
+                    unavailable = true
+                    showArrow = false
+                    address = context.getString(R.string.app_generic_not_activated)
+                    R.drawable.ic_unavailable_mpl
+                }
+            }
+        }
+
+        // Tablet Device
+        parcelLocker.installationType == InstalationType.TABLET ||
+                parcelLocker.type == MPLDeviceType.TABLET -> {
+            when {
+                parcelLocker.isInBleProximity &&
+                        parcelLocker.mplMasterDeviceStatus == MPLDeviceStatus.REGISTERED &&
+                        parcelLocker.masterUnitId != -1 -> {
+                    R.drawable.ic_t_mpl_green
+                }
+                parcelLocker.mplMasterDeviceStatus == MPLDeviceStatus.REGISTERED &&
+                        parcelLocker.isInBleProximity &&
+                        parcelLocker.masterUnitId == -1 -> {
+                    R.drawable.ic_t_mpl_grey
+                }
+                !parcelLocker.isInBleProximity -> {
+                    R.drawable.ic_t_mpl_yellow
+                }
+                else -> {
+                    unavailable = true
+                    showArrow = false
+                    R.drawable.ic_t_mpl_red
+                }
+            }
+        }
+
+        // SPL Device
+        else -> {
+            when {
+                parcelLocker.isInBleProximity && parcelLocker.hasUserRightsOnLocker() -> {
+                    if (parcelLocker.name.isEmpty()) {
+                        name = parcelLocker.macAddress
+                    }
+                    R.drawable.ic_available_spl
+                }
+                parcelLocker.isInBleProximity &&
+                        !parcelLocker.isSplActivate &&
+                        !parcelLocker.hasUserRightsOnLocker() -> {
+                    if (parcelLocker.address.isEmpty()) {
+                        name = parcelLocker.macAddress
+                        address = context.getString(R.string.app_generic_not_activated)
+                    }
+                    R.drawable.ic_s_locker_grey
+                }
+                !parcelLocker.isInBleProximity && parcelLocker.hasUserRightsOnLocker() -> {
+                    R.drawable.ic_s_locker_yellow
+                }
+                parcelLocker.isInBleProximity && !parcelLocker.hasUserRightsOnLocker() -> {
+                    unavailable = true
+                    showArrow = false
+                    R.drawable.ic_unavailable_spl
+                }
+                else -> {
+                    unavailable = true
+                    showArrow = false
+                    address = context.getString(R.string.app_generic_access_forbidden)
+                    R.drawable.ic_unavailable_spl
+                }
+            }
+        }
+    }
+
+    // Determine what to show based on name and address
+    val showName = name.isNotEmpty()
+    val showAddress = address.isNotEmpty()
+
+    return DeviceState(
+        iconResId = iconResId,
+        name = name,
+        address = address,
+        availabilityText = availabilityText,
+        showName = showName,
+        showAddress = showAddress,
+        showAvailability = showAvailability,
+        showArrow = showArrow,
+        unavailable = unavailable,
+        notificationCount = notificationCount
+    )
 }
 
 @Composable

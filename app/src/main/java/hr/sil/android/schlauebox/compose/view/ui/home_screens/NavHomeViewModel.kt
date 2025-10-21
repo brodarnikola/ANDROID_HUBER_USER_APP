@@ -86,14 +86,14 @@ class NavHomeViewModel @Inject constructor()  : BaseViewModel<NavHomeUiState, Ho
 
         if (splList.isNotEmpty()) {
             val header = ItemHomeScreen.Header()
-            header.headerTitle = "SPL Devices" // Use string resource
+            header.headerTitle = "Single" // Use string resource
             items.add(header)
             items.addAll(splList.map { ItemHomeScreen.Child(it) })
         }
 
         if (mplList.isNotEmpty()) {
             val header = ItemHomeScreen.Header()
-            header.headerTitle = "MPL Devices" // Use string resource
+            header.headerTitle = "Multiple" // Use string resource
             items.add(header)
             items.addAll(mplList.map { ItemHomeScreen.Child(it) })
         }

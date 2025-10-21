@@ -1,34 +1,72 @@
 package hr.sil.android.schlauebox.compose.view.ui.main_activity
 
 
-import android.Manifest
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Intent
 import android.os.Build
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dagger.hilt.android.AndroidEntryPoint
-import hr.sil.android.schlauebox.App
+import androidx.navigation.compose.currentBackStackEntryAsState
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity.SignUpOnboardingApp
-import hr.sil.android.schlauebox.compose.view.ui.theme.AppTheme
+
+
+data class BottomNavigationBarItem(
+    val title: String,
+    val route: String,
+    val selectedIcon: ImageVector,
+    val unselectedIcon: ImageVector,
+    val badgeAmount: Int? = null
+)
+
+
+fun bottomNavigationItems(): List<BottomNavigationBarItem> {
+    // setting up the individual tabs
+    val homeTab = BottomNavigationBarItem(
+        title = "Home",
+        route =  MainDestinations.HOME,
+        selectedIcon = Icons.Filled.Home,
+        unselectedIcon = Icons.Outlined.Home
+    )
+    val alertsTab = BottomNavigationBarItem(
+        title = "Alerts",
+        route =  MainDestinations.ALERTS,
+        selectedIcon = Icons.Filled.Email,
+        unselectedIcon = Icons.Outlined.Email,
+        badgeAmount = 7
+    )
+    val locationTab = BottomNavigationBarItem(
+        title = "Location",
+        route =  MainDestinations.LOCATION,
+        selectedIcon = Icons.Filled.Person,
+        unselectedIcon = Icons.Outlined.Person
+    )
+
+    // creating a list of all the tabs
+    val tabBarItems = listOf(homeTab, alertsTab, locationTab )
+    return tabBarItems
+}
 
 // Main Composable with Overlays
 @RequiresApi(Build.VERSION_CODES.S)
@@ -39,6 +77,20 @@ fun MainActivityContent(
     onNavigateToLogin: () -> Unit
 ) {
     val systemState by systemStateViewModel.systemState.collectAsState()
+
+    val appState = rememberMainAppState()
+
+    val bottomNavigationItems = bottomNavigationItems()
+
+    val showBottomBar = rememberSaveable { mutableStateOf(true) }
+    val navBackStackEntry =
+        appState.navController.currentBackStackEntryAsState() // navController.currentBackStackEntryAsState()
+
+    showBottomBar.value = when {
+        navBackStackEntry.value?.destination?.route?.contains(MainDestinations.MOVIE_DETAILS) == true -> false
+        else -> true
+    }
+
 
     Scaffold(
         topBar = {
@@ -59,14 +111,24 @@ fun MainActivityContent(
                     containerColor = MaterialTheme.colorScheme.surface
                 )
             )
-        }
+        },
+        bottomBar = {
+                TabView(
+                    bottomNavigationItems,
+                    navBackStackEntry)
+                { route ->
+                    Log.d("MENU", "route is: $route")
+                    appState.navigateToRoute(route)
+                }
+        },
     ) { paddingValues ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            MainComposeApp()
+
+            MainComposeApp(appState, navBackStackEntry)
 
             // Overlays - shown in priority order
             when {
@@ -88,6 +150,14 @@ fun MainActivityContent(
                     LocationGPSOverlay()
                 }
             }
+
+            Image(
+                painter = painterResource(id = R.drawable.bg_home),
+                contentDescription = "Background",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+
         }
     }
 }
