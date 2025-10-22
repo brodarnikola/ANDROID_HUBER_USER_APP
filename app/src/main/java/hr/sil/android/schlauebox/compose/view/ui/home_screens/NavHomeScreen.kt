@@ -52,6 +52,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.lifecycle.viewmodel.compose.viewModel
 import hr.sil.android.ble.scanner.scan_multi.properties.advv2.common.MPLDeviceStatus
 import hr.sil.android.schlauebox.cache.DatabaseHandler
@@ -98,13 +99,6 @@ fun NavHomeScreen(
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            // Profile icon overlay
-//            Box(
-//                modifier = Modifier.fillMaxWidth(),
-//                contentAlignment = Alignment.Center
-//            ) {
-//                ProfileIcon()
-//            }
 
             // Header with user info
             UserAddressHeader(
@@ -166,19 +160,25 @@ private fun UserAddressHeader(
         ) {
             Text(
                 text = userName,
-                color = Color.Black,
+                color = colorResource(R.color.colorBlack),
                 style = MaterialTheme.typography.bodyMedium.copy(textAlign = TextAlign.Center),
                 fontWeight = FontWeight.Bold,
                 fontSize = 12.sp,
+                lineHeight = 14.sp,
+                maxLines = 1,  // Maximum 2 lines
+                overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.padding(horizontal = 10.dp)
             )
 
             Text(
                 text = address,
-                color = Color.Black,
+                color = colorResource(R.color.colorBlack),
                 style = MaterialTheme.typography.bodyMedium.copy(textAlign = TextAlign.Center),
                 fontWeight = FontWeight.Normal,
                 fontSize = 13.sp,
+                lineHeight = 14.sp,
+                maxLines = 1,  // Maximum 2 lines
+                overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.padding(horizontal = 10.dp, vertical = 2.dp)
             )
         }
@@ -197,25 +197,6 @@ private fun UserAddressHeader(
                 modifier = Modifier.size(24.dp)
             )
         }
-    }
-}
-
-@Composable
-private fun ProfileIcon(
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier
-            .size(50.dp)
-            .clip(CircleShape)
-            .background(colorResource(R.color.colorDarkAccent)), // Adjust based on profile_icon_background
-        contentAlignment = Alignment.Center
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_user),
-            contentDescription = "Profile Icon",
-            modifier = Modifier.size(24.dp)
-        )
     }
 }
 
@@ -253,9 +234,9 @@ private fun DeviceHeaderItem(
     modifier: Modifier = Modifier
 ) {
     Text(
-        text = headerTitle,
+        text = headerTitle.uppercase(),
         fontSize = 18.sp,
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight.Normal,
         color = Color.White,
         modifier = modifier
             .fillMaxWidth()
@@ -281,7 +262,7 @@ private fun DeviceChildItem(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 10.dp, vertical = 5.dp)
+            .padding( vertical = 5.dp)
             .background( colorResource(R.color.colorWhite30PercentTransparency) )
             .clickable(enabled = !deviceState.unavailable, onClick = onClick),
             //.padding(10.dp),
@@ -307,7 +288,7 @@ private fun DeviceChildItem(
                     modifier = Modifier
                         .size(20.dp)
                         .align(Alignment.TopEnd)
-                        .offset(x = 5.dp, y = (-5).dp)
+                        .offset(x = (-5).dp, y = (-5).dp)
                         .background(
                             color = Color.Red,
                             shape = CircleShape
@@ -316,9 +297,11 @@ private fun DeviceChildItem(
                 ) {
                     Text(
                         text = deviceState.notificationCount.toString(),
-                        color = Color.White,
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Normal
+                        color = colorResource(R.color.colorWhite),
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Normal,
+                        modifier = Modifier
+                            .offset( y = (-3).dp)
                     )
                 }
             }
@@ -328,16 +311,22 @@ private fun DeviceChildItem(
         Column(
             modifier = Modifier
                 .weight(6.5f)
-                .padding(start = 10.dp),
+                .padding(start = 10.dp)
+                .padding(vertical = 10.dp),
             verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
             // Device Name
             if (deviceState.showName && deviceState.name.isNotEmpty()) {
                 Text(
                     text = deviceState.name.uppercase(),
-                    color = Color.White,
+                    color = colorResource(R.color.colorWhite),
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Normal,
                     fontSize = 13.sp,
-                    //fontWeight = FontWeight.Normal
+                    lineHeight = 14.sp,
+                    maxLines = 2,  // Maximum 2 lines
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(horizontal = 10.dp)
                 )
             }
 
@@ -345,9 +334,14 @@ private fun DeviceChildItem(
             if (deviceState.showAddress && deviceState.address.isNotEmpty()) {
                 Text(
                     text = deviceState.address.uppercase(),
-                    color = Color.White,
-                    fontSize = 10.sp,
-                    //fontWeight = FontWeight.Normal
+                    color = colorResource(R.color.colorWhite),
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 13.sp,
+                    lineHeight = 14.sp,
+                    maxLines = 2,  // Maximum 2 lines
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(horizontal = 10.dp)
                 )
             }
 
@@ -355,9 +349,14 @@ private fun DeviceChildItem(
             if (deviceState.showAvailability && deviceState.availabilityText.isNotEmpty()) {
                 Text(
                     text = deviceState.availabilityText.uppercase(),
-                    color = Color.Black,
-                    fontSize = 10.sp,
-                    //fontWeight = FontWeight.Bold
+                    color = colorResource(R.color.colorBlack),
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 13.sp,
+                    lineHeight = 14.sp,
+                    maxLines = 1,  // Maximum 2 lines
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(horizontal = 10.dp)
                 )
             }
         }
