@@ -1,10 +1,4 @@
-/*
- * Copyright © 2022 Sunbird. All rights reserved.
- *
- * Sunbird Secure Messaging
- *
- * Created by Cinnamon.
- */
+
 package hr.sil.android.schlauebox.compose.view.ui.home_screens
 
 import android.annotation.SuppressLint
