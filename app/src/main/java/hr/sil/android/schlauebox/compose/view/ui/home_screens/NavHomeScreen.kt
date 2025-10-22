@@ -39,11 +39,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -137,91 +141,61 @@ private fun UserAddressHeader(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(100.dp) ,
-        contentAlignment = Alignment.Center
+            .height(100.dp),
+        contentAlignment = Alignment.TopCenter  // Changed from Center to TopCenter
     ) {
-
+        // Background card with address info
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Bottom,
-            modifier = Modifier.padding(horizontal = 4.dp)
-                .padding(top = 30.dp)
+            verticalArrangement = Arrangement.Center,  // Changed from Bottom to Center
+            modifier = Modifier
+                .padding(horizontal = 4.dp)
+                .padding(top = 35.dp)  // Space for the profile icon
+                .height(65.dp)
                 .fillMaxWidth()
-                .background(colorResource(R.color.colorWhite)    )
-                .border(1.dp, colorResource(R.color.colorGray),
-                    androidx.compose.foundation.shape.RoundedCornerShape(8.dp))
-        ) {  
-
-            androidx.compose.material3.Text(
+                .background(
+                    color = colorResource(R.color.colorWhite),
+                    shape = RoundedCornerShape(8.dp)
+                )
+                .border(
+                    width = 1.dp,
+                    color = colorResource(R.color.colorGray),
+                    shape = RoundedCornerShape(8.dp)
+                )
+                .padding(top = 15.dp)  // Internal padding to push text down
+        ) {
+            Text(
                 text = userName,
-                color = Black, // Material3.colorScheme.onSurface, // onboarding screens - default color
-                style = Material3.typography.bodyMedium.copy(textAlign = TextAlign.Center),
+                color = Color.Black,
+                style = MaterialTheme.typography.bodyMedium.copy(textAlign = TextAlign.Center),
                 fontWeight = FontWeight.Bold,
+                fontSize = 12.sp,
                 modifier = Modifier.padding(horizontal = 10.dp)
             )
 
-//            Text(
-//                text = userName,
-//                fontSize = 12.sp,
-//                style = AppTypography.titleLarge,
-//                textAlign = TextAlign.Center,
-//                color = colorResource(R.color.colorBlack),
-//            )
-
-//            Text(
-//                text = userName,
-//                fontSize = 12.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = Color.Black,
-//                textAlign = TextAlign.Center
-//            )
-//
-//            Spacer(modifier = Modifier.height(2.dp))
-
-            androidx.compose.material3.Text(
+            Text(
                 text = address,
-                color = Black, // Material3.colorScheme.onSurface, // onboarding screens - default color
-                style = Material3.typography.bodyMedium.copy(textAlign = TextAlign.Center),
+                color = Color.Black,
+                style = MaterialTheme.typography.bodyMedium.copy(textAlign = TextAlign.Center),
                 fontWeight = FontWeight.Normal,
-                modifier = Modifier.padding(horizontal = 10.dp)
+                fontSize = 13.sp,
+                modifier = Modifier.padding(horizontal = 10.dp, vertical = 2.dp)
             )
-
-//            Text(
-//                text = address,
-//                fontSize = 13.sp,
-//                style = AppTypography.bodyLarge,
-//                textAlign = TextAlign.Center,
-//                color = colorResource(R.color.colorBlack),
-//            )
-
-//            Text(
-//                text = address,
-//                fontSize = 13.sp,
-//                fontWeight = FontWeight.Normal,
-//                color = Color.Black,
-//                textAlign = TextAlign.Center
-//            )
         }
 
-        Column(
-            modifier = Modifier.fillMaxSize().border(1.dp, Color.Red, RectangleShape),
-            horizontalAlignment = Alignment.CenterHorizontally,
+        // Profile icon overlay (on top)
+        Box(
+            modifier = Modifier
+                .size(50.dp)
+                .clip(CircleShape)
+                .background(colorResource(R.color.colorDarkAccent)),
+            contentAlignment = Alignment.Center
         ) {
-
-            Box(
-                modifier = modifier
-                    .size(50.dp)
-                    .clip(CircleShape)
-                    //.padding(bottom = 40.dp)
-                    .background(colorResource(R.color.colorDarkAccent)), // Adjust based on profile_icon_background
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_user),
-                    contentDescription = "Profile Icon",
-                    modifier = Modifier.size(24.dp)
-                )
-            }
+            Image(
+                painter = painterResource(id = R.drawable.ic_user),
+                contentDescription = "Profile Icon",
+                modifier = Modifier.size(24.dp)
+            )
         }
     }
 }

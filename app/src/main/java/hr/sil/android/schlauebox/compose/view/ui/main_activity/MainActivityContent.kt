@@ -97,7 +97,7 @@ fun MainActivityContent(
             TopAppBar(
                 title = {
                     Box(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().padding(end = 20.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Image(
