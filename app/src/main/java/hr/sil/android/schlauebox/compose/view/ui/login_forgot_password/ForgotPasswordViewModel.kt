@@ -5,7 +5,7 @@
  *
  * Created by Cinnamon.
  */
-package com.sunbird.ui.setup.login
+package hr.sil.android.schlauebox.compose.view.ui.login_forgot_password
 
 import android.app.Activity
 import android.content.Context
@@ -51,7 +51,7 @@ class ForgotPasswordViewModel @Inject constructor()  : BaseViewModel<ForgotPassw
                     if (response.isSuccessful) {
                         log.info("Response code 22: ${response.code()}, is successfully: ${response.isSuccessful}, body is: ${response.body()}")
                         sendUiEvent(ForgotPasswordUiEvent.NavigateToNextScreen(SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route))
-//                        val startIntent = Intent(event.context, MainActivity::class.java)
+//                        val startIntent = Intent(event.context, MainActivity1::class.java)
 //                        event.context.startActivity(startIntent)
 //                        event.activity.finish()
                     } else {

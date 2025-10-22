@@ -22,7 +22,7 @@ import hr.sil.android.schlauebox.store.DeviceStoreRemoteUpdater
 import hr.sil.android.schlauebox.store.MPLDeviceStore
 import hr.sil.android.schlauebox.store.model.MPLDevice
 import hr.sil.android.schlauebox.view.ui.BaseActivity
-import hr.sil.android.schlauebox.view.ui.MainActivity
+import hr.sil.android.schlauebox.view.ui.MainActivity1
 import hr.sil.android.schlauebox.view.ui.dialog.CanNotDeactivateSPLDialog
 import hr.sil.android.schlauebox.view.ui.dialog.DeactivateSplDialog
 import hr.sil.android.schlauebox.view.ui.dialog.ModemQueueNotZeroDialog
@@ -171,7 +171,7 @@ class EditSplActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_layout
         withContext(Dispatchers.Main) {
             if( deactivateSplPlusBackend ) {
                 //App.ref.toast(getString(R.string.app_generic_success))
-                val startIntent = Intent(this@EditSplActivity, MainActivity::class.java)
+                val startIntent = Intent(this@EditSplActivity, MainActivity1::class.java)
                 startActivity(startIntent)
                 finish()
                 log.info("Success deactivation device on ${device?.macAddress}")

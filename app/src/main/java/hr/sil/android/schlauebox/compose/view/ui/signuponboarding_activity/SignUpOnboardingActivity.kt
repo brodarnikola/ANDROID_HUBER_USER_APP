@@ -11,13 +11,12 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import hr.sil.android.schlauebox.App
-import hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity.SignUpOnboardingViewModel
+import hr.sil.android.schlauebox.compose.view.ui.main_activity.MainActivity
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTheme
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.preferences.PreferenceStore
 import hr.sil.android.schlauebox.util.SettingsHelper
 import hr.sil.android.schlauebox.util.backend.UserUtil
-import hr.sil.android.schlauebox.view.ui.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -63,7 +62,7 @@ class SignUpOnboardingActivity : ComponentActivity() {
 
 //            Timber.d("Device-NotRooted")
 //            if (viewModel.isUserLoggedIn()) {
-//                val intent = Intent(this, MainActivity::class.java).apply {
+//                val intent = Intent(this, MainActivity1::class.java).apply {
 //                flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP) }
 //                startActivity(intent)
 //                finish()
@@ -110,7 +109,6 @@ class SignUpOnboardingActivity : ComponentActivity() {
 
                 if (!PreferenceStore.userHash.isNullOrBlank() && SettingsHelper.userRegisterOrLogin) {
                     if (UserUtil.login(SettingsHelper.usernameLogin.toString())) {
-                        MainActivity::class.java
 
                         val startIntent =
                             Intent(this@SignUpOnboardingActivity, MainActivity::class.java)

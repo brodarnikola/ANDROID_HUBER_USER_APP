@@ -5,7 +5,7 @@ import android.os.Looper
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.view.ui.MainActivity
+import hr.sil.android.schlauebox.view.ui.MainActivity1
 
 
 abstract class BaseFragment : Fragment() {
@@ -16,7 +16,7 @@ abstract class BaseFragment : Fragment() {
     fun setFragment(navFragment: Fragment, forgetHistory: Boolean = false) {
         val ctx = context ?: return
         val pendingRunnable = Runnable {
-            val fragmentTransaction = (ctx as MainActivity).supportFragmentManager.beginTransaction()
+            val fragmentTransaction = (ctx as MainActivity1).supportFragmentManager.beginTransaction()
             fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
             fragmentTransaction.replace(R.id.main_frame_layout, navFragment, navFragment.tag).addToBackStack(null)
             if (forgetHistory) {

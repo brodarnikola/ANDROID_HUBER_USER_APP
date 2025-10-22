@@ -5,7 +5,7 @@
  *
  * Created by Cinnamon.
  */
-package com.sunbird.ui.setup.login
+package hr.sil.android.schlauebox.compose.view.ui.login_forgot_password
 
 import android.app.Activity
 import android.content.Context

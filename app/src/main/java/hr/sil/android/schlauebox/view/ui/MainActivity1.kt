@@ -3,37 +3,28 @@ package hr.sil.android.schlauebox.view.ui
 import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.provider.Settings
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.databinding.ActivityMainBinding
 import hr.sil.android.schlauebox.events.UnauthorizedUserEvent
-import hr.sil.android.schlauebox.util.SettingsHelper
-import hr.sil.android.schlauebox.util.backend.UserUtil
-import hr.sil.android.schlauebox.util.backend.UserUtil.logout
 import hr.sil.android.schlauebox.view.ui.home.fragment.NavHomeFragment
 import hr.sil.android.schlauebox.view.ui.settings.NavSettingsFragment
 import hr.sil.android.schlauebox.view.ui.tcc.NavTccFragment
 import hr.sil.android.view_util.extensions.hideKeyboard
 import hr.sil.android.view_util.permission.DroidPermission
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
 
-class MainActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_layout, R.id.no_location_gps_layout) {
+class MainActivity1 : BaseActivity(R.id.no_ble_layout, R.id.no_internet_layout, R.id.no_location_gps_layout) {
 
     private val log = logger()
 
@@ -53,25 +44,6 @@ class MainActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_layout, R
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        if (!UserUtil.isUserLoggedIn()) {
-////            setContentView(_RelativeLayout(this).apply {
-////                progressBar {
-////                    isIndeterminate = true
-////                }.lparams {
-////                    centerInParent()
-////                }
-////            })
-//            GlobalScope.launch(Dispatchers.Main) {
-//                if (UserUtil.login(SettingsHelper.usernameLogin)) {
-//                    continueOnCreate(savedInstanceState)
-//                } else {
-//                    logout()
-//                }
-//            }
-//        } else {
-//            continueOnCreate(savedInstanceState)
-//        }
         continueOnCreate(savedInstanceState)
 
     }
@@ -88,29 +60,6 @@ class MainActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_layout, R
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         setNotification()
-//        binding.mainBottomHeaderId.setOnNavigationItemSelectedListener { item: MenuItem ->
-//            val selectedNavFragment = NavFragment.values().firstOrNull { it.navItemIndex == item.itemId }
-//            val fragmentManager = supportFragmentManager
-//            // this will clear the back stack and displays no animation on the screen
-//            fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-//            if (selectedNavFragment != null) setNavFragment(selectedNavFragment)
-//            else when (item.itemId) {
-//                R.id.navigation_home -> {
-//                    setNavFragment(NavFragment.HOME, true)
-//                }
-//
-//                R.id.navigation_tc -> {
-//                    setNavFragment(NavFragment.TCC, true)
-//                }
-//
-//                R.id.navigation_settings -> {
-//                    setNavFragment(NavFragment.SETTINGS, true)
-//                }
-//
-//            }
-//
-//            true
-//        }
         //get start fragment
         val startNavFragment = NavFragment.HOME
 
@@ -214,15 +163,6 @@ class MainActivity : BaseActivity(R.id.no_ble_layout, R.id.no_internet_layout, R
                     channelName, NotificationManager.IMPORTANCE_LOW))
         }
 
-        // If a notification message is tapped, any data accompanying the notification
-        // message is available in the intent extras. In this sample the launcher
-        // intent is fired when the notification is tapped, so any accompanying data would
-        // be handled here. If you want a different intent fired, set the click_action
-        // field of the notification message to the desired intent. The launcher intent
-        // is used when no click_action is specified.
-        //
-        // Handle possible data accompanying notification message.
-        // [START handle_data_extras]
         if (intent.extras != null) {
             for (key in intent.extras!!.keySet()) {
                 val value = intent.extras!!.get(key)

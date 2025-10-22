@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.ui.MainActivity"
+            android:name=".compose.view.ui.main_activity.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/MainTheme"
@@ -114,12 +114,12 @@
             android:theme="@style/IntroTheme" />
         <activity
             android:name=".view.ui.home.activities.AccessSharingActivity"
-            android:parentActivityName=".view.ui.MainActivity"
+            android:parentActivityName=".view.ui.MainActivity1"
             android:screenOrientation="portrait"
             android:theme="@style/SecondLevel" />
         <activity
             android:name=".view.ui.home.activities.PickupParcelActivity"
-            android:parentActivityName=".view.ui.MainActivity"
+            android:parentActivityName=".view.ui.MainActivity1"
             android:screenOrientation="portrait"
             android:theme="@style/SecondLevel" />
         <activity
@@ -129,7 +129,7 @@
             android:theme="@style/SecondLevel" />
         <activity
             android:name=".view.ui.home.activities.SelectParcelSizeActivity"
-            android:parentActivityName=".view.ui.MainActivity"
+            android:parentActivityName=".view.ui.MainActivity1"
             android:screenOrientation="portrait"
             android:theme="@style/SecondLevel"
             android:windowSoftInputMode="adjustPan" />
@@ -141,12 +141,12 @@
         <activity android:name=".view.ui.BaseActivity" />
         <activity
             android:name=".view.ui.home.activities.SendParcelsOverviewActivity"
-            android:parentActivityName=".view.ui.MainActivity"
+            android:parentActivityName=".view.ui.MainActivity1"
             android:screenOrientation="portrait"
             android:theme="@style/SecondLevel" />
         <activity
             android:name=".view.ui.home.activities.HelpActivity"
-            android:parentActivityName=".view.ui.MainActivity"
+            android:parentActivityName=".view.ui.MainActivity1"
             android:screenOrientation="portrait"
             android:theme="@style/SecondLevel"
             android:windowSoftInputMode="adjustPan" />

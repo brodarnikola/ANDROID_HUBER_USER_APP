@@ -5,7 +5,7 @@
  *
  * Created by Cinnamon.
  */
-package com.sunbird.ui.setup.login
+package hr.sil.android.schlauebox.compose.view.ui.login_forgot_password
 
 import android.app.Activity
 import android.content.Intent
@@ -47,11 +47,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity.SignUpOnboardingSections
 import hr.sil.android.schlauebox.compose.view.ui.components.NewDesignButton
+import hr.sil.android.schlauebox.compose.view.ui.main_activity.MainActivity
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTypography
 import hr.sil.android.schlauebox.compose.view.ui.theme.DarkModeTransparent
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.utils.UiEvent
-import hr.sil.android.schlauebox.view.ui.MainActivity
+import hr.sil.android.schlauebox.view.ui.MainActivity1
 import hr.sil.android.schlauebox.view.ui.intro.TCInvitedUserActivity
 
 @OptIn(ExperimentalComposeUiApi::class)

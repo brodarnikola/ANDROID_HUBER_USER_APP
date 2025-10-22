@@ -16,7 +16,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 //import com.google.android.material.textfield.TextInputLayout
-import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
 //import hr.sil.android.schlauebox.cache.DataCache
 import hr.sil.android.schlauebox.core.remote.WSUser
@@ -28,7 +27,7 @@ import hr.sil.android.schlauebox.util.backend.UserUtil
 import hr.sil.android.schlauebox.util.connectivity.NetworkChecker
 import hr.sil.android.schlauebox.view.ui.BaseActivity
 import hr.sil.android.schlauebox.view.ui.LoginActivity
-import hr.sil.android.schlauebox.view.ui.MainActivity
+import hr.sil.android.schlauebox.view.ui.MainActivity1
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -164,7 +163,7 @@ class InviteUserActivity : BaseActivity(noWifiViewId = R.id.no_internet_layout) 
                                 SettingsHelper.userRegisterOrLogin = true
                                 WSUser.registerDevice(UserUtil.fcmTokenRequest(), DeviceInfo.getJsonInstance())
 
-                                val intent = Intent(this@InviteUserActivity, MainActivity::class.java)
+                                val intent = Intent(this@InviteUserActivity, MainActivity1::class.java)
                                 startActivity(intent)
                                 finish()
                             }
