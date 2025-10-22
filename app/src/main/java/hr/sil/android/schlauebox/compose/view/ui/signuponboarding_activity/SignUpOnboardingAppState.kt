@@ -1,5 +1,4 @@
-
-package hr.sil.android.schlauebox.compose.view.ui
+package hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity
 
 
 import android.content.res.Resources
@@ -9,15 +8,13 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavDestination
-import androidx.navigation.NavGraph
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import kotlinx.coroutines.CoroutineScope
@@ -73,16 +70,18 @@ class SignUpAppState(
         navController.navigateUp()
     }
 
-    fun navigateToRoute(route: String) {
-        if (route != currentRoute) {
-            navController.navigate(route) {
-                launchSingleTop = true
-                restoreState = true
-                // Pop up backstack to the first destination and save state. This makes going back
-                // to the start destination when pressing back in any other bottom tab.
-                // popUpTo(findStartDestination(navController.graph).id) { saveState = true }
+    fun navigateToRoute(route: String, navBackStackEntry: State<NavBackStackEntry?>) {
+        //if(navBackStackEntry.value?.lifecycleIsResumed() == true)
+            if (route != currentRoute) {
+                navController.navigate(route)
+                    //launchSingleTop = true
+                    //restoreState = true
+
+                    // Pop up backstack to the first destination and save state. This makes going back
+                    // to the start destination when pressing back in any other bottom tab.
+                    // popUpTo(findStartDestination(navController.graph).id) { saveState = true }
+
             }
-        }
     }
 
     fun navigateToRouteDeletePreviousComposable(route: String) {
@@ -105,9 +104,9 @@ class SignUpAppState(
     }
 }
 
-private tailrec fun findStartDestination(graph: NavDestination): NavDestination {
-    return if (graph is NavGraph) findStartDestination(graph.findStartDestination()) else graph
-}
+//private tailrec fun findStartDestination(graph: NavDestination): NavDestination {
+//    return if (graph is NavGraph) findStartDestination(graph.findStartDestination()) else graph
+//}
 
 /**
  * If the lifecycle is not resumed it means this NavBackStackEntry already processed a nav event.

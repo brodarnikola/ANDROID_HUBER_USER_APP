@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.DataCache
+//import hr.sil.android.schlauebox.cache.DataCache
 import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.remote.model.*
 import hr.sil.android.schlauebox.core.util.logger
@@ -168,12 +168,12 @@ class KeySharingAdapter(var keys: MutableList<ItemRGroupInfo>
 
         var deletedInOwnerList: Boolean = false
 
-        for( ownerItems in DataCache.getGroupMembers() )  {
+        for( ownerItems in WSUser.getGroupMembers() ?: mutableListOf() ) { //DataCache.getGroupMembers() )  {
 
             if( ownerItems.endUserId == item.endUserId && ownerItems.groupId == item.groupId && ownerItems.master_id == item.master_id ) {
 
                 deletedInOwnerList = true
-                DataCache.deleteOwnerGroupElement(ownerItems.id)
+                //DataCache.deleteOwnerGroupElement(ownerItems.id)
                 break
             }
         }
@@ -182,15 +182,15 @@ class KeySharingAdapter(var keys: MutableList<ItemRGroupInfo>
 
         if( deletedInOwnerList == false ) {
 
-            val groupMemberShipId = DataCache.getGroupMemberships().toMutableList()
+            val groupMemberShipId = WSUser.getGroupMemberships()?: mutableListOf() //DataCache.getGroupMemberships().toMutableList()
             var isAdminItemDeleted = false
 
             if( groupMemberShipId.isNotEmpty() ) {
 
                 for (items in groupMemberShipId) {
 
-                    var groupDataList: MutableList<RGroupInfo> = DataCache.groupMemberships(items.groupId.toLong()).toMutableList()
-                    Log.d("KeySharingAdapter", "Admin group list size is: " + DataCache.groupMemberships(items.groupId.toLong()).size)
+                    var groupDataList: MutableList<RGroupInfo> = WSUser.getGroupMembershipsById(items.groupId.toLong()) ?: mutableListOf() // DataCache.groupMemberships(items.groupId.toLong()).toMutableList()
+                    Log.d("KeySharingAdapter", "Admin group list size is: " + groupDataList.size)
 
                     if (groupDataList.size > 0) {
 
@@ -199,7 +199,8 @@ class KeySharingAdapter(var keys: MutableList<ItemRGroupInfo>
                             if( subItems.endUserId == item.endUserId && subItems.groupId == item.groupId && subItems.master_id == item.master_id ) {
 
                                 isAdminItemDeleted = true
-                                DataCache.groupMemberships(items.groupId.toLong(), true)
+                                WSUser.getGroupMembershipsById(items.groupId.toLong()) ?: mutableListOf()
+                                //DataCache.groupMemberships(items.groupId.toLong(), true)
                                 break
                             }
                         }
@@ -212,7 +213,7 @@ class KeySharingAdapter(var keys: MutableList<ItemRGroupInfo>
             }
         }
 
-        Log.d("KeySharingAdapter", "Second example Admin group list size is: " + DataCache.getGroupMembers().size)
+        Log.d("KeySharingAdapter", "Second example Admin group list size is: " )
 
         keys.remove(item)
     }

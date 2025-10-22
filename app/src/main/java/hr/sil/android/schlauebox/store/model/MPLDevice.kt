@@ -33,7 +33,7 @@ import hr.sil.android.ble.scanner.scan_multi.properties.advv2.common.MPLModemSta
 import hr.sil.android.ble.scanner.scan_multi.properties.advv2.common.ParcelLockerKeyboardType
 import hr.sil.android.ble.scanner.scan_multi.properties.base.BLEAdvProperties
 import hr.sil.android.schlauebox.App
-import hr.sil.android.schlauebox.cache.DataCache
+//import hr.sil.android.schlauebox.cache.DataCache
 import hr.sil.android.schlauebox.core.ble.comm.MPLUserBLECommunicator
 import hr.sil.android.schlauebox.core.model.MPLDeviceType
 import hr.sil.android.schlauebox.core.remote.model.*

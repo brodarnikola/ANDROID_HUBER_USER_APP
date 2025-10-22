@@ -231,35 +231,6 @@ class MplSplAdapter(var mplLocker: MutableList<ItemHomeScreen>, val clickListene
                                 R.drawable.ic_t_mpl_red
                             }
                         }
-                        // when will be implemented on backend, that masterUnitType return SPL PLUS for SPL PLUS
-                        // then I need to uncomment this method here
-                       /* else if( parcelLocker.masterUnitType == RMasterUnitType.SPL_PLUS || parcelLocker.type == MPLDeviceType.SPL_PLUS ) {
-                            if (parcelLocker.isInBleProximity && parcelLocker.mplMasterDeviceStatus == MPLDeviceStatus.REGISTERED && parcelLocker.masterUnitId != -1) {
-                                arrow.visibility = View.VISIBLE
-                                displayMPLSPLNameAndAddress(parcelLocker)
-                                R.drawable.ic_available_spl_plus
-                            } else if (parcelLocker.mplMasterDeviceStatus == MPLDeviceStatus.UNREGISTERED && parcelLocker.isInBleProximity) {
-                                arrow.visibility = View.VISIBLE
-                                displayMPLSPLNameAndAddress(parcelLocker)
-                                R.drawable.ic_unregistered_spl_plus
-                            } else if (!parcelLocker.isInBleProximity) {
-                                arrow.visibility = View.VISIBLE
-                                displayMPLSPLNameAndAddress(parcelLocker)
-                                R.drawable.ic_available_spl_plus_yellow
-                            } else if (parcelLocker.isInBleProximity) {
-                                displayMPLSPLNameAndAddress(parcelLocker)
-                                unavailable = true
-                                arrow.visibility = View.GONE
-                                address.visibility = View.GONE
-                                R.drawable.ic_unavailable_spl_plus
-                            } else {
-                                displayMPLSPLNameAndAddress(parcelLocker)
-                                unavailable = true
-                                arrow.visibility = View.GONE
-                                address.visibility = View.GONE
-                                R.drawable.ic_unavailable_spl_plus
-                            }
-                        }*/
                         else {
 
                             groupedLabel.visibility = View.GONE

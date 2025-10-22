@@ -7,7 +7,7 @@ import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.core.util.logger
 //import org.jetbrains.anko.toast
 import android.os.Bundle
-import hr.sil.android.schlauebox.cache.status.InstallationKeyHandler
+//import hr.sil.android.schlauebox.cache.status.InstallationKeyHandler
 import hr.sil.android.schlauebox.data.InstallationKey
 
 
@@ -20,7 +20,7 @@ class InstallListener : BroadcastReceiver() {
 
         log.info("Getting ref key from intent $rawReferrerString")
         if (!rawReferrerString.isNullOrBlank()) {
-            InstallationKeyHandler.key.put(InstallationKey(rawReferrerString))
+            //InstallationKeyHandler.key.put(InstallationKey(rawReferrerString))
         }
     }
 }

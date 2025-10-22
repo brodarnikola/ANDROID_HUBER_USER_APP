@@ -19,15 +19,10 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.firebase.messaging.FirebaseMessaging
-import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.DataCache
-import hr.sil.android.schlauebox.databinding.ActivityLoginBinding
+//import hr.sil.android.schlauebox.cache.DataCache
 import hr.sil.android.schlauebox.databinding.ActivitySplashBinding
-import hr.sil.android.schlauebox.fcm.MPLFireBaseMessagingService
 import hr.sil.android.schlauebox.store.DeviceStoreRemoteUpdater
 import hr.sil.android.schlauebox.store.MPLDeviceStore
-import hr.sil.android.schlauebox.util.awaitForResult
 
 
 class SplashActivity : AppCompatActivity() {
@@ -107,7 +102,7 @@ class SplashActivity : AppCompatActivity() {
         }
         GlobalScope.launch(Dispatchers.Main) {
             MPLDeviceStore.clear()
-            DataCache.getDevicesInfo(true)
+            //DataCache.getDevicesInfo(true)
 
             DeviceStoreRemoteUpdater.forceUpdate()
             hideError()
@@ -164,7 +159,7 @@ class SplashActivity : AppCompatActivity() {
             } else {
                 startupClass = if (!PreferenceStore.userHash.isNullOrBlank() && SettingsHelper.userRegisterOrLogin) {
                     if (UserUtil.login(SettingsHelper.usernameLogin.toString())) {
-                        MainActivity::class.java
+                        MainActivity1::class.java
 
                     } else {
                         if( !SettingsHelper.userRegisterOrLogin ) {

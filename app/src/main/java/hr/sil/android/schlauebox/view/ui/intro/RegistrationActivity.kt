@@ -5,30 +5,22 @@ import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputType
 import android.text.TextWatcher
 import android.view.MenuItem
-import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.RelativeLayout
 import androidx.core.content.res.getColorOrThrow
-import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.databinding.ActivityRegistrationBinding
-import hr.sil.android.schlauebox.util.SettingsHelper
-import hr.sil.android.schlauebox.util.backend.UserUtil
 import hr.sil.android.schlauebox.util.connectivity.NetworkChecker
 import hr.sil.android.schlauebox.view.ui.BaseActivity
 import hr.sil.android.schlauebox.view.ui.LoginActivity
-import hr.sil.android.schlauebox.view.ui.MainActivity
 import hr.sil.android.schlauebox.view.ui.home.activities.TtcActivity
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class RegistrationActivity : BaseActivity() {
@@ -126,7 +118,7 @@ class RegistrationActivity : BaseActivity() {
 //                                SettingsHelper.userRegisterOrLogin = true
 //
 //                                val intent =
-//                                        Intent(this@RegistrationActivity, MainActivity::class.java)
+//                                        Intent(this@RegistrationActivity, MainActivity1::class.java)
 //                                startActivity(intent)
 //                                finish()
 //                            } else

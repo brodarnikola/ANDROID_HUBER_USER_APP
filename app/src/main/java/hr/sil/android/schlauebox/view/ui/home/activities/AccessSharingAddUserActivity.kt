@@ -11,7 +11,7 @@ import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.DataCache
+//import hr.sil.android.schlauebox.cache.DataCache
 import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.remote.model.RGroupInfo
 import hr.sil.android.schlauebox.core.remote.model.RUserAccess
@@ -180,11 +180,15 @@ class AccessSharingAddUserActivity : BaseActivity(R.id.no_ble_layout, R.id.no_in
                         // add new user to admin data cache
                         if (UserUtil.userGroup?.name != rGroupInfoId?.groupOwnerName) {
 
-                            userAccess.groupId?.toLong()?.let { it -> DataCache.groupMemberships(it, true) }
+                            userAccess.groupId?.toLong()?.let { it ->
+                                WSUser.getGroupMembershipsById(it) ?: mutableListOf()
+                                //DataCache.groupMemberships(it, true)
+                            }
                         }
                         // add new user to owner data cache
                         else {
-                            DataCache.getGroupMembers(true)
+                            WSUser.getGroupMembers() ?: mutableListOf()
+                            //DataCache.getGroupMembers(true)
                         }
 
                         withContext(Dispatchers.Main) {

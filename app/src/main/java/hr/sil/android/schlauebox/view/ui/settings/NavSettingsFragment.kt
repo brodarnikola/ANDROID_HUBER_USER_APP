@@ -1,7 +1,6 @@
 package hr.sil.android.schlauebox.view.ui.settings
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,15 +10,14 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.DataCache
+import hr.sil.android.schlauebox.core.remote.WSUser
+//import hr.sil.android.schlauebox.cache.DataCache
 import hr.sil.android.schlauebox.core.remote.model.RLanguage
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.databinding.FragmentSettingsScreenBinding
 import hr.sil.android.schlauebox.util.SettingsHelper
 import hr.sil.android.schlauebox.util.backend.UserUtil
-import hr.sil.android.schlauebox.view.ui.MainActivity
 import hr.sil.android.schlauebox.view.ui.base.BaseFragment
 import hr.sil.android.schlauebox.view.ui.dialog.LogoutDialog
 import kotlinx.coroutines.*
@@ -66,14 +64,13 @@ class NavSettingsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         GlobalScope.launch {
-            val list = DataCache.getLanguages().toList()
+            val list = WSUser.getLanguages() ?: listOf()
             withContext(Dispatchers.Main) {
                 binding.settingsLanguageSelection.adapter = LanguageAdapter(list)
                 if (context != null) {
 
                     val languageName = SettingsHelper.languageName
-                    val languagesList = DataCache.getLanguages()
-                    binding.settingsLanguageSelection.setSelection(languagesList.indexOfFirst { it.code == languageName })
+                    binding.settingsLanguageSelection.setSelection(list.indexOfFirst { it.code == languageName })
                     binding.settingsPushNotification.isChecked = SettingsHelper.pushEnabled
                     binding.settingsEmailNotification.isChecked = SettingsHelper.emailEnabled
                 }
@@ -311,7 +308,7 @@ class NavSettingsFragment : BaseFragment() {
 //                            SettingsHelper.pushEnabled = binding.settingsPushNotification.isChecked
 //                            SettingsHelper.emailEnabled = binding.settingsEmailNotification.isChecked
 //                            UserUtil.userGroup?.name = binding.registerGroupNameFirstRow.text.toString().trim() + " " + binding.registerGroupNameSecondRow.text.toString().trim()
-//                            val intent = Intent(context, MainActivity::class.java)
+//                            val intent = Intent(context, MainActivity1::class.java)
 //                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
 //                            this@NavSettingsFragment.activity?.finish()
 //                            this@NavSettingsFragment.activity?.overridePendingTransition(0, 0)

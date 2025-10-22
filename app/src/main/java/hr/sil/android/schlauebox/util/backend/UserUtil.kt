@@ -23,8 +23,8 @@ package hr.sil.android.schlauebox.util.backend
 
 import com.google.firebase.messaging.FirebaseMessaging
 import hr.sil.android.rest.core.util.UserHashUtil
-import hr.sil.android.schlauebox.cache.DataCache
-import hr.sil.android.schlauebox.cache.status.InstallationKeyHandler
+//import hr.sil.android.schlauebox.cache.DataCache
+//import hr.sil.android.schlauebox.cache.status.InstallationKeyHandler
 import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.remote.model.*
 import hr.sil.android.schlauebox.core.util.DeviceInfo
@@ -86,20 +86,20 @@ object UserUtil {
 
         WSUser.registerDevice(fcmTokenRequest(), DeviceInfo.getJsonInstance())
 
-        val langList = DataCache.getLanguages(true)
+        val langList = WSUser.getLanguages() ?: listOf() //DataCache.getLanguages(true)
         val language = langList.find { it.code == "EN" }
         var user: REndUserInfo? = null
         try {
             var key = ""
-            val installationKeys = InstallationKeyHandler.key.getAll()
-            if (!installationKeys.isNullOrEmpty()) key = installationKeys.first().key
+            //val installationKeys = InstallationKeyHandler.key.getAll()
+            //if (!installationKeys.isNullOrEmpty()) key = installationKeys.first().key
             log.info("Getting ref key from registration $key")
-            log.info("Size from installation keys ${installationKeys.size}")
+            //log.info("Size from installation keys ${installationKeys.size}")
             if (language != null) {
                 log.info("Language id is: ${language.id}")
                 user = WSUser.registerEndUser(name, address, phoneNumber, email, password, language, groupName, reducedMobility, key )
                 updateUserHash(user?.email, password)
-                InstallationKeyHandler.key.clear()
+                //InstallationKeyHandler.key.clear()
 
                 return user != null && login(user.email)
             } else {
@@ -138,7 +138,7 @@ object UserUtil {
     suspend fun loginCheckUserStatus(username: String, password: String): UserStatus {
         WSUser.registerDevice(fcmTokenRequest(), DeviceInfo.getJsonInstance())
         updateUserHash(username, password)
-        return if (!PreferenceStore.userHash.isNullOrBlank()) {
+        if (!PreferenceStore.userHash.isNullOrBlank()) {
             val responseUser = WSUser.getUserInfo()
             val group = WSUser.getUserGroupInfo()
             userMemberships = WSUser.getGroupMemberships() ?: listOf()
@@ -155,9 +155,14 @@ object UserUtil {
 
                 log.info("User is logged in updating device and token...")
 
-                val languagesList = DataCache.getLanguages()
+                val languagesList = WSUser.getLanguages() ?: listOf() //DataCache.getLanguages()
                 val languageData = languagesList.find { it.id == responseUser.languageId }
 
+                log.info("User is logged languageData: ${languageData}...")
+                log.info("User is logged languageData.code: ${languageData}...")
+                log.info("User is logged responseUser.isNotifyPush: ${languageData}...")
+                log.info("User is logged responseUser.isNotifyEmail: ${languageData}...")
+                log.info("User is logged username: ${username}...")
                 if (languageData != null) {
                     SettingsHelper.languageName = languageData.code
                 }
@@ -165,6 +170,7 @@ object UserUtil {
                 SettingsHelper.emailEnabled = responseUser.isNotifyEmail
                 SettingsHelper.usernameLogin = username
 
+                log.info("User is logged  UserStatus.ACTIVE: ${ UserStatus.ACTIVE}...")
                 return UserStatus.ACTIVE
             } else if (responseUser != null && responseUser.status == UserStatus.INVITED.toString()) {
                 userInvitedTempdata = responseUser
@@ -202,7 +208,7 @@ object UserUtil {
                 //invalidate caches on login
                 AppUtil.refreshCache()
 
-                val languagesList = DataCache.getLanguages()
+                val languagesList = WSUser.getLanguages() ?: listOf() //DataCache.getLanguages()
 
                 val languageData = languagesList.find { it.id == responseUser.languageId }
 
@@ -236,7 +242,7 @@ object UserUtil {
         updateUserHash(null, null)
         user = null
         //UserAppService.config.setAuthorization(Authorization.Custom(""))
-        DataCache.clearCaches()
+        //DataCache.clearCaches()
         MPLDeviceStore.clear()
     }
 

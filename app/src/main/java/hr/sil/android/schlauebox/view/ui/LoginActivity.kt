@@ -10,7 +10,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.status.InstallationKeyHandler
+//import hr.sil.android.schlauebox.cache.status.InstallationKeyHandler
 import hr.sil.android.schlauebox.core.remote.model.UserStatus
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.databinding.ActivityLoginBinding
@@ -65,8 +65,8 @@ class LoginActivity : BaseActivity(noWifiViewId = R.id.no_internet_layout) {
 //                params.centerHorizontally()
                 binding.tvShowPasswords.layoutParams = params
 
-                GlobalScope.launch(/*parentJob*/) {
-
+//                GlobalScope.launch(/*parentJob*/) {
+//
 //                    if (NetworkChecker.isInternetConnectionAvailable()) {
 //
 //
@@ -89,7 +89,7 @@ class LoginActivity : BaseActivity(noWifiViewId = R.id.no_internet_layout) {
 //                                } else {
 //                                    SettingsHelper.userPasswordWithoutEncryption = binding.etPassword.text.toString()
 //                                    SettingsHelper.userRegisterOrLogin = true
-//                                    val startIntent = Intent(this@LoginActivity, MainActivity::class.java)
+//                                    val startIntent = Intent(this@LoginActivity, MainActivity1::class.java)
 //                                    startActivity(startIntent)
 //                                    finish()
 //                                }
@@ -115,7 +115,7 @@ class LoginActivity : BaseActivity(noWifiViewId = R.id.no_internet_layout) {
 //                            binding.btnLogin.visibility = View.VISIBLE
 //                        }
 //                    }
-                }
+                //}
             }
             else {
 //                if (correctPassword) {
@@ -202,6 +202,7 @@ class LoginActivity : BaseActivity(noWifiViewId = R.id.no_internet_layout) {
     }*/
 
     override fun onBackPressed() {
+        super.onBackPressed()
         val intent = Intent(this@LoginActivity, IntroductionSlidePagerActivity::class.java)
         intent.putExtra("Back", true)
         startActivity(intent)

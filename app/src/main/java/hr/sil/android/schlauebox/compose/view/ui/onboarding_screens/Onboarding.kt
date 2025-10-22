@@ -2,6 +2,7 @@ package hr.sil.android.schlauebox.compose.view.ui.onboarding_screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,10 +14,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material3.FilledTonalButton
@@ -25,7 +28,6 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -36,9 +38,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -48,10 +49,11 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.compose.view.ui.SignUpOnboardingDestinations
-import hr.sil.android.schlauebox.compose.view.ui.SignUpOnboardingSections
+import hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity.SignUpOnboardingSections
+import hr.sil.android.schlauebox.compose.view.ui.components.NewDesignButton
 import hr.sil.android.schlauebox.compose.view.ui.theme.Black
 import hr.sil.android.schlauebox.compose.view.ui.theme.Primary60
+import hr.sil.android.schlauebox.util.SettingsHelper
 import androidx.compose.material3.MaterialTheme as Material3
 
 
@@ -116,7 +118,7 @@ fun HorizontalPager(
 
                 when (page) {
                     0 -> slideImage.intValue = R.drawable.img_onboarding_start
-                    1 -> slideImage.intValue = R.drawable.img_onboarding_pickup
+                    1 -> slideImage.intValue = R.drawable.img_onboarding_send
                     2 -> slideImage.intValue = R.drawable.img_onboarding_key
                     3 -> slideImage.intValue = R.drawable.img_onboarding_start
                 }
@@ -164,28 +166,22 @@ fun HorizontalPager(
                         )
                     } else {
                         Spacer(modifier = Modifier.heightIn(min = 40.dp))
-                        FilledTonalButton(
-                            onClick = {
-                                nextScreen(SignUpOnboardingSections.LOGIN_SCREEN.route)
-                            },
+
+                        NewDesignButton(
                             modifier = Modifier
+                                .semantics {
+                                    contentDescription = "signInButtonLoginScreen"
+                                }
                                 .heightIn(min = 20.dp)
                                 .padding(horizontal = 50.dp)
                                 .fillMaxWidth(),
-                            colors = androidx.compose.material3.ButtonDefaults.filledTonalButtonColors(
-                                containerColor = Primary60, // Material3.colorScheme.primary,
-                                contentColor = Material3.colorScheme.onPrimary,
-                                disabledContainerColor = Material3.colorScheme.onSurface.copy(alpha = 0.12f)
-                            )
-                        ) {
-                            androidx.compose.material3.Text(
-                                text = "Go to next screen",
-                                color = White,
-                                style = Material3.typography.labelLarge,
-                                modifier = Modifier
-                                    .padding(vertical = 5.dp)
-                            )
-                        }
+                            title = stringResource(R.string.login_title),
+                            onClick = {
+                                SettingsHelper.firstRun = false
+                                nextScreen(SignUpOnboardingSections.LOGIN_SCREEN.route)
+                            },
+                            enabled = true,
+                        )
                     }
                 }
             }
@@ -248,6 +244,337 @@ fun DotsIndicator(
         }
     }
 }
+
+@Composable
+fun LoginScreen1(
+    modifier: Modifier = Modifier,
+    emailValue: String = "",
+    passwordValue: String = "",
+    onEmailChange: (String) -> Unit = {},
+    onPasswordChange: (String) -> Unit = {},
+    onShowPasswordClick: () -> Unit = {},
+    onForgotPasswordClick: () -> Unit = {},
+    onLoginClick: () -> Unit = {},
+    isLoading: Boolean = false,
+    passwordVisible: Boolean = false
+) {
+    Surface(
+        modifier = modifier
+            .fillMaxSize()
+            .background(White)
+    ) {
+        ConstraintLayout(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 56.dp) // equivalent to ?actionBarSize
+        ) {
+            val (emailSection, passwordSection, forgotPassword, progressBar, loginButton) = createRefs()
+
+            // Email Section
+            ConstraintLayout(
+                modifier = Modifier
+                    .constrainAs(emailSection) {
+                        top.linkTo(parent.top, margin = 16.dp)
+                        start.linkTo(parent.start, margin = 20.dp)
+                        end.linkTo(parent.end, margin = 20.dp)
+                        width = Dimension.fillToConstraints
+                    }
+            ) {
+                val (emailField, emailIcon) = createRefs()
+
+                OutlinedTextField(
+                    value = emailValue,
+                    onValueChange = onEmailChange,
+                    modifier = Modifier
+                        .constrainAs(emailField) {
+                            top.linkTo(parent.top)
+                            start.linkTo(parent.start)
+                            end.linkTo(parent.end)
+                            width = Dimension.fillToConstraints
+                        },
+                    placeholder = { Text("Email") },
+                    singleLine = true,
+                    textStyle = Material3.typography.bodyLarge.copy(fontSize = 14.sp),
+                    //keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+                )
+
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_register_email),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .constrainAs(emailIcon) {
+                            top.linkTo(emailField.top)
+                            bottom.linkTo(emailField.bottom, margin = 20.dp)
+                            end.linkTo(emailField.end, margin = 5.dp)
+                        }
+                )
+            }
+
+            // Password Section
+            Column(
+                modifier = Modifier
+                    .constrainAs(passwordSection) {
+                        top.linkTo(emailSection.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        width = Dimension.fillToConstraints
+                    }
+                    .padding(bottom = 5.dp)
+            ) {
+                ConstraintLayout(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp)
+                ) {
+                    val (passwordField, passwordIcon) = createRefs()
+
+                    OutlinedTextField(
+                        value = passwordValue,
+                        onValueChange = onPasswordChange,
+                        modifier = Modifier
+                            .constrainAs(passwordField) {
+                                top.linkTo(parent.top)
+                                start.linkTo(parent.start)
+                                end.linkTo(parent.end)
+                                width = Dimension.fillToConstraints
+                            },
+                        placeholder = { Text("Password") },
+                        singleLine = true,
+                        textStyle = Material3.typography.bodyLarge.copy(fontSize = 14.sp),
+//                        visualTransformation = if (passwordVisible)
+//                            VisualTransformation.None
+//                        else
+//                            PasswordVisualTransformation(),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                    )
+
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_password),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .constrainAs(passwordIcon) {
+                                top.linkTo(passwordField.top)
+                                bottom.linkTo(passwordField.bottom, margin = 20.dp)
+                                end.linkTo(passwordField.end, margin = 5.dp)
+                            }
+                    )
+                }
+
+                Text(
+                    text = "Show Password",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 5.dp)
+                        .clickable { onShowPasswordClick() },
+                    textAlign = TextAlign.Center,
+                    fontSize = 13.sp,
+                    style = Material3.typography.bodyMedium
+                )
+            }
+
+            // Forgot Password
+            Text(
+                text = "Forgot Password?",
+                modifier = Modifier
+                    .constrainAs(forgotPassword) {
+                        top.linkTo(passwordSection.bottom, margin = 20.dp)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                    .fillMaxWidth()
+                    .clickable { onForgotPasswordClick() },
+                textAlign = TextAlign.Center,
+                fontSize = 13.sp,
+                style = Material3.typography.bodyMedium
+            )
+
+            // Progress Bar
+            if (isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .constrainAs(progressBar) {
+                            top.linkTo(forgotPassword.bottom, margin = 10.dp)
+                            start.linkTo(parent.start)
+                            end.linkTo(parent.end)
+                        }
+                )
+            }
+
+            // Login Button
+            FilledTonalButton(
+                onClick = onLoginClick,
+                modifier = Modifier
+                    .width(220.dp)
+                    .height(40.dp)
+                    .constrainAs(loginButton) {
+                        bottom.linkTo(parent.bottom, margin = 12.dp)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    },
+//                colors = ButtonDefaults.filledTonalButtonColors(
+//                    containerColor = Primary60,
+//                    contentColor = White
+//                ),
+                shape = RoundedCornerShape(20.dp) // equivalent to rounded_button drawable
+            ) {
+                Text(
+                    text = "Sign In",
+                    color = White,
+                    fontSize = 16.sp,
+                    style = Material3.typography.labelLarge
+                )
+            }
+        }
+    }
+}
+
+/*@Composable
+fun LoginScreen(
+    modifier: Modifier = Modifier,
+    onLoginClick: () -> Unit = {},
+    onForgotPasswordClick: () -> Unit = {},
+    onShowPasswordClick: () -> Unit = {},
+) {
+    Surface(
+        modifier = modifier
+            .fillMaxSize()
+            .background(hr.sil.android.schlauebox.compose.view.ui.theme.White)
+    ) {
+        ConstraintLayout(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 56.dp) // ?actionBarSize equivalent
+        ) {
+            val (emailSection, passwordSection, forgotPassword, progressBar, loginButton) = createRefs()
+
+            // === EMAIL FIELD ===
+            Row(
+                modifier = Modifier
+                    .constrainAs(emailSection) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                    .padding(horizontal = 20.dp, vertical = 16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                OutlinedTextField(
+                    value = "",
+                    onValueChange = {},
+                    label = { Text(text = stringResource(id = R.string.app_generic_email)) },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = 5.dp),
+                    singleLine = true
+                )
+
+                Image(
+                    painter = painterResource(id = R.drawable.ic_register_email),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(24.dp)
+                        .padding(bottom = 8.dp)
+                )
+            }
+
+            // === PASSWORD FIELD + SHOW PASSWORD ===
+            Column(
+                modifier = Modifier
+                    .constrainAs(passwordSection) {
+                        top.linkTo(emailSection.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                    .padding(horizontal = 20.dp, vertical = 8.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    OutlinedTextField(
+                        value = "",
+                        onValueChange = {},
+                        label = { Text(text = stringResource(id = R.string.app_generic_password)) },
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(end = 5.dp),
+                        singleLine = true,
+                        //visualTransformation = PasswordVisualTransformation()
+                    )
+
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_password),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(24.dp)
+                            .padding(bottom = 8.dp)
+                    )
+                }
+
+                Text(
+                    text = stringResource(id = R.string.intro_register_show_password),
+                    style = MaterialTheme.typography.body2,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .padding(top = 4.dp)
+                        .clickable { onShowPasswordClick() }
+                )
+            }
+
+            // === FORGOT PASSWORD ===
+            Text(
+                text = stringResource(id = R.string.forgot_password_title),
+                style = MaterialTheme.typography.body2,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .constrainAs(forgotPassword) {
+                        top.linkTo(passwordSection.bottom, margin = 20.dp)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                    .clickable { onForgotPasswordClick() }
+            )
+
+            // === PROGRESS BAR ===
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .constrainAs(progressBar) {
+                        top.linkTo(forgotPassword.bottom, margin = 10.dp)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                    .size(40.dp)
+                    .alpha(0f) // visibility="gone"
+            )
+
+            // === LOGIN BUTTON ===
+            Button(
+                onClick = onLoginClick,
+                modifier = Modifier
+                    .constrainAs(loginButton) {
+                        bottom.linkTo(parent.bottom, margin = 24.dp)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                    .width(220.dp)
+                    .height(40.dp),
+                shape = RoundedCornerShape(20.dp),
+                colors = ButtonDefaults.buttonColors(
+                    //containerColor = Black,
+                    contentColor = Color.White
+                )
+            ) {
+                Text(
+                    text = stringResource(id = R.string.app_generic_sign_in),
+                    style = MaterialTheme.typography.body1
+                )
+            }
+        }
+    }
+}*/
+
 
 @Composable
 fun FirstOnboardingScreen(

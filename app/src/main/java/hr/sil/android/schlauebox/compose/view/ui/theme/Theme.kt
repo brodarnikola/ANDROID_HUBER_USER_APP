@@ -2,7 +2,6 @@ package hr.sil.android.schlauebox.compose.view.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.MaterialTheme
 
 import androidx.compose.material3.MaterialTheme as Material3
 import androidx.compose.material3.darkColorScheme
@@ -582,7 +581,7 @@ fun AppTheme(
 
     val colors =
         if (isDarkTheme) {
-            DarkColorPalette
+            LightColorPalette
         } else {
             LightColorPalette
         }
@@ -595,7 +594,7 @@ fun AppTheme(
         dynamicColor && !isDarkTheme -> {
             dynamicLightColorScheme(LocalContext.current)
         }
-        isDarkTheme -> DarkColorScheme
+        isDarkTheme -> LightColorScheme
         else -> LightColorScheme
     }
 
@@ -616,7 +615,7 @@ fun AppTheme(
             Material3(
                 colorScheme = colorScheme,
                 typography = AppTypography,
-                shapes = SunbirdShapes,
+                shapes = AppShapes,
                 content = content
             )
         }

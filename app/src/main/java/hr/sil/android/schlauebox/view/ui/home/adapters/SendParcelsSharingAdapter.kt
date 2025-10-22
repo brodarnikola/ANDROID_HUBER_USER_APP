@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.status.ActionStatusHandler
+//import hr.sil.android.schlauebox.cache.status.ActionStatusHandler
 import hr.sil.android.schlauebox.cache.status.ActionStatusKey
 import hr.sil.android.schlauebox.cache.status.ActionStatusType
 import hr.sil.android.schlauebox.core.model.MPLDeviceType
@@ -121,7 +121,7 @@ class SendParcelsSharingAdapter(private var keys: MutableList<RCreatedLockerKey>
                         val action = ActionStatusKey().apply {
                             keyId = lockerId.toString() + ActionStatusType.PAH_ACCESS_CANCEL
                         }
-                        ActionStatusHandler.actionStatusDb.put(action)
+                        //ActionStatusHandler.actionStatusDb.put(action)
 
                         withContext(Dispatchers.Main) {
                             log.error("Success delete ${lockerId}")

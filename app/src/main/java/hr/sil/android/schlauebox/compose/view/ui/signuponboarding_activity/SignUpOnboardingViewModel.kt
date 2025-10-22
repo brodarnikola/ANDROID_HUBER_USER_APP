@@ -1,20 +1,8 @@
-package hr.sil.android.schlauebox.compose.view.ui
+package hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity
 
-import android.content.Context
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import javax.inject.Inject
 
-@HiltViewModel
-class SignUpOnboardingViewModel
-@Inject
-constructor(
-    //private val sp: SharedPrefsStorage
-) : ViewModel() {
+class SignUpOnboardingViewModel : ViewModel() {
 
 //    val selectedTheme = MutableStateFlow(Theme.LIGHT)
 //

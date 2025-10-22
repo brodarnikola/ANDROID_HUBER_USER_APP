@@ -14,7 +14,8 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.cache.DataCache
+import hr.sil.android.schlauebox.core.remote.WSUser
+//import hr.sil.android.schlauebox.cache.DataCache
 import hr.sil.android.schlauebox.core.remote.model.RLanguage
 import hr.sil.android.schlauebox.databinding.FragmentTermsConditionsBinding
 import hr.sil.android.schlauebox.util.SettingsHelper
@@ -46,7 +47,7 @@ class NavTccFragment : BaseFragment() {
 
 
             val languageName = SettingsHelper.languageName
-            val languagesList = DataCache.getLanguages()
+            val languagesList = WSUser.getLanguages() ?: listOf() //DataCache.getLanguages()
             selectedLanguage = languagesList.find { it.code == languageName }
 
             withContext(Dispatchers.Main) {

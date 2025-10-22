@@ -24,7 +24,7 @@ import hr.sil.android.schlauebox.events.UnauthorizedUserEvent
 import hr.sil.android.schlauebox.store.MPLDeviceStore
 import hr.sil.android.schlauebox.util.backend.UserUtil
 import hr.sil.android.schlauebox.view.ui.LoginActivity
-import hr.sil.android.schlauebox.view.ui.MainActivity
+import hr.sil.android.schlauebox.view.ui.MainActivity1
 import hr.sil.android.schlauebox.view.ui.base.BaseFragment
 import hr.sil.android.schlauebox.view.ui.home.adapters.MplSplAdapter
 import org.greenrobot.eventbus.Subscribe
@@ -159,12 +159,12 @@ class NavHomeFragment : BaseFragment() {
     private fun setNavFragment(navFragment: Fragment) {
         val ctx = context ?: return
         val pendingRunnable = Runnable {
-            val fragmentTransaction = (ctx as MainActivity).supportFragmentManager.beginTransaction()
+            val fragmentTransaction = (ctx as MainActivity1).supportFragmentManager.beginTransaction()
             fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
             fragmentTransaction.replace(R.id.main_frame_layout, navFragment, navFragment.tag).addToBackStack(null)
             fragmentTransaction.commit()
         }
-        log.info("fragment size is: " + (ctx as MainActivity).supportFragmentManager.backStackEntryCount)
+        log.info("fragment size is: " + (ctx as MainActivity1).supportFragmentManager.backStackEntryCount)
         fragmentLoaderHandler.post(pendingRunnable)
     }
 
