@@ -128,6 +128,13 @@ fun MainActivityContent(
                 .padding(paddingValues)
         ) {
 
+            Image(
+                painter = painterResource(id = R.drawable.bg_home),
+                contentDescription = "Background",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+
             MainComposeApp(appState, navBackStackEntry)
 
             // Overlays - shown in priority order
@@ -150,13 +157,6 @@ fun MainActivityContent(
                     LocationGPSOverlay()
                 }
             }
-
-            Image(
-                painter = painterResource(id = R.drawable.bg_home),
-                contentDescription = "Background",
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
 
         }
     }

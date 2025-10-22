@@ -10,7 +10,6 @@ package hr.sil.android.schlauebox.compose.view.ui.home_screens
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,14 +32,18 @@ import androidx.compose.ui.unit.sp
 import hr.sil.android.schlauebox.R
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -48,6 +51,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.viewmodel.compose.viewModel
 import hr.sil.android.ble.scanner.scan_multi.properties.advv2.common.MPLDeviceStatus
 import hr.sil.android.schlauebox.cache.DatabaseHandler
+import hr.sil.android.schlauebox.compose.view.ui.theme.AppTypography
+import hr.sil.android.schlauebox.compose.view.ui.theme.Black
 import hr.sil.android.schlauebox.core.model.MPLDeviceType
 import hr.sil.android.schlauebox.core.remote.model.InstalationType
 import hr.sil.android.schlauebox.core.remote.model.RLockerKeyPurpose
@@ -55,6 +60,7 @@ import hr.sil.android.schlauebox.core.remote.model.RMasterUnitType
 import hr.sil.android.schlauebox.data.ItemHomeScreen
 import hr.sil.android.schlauebox.store.model.MPLDevice
 
+import androidx.compose.material3.MaterialTheme as Material3
 
 import hr.sil.android.schlauebox.store.MPLDeviceStore
 
@@ -83,24 +89,24 @@ fun NavHomeScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black) // Adjust based on your theme
+            //.background(Color.Black) // Adjust based on your theme
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
             // Profile icon overlay
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                ProfileIcon()
-            }
+//            Box(
+//                modifier = Modifier.fillMaxWidth(),
+//                contentAlignment = Alignment.Center
+//            ) {
+//                ProfileIcon()
+//            }
 
             // Header with user info
             UserAddressHeader(
                 userName = uiState.userName,
                 address = uiState.address,
-                modifier = Modifier.padding(top = 40.dp, start = 16.dp, end = 16.dp)
+                modifier = Modifier.padding(top = 10.dp, start = 16.dp, end = 16.dp)
             )
 
 
@@ -131,35 +137,91 @@ private fun UserAddressHeader(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(60.dp)
-            .background(
-                color = Color(0xFFF5F5F5), // Adjust based on profile_address_background
-                shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp)
-            ),
+            .height(100.dp) ,
         contentAlignment = Alignment.Center
     ) {
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.Bottom,
             modifier = Modifier.padding(horizontal = 4.dp)
-        ) {
-            Text(
+                .padding(top = 30.dp)
+                .fillMaxWidth()
+                .background(colorResource(R.color.colorWhite)    )
+                .border(1.dp, colorResource(R.color.colorGray),
+                    androidx.compose.foundation.shape.RoundedCornerShape(8.dp))
+        ) {  
+
+            androidx.compose.material3.Text(
                 text = userName,
-                fontSize = 12.sp,
+                color = Black, // Material3.colorScheme.onSurface, // onboarding screens - default color
+                style = Material3.typography.bodyMedium.copy(textAlign = TextAlign.Center),
                 fontWeight = FontWeight.Bold,
-                color = Color.Black,
-                textAlign = TextAlign.Center
+                modifier = Modifier.padding(horizontal = 10.dp)
             )
 
-            Spacer(modifier = Modifier.height(2.dp))
+//            Text(
+//                text = userName,
+//                fontSize = 12.sp,
+//                style = AppTypography.titleLarge,
+//                textAlign = TextAlign.Center,
+//                color = colorResource(R.color.colorBlack),
+//            )
 
-            Text(
+//            Text(
+//                text = userName,
+//                fontSize = 12.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = Color.Black,
+//                textAlign = TextAlign.Center
+//            )
+//
+//            Spacer(modifier = Modifier.height(2.dp))
+
+            androidx.compose.material3.Text(
                 text = address,
-                fontSize = 13.sp,
+                color = Black, // Material3.colorScheme.onSurface, // onboarding screens - default color
+                style = Material3.typography.bodyMedium.copy(textAlign = TextAlign.Center),
                 fontWeight = FontWeight.Normal,
-                color = Color.Black,
-                textAlign = TextAlign.Center
+                modifier = Modifier.padding(horizontal = 10.dp)
             )
+
+//            Text(
+//                text = address,
+//                fontSize = 13.sp,
+//                style = AppTypography.bodyLarge,
+//                textAlign = TextAlign.Center,
+//                color = colorResource(R.color.colorBlack),
+//            )
+
+//            Text(
+//                text = address,
+//                fontSize = 13.sp,
+//                fontWeight = FontWeight.Normal,
+//                color = Color.Black,
+//                textAlign = TextAlign.Center
+//            )
+        }
+
+        Column(
+            modifier = Modifier.fillMaxSize().border(1.dp, Color.Red, RectangleShape),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+
+            Box(
+                modifier = modifier
+                    .size(50.dp)
+                    .clip(CircleShape)
+                    //.padding(bottom = 40.dp)
+                    .background(colorResource(R.color.colorDarkAccent)), // Adjust based on profile_icon_background
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_user),
+                    contentDescription = "Profile Icon",
+                    modifier = Modifier.size(24.dp)
+                )
+            }
         }
     }
 }

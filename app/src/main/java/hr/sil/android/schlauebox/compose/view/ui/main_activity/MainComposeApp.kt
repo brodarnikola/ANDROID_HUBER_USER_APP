@@ -29,10 +29,10 @@ import kotlin.collections.forEachIndexed
 @Composable
 fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStackEntry?>) {
 
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        //color = MaterialTheme.colorScheme.background
-    ) {
+//    Surface(
+//        modifier = Modifier.fillMaxSize(),
+//        //color = MaterialTheme.colorScheme.background
+//    ) {
 
 //        Scaffold(
 //            bottomBar = {
@@ -66,7 +66,7 @@ fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStack
                 )
             }
         //}
-    }
+    //}
 }
 
 fun NavGraphBuilder.mainNavGraph(
