@@ -58,7 +58,7 @@ fun bottomNavigationItems(): List<BottomNavigationBarItem> {
     )
     val locationTab = BottomNavigationBarItem(
         title = "Location",
-        route =  MainDestinations.LOCATION,
+        route =  MainDestinations.DEVICE_DETAILS,
         selectedIcon = Icons.Filled.Person,
         unselectedIcon = Icons.Outlined.Person
     )
@@ -87,7 +87,7 @@ fun MainActivityContent(
         appState.navController.currentBackStackEntryAsState() // navController.currentBackStackEntryAsState()
 
     showBottomBar.value = when {
-        navBackStackEntry.value?.destination?.route?.contains(MainDestinations.MOVIE_DETAILS) == true -> false
+        navBackStackEntry.value?.destination?.route?.contains(MainDestinations.DEVICE_DETAILS) == true -> false
         else -> true
     }
 

@@ -69,7 +69,7 @@ import hr.sil.android.schlauebox.store.MPLDeviceStore
 @Composable
 fun NavHomeScreen(
     viewModel: NavHomeViewModel = viewModel(),
-    //onDeviceClick: (ItemHomeScreen.Child) -> Unit,
+    onDeviceClick: (macAddress: String) -> Unit,
     //onNavigateToLogin: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -112,7 +112,7 @@ fun NavHomeScreen(
             } else {
                 DeviceList(
                     devices = uiState.devices,
-                    //onDeviceClick = onDeviceClick,
+                    onDeviceClick = onDeviceClick,
                     modifier = Modifier.fillMaxSize()
                 )
             }
@@ -197,7 +197,7 @@ private fun UserAddressHeader(
 @Composable
 private fun DeviceList(
     devices: List<ItemHomeScreen>,
-    //onDeviceClick: (ItemHomeScreen.Child) -> Unit,
+    onDeviceClick: (macAddress: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -213,7 +213,7 @@ private fun DeviceList(
                     DeviceChildItem(
                         device = item,
                         onClick = {
-                           // onDeviceClick(item)
+                            onDeviceClick(item.mplOrSplDevice?.macAddress ?: "")
                         }
                     )
                 }
@@ -241,7 +241,7 @@ private fun DeviceHeaderItem(
 @Composable
 private fun DeviceChildItem(
     device: ItemHomeScreen.Child,
-    onClick: () -> Unit,
+    onClick: (macAddress: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -258,7 +258,13 @@ private fun DeviceChildItem(
             .fillMaxWidth()
             .padding( vertical = 5.dp)
             .background( colorResource(R.color.colorWhite30PercentTransparency) )
-            .clickable(enabled = !deviceState.unavailable, onClick = onClick),
+            .clickable(
+                enabled = !deviceState.unavailable,
+                onClick =
+                {
+                    onClick(device.mplOrSplDevice?.macAddress ?: "")
+                }
+            ),
             //.padding(10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
