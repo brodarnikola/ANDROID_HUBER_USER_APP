@@ -7,7 +7,10 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
@@ -22,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -58,7 +62,7 @@ fun bottomNavigationItems(): List<BottomNavigationBarItem> {
     )
     val locationTab = BottomNavigationBarItem(
         title = "Location",
-        route =  MainDestinations.LOCATION,
+        route =  MainDestinations.DEVICE_DETAILS,
         selectedIcon = Icons.Filled.Person,
         unselectedIcon = Icons.Outlined.Person
     )
@@ -82,13 +86,16 @@ fun MainActivityContent(
 
     val bottomNavigationItems = bottomNavigationItems()
 
+    val arrowSize = rememberSaveable { mutableIntStateOf(0) }
     val showBottomBar = rememberSaveable { mutableStateOf(true) }
     val navBackStackEntry =
         appState.navController.currentBackStackEntryAsState() // navController.currentBackStackEntryAsState()
 
     showBottomBar.value = when {
-        navBackStackEntry.value?.destination?.route?.contains(MainDestinations.MOVIE_DETAILS) == true -> false
-        else -> true
+        navBackStackEntry.value?.destination?.route?.contains(MainDestinations.HOME) == true ||
+        navBackStackEntry.value?.destination?.route?.contains(MainDestinations.ALERTS) == true ||
+        navBackStackEntry.value?.destination?.route?.contains(MainDestinations.SETTINGS) == true  -> true
+        else -> false
     }
 
 
@@ -96,8 +103,13 @@ fun MainActivityContent(
         topBar = {
             TopAppBar(
                 title = {
+                    val imageLogoPadding = if( !showBottomBar.value ) {
+                        60.dp
+                    } else {
+                        20.dp
+                    }
                     Box(
-                        modifier = Modifier.fillMaxWidth().padding(end = 20.dp),
+                        modifier = Modifier.fillMaxWidth().padding(end = imageLogoPadding),
                         contentAlignment = Alignment.Center
                     ) {
                         Image(
@@ -107,12 +119,59 @@ fun MainActivityContent(
                         )
                     }
                 },
+                navigationIcon = {
+                    if (!showBottomBar.value) {
+                        IconButton(onClick = {
+                            appState.upPress()
+                        }) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                                contentDescription = "Back",
+                                tint = colorResource(R.color.colorBlack)
+                            )
+                        }
+                    }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface
                 )
             )
         },
+//                    Row(
+//                        modifier = Modifier.fillMaxWidth().padding(end = 20.dp),
+//                        verticalAlignment = Alignment.CenterVertically,
+//                        horizontalArrangement = Arrangement.SpaceAround
+//                        //contentAlignment = Alignment.Center
+//                    ) {
+//                        if(showBottomBar.value) {
+//                            arrowSize.intValue = 0
+//                        } else {
+//                            arrowSize.intValue = 30
+//                        }
+//                            Image(
+//                                painter = painterResource(id = android.R.drawable.star_on),
+//                                contentDescription = "Logo1",
+//                                modifier = Modifier.size(arrowSize.intValue.dp).weight(1f)
+//
+//                                )
+//                        Image(
+//                            painter = painterResource(id = R.drawable.schlauebox_logo),
+//                            contentDescription = "Logo",
+//                            modifier = Modifier
+//                                .height(40.dp)
+//                                .padding(end = 10.dp)
+//                                .weight(1f)
+//                        )
+//                        Spacer(modifier = Modifier.weight(1f))
+////                        Image(
+////                            painter = painterResource(id = android.R.drawable.star_on),
+////                            contentDescription = "Logo1",
+////                            modifier = Modifier.size(0.dp)
+////                        )
+//                    }
+//                },
         bottomBar = {
+            if(showBottomBar.value)
                 TabView(
                     bottomNavigationItems,
                     navBackStackEntry)

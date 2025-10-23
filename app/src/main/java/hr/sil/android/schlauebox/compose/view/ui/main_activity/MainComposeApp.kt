@@ -16,10 +16,14 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import hr.sil.android.schlauebox.compose.view.ui.home_screens.DeviceDetailsScreen
 import hr.sil.android.schlauebox.compose.view.ui.home_screens.NavHomeScreen
 import kotlin.collections.forEachIndexed
 
@@ -57,8 +61,8 @@ fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStack
                     goToAnimatedCreditCard =  { route ->
                         appState.navigateToAnimatedCreditCard(route = route)
                     },
-                    goToMovieDetails =  { route, movieId ->
-                        appState.navigateToMovieDetails(route = route, movieId = movieId)
+                    goToDeviceDetails =  { route, deviceId ->
+                        appState.navigateToDeviceDetails(route = route, deviceId = deviceId)
                     },
                     navigateUp = {
                         appState.upPress()
@@ -71,13 +75,18 @@ fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStack
 
 fun NavGraphBuilder.mainNavGraph(
     navBackStackEntry: State<NavBackStackEntry?>,
-    goToMovieDetails: (route: String, movieId: Long) -> Unit,
+    goToDeviceDetails: (route: String, movieId: String) -> Unit,
     goToAnimatedCreditCard: (route: String) -> Unit,
     navigateUp:() -> Unit
 ) {
     composable(MainDestinations.HOME) {
         NavHomeScreen(
             viewModel = hiltViewModel(), // viewModel,
+            onDeviceClick = { deviceId ->
+                if (navBackStackEntry.value?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
+                    goToDeviceDetails(MainDestinations.DEVICE_DETAILS, deviceId)
+                }
+            }
 //            onMovieClick = { movieId ->
 //                if (navBackStackEntry.value?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
 //                    goToMovieDetails(MainDestinations.MOVIE_DETAILS,  movieId)
@@ -85,19 +94,21 @@ fun NavGraphBuilder.mainNavGraph(
 //            }
         )
     }
-//    composable(
-//        "${MainDestinations.MOVIE_DETAILS}/{${NavArguments.MOVIE_ID}}",
-//        arguments = listOf(navArgument(NavArguments.MOVIE_ID) {
-//            type = NavType.LongType
-//        })
-//    ) {
-//        MovieDetailsScreen(
-//            viewModel = hiltViewModel(),
+    composable(
+        "${MainDestinations.DEVICE_DETAILS}/{${NavArguments.DEVICE_ID}}",
+        arguments = listOf(navArgument(NavArguments.DEVICE_ID) {
+            type = NavType.StringType
+        })
+    ) {
+        DeviceDetailsScreen(
+            macAddress = it.arguments?.getString(NavArguments.DEVICE_ID) ?: "",
+            nameOfDevice = "",
+            viewModel = hiltViewModel(),
 //            navigateUp = {
 //                navigateUp()
 //            }
-//        )
-//    }
+        )
+    }
 //
 //    composable(MainDestinations.SETTINGS) {
 //        SettingsScreen(viewModel = hiltViewModel())
