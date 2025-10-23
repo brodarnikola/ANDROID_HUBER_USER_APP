@@ -86,12 +86,14 @@ fun MainActivityContent(
 
     val bottomNavigationItems = bottomNavigationItems()
 
-    val arrowSize = rememberSaveable { mutableIntStateOf(0) }
     val showBottomBar = rememberSaveable { mutableStateOf(true) }
     val navBackStackEntry =
         appState.navController.currentBackStackEntryAsState() // navController.currentBackStackEntryAsState()
 
+    val currentRoute = navBackStackEntry.value?.destination?.route
+
     showBottomBar.value = when {
+        currentRoute == null -> true
         navBackStackEntry.value?.destination?.route?.contains(MainDestinations.HOME) == true ||
         navBackStackEntry.value?.destination?.route?.contains(MainDestinations.ALERTS) == true ||
         navBackStackEntry.value?.destination?.route?.contains(MainDestinations.SETTINGS) == true  -> true
@@ -104,7 +106,7 @@ fun MainActivityContent(
             TopAppBar(
                 title = {
                     val imageLogoPadding = if( !showBottomBar.value ) {
-                        60.dp
+                        50.dp
                     } else {
                         20.dp
                     }
