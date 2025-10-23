@@ -235,7 +235,7 @@ private fun DeviceActionsSection(
             Spacer(modifier = Modifier.width(16.dp))
 
             ActionButton(
-                iconRes = R.drawable.ic_send_parcel,
+                iconRes = R.drawable.ic_pickup_parcel,
                 text = stringResource(R.string.app_generic_send_parcel),
                 enabled = uiState.sendParcelButtonEnabled,
                 onClick = onSendParcelClick,
@@ -280,29 +280,57 @@ private fun ActionButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
+    Box(
         modifier = modifier
-            .size(160.dp)
+            .size(180.dp)
             .clickable(enabled = enabled, onClick = onClick),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        contentAlignment = Alignment.Center
     ) {
         Image(
             painter = painterResource(id = iconRes),
             contentDescription = text,
-            modifier = Modifier.size(120.dp),
+            modifier = Modifier.size(160.dp),
             alpha = if (enabled) 1f else 0.4f
         )
 
-        Text(
-            text = text,
-            color = colorResource(R.color.colorWhite),
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Normal,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 8.dp)
-        )
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 28.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = text,
+                color = colorResource(R.color.colorWhite),
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
+            )
+        }
     }
+//    Column(
+//        modifier = modifier
+//            .size(160.dp)
+//            .clickable(enabled = enabled, onClick = onClick),
+//        horizontalAlignment = Alignment.CenterHorizontally,
+//        verticalArrangement = Arrangement.Center
+//    ) {
+//        Image(
+//            painter = painterResource(id = iconRes),
+//            contentDescription = text,
+//            modifier = Modifier.size(120.dp),
+//            alpha = if (enabled) 1f else 0.4f
+//        )
+//
+//        Text(
+//            text = text,
+//            color = colorResource(R.color.colorWhite),
+//            fontSize = 14.sp,
+//            fontWeight = FontWeight.Normal,
+//            textAlign = TextAlign.Center,
+//            modifier = Modifier.padding(top = 8.dp)
+//        )
+//    }
 }
 
 @Composable
