@@ -11,17 +11,12 @@ import kotlin.let
 object MainDestinations {
     const val HOME = "Home"
     const val ALERTS = "Alerts"
-    const val LOCATION = "Location"
     const val SETTINGS = "Settings"
-    const val MOVIE_DETAILS = "MovieDetails"
-    const val ANDROID_POSSIBILITIES = "Android possibilities"
-    const val RX_JAVA_EXAMPLES = "RxJavaExamples"
-    const val OBJECT_DETECTION = "ObjectDetection"
-    const val ANIMATED_CARD = "AnimatedCard"
+    const val DEVICE_DETAILS = "DeviceDetails"
 }
 
 object NavArguments {
-    const val MOVIE_ID = "movieId"
+    const val DEVICE_ID = "deviceId"
 }
 
 @Composable
@@ -46,9 +41,9 @@ class MainAppState(
         }
     }
 
-    fun navigateToMovieDetails(route: String, movieId: Long) {
+    fun navigateToDeviceDetails(route: String, deviceId: String) {
         if (route != currentRoute) {
-            navController.navigate("$route/$movieId") {
+            navController.navigate("$route/$deviceId") {
                 launchSingleTop = true
                 restoreState = true
 //                if (popPreviousScreen) {

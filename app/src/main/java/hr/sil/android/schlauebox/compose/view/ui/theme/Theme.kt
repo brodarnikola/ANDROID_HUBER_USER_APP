@@ -566,7 +566,7 @@ fun ProvideAppColors(colors: AppColors, content: @Composable () -> Unit) {
 }
 
 private val LocalAppColors =
-    staticCompositionLocalOf<AppColors> { error("No LocalCinnamonColorsPalette provided") }
+    staticCompositionLocalOf<AppColors> { error("No LocalColorsPalette provided") }
 
 
 val IsAppInDarkTheme = compositionLocalOf<Boolean> { error("No IsAppInDarkTheme provided") }
