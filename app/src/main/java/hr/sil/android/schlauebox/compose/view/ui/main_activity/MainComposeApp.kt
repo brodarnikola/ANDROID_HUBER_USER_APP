@@ -23,6 +23,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import hr.sil.android.schlauebox.compose.view.ui.help.HelpContentScreen
 import hr.sil.android.schlauebox.compose.view.ui.help.HelpScreen
 import hr.sil.android.schlauebox.compose.view.ui.home_screens.DeviceDetailsScreen
 import hr.sil.android.schlauebox.compose.view.ui.home_screens.NavHomeScreen
@@ -69,6 +70,9 @@ fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStack
                     goToHelp = {
                         appState.goToHelp(it)
                     },
+                    goToHelpContent = {
+                        appState.goToHelpContent(it)
+                    },
                     navigateUp = {
                         appState.upPress()
                     }
@@ -83,6 +87,7 @@ fun NavGraphBuilder.mainNavGraph(
     goToDeviceDetails: (route: String, deviceId: String) -> Unit,
     goToPickup: (route: String, macAddress: String) -> Unit,
     goToHelp: (route: String) -> Unit,
+    goToHelpContent: (route: String ) -> Unit,
     navigateUp:() -> Unit
 ) {
     composable(MainDestinations.HOME) {
@@ -141,6 +146,32 @@ fun NavGraphBuilder.mainNavGraph(
         MainDestinations.HELP_SCREEN
     ) {
         HelpScreen(
+            viewModel = hiltViewModel(),
+            onNavigateToHelpContent = { titleResId, contentResId, picturePosition ->
+                goToHelpContent("${MainDestinations.HELP_CONTENT_SCREEN}/$titleResId/$contentResId/$picturePosition")
+            }
+        )
+    }
+
+    composable(
+        "${MainDestinations.HELP_CONTENT_SCREEN}/{${NavArguments.TITLE_HELP}}/{${NavArguments.CONTENT_HELP}}/{${NavArguments.PICTURE_POSITION}}",
+        arguments = listOf(navArgument(NavArguments.TITLE_HELP) {
+            type = NavType.IntType
+        }, navArgument(NavArguments.CONTENT_HELP) {
+            type = NavType.IntType
+        }, navArgument(NavArguments.PICTURE_POSITION) {
+            type = NavType.IntType
+        }
+        )
+    ) {
+        val titleResId = it.arguments?.getInt(NavArguments.TITLE_HELP) ?: 0
+        val contentResId = it.arguments?.getInt(NavArguments.CONTENT_HELP) ?: 0
+        val picturePosition = it.arguments?.getInt(NavArguments.PICTURE_POSITION) ?: 0
+
+        HelpContentScreen(
+            titleResId,
+            contentResId,
+            picturePosition,
             viewModel = hiltViewModel()
         )
     }

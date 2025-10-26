@@ -12,6 +12,7 @@ object MainDestinations {
     const val HOME = "Home"
     const val TERMS_AND_CONDITION_SCREEN = "TermsAndConditionScreen"
     const val HELP_SCREEN = "HelpScreen"
+    const val HELP_CONTENT_SCREEN = "HelpContentScreen"
     const val SETTINGS = "Settings"
     const val DEVICE_DETAILS = "DeviceDetails"
     const val PARCEL_PICKUP = "ParcelPickup"
@@ -20,6 +21,9 @@ object MainDestinations {
 object NavArguments {
     const val DEVICE_ID = "deviceId"
     const val MAC_ADDRESS = "macAddress"
+    const val TITLE_HELP = "titleHelp"
+    const val CONTENT_HELP = "contentHelp"
+    const val PICTURE_POSITION = "picturePosition"
 }
 
 @Composable
@@ -68,6 +72,15 @@ class MainAppState(
     }
 
     fun goToHelp(route: String ) {
+        if (route != currentRoute) {
+            navController.navigate(route) {
+                launchSingleTop = true
+                restoreState = true
+            }
+        }
+    }
+
+    fun goToHelpContent(route: String ) {
         if (route != currentRoute) {
             navController.navigate(route) {
                 launchSingleTop = true

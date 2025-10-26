@@ -4,12 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.*
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.*
@@ -28,24 +28,36 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import hr.sil.android.schlauebox.BuildConfig
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.view.ui.home.activities.HelpContentActivity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HelpScreen(
-    viewModel: HelpViewModel = viewModel(),
+fun HelpContentScreen(
+    titleResId: Int,
+    contentResId: Int,
+    picturePosition: Int,
+    viewModel: HelpContentViewModel = viewModel(),
     navigateUp: () -> Unit = {},
-    onNavigateToLogin: () -> Unit = {},
-    onNavigateToHelpContent: (titleResId: Int, contentResId: Int, picturePosition: Int) -> Unit = { _, _, _ -> }
+    onNavigateToLogin: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
+
+    LaunchedEffect(titleResId, contentResId, picturePosition) {
+        viewModel.loadContent(titleResId, contentResId, picturePosition)
+    }
 
     LaunchedEffect(uiState.isUnauthorized) {
         if (uiState.isUnauthorized) {
             onNavigateToLogin()
         }
     }
+
+    val imageRes = when (picturePosition) {
+        0 -> R.drawable.img_pickup_parcel_small
+        1 -> R.drawable.img_send_parcel_small
+        else -> R.drawable.img_share_access_small
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -56,56 +68,55 @@ fun HelpScreen(
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                //.padding(paddingValues)
         ) {
-
             HorizontalDivider(
                 thickness = 1.dp,
                 color = colorResource(R.color.colorPinkishGray)
             )
 
-            Text(
-                text = stringResource(R.string.help_description_title),
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold,
-                color = colorResource(R.color.colorBlack),
-                textAlign = TextAlign.Center,
+            Image(
+                painter = painterResource(id = imageRes),
+                contentDescription = "Help illustration",
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 40.dp, start = 15.dp, end = 15.dp)
+                    .padding(top = 10.dp)
+                    .align(Alignment.CenterHorizontally)
             )
 
-            Spacer(modifier = Modifier.height(40.dp))
+            if (titleResId != 0) {
+                Text(
+                    text = stringResource(id = titleResId),
+                    style = MaterialTheme.typography.headlineSmall.copy(
+                        fontSize = 25.sp,
+                        lineHeight = 14.sp,
+                        textAlign = TextAlign.Center
+                    ),
+                    lineHeight = 14.sp,
+                    color = colorResource(R.color.colorBlack),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 5.dp, start = 15.dp, end = 15.dp, bottom = 10.dp)
+                )
+            }
 
-            HelpItem(
-                title = stringResource(R.string.app_generic_pickup_parcel),
-                onClick = {
-                    onNavigateToHelpContent(R.string.app_generic_pickup_parcel, R.string.help_pickup_parcel_content, 0)
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .verticalScroll(rememberScrollState())
+                    .padding(horizontal = 20.dp, vertical = 5.dp)
+            ) {
+                if (contentResId != 0) {
+                    Text(
+                        text = stringResource(id = contentResId),
+                        fontSize = 14.sp,
+                        color = colorResource(R.color.colorBlack),
+                        modifier = Modifier.padding(top = 2.dp)
+                    )
                 }
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            HelpItem(
-                title = stringResource(R.string.app_generic_send_parcel),
-                onClick = {
-                    onNavigateToHelpContent(R.string.app_generic_send_parcel, R.string.help_send_parcel_text, 1)
-                }
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            HelpItem(
-                title = stringResource(R.string.app_generic_key_sharing),
-                onClick = {
-                    onNavigateToHelpContent(R.string.app_generic_key_sharing, R.string.help_share_access_text, 2)
-                }
-            )
-
-            Spacer(modifier = Modifier.weight(1f))
+            }
 
             Column(
                 modifier = Modifier
@@ -132,41 +143,11 @@ fun HelpScreen(
                             Intent.ACTION_SENDTO,
                             Uri.parse("mailto:${BuildConfig.APP_BASE_EMAIL}")
                         )
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_generic_help))
                         context.startActivity(Intent.createChooser(emailIntent, ""))
                     }
                 )
             }
         }
-    }
-}
-
-@Composable
-private fun HelpItem(
-    title: String,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(colorResource(R.color.help_item_transparent))
-            .clickable(onClick = onClick)
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = title,
-            fontSize = 14.sp,
-            color = colorResource(R.color.colorWhite),
-            modifier = Modifier
-                .weight(1f)
-                .padding(top = 4.dp)
-        )
-
-        Icon(
-            imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-            contentDescription = "Navigate",
-            tint = colorResource(R.color.colorWhite)
-        )
     }
 }
