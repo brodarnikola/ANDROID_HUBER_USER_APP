@@ -13,10 +13,12 @@ object MainDestinations {
     const val ALERTS = "Alerts"
     const val SETTINGS = "Settings"
     const val DEVICE_DETAILS = "DeviceDetails"
+    const val PARCEL_PICKUP = "ParcelPickup"
 }
 
 object NavArguments {
     const val DEVICE_ID = "deviceId"
+    const val MAC_ADDRESS = "macAddress"
 }
 
 @Composable
@@ -55,27 +57,9 @@ class MainAppState(
         }
     }
 
-    fun navigateToAnimatedCreditCard(route: String) {
+    fun goToPickup(route: String, macAddress: String) {
         if (route != currentRoute) {
-            navController.navigate(route) {
-                launchSingleTop = true
-                restoreState = true
-            }
-        }
-    }
-
-    fun navigateToMachineLearning(route: String) {
-        if (route != currentRoute) {
-            navController.navigate(route) {
-                launchSingleTop = true
-                restoreState = true
-            }
-        }
-    }
-
-    fun navigateToRxJava3Examples(route: String) {
-        if (route != currentRoute) {
-            navController.navigate(route) {
+            navController.navigate("$route/$macAddress") {
                 launchSingleTop = true
                 restoreState = true
             }

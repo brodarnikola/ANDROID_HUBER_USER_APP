@@ -36,7 +36,7 @@ fun DeviceDetailsScreen(
     macAddress: String,
     nameOfDevice: String,
     viewModel: DeviceDetailsViewModel = viewModel(),
-    onNavigateToPickup: () -> Unit = {},
+    onNavigateToPickup: (macAddress: String) -> Unit = {},
     onNavigateToSendParcel: () -> Unit = {},
     onNavigateToAccessSharing: () -> Unit = {},
     onNavigateToHelp: () -> Unit = {},
@@ -85,12 +85,16 @@ fun DeviceDetailsScreen(
                     nameOfDevice = nameOfDevice,
                     uiState = uiState,
                     onPickupClick = {
+                        onNavigateToPickup(macAddress)
+//                        val startIntent = Intent(context, PickupParcelActivity::class.java)
+//                        startIntent.putExtra("rMacAddress", macAddress)
+//                        context.startActivity(startIntent)
+                    },
+                    onSendParcelClick = {
                         val startIntent = Intent(context, PickupParcelActivity::class.java)
                         startIntent.putExtra("rMacAddress", macAddress)
                         context.startActivity(startIntent)
-                    },
-                    onSendParcelClick = {
-                        handleSendParcelClick(context, macAddress, uiState)
+                        //handleSendParcelClick(context, macAddress, uiState)
                     },
                     onAccessSharingClick = {
                         val startIntent = Intent(context, AccessSharingActivity::class.java)

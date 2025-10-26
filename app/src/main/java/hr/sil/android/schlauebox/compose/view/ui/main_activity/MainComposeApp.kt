@@ -25,6 +25,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import hr.sil.android.schlauebox.compose.view.ui.home_screens.DeviceDetailsScreen
 import hr.sil.android.schlauebox.compose.view.ui.home_screens.NavHomeScreen
+import hr.sil.android.schlauebox.compose.view.ui.pickup_parcel.PickupParcelScreen
 import kotlin.collections.forEachIndexed
 
 
@@ -58,8 +59,8 @@ fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStack
             ) {
                 mainNavGraph(
                     navBackStackEntry = navBackStackEntry,
-                    goToAnimatedCreditCard =  { route ->
-                        appState.navigateToAnimatedCreditCard(route = route)
+                    goToPickup =  { route, macAddress ->
+                        appState.goToPickup(route = route, macAddress)
                     },
                     goToDeviceDetails =  { route, deviceId ->
                         appState.navigateToDeviceDetails(route = route, deviceId = deviceId)
@@ -75,8 +76,8 @@ fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStack
 
 fun NavGraphBuilder.mainNavGraph(
     navBackStackEntry: State<NavBackStackEntry?>,
-    goToDeviceDetails: (route: String, movieId: String) -> Unit,
-    goToAnimatedCreditCard: (route: String) -> Unit,
+    goToDeviceDetails: (route: String, deviceId: String) -> Unit,
+    goToPickup: (route: String, macAddress: String) -> Unit,
     navigateUp:() -> Unit
 ) {
     composable(MainDestinations.HOME) {
@@ -104,11 +105,33 @@ fun NavGraphBuilder.mainNavGraph(
             macAddress = it.arguments?.getString(NavArguments.DEVICE_ID) ?: "",
             nameOfDevice = "",
             viewModel = hiltViewModel(),
+            onNavigateToPickup = { macAddress ->
+                goToPickup(MainDestinations.PARCEL_PICKUP, macAddress)
+            },
 //            navigateUp = {
 //                navigateUp()
 //            }
         )
     }
+
+    composable(
+        "${MainDestinations.PARCEL_PICKUP}/{${NavArguments.MAC_ADDRESS}}",
+        arguments = listOf(navArgument(NavArguments.MAC_ADDRESS) {
+            type = NavType.StringType
+        })
+    ) {
+        PickupParcelScreen(
+            macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
+            viewModel = hiltViewModel(),
+            onFinish = {
+                navigateUp()
+            }
+//            navigateUp = {
+//                navigateUp()
+//            }
+        )
+    }
+
 //
 //    composable(MainDestinations.SETTINGS) {
 //        SettingsScreen(viewModel = hiltViewModel())
