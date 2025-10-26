@@ -23,6 +23,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import hr.sil.android.schlauebox.compose.view.ui.help.HelpScreen
 import hr.sil.android.schlauebox.compose.view.ui.home_screens.DeviceDetailsScreen
 import hr.sil.android.schlauebox.compose.view.ui.home_screens.NavHomeScreen
 import hr.sil.android.schlauebox.compose.view.ui.pickup_parcel.PickupParcelScreen
@@ -65,6 +66,9 @@ fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStack
                     goToDeviceDetails =  { route, deviceId ->
                         appState.navigateToDeviceDetails(route = route, deviceId = deviceId)
                     },
+                    goToHelp = {
+                        appState.goToHelp(it)
+                    },
                     navigateUp = {
                         appState.upPress()
                     }
@@ -78,6 +82,7 @@ fun NavGraphBuilder.mainNavGraph(
     navBackStackEntry: State<NavBackStackEntry?>,
     goToDeviceDetails: (route: String, deviceId: String) -> Unit,
     goToPickup: (route: String, macAddress: String) -> Unit,
+    goToHelp: (route: String) -> Unit,
     navigateUp:() -> Unit
 ) {
     composable(MainDestinations.HOME) {
@@ -108,6 +113,9 @@ fun NavGraphBuilder.mainNavGraph(
             onNavigateToPickup = { macAddress ->
                 goToPickup(MainDestinations.PARCEL_PICKUP, macAddress)
             },
+            onNavigateToHelp = {
+                goToHelp(MainDestinations.HELP_SCREEN)
+            }
 //            navigateUp = {
 //                navigateUp()
 //            }
@@ -126,9 +134,14 @@ fun NavGraphBuilder.mainNavGraph(
             onFinish = {
                 navigateUp()
             }
-//            navigateUp = {
-//                navigateUp()
-//            }
+        )
+    }
+
+    composable(
+        MainDestinations.HELP_SCREEN
+    ) {
+        HelpScreen(
+            viewModel = hiltViewModel()
         )
     }
 

@@ -55,7 +55,7 @@ fun bottomNavigationItems(): List<BottomNavigationBarItem> {
     )
     val alertsTab = BottomNavigationBarItem(
         title = "Alerts",
-        route =  MainDestinations.ALERTS,
+        route =  MainDestinations.TERMS_AND_CONDITION_SCREEN,
         selectedIcon = Icons.Filled.Email,
         unselectedIcon = Icons.Outlined.Email,
         badgeAmount = 7
@@ -95,7 +95,7 @@ fun MainActivityContent(
     showBottomBar.value = when {
         currentRoute == null -> true
         navBackStackEntry.value?.destination?.route?.contains(MainDestinations.HOME) == true ||
-        navBackStackEntry.value?.destination?.route?.contains(MainDestinations.ALERTS) == true ||
+        navBackStackEntry.value?.destination?.route?.contains(MainDestinations.TERMS_AND_CONDITION_SCREEN) == true ||
         navBackStackEntry.value?.destination?.route?.contains(MainDestinations.SETTINGS) == true  -> true
         else -> false
     }

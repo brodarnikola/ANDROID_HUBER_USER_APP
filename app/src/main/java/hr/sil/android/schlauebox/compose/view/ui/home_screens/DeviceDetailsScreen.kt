@@ -103,9 +103,10 @@ fun DeviceDetailsScreen(
                         context.startActivity(startIntent)
                     },
                     onHelpClick = {
-                        val startIntent = Intent(context, HelpActivity::class.java)
-                        startIntent.putExtra("rMacAddress", macAddress)
-                        context.startActivity(startIntent)
+                        onNavigateToHelp()
+//                        val startIntent = Intent(context, HelpActivity::class.java)
+//                        startIntent.putExtra("rMacAddress", macAddress)
+//                        context.startActivity(startIntent)
                     },
                     modifier = Modifier.padding(top = 16.dp)
                 )

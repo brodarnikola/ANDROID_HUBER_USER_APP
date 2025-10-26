@@ -10,7 +10,8 @@ import kotlin.let
 
 object MainDestinations {
     const val HOME = "Home"
-    const val ALERTS = "Alerts"
+    const val TERMS_AND_CONDITION_SCREEN = "TermsAndConditionScreen"
+    const val HELP_SCREEN = "HelpScreen"
     const val SETTINGS = "Settings"
     const val DEVICE_DETAILS = "DeviceDetails"
     const val PARCEL_PICKUP = "ParcelPickup"
@@ -60,6 +61,15 @@ class MainAppState(
     fun goToPickup(route: String, macAddress: String) {
         if (route != currentRoute) {
             navController.navigate("$route/$macAddress") {
+                launchSingleTop = true
+                restoreState = true
+            }
+        }
+    }
+
+    fun goToHelp(route: String ) {
+        if (route != currentRoute) {
+            navController.navigate(route) {
                 launchSingleTop = true
                 restoreState = true
             }
