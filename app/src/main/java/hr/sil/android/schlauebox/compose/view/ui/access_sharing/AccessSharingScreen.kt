@@ -232,47 +232,60 @@ private fun MemberItem(
         else -> ""
     }
 
-    Row(
+    Box(
         modifier = modifier
             .fillMaxWidth()
             .background(colorResource(R.color.help_item_transparent))
-            .padding(start = 26.dp, top = 10.dp, bottom = 10.dp, end = 16.dp),
-        verticalAlignment = Alignment.CenterVertically
+            .padding(start = 26.dp, top = 10.dp, bottom = 10.dp, end = 16.dp)
     ) {
-        Column(
-            modifier = Modifier.weight(1f)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = member.endUserName,
-                style = MaterialTheme.typography.titleSmall,
-                color = colorResource(R.color.colorWhite)
-            )
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                if (member.endUserEmail.isNotEmpty()) {
+                    Text(
+                        text = member.endUserName,
+                        style = MaterialTheme.typography.titleSmall,
+                        color = colorResource(R.color.colorWhite)
+                    )
+                }
 
-            if (member.endUserEmail.isNotEmpty()) {
-                Text(
-                    text = member.endUserEmail,
-                    style = MaterialTheme.typography.labelSmall,
-                    color = colorResource(R.color.colorWhite),
-                    modifier = Modifier.padding(top = 2.dp)
-                )
-            }
+                if (member.endUserEmail.isNotEmpty()) {
+                    Text(
+                        text = member.endUserEmail,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = colorResource(R.color.colorWhite),
+                        modifier = Modifier.padding(top = 2.dp)
+                    )
+                }
 
-            if (roleText.isNotEmpty()) {
-                Text(
-                    text = roleText,
-                    style = MaterialTheme.typography.labelSmall,
-                    color = colorResource(R.color.colorWhite),
-                    modifier = Modifier.padding(top = 2.dp)
-                )
+                if (roleText.isNotEmpty()) {
+                    Text(
+                        text = roleText,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = colorResource(R.color.colorWhite),
+                        modifier = Modifier.padding(top = 2.dp)
+                    )
+                }
             }
         }
 
-        IconButton(onClick = onDeleteClick) {
-            Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = "Delete",
-                tint = colorResource(R.color.colorWhite)
-            )
+        Box(
+            modifier = Modifier
+                .align(Alignment.CenterEnd)
+                .size(48.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            IconButton(onClick = onDeleteClick) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Delete",
+                    tint = colorResource(R.color.colorWhite)
+                )
+            }
         }
     }
 }
