@@ -8,22 +8,29 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
@@ -40,7 +47,8 @@ fun AccessSharingAddUserScreen(
     macAddress: String,
     nameOfDevice: String,
     viewModel: AccessSharingAddUserViewModel = viewModel(),
-    navigateUp: () -> Unit = {},
+    navigateToAccessSharingActivity: ( macAddress: String, nameOfDevice: String) -> Unit = { _, _ -> },
+
     onNavigateToLogin: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -86,132 +94,161 @@ fun AccessSharingAddUserScreen(
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = R.drawable.bg_three),
+            contentDescription = "Background",
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+        HorizontalDivider(
+            color = colorResource(R.color.colorPinkishGray),
+            thickness = 1.dp
+        )
         Column(modifier = Modifier.fillMaxSize()) {
-
-            HorizontalDivider(
-                color = colorResource(R.color.colorPinkishGray),
-                thickness = 1.dp
-            )
-
-            Column(
+            Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 16.dp, vertical = 16.dp)
+                    //.background(colorResource(R.color.colorPinkishGray))
             ) {
-                Text(
-                    text = stringResource(R.string.access_sharing_new_user_title),
-                    style = MaterialTheme.typography.titleLarge,
-                    color = colorResource(R.color.colorBlack),
-                    modifier = Modifier.padding(top = 10.dp)
-                )
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(top = 10.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = stringResource(R.string.access_sharing_new_user_title),
+                        style = MaterialTheme.typography.titleLarge,
+                        color = colorResource(R.color.colorBlack),
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
 
-                Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
 
-                OutlinedTextField(
-                    value = uiState.email,
-                    onValueChange = { viewModel.onEmailChanged(it) },
-                    label = { Text(stringResource(R.string.app_generic_email)) },
-                    placeholder = { Text(stringResource(R.string.app_generic_email)) },
-                    isError = uiState.emailError != null,
-                    supportingText = {
-                        uiState.emailError?.let {
-                            Text(
-                                text = it,
-                                color = MaterialTheme.colorScheme.error
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                            .height(48.dp)
+                            .clip(RoundedCornerShape(4.dp))
+                            .border(
+                                width = 1.dp,
+                                color = colorResource(R.color.colorGray),
+                                shape = RoundedCornerShape(4.dp)
+                            )
+                            .background(colorResource(R.color.colorWhite))
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(horizontal = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            BasicTextField(
+                                value = uiState.email,
+                                onValueChange = { viewModel.onEmailChanged(it) },
+                                textStyle = TextStyle(
+                                    fontSize = 14.sp,
+                                    color = colorResource(R.color.colorBlack)
+                                ),
+                                modifier = Modifier.weight(1f),
+                                decorationBox = { innerTextField ->
+                                    if (uiState.email.isEmpty()) {
+                                        Text(
+                                            text = stringResource(R.string.app_generic_email),
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = colorResource(R.color.colorGray)
+                                        )
+                                    }
+                                    innerTextField()
+                                }
+                            )
+
+                            Icon(
+                                painter = painterResource(R.drawable.ic_register_email),
+                                contentDescription = "Email",
+                                tint = colorResource(R.color.colorGray)
                             )
                         }
-                    },
-                    trailingIcon = {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_register_email),
-                            contentDescription = "Email",
-                            tint = colorResource(R.color.colorPrimary)
-                        )
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = colorResource(R.color.colorPrimary),
-                        unfocusedBorderColor = colorResource(R.color.colorGray)
-                    )
-                )
+                    }
 
-                Spacer(modifier = Modifier.height(10.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                            if (contactsPermission.status.isGranted) {
-                                contactPickerLauncher.launch(null)
-                            } else {
-                                contactsPermission.launchPermissionRequest()
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                            .clickable {
+                                if (contactsPermission.status.isGranted) {
+                                    contactPickerLauncher.launch(null)
+                                } else {
+                                    contactsPermission.launchPermissionRequest()
+                                }
                             }
-                        }
-                        .padding(vertical = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_adressbook),
-                        contentDescription = "Address Book",
-                        tint = colorResource(R.color.colorPrimary)
-                    )
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Text(
-                        text = stringResource(R.string.access_sharing_new_user_selection),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = colorResource(R.color.colorBlack)
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                GroupSelectionDropdown(
-                    label = stringResource(R.string.access_sharing_group_selection),
-                    groups = uiState.availableGroups,
-                    selectedGroup = uiState.selectedGroup,
-                    onGroupSelected = { viewModel.onGroupSelected(it) }
-                )
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                RoleSelectionDropdown(
-                    label = stringResource(R.string.access_sharing_new_user_access_details),
-                    selectedRole = uiState.selectedRole,
-                    onRoleSelected = { viewModel.onRoleSelected(it) }
-                )
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Button(
-                    onClick = {
-                        viewModel.addUserAccess(macAddress) {
-                            val startIntent = Intent(context, AccessSharingActivity::class.java)
-                            startIntent.putExtra("rMacAddress", macAddress)
-                            startIntent.putExtra("nameOfDevice", nameOfDevice)
-                            context.startActivity(startIntent)
-                            (context as? Activity)?.finish()
-                        }
-                    },
-                    enabled = !uiState.isLoading,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(48.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = colorResource(R.color.colorPrimary)
-                    ),
-                    shape = RoundedCornerShape(24.dp)
-                ) {
-                    if (uiState.isLoading) {
-                        CircularProgressIndicator(
-                            modifier = Modifier.size(24.dp),
-                            color = Color.White
+                            .padding(vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_adressbook),
+                            contentDescription = "Address Book",
+                            tint = colorResource(R.color.colorBlack)
                         )
-                    } else {
+                        Spacer(modifier = Modifier.width(10.dp))
                         Text(
-                            text = stringResource(R.string.access_sharing_new_user_allow),
-                            style = MaterialTheme.typography.titleMedium,
-                            color = Color.White
+                            text = stringResource(R.string.access_sharing_new_user_selection),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = colorResource(R.color.colorBlack)
                         )
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    GroupSelectionDropdown(
+                        label = stringResource(R.string.access_sharing_group_selection),
+                        groups = uiState.availableGroups,
+                        selectedGroup = uiState.selectedGroup,
+                        onGroupSelected = { viewModel.onGroupSelected(it) }
+                    )
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    RoleSelectionDropdown(
+                        label = stringResource(R.string.access_sharing_new_user_access_details),
+                        selectedRole = uiState.selectedRole,
+                        onRoleSelected = { viewModel.onRoleSelected(it) }
+                    )
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    Button(
+                        onClick = {
+                            viewModel.addUserAccess(macAddress) {
+                                navigateToAccessSharingActivity(macAddress, nameOfDevice)
+                            }
+                        },
+                        enabled = !uiState.isLoading,
+                        modifier = Modifier
+                            .width(220.dp)
+                            .height(40.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = colorResource(R.color.colorPrimary)
+                        ),
+                        shape = RoundedCornerShape(20.dp)
+                    ) {
+                        if (uiState.isLoading) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(20.dp),
+                                color = Color.White,
+                                strokeWidth = 2.dp
+                            )
+                        } else {
+                            Text(
+                                text = stringResource(R.string.access_sharing_new_user_allow),
+                                style = MaterialTheme.typography.titleSmall,
+                                color = Color.White
+                            )
+                        }
                     }
                 }
             }
@@ -226,7 +263,6 @@ fun AccessSharingAddUserScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun GroupSelectionDropdown(
     label: String,
@@ -236,41 +272,68 @@ private fun GroupSelectionDropdown(
 ) {
     var expanded by remember { mutableStateOf(false) }
 
-    Column {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodySmall,
-            color = colorResource(R.color.colorBlack),
-            modifier = Modifier.padding(bottom = 4.dp)
-        )
-
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded }
-        ) {
-            OutlinedTextField(
-                value = selectedGroup?.groupOwnerName ?: "",
-                onValueChange = {},
-                readOnly = true,
-                trailingIcon = {
-                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .menuAnchor(),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = colorResource(R.color.colorPrimary),
-                    unfocusedBorderColor = colorResource(R.color.colorGray)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(4.dp))
+                .border(
+                    width = 1.dp,
+                    color = colorResource(R.color.colorGray),
+                    shape = RoundedCornerShape(4.dp)
                 )
+                .background(colorResource(R.color.colorWhite))
+                .padding(top = 1.dp, bottom = 15.dp)
+        ) {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.bodySmall,
+                color = colorResource(R.color.colorBlack),
+                modifier = Modifier.padding(start = 15.dp, top = 4.dp)
             )
 
-            ExposedDropdownMenu(
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(40.dp)
+                    .clickable { expanded = !expanded }
+                    .padding(horizontal = 5.dp, vertical = 10.dp)
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = selectedGroup?.groupOwnerName ?: "",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = colorResource(R.color.colorBlack)
+                    )
+                    Icon(
+                        imageVector = Icons.Default.ArrowDropDown,
+                        contentDescription = "Dropdown",
+                        tint = colorResource(R.color.colorBlack)
+                    )
+                }
+            }
+
+            DropdownMenu(
                 expanded = expanded,
-                onDismissRequest = { expanded = false }
+                onDismissRequest = { expanded = false },
+                modifier = Modifier.fillMaxWidth(0.9f)
             ) {
                 groups.forEach { group ->
                     DropdownMenuItem(
-                        text = { Text(group.groupOwnerName) },
+                        text = {
+                            Text(
+                                text = group.groupOwnerName,
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        },
                         onClick = {
                             onGroupSelected(group)
                             expanded = false
@@ -282,7 +345,6 @@ private fun GroupSelectionDropdown(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun RoleSelectionDropdown(
     label: String,
@@ -297,41 +359,68 @@ private fun RoleSelectionDropdown(
         RUserAccessRole.USER to context.getString(R.string.access_sharing_user_role_full)
     )
 
-    Column {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodySmall,
-            color = colorResource(R.color.colorBlack),
-            modifier = Modifier.padding(bottom = 4.dp)
-        )
-
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded }
-        ) {
-            OutlinedTextField(
-                value = roles.find { it.first == selectedRole }?.second ?: "",
-                onValueChange = {},
-                readOnly = true,
-                trailingIcon = {
-                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .menuAnchor(),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = colorResource(R.color.colorPrimary),
-                    unfocusedBorderColor = colorResource(R.color.colorGray)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(4.dp))
+                .border(
+                    width = 1.dp,
+                    color = colorResource(R.color.colorGray),
+                    shape = RoundedCornerShape(4.dp)
                 )
+                .background(colorResource(R.color.colorWhite))
+                .padding(top = 1.dp, bottom = 15.dp)
+        ) {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.bodySmall,
+                color = colorResource(R.color.colorBlack),
+                modifier = Modifier.padding(start = 15.dp, top = 4.dp)
             )
 
-            ExposedDropdownMenu(
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(40.dp)
+                    .clickable { expanded = !expanded }
+                    .padding(horizontal = 5.dp, vertical = 10.dp)
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = roles.find { it.first == selectedRole }?.second ?: "",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = colorResource(R.color.colorBlack)
+                    )
+                    Icon(
+                        imageVector = Icons.Default.ArrowDropDown,
+                        contentDescription = "Dropdown",
+                        tint = colorResource(R.color.colorBlack)
+                    )
+                }
+            }
+
+            DropdownMenu(
                 expanded = expanded,
-                onDismissRequest = { expanded = false }
+                onDismissRequest = { expanded = false },
+                modifier = Modifier.fillMaxWidth(0.9f)
             ) {
                 roles.forEach { (role, roleName) ->
                     DropdownMenuItem(
-                        text = { Text(roleName) },
+                        text = {
+                            Text(
+                                text = roleName,
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        },
                         onClick = {
                             onRoleSelected(role)
                             expanded = false
@@ -378,7 +467,7 @@ private fun ShareAppDialog(
                     val emailIntent = Intent(Intent.ACTION_SEND).apply {
                         type = "message/rfc822"
                         putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
-                        putExtra(Intent.EXTRA_SUBJECT, "SchlaueBox App")
+                        putExtra(Intent.EXTRA_SUBJECT, "SchlauBox App")
                         putExtra(Intent.EXTRA_TEXT, shareBodyText)
                     }
 
@@ -391,7 +480,7 @@ private fun ShareAppDialog(
                     onDismiss()
                 }
             ) {
-                Text("Share application")
+                Text("Share app")
             }
         },
         dismissButton = {

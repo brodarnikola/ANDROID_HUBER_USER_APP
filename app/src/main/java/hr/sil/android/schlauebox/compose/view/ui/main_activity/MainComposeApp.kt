@@ -203,7 +203,10 @@ fun NavGraphBuilder.mainNavGraph(
         AccessSharingAddUserScreen(
             macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
             nameOfDevice = it.arguments?.getString(NavArguments.NAME_OF_DEVICE) ?: "CHANGE_THIS",
-            viewModel = hiltViewModel()
+            viewModel = hiltViewModel(),
+            navigateToAccessSharingActivity = { macAddress, nameOfDevice ->
+                goToAccessSharing(MainDestinations.ACCESS_SHARING_SCREEN, macAddress, nameOfDevice)
+            }
         )
     }
 
