@@ -23,6 +23,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import hr.sil.android.schlauebox.compose.view.ui.access_sharing.AccessSharingAddUserScreen
 import hr.sil.android.schlauebox.compose.view.ui.access_sharing.AccessSharingScreen
 import hr.sil.android.schlauebox.compose.view.ui.help.HelpContentScreen
 import hr.sil.android.schlauebox.compose.view.ui.help.HelpScreen
@@ -81,6 +82,13 @@ fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStack
                             nameOfDevice = nameOfDevice
                         )
                     },
+                    goToAccessSharingAddUser = { route, macAddress, nameOfDevice ->
+                        appState.goToAccessSharingAddUser(
+                            route = route,
+                            macAddress = macAddress,
+                            nameOfDevice = nameOfDevice
+                        )
+                    },
                     navigateUp = {
                         appState.upPress()
                     }
@@ -97,6 +105,7 @@ fun NavGraphBuilder.mainNavGraph(
     goToHelp: (route: String) -> Unit,
     goToHelpContent: (route: String ) -> Unit,
     goToAccessSharing: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
+    goToAccessSharingAddUser: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
     navigateUp:() -> Unit
 ) {
     composable(MainDestinations.HOME) {
@@ -171,6 +180,27 @@ fun NavGraphBuilder.mainNavGraph(
         )
     ) {
         AccessSharingScreen(
+            macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
+            nameOfDevice = it.arguments?.getString(NavArguments.NAME_OF_DEVICE) ?: "CHANGE_THIS",
+            viewModel = hiltViewModel(),
+            onNavigateToAddUser = { macAddress, nameOfDevice ->
+                goToAccessSharingAddUser(MainDestinations.ACCESS_SHARING_ADD_USER_SCREEN, macAddress, nameOfDevice )
+            }
+        )
+    }
+
+    composable(
+        "${MainDestinations.ACCESS_SHARING_ADD_USER_SCREEN}/{${NavArguments.MAC_ADDRESS}}/{${NavArguments.NAME_OF_DEVICE}}",
+        arguments = listOf(
+            navArgument(NavArguments.MAC_ADDRESS) {
+                type = NavType.StringType
+            },
+            navArgument(NavArguments.NAME_OF_DEVICE) {
+                type = NavType.StringType
+            }
+        )
+    ) {
+        AccessSharingAddUserScreen(
             macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
             nameOfDevice = it.arguments?.getString(NavArguments.NAME_OF_DEVICE) ?: "CHANGE_THIS",
             viewModel = hiltViewModel()

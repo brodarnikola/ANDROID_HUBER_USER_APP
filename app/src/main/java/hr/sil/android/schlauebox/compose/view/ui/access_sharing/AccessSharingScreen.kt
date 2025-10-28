@@ -41,8 +41,8 @@ fun AccessSharingScreen(
     macAddress: String,
     nameOfDevice: String,
     viewModel: AccessSharingViewModel = viewModel(),
-    navigateUp: () -> Unit = {},
-    onNavigateToLogin: () -> Unit = {}
+    onNavigateToLogin: () -> Unit = {},
+    onNavigateToAddUser: (macAddress: String, nameOfDevice: String) -> Unit = { _, _ -> }
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
@@ -59,103 +59,61 @@ fun AccessSharingScreen(
         }
     }
 
-//    Scaffold(
-//        topBar = {
-//            TopAppBar(
-//                title = {
-//                    Text(
-//                        text = stringResource(R.string.app_generic_access_sharing),
-//                        style = MaterialTheme.typography.bodyMedium.copy(
-//                            textAlign = TextAlign.Center
-//                        ),
-//                        color = colorResource(R.color.colorBlack),
-//                        textAlign = TextAlign.Center
-//                    )
-//                },
-//                colors = TopAppBarDefaults.topAppBarColors(
-//                    containerColor = colorResource(R.color.transparentColor)
-//                )
-//            )
-//        },
-//        floatingActionButton = {
-//            if (uiState.canAddUsers) {
-//                FloatingActionButton(
-//                    onClick = {
-//                        val startIntent = Intent(context, AccessSharingAddUserActivity::class.java)
-//                        startIntent.putExtra("rMacAddress", macAddress)
-//                        startIntent.putExtra("nameOfDevice", nameOfDevice)
-//                        context.startActivity(startIntent)
-//                        (context as? Activity)?.finish()
-//                    },
-//                    containerColor = colorResource(R.color.colorPrimary),
-//                    shape = CircleShape
-//                ) {
-//                    Icon(
-//                        imageVector = Icons.Default.Add,
-//                        contentDescription = "Add User",
-//                        tint = colorResource(R.color.colorWhite)
-//                    )
-//                }
-//            }
-//        }
-//    ) { paddingValues: PaddingValues ->
     Box(modifier = Modifier.fillMaxSize()) {
-//        Box(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(paddingValues)
-//        ) {
-            Image(
-                painter = painterResource(id = R.drawable.bg_three),
-                contentDescription = "Background",
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
-            Text(
-                text = stringResource(R.string.app_generic_access_sharing),
-                color = colorResource(R.color.colorBlack),
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.fillMaxWidth()
-                    .background(colorResource(R.color.transparentColor))
-                    .wrapContentHeight()
-                    .padding(vertical = 10.dp)
-                    .background(colorResource(R.color.transparentColor))
-            )
-            when {
-                uiState.isLoading -> {
-                    CircularProgressIndicator(
-                        modifier = Modifier.align(Alignment.Center),
-                        color = colorResource(R.color.colorPrimary)
-                    )
-                }
-                uiState.showEmptyState -> {
-                    EmptyAccessState(
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
-                else -> {
-                    AccessSharingList(
-                        members = uiState.members,
-                        onDeleteClick = { member ->
-                            memberToDelete = member
-                            showDeleteDialog = true
-                        }
-                    )
-                }
+        Image(
+            painter = painterResource(id = R.drawable.bg_three),
+            contentDescription = "Background",
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+        HorizontalDivider(
+            color = colorResource(R.color.colorPinkishGray),
+            thickness = 1.dp
+        )
+        Text(
+            text = stringResource(R.string.app_generic_access_sharing),
+            color = colorResource(R.color.colorBlack),
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(colorResource(R.color.transparentColor))
+                .wrapContentHeight()
+                .padding(vertical = 10.dp)
+                .background(colorResource(R.color.transparentColor))
+        )
+        when {
+            uiState.isLoading -> {
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center),
+                    color = colorResource(R.color.colorPrimary)
+                )
             }
+
+            uiState.showEmptyState -> {
+                EmptyAccessState(
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            }
+
+            else -> {
+                AccessSharingList(
+                    members = uiState.members,
+                    onDeleteClick = { member ->
+                        memberToDelete = member
+                        showDeleteDialog = true
+                    }
+                )
+            }
+        }
 
         if (uiState.canAddUsers) {
             FloatingActionButton(
                 onClick = {
-                    val startIntent = Intent(context, AccessSharingAddUserActivity::class.java)
-                    startIntent.putExtra("rMacAddress", macAddress)
-                    startIntent.putExtra("nameOfDevice", nameOfDevice)
-                    context.startActivity(startIntent)
-                    (context as? Activity)?.finish()
+                    onNavigateToAddUser(macAddress, nameOfDevice)
                 },
                 containerColor = colorResource(R.color.colorPrimary),
                 shape = CircleShape,
@@ -171,22 +129,21 @@ fun AccessSharingScreen(
             }
         }
 
-        }
+    }
 
-        if (showDeleteDialog && memberToDelete != null) {
-            DeleteConfirmationDialog(
-                memberName = memberToDelete?.endUserName ?: "",
-                onConfirm = {
-                    memberToDelete?.let { viewModel.deleteUserAccess(it) }
-                    showDeleteDialog = false
-                    memberToDelete = null
-                },
-                onDismiss = {
-                    showDeleteDialog = false
-                    memberToDelete = null
-                }
-            )
-        //}
+    if (showDeleteDialog && memberToDelete != null) {
+        DeleteConfirmationDialog(
+            memberName = memberToDelete?.endUserName ?: "",
+            onConfirm = {
+                memberToDelete?.let { viewModel.deleteUserAccess(it) }
+                showDeleteDialog = false
+                memberToDelete = null
+            },
+            onDismiss = {
+                showDeleteDialog = false
+                memberToDelete = null
+            }
+        )
     }
 }
 
@@ -196,7 +153,9 @@ private fun AccessSharingList(
     onDeleteClick: (RGroupDisplayMembersChild) -> Unit
 ) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize().padding(top = 5.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 5.dp),
         //contentPadding = PaddingValues(vertical = 8.dp)
     ) {
         items(members) { item ->
@@ -204,9 +163,11 @@ private fun AccessSharingList(
                 is RGroupDisplayMembersHeader -> {
                     HeaderItem(headerTitle = item.groupOwnerName)
                 }
+
                 is RGroupDisplayMembersAdmin -> {
                     AdminItem(adminName = item.groupOwnerName)
                 }
+
                 is RGroupDisplayMembersChild -> {
                     MemberItem(
                         member = item,
@@ -239,24 +200,6 @@ private fun HeaderItem(
     )
 }
 
-//@Composable
-//private fun HeaderItem(
-//    headerTitle: String,
-//    modifier: Modifier = Modifier
-//) {
-//    Text(
-//        text = headerTitle.uppercase(),
-//        style = MaterialTheme.typography.titleMedium.copy(
-//            fontSize = 18.sp
-//        ),
-//        color = colorResource(R.color.colorBlack),
-//        modifier = modifier
-//            .fillMaxWidth()
-//            .background(colorResource(R.color.colorGray))
-//            .padding(horizontal = 16.dp, vertical = 12.dp)
-//    )
-//}
-
 @Composable
 private fun AdminItem(
     adminName: String,
@@ -275,22 +218,6 @@ private fun AdminItem(
         thickness = 25.dp
     )
 }
-
-//@Composable
-//private fun AdminItem(
-//    adminName: String,
-//    modifier: Modifier = Modifier
-//) {
-//    Text(
-//        text = adminName,
-//        style = MaterialTheme.typography.titleMedium,
-//        color = colorResource(R.color.colorBlack),
-//        modifier = modifier
-//            .fillMaxWidth()
-//            .background(colorResource(R.color.colorWhite))
-//            .padding(horizontal = 16.dp, vertical = 10.dp)
-//    )
-//}
 
 @Composable
 private fun MemberItem(
@@ -349,67 +276,6 @@ private fun MemberItem(
         }
     }
 }
-
-//@Composable
-//private fun MemberItem(
-//    member: RGroupDisplayMembersChild,
-//    onDeleteClick: () -> Unit,
-//    modifier: Modifier = Modifier
-//) {
-//    val context = LocalContext.current
-//    val roleText = when (member.role) {
-//        "ADMIN" -> context.getString(R.string.access_sharing_admin_role_full)
-//        "USER" -> context.getString(R.string.access_sharing_user_role_full)
-//        else -> ""
-//    }
-//
-//    Row(
-//        modifier = modifier
-//            .fillMaxWidth()
-//            .background(colorResource(R.color.colorWhite))
-//            .padding(horizontal = 16.dp, vertical = 12.dp),
-//        verticalAlignment = Alignment.CenterVertically
-//    ) {
-//        Column(
-//            modifier = Modifier.weight(1f)
-//        ) {
-//            Text(
-//                text = member.endUserName,
-//                style = MaterialTheme.typography.bodyLarge,
-//                color = colorResource(R.color.colorBlack)
-//            )
-//
-//            Text(
-//                text = member.endUserEmail,
-//                style = MaterialTheme.typography.bodyMedium,
-//                color = colorResource(R.color.colorGray),
-//                modifier = Modifier.padding(top = 4.dp)
-//            )
-//
-//            if (roleText.isNotEmpty()) {
-//                Text(
-//                    text = roleText,
-//                    style = MaterialTheme.typography.bodyMedium,
-//                    color = colorResource(R.color.colorPrimary),
-//                    modifier = Modifier.padding(top = 4.dp)
-//                )
-//            }
-//        }
-//
-//        IconButton(onClick = onDeleteClick) {
-//            Icon(
-//                imageVector = Icons.Default.Delete,
-//                contentDescription = "Delete",
-//                tint = colorResource(R.color.colorDarkAccent)
-//            )
-//        }
-//    }
-//
-//    HorizontalDivider(
-//        color = colorResource(R.color.colorGray),
-//        thickness = 1.dp
-//    )
-//}
 
 @Composable
 private fun EmptyAccessState(
