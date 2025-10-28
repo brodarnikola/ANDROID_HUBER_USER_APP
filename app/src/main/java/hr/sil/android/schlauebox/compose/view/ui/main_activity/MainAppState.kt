@@ -110,6 +110,16 @@ class MainAppState(
         }
     }
 
+    fun goToAccessSharingForgetPreviousScreen(route: String, macAddress: String, nameOfDevice: String) {
+        if (route != currentRoute) {
+            navController.navigate("$route/$macAddress/$nameOfDevice") {
+                launchSingleTop = true
+                restoreState = true
+                popUpTo("$route/$macAddress/$nameOfDevice")
+            }
+        }
+    }
+
     fun navigateToRoute(route: String) {
         if (route != currentRoute) {
             navController.navigate(route) {

@@ -89,6 +89,13 @@ fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStack
                             nameOfDevice = nameOfDevice
                         )
                     },
+                    goToAccessSharingForgetPreviousScreen = { route, macAddress, nameOfDevice ->
+                        appState.goToAccessSharingForgetPreviousScreen(
+                            route = route,
+                            macAddress = macAddress,
+                            nameOfDevice = nameOfDevice
+                        )
+                    },
                     navigateUp = {
                         appState.upPress()
                     }
@@ -106,6 +113,7 @@ fun NavGraphBuilder.mainNavGraph(
     goToHelpContent: (route: String ) -> Unit,
     goToAccessSharing: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
     goToAccessSharingAddUser: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
+    goToAccessSharingForgetPreviousScreen: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
     navigateUp:() -> Unit
 ) {
     composable(MainDestinations.HOME) {
@@ -205,7 +213,7 @@ fun NavGraphBuilder.mainNavGraph(
             nameOfDevice = it.arguments?.getString(NavArguments.NAME_OF_DEVICE) ?: "CHANGE_THIS",
             viewModel = hiltViewModel(),
             navigateToAccessSharingActivity = { macAddress, nameOfDevice ->
-                goToAccessSharing(MainDestinations.ACCESS_SHARING_SCREEN, macAddress, nameOfDevice)
+                goToAccessSharingForgetPreviousScreen(MainDestinations.ACCESS_SHARING_SCREEN, macAddress, nameOfDevice)
             }
         )
     }

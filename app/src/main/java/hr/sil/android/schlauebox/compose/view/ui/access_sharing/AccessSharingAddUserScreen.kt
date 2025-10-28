@@ -1,6 +1,7 @@
 package hr.sil.android.schlauebox.compose.view.ui.access_sharing
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.provider.ContactsContract
@@ -41,6 +42,7 @@ import hr.sil.android.schlauebox.core.remote.model.RGroupInfo
 import hr.sil.android.schlauebox.core.remote.model.RUserAccessRole
 import hr.sil.android.schlauebox.view.ui.home.activities.AccessSharingActivity
 
+@SuppressLint("Range")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
 fun AccessSharingAddUserScreen(
@@ -56,28 +58,34 @@ fun AccessSharingAddUserScreen(
 
     val contactsPermission = rememberPermissionState(Manifest.permission.READ_CONTACTS)
 
-    val contactPickerLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.PickContact()
-    ) { uri ->
-        uri?.let {
-            val projection = arrayOf(
-                ContactsContract.CommonDataKinds.Email.ADDRESS
-            )
-            context.contentResolver.query(
-                uri,
-                projection,
-                null,
-                null,
-                null
-            )?.use { cursor ->
-                if (cursor.moveToFirst()) {
-                    val emailIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.ADDRESS)
-                    if (emailIndex >= 0) {
-                        val email = cursor.getString(emailIndex)
-                        if (!email.isNullOrBlank()) {
-                            viewModel.onEmailFromContact(email)
+    val emailPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.data?.let { uri ->
+                try {
+                    val projection = arrayOf(
+                        ContactsContract.CommonDataKinds.Email.ADDRESS
+                    )
+                    context.contentResolver.query(
+                        uri,
+                        projection,
+                        null,
+                        null,
+                        null
+                    )?.use { cursor ->
+                        if (cursor.moveToFirst()) {
+                            val emailIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.ADDRESS)
+                            if (emailIndex >= 0) {
+                                val email = cursor.getString(emailIndex)
+                                if (!email.isNullOrBlank()) {
+                                    viewModel.onEmailFromContact(email)
+                                }
+                            }
                         }
                     }
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             }
         }
@@ -181,7 +189,11 @@ fun AccessSharingAddUserScreen(
                             .padding(horizontal = 16.dp)
                             .clickable {
                                 if (contactsPermission.status.isGranted) {
-                                    contactPickerLauncher.launch(null)
+                                    val intent = Intent(Intent.ACTION_PICK).apply {
+                                        type = ContactsContract.CommonDataKinds.Email.CONTENT_TYPE
+                                    }
+                                    emailPickerLauncher.launch(intent)
+                                    //emailPickerLauncher.launch(null)
                                 } else {
                                     contactsPermission.launchPermissionRequest()
                                 }
