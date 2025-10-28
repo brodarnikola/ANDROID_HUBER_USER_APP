@@ -55,7 +55,7 @@ fun bottomNavigationItems(): List<BottomNavigationBarItem> {
     )
     val alertsTab = BottomNavigationBarItem(
         title = "Alerts",
-        route =  MainDestinations.ALERTS,
+        route =  MainDestinations.TERMS_AND_CONDITION_SCREEN,
         selectedIcon = Icons.Filled.Email,
         unselectedIcon = Icons.Outlined.Email,
         badgeAmount = 7
@@ -95,7 +95,7 @@ fun MainActivityContent(
     showBottomBar.value = when {
         currentRoute == null -> true
         navBackStackEntry.value?.destination?.route?.contains(MainDestinations.HOME) == true ||
-        navBackStackEntry.value?.destination?.route?.contains(MainDestinations.ALERTS) == true ||
+        navBackStackEntry.value?.destination?.route?.contains(MainDestinations.TERMS_AND_CONDITION_SCREEN) == true ||
         navBackStackEntry.value?.destination?.route?.contains(MainDestinations.SETTINGS) == true  -> true
         else -> false
     }
@@ -139,39 +139,6 @@ fun MainActivityContent(
                 )
             )
         },
-//                    Row(
-//                        modifier = Modifier.fillMaxWidth().padding(end = 20.dp),
-//                        verticalAlignment = Alignment.CenterVertically,
-//                        horizontalArrangement = Arrangement.SpaceAround
-//                        //contentAlignment = Alignment.Center
-//                    ) {
-//                        if(showBottomBar.value) {
-//                            arrowSize.intValue = 0
-//                        } else {
-//                            arrowSize.intValue = 30
-//                        }
-//                            Image(
-//                                painter = painterResource(id = android.R.drawable.star_on),
-//                                contentDescription = "Logo1",
-//                                modifier = Modifier.size(arrowSize.intValue.dp).weight(1f)
-//
-//                                )
-//                        Image(
-//                            painter = painterResource(id = R.drawable.schlauebox_logo),
-//                            contentDescription = "Logo",
-//                            modifier = Modifier
-//                                .height(40.dp)
-//                                .padding(end = 10.dp)
-//                                .weight(1f)
-//                        )
-//                        Spacer(modifier = Modifier.weight(1f))
-////                        Image(
-////                            painter = painterResource(id = android.R.drawable.star_on),
-////                            contentDescription = "Logo1",
-////                            modifier = Modifier.size(0.dp)
-////                        )
-//                    }
-//                },
         bottomBar = {
             if(showBottomBar.value)
                 TabView(

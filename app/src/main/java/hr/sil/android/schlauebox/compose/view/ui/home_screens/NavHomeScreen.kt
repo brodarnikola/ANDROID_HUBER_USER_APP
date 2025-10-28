@@ -69,7 +69,7 @@ import hr.sil.android.schlauebox.store.MPLDeviceStore
 @Composable
 fun NavHomeScreen(
     viewModel: NavHomeViewModel = viewModel(),
-    onDeviceClick: (macAddress: String) -> Unit,
+    onDeviceClick: (macAddress: String, nameOfDevice: String) -> Unit,
     //onNavigateToLogin: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -197,7 +197,7 @@ private fun UserAddressHeader(
 @Composable
 private fun DeviceList(
     devices: List<ItemHomeScreen>,
-    onDeviceClick: (macAddress: String) -> Unit,
+    onDeviceClick: (macAddress: String, nameOfDevice: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -213,7 +213,7 @@ private fun DeviceList(
                     DeviceChildItem(
                         device = item,
                         onClick = {
-                            onDeviceClick(item.mplOrSplDevice?.macAddress ?: "")
+                            onDeviceClick(item.mplOrSplDevice?.macAddress ?: "", item.mplOrSplDevice?.name ?: "")
                         }
                     )
                 }

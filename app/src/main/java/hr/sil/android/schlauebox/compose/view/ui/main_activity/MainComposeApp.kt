@@ -23,8 +23,13 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import hr.sil.android.schlauebox.compose.view.ui.access_sharing.AccessSharingAddUserScreen
+import hr.sil.android.schlauebox.compose.view.ui.access_sharing.AccessSharingScreen
+import hr.sil.android.schlauebox.compose.view.ui.help.HelpContentScreen
+import hr.sil.android.schlauebox.compose.view.ui.help.HelpScreen
 import hr.sil.android.schlauebox.compose.view.ui.home_screens.DeviceDetailsScreen
 import hr.sil.android.schlauebox.compose.view.ui.home_screens.NavHomeScreen
+import hr.sil.android.schlauebox.compose.view.ui.pickup_parcel.PickupParcelScreen
 import kotlin.collections.forEachIndexed
 
 
@@ -58,11 +63,38 @@ fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStack
             ) {
                 mainNavGraph(
                     navBackStackEntry = navBackStackEntry,
-                    goToAnimatedCreditCard =  { route ->
-                        appState.navigateToAnimatedCreditCard(route = route)
+                    goToPickup =  { route, macAddress ->
+                        appState.goToPickup(route = route, macAddress)
                     },
-                    goToDeviceDetails =  { route, deviceId ->
-                        appState.navigateToDeviceDetails(route = route, deviceId = deviceId)
+                    goToDeviceDetails =  { route, deviceId, nameOfDevice ->
+                        appState.navigateToDeviceDetails(route = route, deviceId = deviceId, nameOfDevice = nameOfDevice)
+                    },
+                    goToHelp = {
+                        appState.goToHelp(it)
+                    },
+                    goToHelpContent = {
+                        appState.goToHelpContent(it)
+                    },
+                    goToAccessSharing = { route, macAddress, nameOfDevice ->
+                        appState.goToAccessSharing(
+                            route = route,
+                            macAddress = macAddress,
+                            nameOfDevice = nameOfDevice
+                        )
+                    },
+                    goToAccessSharingAddUser = { route, macAddress, nameOfDevice ->
+                        appState.goToAccessSharingAddUser(
+                            route = route,
+                            macAddress = macAddress,
+                            nameOfDevice = nameOfDevice
+                        )
+                    },
+                    goToAccessSharingForgetPreviousScreen = { route, macAddress, nameOfDevice ->
+                        appState.goToAccessSharingForgetPreviousScreen(
+                            route = route,
+                            macAddress = macAddress,
+                            nameOfDevice = nameOfDevice
+                        )
                     },
                     navigateUp = {
                         appState.upPress()
@@ -75,16 +107,21 @@ fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStack
 
 fun NavGraphBuilder.mainNavGraph(
     navBackStackEntry: State<NavBackStackEntry?>,
-    goToDeviceDetails: (route: String, movieId: String) -> Unit,
-    goToAnimatedCreditCard: (route: String) -> Unit,
+    goToDeviceDetails: (route: String, deviceId: String, nameOfDevice: String) -> Unit,
+    goToPickup: (route: String, macAddress: String) -> Unit,
+    goToHelp: (route: String) -> Unit,
+    goToHelpContent: (route: String ) -> Unit,
+    goToAccessSharing: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
+    goToAccessSharingAddUser: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
+    goToAccessSharingForgetPreviousScreen: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
     navigateUp:() -> Unit
 ) {
     composable(MainDestinations.HOME) {
         NavHomeScreen(
             viewModel = hiltViewModel(), // viewModel,
-            onDeviceClick = { deviceId ->
+            onDeviceClick = { deviceId, nameOfDevice ->
                 if (navBackStackEntry.value?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
-                    goToDeviceDetails(MainDestinations.DEVICE_DETAILS, deviceId)
+                    goToDeviceDetails(MainDestinations.DEVICE_DETAILS, deviceId, nameOfDevice)
                 }
             }
 //            onMovieClick = { movieId ->
@@ -95,20 +132,126 @@ fun NavGraphBuilder.mainNavGraph(
         )
     }
     composable(
-        "${MainDestinations.DEVICE_DETAILS}/{${NavArguments.DEVICE_ID}}",
-        arguments = listOf(navArgument(NavArguments.DEVICE_ID) {
-            type = NavType.StringType
-        })
+        "${MainDestinations.DEVICE_DETAILS}/{${NavArguments.DEVICE_ID}}/{${NavArguments.NAME_OF_DEVICE}}",
+        arguments = listOf(
+            navArgument(NavArguments.DEVICE_ID) {
+                type = NavType.StringType
+            },
+            navArgument(NavArguments.NAME_OF_DEVICE) {
+                type = NavType.StringType
+            }
+        )
     ) {
         DeviceDetailsScreen(
             macAddress = it.arguments?.getString(NavArguments.DEVICE_ID) ?: "",
-            nameOfDevice = "",
+            nameOfDevice = it.arguments?.getString(NavArguments.NAME_OF_DEVICE) ?: "",
             viewModel = hiltViewModel(),
+            onNavigateToPickup = { macAddress ->
+                goToPickup(MainDestinations.PARCEL_PICKUP, macAddress)
+            },
+            onNavigateToHelp = {
+                goToHelp(MainDestinations.HELP_SCREEN)
+            },
+            onNavigateToAccessSharing = { macAddress, nameOfDevice ->
+                goToAccessSharing(MainDestinations.ACCESS_SHARING_SCREEN, macAddress, nameOfDevice)
+            }
 //            navigateUp = {
 //                navigateUp()
 //            }
         )
     }
+
+    composable(
+        "${MainDestinations.PARCEL_PICKUP}/{${NavArguments.MAC_ADDRESS}}",
+        arguments = listOf(navArgument(NavArguments.MAC_ADDRESS) {
+            type = NavType.StringType
+        })
+    ) {
+        PickupParcelScreen(
+            macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
+            viewModel = hiltViewModel(),
+            onFinish = {
+                navigateUp()
+            }
+        )
+    }
+
+    composable(
+        "${MainDestinations.ACCESS_SHARING_SCREEN}/{${NavArguments.MAC_ADDRESS}}/{${NavArguments.NAME_OF_DEVICE}}",
+        arguments = listOf(
+            navArgument(NavArguments.MAC_ADDRESS) {
+                type = NavType.StringType
+            },
+            navArgument(NavArguments.NAME_OF_DEVICE) {
+                type = NavType.StringType
+            }
+        )
+    ) {
+        AccessSharingScreen(
+            macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
+            nameOfDevice = it.arguments?.getString(NavArguments.NAME_OF_DEVICE) ?: "CHANGE_THIS",
+            viewModel = hiltViewModel(),
+            onNavigateToAddUser = { macAddress, nameOfDevice ->
+                goToAccessSharingAddUser(MainDestinations.ACCESS_SHARING_ADD_USER_SCREEN, macAddress, nameOfDevice )
+            }
+        )
+    }
+
+    composable(
+        "${MainDestinations.ACCESS_SHARING_ADD_USER_SCREEN}/{${NavArguments.MAC_ADDRESS}}/{${NavArguments.NAME_OF_DEVICE}}",
+        arguments = listOf(
+            navArgument(NavArguments.MAC_ADDRESS) {
+                type = NavType.StringType
+            },
+            navArgument(NavArguments.NAME_OF_DEVICE) {
+                type = NavType.StringType
+            }
+        )
+    ) {
+        AccessSharingAddUserScreen(
+            macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
+            nameOfDevice = it.arguments?.getString(NavArguments.NAME_OF_DEVICE) ?: "CHANGE_THIS",
+            viewModel = hiltViewModel(),
+            navigateToAccessSharingActivity = { macAddress, nameOfDevice ->
+                goToAccessSharingForgetPreviousScreen(MainDestinations.ACCESS_SHARING_SCREEN, macAddress, nameOfDevice)
+            }
+        )
+    }
+
+    composable(
+        MainDestinations.HELP_SCREEN
+    ) {
+        HelpScreen(
+            viewModel = hiltViewModel(),
+            onNavigateToHelpContent = { titleResId, contentResId, picturePosition ->
+                goToHelpContent("${MainDestinations.HELP_CONTENT_SCREEN}/$titleResId/$contentResId/$picturePosition")
+            }
+        )
+    }
+
+    composable(
+        "${MainDestinations.HELP_CONTENT_SCREEN}/{${NavArguments.TITLE_HELP}}/{${NavArguments.CONTENT_HELP}}/{${NavArguments.PICTURE_POSITION}}",
+        arguments = listOf(navArgument(NavArguments.TITLE_HELP) {
+            type = NavType.IntType
+        }, navArgument(NavArguments.CONTENT_HELP) {
+            type = NavType.IntType
+        }, navArgument(NavArguments.PICTURE_POSITION) {
+            type = NavType.IntType
+        }
+        )
+    ) {
+        val titleResId = it.arguments?.getInt(NavArguments.TITLE_HELP) ?: 0
+        val contentResId = it.arguments?.getInt(NavArguments.CONTENT_HELP) ?: 0
+        val picturePosition = it.arguments?.getInt(NavArguments.PICTURE_POSITION) ?: 0
+
+        HelpContentScreen(
+            titleResId,
+            contentResId,
+            picturePosition,
+            viewModel = hiltViewModel()
+        )
+    }
+
 //
 //    composable(MainDestinations.SETTINGS) {
 //        SettingsScreen(viewModel = hiltViewModel())
