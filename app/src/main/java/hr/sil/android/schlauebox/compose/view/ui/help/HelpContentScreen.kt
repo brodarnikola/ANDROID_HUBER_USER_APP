@@ -35,8 +35,7 @@ fun HelpContentScreen(
     titleResId: Int,
     contentResId: Int,
     picturePosition: Int,
-    viewModel: HelpContentViewModel = viewModel(),
-    navigateUp: () -> Unit = {},
+    viewModel: HelpContentViewModel = viewModel(), 
     onNavigateToLogin: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
