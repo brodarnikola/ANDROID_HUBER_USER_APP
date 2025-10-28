@@ -38,13 +38,15 @@ fun DeviceDetailsScreen(
     viewModel: DeviceDetailsViewModel = viewModel(),
     onNavigateToPickup: (macAddress: String) -> Unit = {},
     onNavigateToSendParcel: () -> Unit = {},
-    onNavigateToAccessSharing: () -> Unit = {},
+    onNavigateToAccessSharing: (macAddress: String, nameOfDevice: String) -> Unit = {_: String, _: String ->},
     onNavigateToHelp: () -> Unit = {},
     onNavigateToEdit: () -> Unit = {},
     onNavigateToLogin: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
+
+    print("Name of device is : $nameOfDevice")
 
     LaunchedEffect(macAddress) {
         viewModel.loadDeviceDetails(macAddress)
@@ -86,9 +88,6 @@ fun DeviceDetailsScreen(
                     uiState = uiState,
                     onPickupClick = {
                         onNavigateToPickup(macAddress)
-//                        val startIntent = Intent(context, PickupParcelActivity::class.java)
-//                        startIntent.putExtra("rMacAddress", macAddress)
-//                        context.startActivity(startIntent)
                     },
                     onSendParcelClick = {
                         val startIntent = Intent(context, PickupParcelActivity::class.java)
@@ -97,10 +96,13 @@ fun DeviceDetailsScreen(
                         //handleSendParcelClick(context, macAddress, uiState)
                     },
                     onAccessSharingClick = {
-                        val startIntent = Intent(context, AccessSharingActivity::class.java)
-                        startIntent.putExtra("rMacAddress", macAddress)
-                        startIntent.putExtra("nameOfDevice", nameOfDevice)
-                        context.startActivity(startIntent)
+
+                        print("Name of device is 22: $nameOfDevice")
+                        onNavigateToAccessSharing(macAddress, nameOfDevice)
+//                        val startIntent = Intent(context, AccessSharingActivity::class.java)
+//                        startIntent.putExtra("rMacAddress", macAddress)
+//                        startIntent.putExtra("nameOfDevice", nameOfDevice)
+//                        context.startActivity(startIntent)
                     },
                     onHelpClick = {
                         onNavigateToHelp()
