@@ -3,6 +3,7 @@ package hr.sil.android.schlauebox.compose.view.ui.home_screens
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -24,6 +26,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -45,14 +49,17 @@ fun SettingsScreen(
     var showLogoutDialog by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
 
-//    LaunchedEffect(Unit) {
-//        try {
-//            val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-//            viewModel.setAppVersion("Version: ${packageInfo.versionName}")
-//        } catch (e: PackageManager.NameNotFoundException) {
-//            viewModel.setAppVersion("Version: Unknown")
-//        }
-//    }
+    val appVersionValue = stringResource(R.string.nav_settings_app_version, stringResource(R.string.app_version))
+
+    LaunchedEffect(Unit) {
+        try {
+            val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+            //viewModel.setAppVersion("Version: ${packageInfo.versionName}")
+            viewModel.setAppVersion(appVersionValue)
+        } catch (e: PackageManager.NameNotFoundException) {
+            viewModel.setAppVersion("Version: Unknown")
+        }
+    }
 
     LaunchedEffect(uiState.isUnauthorized) {
         if (uiState.isUnauthorized) {
@@ -84,13 +91,11 @@ fun SettingsScreen(
                     color = colorResource(R.color.colorBlack)
                 )
 
-                IconButton(onClick = { showLogoutDialog = true }) {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_logout),
-                        contentDescription = "Logout",
-                        tint = colorResource(R.color.colorDarkAccent)
-                    )
-                }
+                Image(
+                    painter = painterResource(R.drawable.ic_logout),
+                    contentDescription = null,
+                    modifier = Modifier.clickable { showLogoutDialog = true }
+                )
             }
 
             Text(
@@ -187,6 +192,41 @@ fun SettingsScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
+            Text(
+                text = stringResource(R.string.nav_settings_change_password).uppercase(),
+                style = MaterialTheme.typography.bodyMedium,
+                color = colorResource(R.color.colorBlack),
+                modifier = Modifier.padding(top = 8.dp, bottom = 10.dp),
+                letterSpacing = 0.17.sp
+            )
+
+            PasswordTextField(
+                value = uiState.oldPassword,
+                onValueChange = { viewModel.onOldPasswordChanged(it) },
+                placeholder = stringResource(R.string.nav_settings_old_password),
+                errorMessage = uiState.oldPasswordError
+            )
+
+            Spacer(modifier = Modifier.height(5.dp))
+
+            PasswordTextField(
+                value = uiState.newPassword,
+                onValueChange = { viewModel.onNewPasswordChanged(it) },
+                placeholder = stringResource(R.string.nav_settings_new_password),
+                errorMessage = uiState.newPasswordError
+            )
+
+            Spacer(modifier = Modifier.height(5.dp))
+
+            PasswordTextField(
+                value = uiState.retypePassword,
+                onValueChange = { viewModel.onRetypePasswordChanged(it) },
+                placeholder = stringResource(R.string.nav_settings_retype_new),
+                errorMessage = uiState.retypePasswordError
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
             Button(
                 onClick = {
                     viewModel.saveSettings(
@@ -226,7 +266,19 @@ fun SettingsScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Text(
+                text = uiState.appVersion,
+                style = MaterialTheme.typography.bodyMedium,
+                color = colorResource(R.color.colorGray),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                textAlign = androidx.compose.ui.text.style.TextAlign.Center
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
         }
 
         if (showLogoutDialog) {
@@ -240,16 +292,6 @@ fun SettingsScreen(
                 },
                 onDismiss = { showLogoutDialog = false }
             )
-//            LogoutConfirmationDialog(
-//                onConfirm = {
-//                    val logoutDialog = LogoutDialog()
-//                    (context as? Activity)?.supportFragmentManager?.let {
-//                        logoutDialog.show(it, "")
-//                    }
-//                    showLogoutDialog = false
-//                },
-//                onDismiss = { showLogoutDialog = false }
-//            )
         }
 
         if (errorMessage != null) {
@@ -262,6 +304,77 @@ fun SettingsScreen(
                         Text("OK")
                     }
                 }
+            )
+        }
+    }
+}
+
+@Composable
+private fun PasswordTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    placeholder: String,
+    errorMessage: String? = null
+) {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp)
+                .clip(RoundedCornerShape(4.dp))
+                .border(
+                    width = 1.dp,
+                    color = colorResource(R.color.colorGray),
+                    shape = RoundedCornerShape(4.dp)
+                )
+                .background(colorResource(R.color.colorWhite))
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 10.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                BasicTextField(
+                    value = value,
+                    onValueChange = onValueChange,
+                    textStyle = TextStyle(
+                        fontSize = 14.sp,
+                        color = colorResource(R.color.colorBlack)
+                    ),
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password
+                    ),
+                    modifier = Modifier.weight(1f),
+                    decorationBox = { innerTextField ->
+                        if (value.isEmpty()) {
+                            Text(
+                                text = placeholder,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = colorResource(R.color.colorGray)
+                            )
+                        }
+                        innerTextField()
+                    }
+                )
+
+                Icon(
+                    painter = painterResource(R.drawable.ic_password),
+                    contentDescription = null,
+                    tint = colorResource(R.color.colorGray)
+                )
+            }
+        }
+
+        if (errorMessage != null) {
+            Text(
+                text = errorMessage,
+                style = MaterialTheme.typography.bodySmall,
+                color = colorResource(R.color.colorDarkAccent),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 2.dp, bottom = 3.dp)
             )
         }
     }

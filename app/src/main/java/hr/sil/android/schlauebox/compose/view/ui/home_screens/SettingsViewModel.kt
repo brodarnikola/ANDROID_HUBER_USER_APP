@@ -32,6 +32,12 @@ data class SettingsUiState(
     val emailNotifications: Boolean = false,
     val availableLanguages: List<RLanguage> = emptyList(),
     val selectedLanguage: RLanguage? = null,
+    val oldPassword: String = "",
+    val newPassword: String = "",
+    val retypePassword: String = "",
+    val oldPasswordError: String? = null,
+    val newPasswordError: String? = null,
+    val retypePasswordError: String? = null,
     val isLoading: Boolean = false,
     val isSaveEnabled: Boolean = false,
     val appVersion: String = "",
@@ -165,6 +171,22 @@ class SettingsViewModel @Inject constructor() : ViewModel() {
         _uiState.update { it.copy(selectedLanguage = language, isSaveEnabled = true) }
     }
 
+    fun onOldPasswordChanged(password: String) {
+        _uiState.update { it.copy(oldPassword = password, oldPasswordError = null, isSaveEnabled = true) }
+    }
+
+    fun onNewPasswordChanged(password: String) {
+        _uiState.update { it.copy(newPassword = password, newPasswordError = null, isSaveEnabled = true) }
+    }
+
+    fun onRetypePasswordChanged(password: String) {
+        _uiState.update { it.copy(retypePassword = password, retypePasswordError = null, isSaveEnabled = true) }
+    }
+
+    fun setAppVersion(version: String) {
+        _uiState.update { it.copy(appVersion = version) }
+    }
+
     fun saveSettings(onSuccess: () -> Unit, onError: (String) -> Unit) {
         val currentState = _uiState.value
 
@@ -181,6 +203,18 @@ class SettingsViewModel @Inject constructor() : ViewModel() {
         val groupNameLength = currentState.groupNameRow1.length + currentState.groupNameRow2.length
         if (groupNameLength < 4) {
             onError("Group name must be at least 4 characters")
+            return
+        }
+
+        if (currentState.oldPassword.isNotEmpty() && currentState.oldPassword != SettingsHelper.userPasswordWithoutEncryption) {
+            _uiState.update { it.copy(oldPasswordError = "Current password is invalid") }
+            onError("Current password is invalid")
+            return
+        }
+
+        if (currentState.newPassword != currentState.retypePassword) {
+            _uiState.update { it.copy(retypePasswordError = "Passwords do not match") }
+            onError("Passwords do not match")
             return
         }
 
@@ -208,6 +242,22 @@ class SettingsViewModel @Inject constructor() : ViewModel() {
                     SettingsHelper.emailEnabled = currentState.emailNotifications
                     UserUtil.userGroup?.name = groupName
                     App.ref.languageCode = selectedLang
+
+                    if (currentState.oldPassword.isNotEmpty() && currentState.retypePassword.isNotEmpty()
+                        && currentState.newPassword == currentState.retypePassword) {
+                        val passwordResult = UserUtil.passwordUpdate(
+                            email = currentState.email,
+                            newPassword = currentState.newPassword,
+                            oldPassword = currentState.oldPassword
+                        )
+                        if (passwordResult) {
+                            SettingsHelper.userPasswordWithoutEncryption = currentState.retypePassword
+                        } else {
+                            _uiState.update { it.copy(isLoading = false) }
+                            onError("Failed to update password")
+                            return@launch
+                        }
+                    }
 
                     _uiState.update { it.copy(isLoading = false, isSaveEnabled = false) }
                     onSuccess()
