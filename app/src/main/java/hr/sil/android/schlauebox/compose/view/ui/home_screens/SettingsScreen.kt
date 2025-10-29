@@ -2,6 +2,7 @@ package hr.sil.android.schlauebox.compose.view.ui.home_screens
 
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -27,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import hr.sil.android.schlauebox.R
+import hr.sil.android.schlauebox.compose.view.ui.main_activity.MainActivity
 import hr.sil.android.schlauebox.core.remote.model.RLanguage
 import hr.sil.android.schlauebox.util.backend.UserUtil
 import hr.sil.android.schlauebox.view.ui.LoginActivity
@@ -42,6 +44,15 @@ fun SettingsScreen(
     val context = LocalContext.current
     var showLogoutDialog by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
+
+//    LaunchedEffect(Unit) {
+//        try {
+//            val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+//            viewModel.setAppVersion("Version: ${packageInfo.versionName}")
+//        } catch (e: PackageManager.NameNotFoundException) {
+//            viewModel.setAppVersion("Version: Unknown")
+//        }
+//    }
 
     LaunchedEffect(uiState.isUnauthorized) {
         if (uiState.isUnauthorized) {
@@ -77,7 +88,7 @@ fun SettingsScreen(
                     Icon(
                         painter = painterResource(R.drawable.ic_logout),
                         contentDescription = "Logout",
-                        tint = colorResource(R.color.colorBlack)
+                        tint = colorResource(R.color.colorDarkAccent)
                     )
                 }
             }
@@ -180,7 +191,7 @@ fun SettingsScreen(
                 onClick = {
                     viewModel.saveSettings(
                         onSuccess = {
-                            val intent = Intent(context, MainActivity1::class.java)
+                            val intent = Intent(context, MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                             (context as? Activity)?.finish()
                             context.startActivity(intent)
