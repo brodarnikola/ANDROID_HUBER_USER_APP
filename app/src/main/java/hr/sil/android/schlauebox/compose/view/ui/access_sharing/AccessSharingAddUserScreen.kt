@@ -316,7 +316,7 @@ private fun GroupSelectionDropdown(
                     .padding(horizontal = 5.dp, vertical = 10.dp)
             ) {
                 Row(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize().padding(start = 10.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
@@ -403,7 +403,7 @@ private fun RoleSelectionDropdown(
                     .padding(horizontal = 5.dp, vertical = 10.dp)
             ) {
                 Row(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize().padding(start = 10.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {

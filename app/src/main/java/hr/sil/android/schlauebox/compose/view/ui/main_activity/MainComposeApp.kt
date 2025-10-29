@@ -29,6 +29,7 @@ import hr.sil.android.schlauebox.compose.view.ui.help.HelpContentScreen
 import hr.sil.android.schlauebox.compose.view.ui.help.HelpScreen
 import hr.sil.android.schlauebox.compose.view.ui.home_screens.DeviceDetailsScreen
 import hr.sil.android.schlauebox.compose.view.ui.home_screens.NavHomeScreen
+import hr.sil.android.schlauebox.compose.view.ui.home_screens.SettingsScreen
 import hr.sil.android.schlauebox.compose.view.ui.pickup_parcel.PickupParcelScreen
 import kotlin.collections.forEachIndexed
 
@@ -124,13 +125,15 @@ fun NavGraphBuilder.mainNavGraph(
                     goToDeviceDetails(MainDestinations.DEVICE_DETAILS, deviceId, nameOfDevice)
                 }
             }
-//            onMovieClick = { movieId ->
-//                if (navBackStackEntry.value?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
-//                    goToMovieDetails(MainDestinations.MOVIE_DETAILS,  movieId)
-//                }
-//            }
         )
     }
+
+    composable(MainDestinations.SETTINGS) {
+        SettingsScreen(
+            viewModel = hiltViewModel()
+        )
+    }
+
     composable(
         "${MainDestinations.DEVICE_DETAILS}/{${NavArguments.DEVICE_ID}}/{${NavArguments.NAME_OF_DEVICE}}",
         arguments = listOf(
@@ -155,9 +158,6 @@ fun NavGraphBuilder.mainNavGraph(
             onNavigateToAccessSharing = { macAddress, nameOfDevice ->
                 goToAccessSharing(MainDestinations.ACCESS_SHARING_SCREEN, macAddress, nameOfDevice)
             }
-//            navigateUp = {
-//                navigateUp()
-//            }
         )
     }
 

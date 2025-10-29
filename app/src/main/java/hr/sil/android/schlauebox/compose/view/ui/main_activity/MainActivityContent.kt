@@ -60,15 +60,15 @@ fun bottomNavigationItems(): List<BottomNavigationBarItem> {
         unselectedIcon = Icons.Outlined.Email,
         badgeAmount = 7
     )
-    val locationTab = BottomNavigationBarItem(
-        title = "Location",
-        route =  MainDestinations.DEVICE_DETAILS,
+    val settingsTab = BottomNavigationBarItem(
+        title = "Settings",
+        route =  MainDestinations.SETTINGS,
         selectedIcon = Icons.Filled.Person,
         unselectedIcon = Icons.Outlined.Person
     )
 
     // creating a list of all the tabs
-    val tabBarItems = listOf(homeTab, alertsTab, locationTab )
+    val tabBarItems = listOf(homeTab, alertsTab, settingsTab )
     return tabBarItems
 }
 
