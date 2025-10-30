@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.core.remote.model.RLockerSize
+import hr.sil.android.schlauebox.core.util.logger
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,6 +39,7 @@ fun SelectParcelSizeScreen(
     val uiState by viewModel.uiState.collectAsState()
 
     LaunchedEffect(macAddress) {
+        logger().info("select parcel size activity, mac address is: $macAddress")
         viewModel.loadAvailableLockers(macAddress)
     }
 
