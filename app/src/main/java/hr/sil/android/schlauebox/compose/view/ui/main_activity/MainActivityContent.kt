@@ -40,7 +40,6 @@ import hr.sil.android.schlauebox.R
 
 
 data class BottomNavigationBarItem(
-    val title: String,
     val route: String,
     val icon: Int,
     val badgeAmount: Int? = null
@@ -50,17 +49,14 @@ data class BottomNavigationBarItem(
 fun bottomNavigationItems(): List<BottomNavigationBarItem> {
     // setting up the individual tabs
     val homeTab = BottomNavigationBarItem(
-        title = "Home",
         route = MainDestinations.HOME,
         icon = R.drawable.ic_bottom_home
     )
     val tcTab = BottomNavigationBarItem(
-        title = "Privacy Policy",
         route = MainDestinations.TERMS_AND_CONDITION_SCREEN,
         icon = R.drawable.ic_bottom_tc
     )
     val settingsTab = BottomNavigationBarItem(
-        title = "Settings",
         route = MainDestinations.SETTINGS,
         icon = R.drawable.ic_bottom_settings
     )

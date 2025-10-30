@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import hr.sil.android.schlauebox.R
+import hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity.SignUpOnboardingActivity
 import hr.sil.android.schlauebox.core.remote.model.RLanguage
 import hr.sil.android.schlauebox.util.backend.UserUtil
 import hr.sil.android.schlauebox.view.ui.LoginActivity
@@ -228,7 +229,7 @@ fun SettingsScreen(
                 onClick = {
                     viewModel.saveSettings(
                         onSuccess = {
-                            val intent = Intent(context, MainActivity1::class.java)
+                            val intent = Intent(context, SignUpOnboardingActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                             (context as? Activity)?.finish()
                             context.startActivity(intent)

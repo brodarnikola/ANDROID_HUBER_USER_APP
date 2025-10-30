@@ -37,6 +37,7 @@ import hr.sil.android.schlauebox.compose.view.ui.pickup_parcel.PickupParcelScree
 import kotlin.collections.forEachIndexed
 
 import hr.sil.android.schlauebox.R
+import hr.sil.android.schlauebox.compose.view.ui.home_screens.TccScreen
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -118,6 +119,12 @@ fun NavGraphBuilder.mainNavGraph(
 
     composable(MainDestinations.SETTINGS) {
         SettingsScreen(
+            viewModel = hiltViewModel()
+        )
+    }
+
+    composable(MainDestinations.TERMS_AND_CONDITION_SCREEN) {
+        TccScreen(
             viewModel = hiltViewModel()
         )
     }
@@ -281,15 +288,15 @@ fun TabView(
         // looping over each tab to generate the views and navigation for each item
         tabBarItems.forEachIndexed { _, tabBarItem ->
             NavigationBarItem(
-                selected = tabBarItem.title == navBackStackEntry.value?.destination?.route, // selectedTabIndex == index,
+                selected = tabBarItem.route == navBackStackEntry.value?.destination?.route, // selectedTabIndex == index,
                 onClick = {
-                    goToNextScreen(tabBarItem.title)
+                    goToNextScreen(tabBarItem.route)
                 },
                 icon = {
                     TabBarIconView(
-                        isSelected = tabBarItem.title == navBackStackEntry.value?.destination?.route, // selectedTabIndex == index,
+                        isSelected = tabBarItem.route == navBackStackEntry.value?.destination?.route, // selectedTabIndex == index,
                         icon = tabBarItem.icon,
-                        title = tabBarItem.title,
+                        title = tabBarItem.route,
                         badgeAmount = tabBarItem.badgeAmount
                     )
                 },
