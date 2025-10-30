@@ -1,11 +1,16 @@
 package hr.sil.android.schlauebox.compose.view.ui.send_parcel
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -77,11 +82,19 @@ fun PinManagementDialog(
                             LazyColumn(
                                 modifier = Modifier.fillMaxWidth()
                             ) {
-                                items(uiState.pins) { pin ->
+                                itemsIndexed(uiState.pins) { index, pin ->
                                     PinManagementItem(
                                         pin = pin,
-                                        isSelected = pin.pinId == uiState.selectedPin?.pinId,
-                                        onSelected = { viewModel.selectPin(pin) }
+                                        isSelected = pin.pinId == uiState.selectedPin?.pinId &&
+                                                pin.pin == uiState.selectedPin?.pin,
+                                        onSelected = { viewModel.selectPin(pin) },
+                                        onToggleNaming = { viewModel.toggleNaming(pin) },
+                                        onNameChanged = { name -> viewModel.updatePinName(name) },
+                                        onSavePin = { viewModel.saveGeneratedPin(macAddress) },
+                                        onToggleDelete = { viewModel.toggleDelete(pin) },
+                                        onDeletePin = { viewModel.deletePin(macAddress, pin) },
+                                        isSavingPin = uiState.isSavingPin,
+                                        isDeletingPin = uiState.isDeletingPin
                                     )
                                 }
                             }
@@ -118,7 +131,6 @@ fun PinManagementDialog(
                     TextButton(
                         onClick = {
                             uiState.selectedPin?.let { selectedPin ->
-                                viewModel.savePinIfNeeded(macAddress)
                                 onConfirm(macAddress, selectedPin.pin.toInt(), lockerSize.name)
                                 onDismiss()
                             }
@@ -142,9 +154,18 @@ fun PinManagementDialog(
 private fun PinManagementItem(
     pin: RPinManagement,
     isSelected: Boolean,
-    onSelected: () -> Unit
+    onSelected: () -> Unit,
+    onToggleNaming: () -> Unit,
+    onNameChanged: (String) -> Unit,
+    onSavePin: () -> Unit,
+    onToggleDelete: () -> Unit,
+    onDeletePin: () -> Unit,
+    isSavingPin: Boolean,
+    isDeletingPin: Boolean
 ) {
-    Row(
+    var pinNameInput by remember(pin.pinId) { mutableStateOf("") }
+
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .background(
@@ -153,45 +174,174 @@ private fun PinManagementItem(
                 shape = RoundedCornerShape(4.dp)
             )
             .clickable { onSelected() }
-            .padding(vertical = 12.dp, horizontal = 16.dp),
-        verticalAlignment = Alignment.CenterVertically
+            .padding(7.dp)
     ) {
-        Column(modifier = Modifier.weight(1f)) {
-            if (pin.pinGenerated == true) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = "Generated PIN",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold,
+                    text = pin.pin,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Normal,
                     color = colorResource(R.color.colorBlack)
                 )
-            } else {
-                pin.pinName?.let {
+
+                Spacer(modifier = Modifier.height(4.dp))
+
+                if (!pin.isExtendedToName) {
                     Text(
-                        text = it,
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
+                        text = if (pin.pinGenerated == true) {
+                            stringResource(R.string.pin_managment_generate)
+                        } else {
+                            pin.pinName ?: ""
+                        },
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Normal,
                         color = colorResource(R.color.colorBlack)
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(4.dp))
-
-            Text(
-                text = pin.pin,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Normal,
-                color = colorResource(R.color.colorBlack)
-            )
+            if (pin.pinGenerated == true) {
+                IconButton(
+                    onClick = onToggleNaming,
+                    enabled = !isSavingPin
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = "Add name",
+                        tint = colorResource(R.color.colorPrimary)
+                    )
+                }
+            } else {
+                if (!pin.isExtendedToDelete) {
+                    IconButton(
+                        onClick = onToggleDelete,
+                        enabled = !isDeletingPin
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Clear,
+                            contentDescription = "Delete",
+                            tint = colorResource(R.color.colorBlack)
+                        )
+                    }
+                }
+            }
         }
 
-        if (isSelected) {
-            Text(
-                text = "✓",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = colorResource(R.color.colorPrimary)
-            )
+        AnimatedVisibility(visible = pin.isExtendedToName && pin.pinGenerated == true) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp, vertical = 5.dp)
+                    .background(
+                        color = colorResource(R.color.colorGray),
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                    .padding(10.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                TextField(
+                    value = pinNameInput,
+                    onValueChange = {
+                        pinNameInput = it
+                        onNameChanged(it)
+                    },
+                    placeholder = {
+                        Text(stringResource(R.string.pin_managment_input_edittext))
+                    },
+                    modifier = Modifier.weight(1f),
+                    singleLine = true,
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = colorResource(R.color.colorGray),
+                        unfocusedContainerColor = colorResource(R.color.colorGray),
+                        focusedIndicatorColor = colorResource(android.R.color.transparent),
+                        unfocusedIndicatorColor = colorResource(android.R.color.transparent)
+                    )
+                )
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+                IconButton(
+                    onClick = onSavePin,
+                    enabled = pinNameInput.isNotEmpty() && !isSavingPin
+                ) {
+                    if (isSavingPin) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(24.dp),
+                            color = colorResource(R.color.colorPrimary)
+                        )
+                    } else {
+                        Icon(
+                            imageVector = Icons.Default.Check,
+                            contentDescription = "Save",
+                            tint = colorResource(R.color.colorPrimary)
+                        )
+                    }
+                }
+            }
+        }
+
+        AnimatedVisibility(visible = pin.isExtendedToDelete && pin.pinGenerated == false) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp, vertical = 5.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.app_generic_are_you_sure),
+                    fontSize = 12.sp,
+                    color = colorResource(R.color.colorBlack)
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    Button(
+                        onClick = onToggleDelete,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = colorResource(R.color.colorPrimary)
+                        ),
+                        modifier = Modifier.height(40.dp),
+                        enabled = !isDeletingPin
+                    ) {
+                        Text(
+                            text = stringResource(R.string.app_generic_cancel),
+                            fontSize = 12.sp,
+                            color = colorResource(R.color.colorWhite)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    Button(
+                        onClick = onDeletePin,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = colorResource(R.color.colorPrimary)
+                        ),
+                        modifier = Modifier.height(40.dp),
+                        enabled = !isDeletingPin
+                    ) {
+                        if (isDeletingPin) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(16.dp),
+                                color = colorResource(R.color.colorWhite)
+                            )
+                        } else {
+                            Text(
+                                text = stringResource(R.string.pin_managment_delete_pin),
+                                fontSize = 12.sp,
+                                color = colorResource(R.color.colorWhite)
+                            )
+                        }
+                    }
+                }
+            }
         }
     }
 

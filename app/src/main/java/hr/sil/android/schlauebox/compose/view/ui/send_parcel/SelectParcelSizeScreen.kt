@@ -2,6 +2,7 @@ package hr.sil.android.schlauebox.compose.view.ui.send_parcel
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
@@ -127,7 +129,13 @@ fun SelectParcelSizeScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.weight(1f).border(2.dp, Color.Blue, RectangleShape))
+            Box(
+                modifier = Modifier.wrapContentSize()
+                    .padding(15.dp).border(2.dp, Color.Green, RectangleShape),
+                contentAlignment = Alignment.BottomCenter
+            ) {
+
 
             // Next Button
             //if (uiState.showNextButton) {
@@ -136,13 +144,14 @@ fun SelectParcelSizeScreen(
                         val device = uiState.device
                         val selectedSize = uiState.selectedSize
                         if (device != null && selectedSize != RLockerSize.UNKNOWN) {
-                            if (device.pinManagementAllowed == false) {
-                                showGeneratedPinDialog = true
-                                //onNavigateToGeneratedPinDialog(macAddress, selectedSize)
-                            } else {
-                                showPinManagementDialog = true
-                                //onNavigateToPinManagement(macAddress, selectedSize)
-                            }
+                            showPinManagementDialog = true
+//                            if (device.pinManagementAllowed == false) {
+//                                showGeneratedPinDialog = true
+//                                //onNavigateToGeneratedPinDialog(macAddress, selectedSize)
+//                            } else {
+//                                showPinManagementDialog = true
+//                                //onNavigateToPinManagement(macAddress, selectedSize)
+//                            }
                         }
                     },
                     enabled = uiState.selectedSize != RLockerSize.UNKNOWN && !uiState.isLoading,
@@ -160,6 +169,8 @@ fun SelectParcelSizeScreen(
                         color = Color.White
                     )
                 }
+
+            }
            // }
 
             Spacer(modifier = Modifier.height(16.dp))
