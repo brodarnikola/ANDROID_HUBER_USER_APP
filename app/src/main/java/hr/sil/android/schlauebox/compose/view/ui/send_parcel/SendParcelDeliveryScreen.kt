@@ -121,8 +121,7 @@ fun SendParcelDeliveryScreen(
                         onClick = onFinish,
                         modifier = Modifier
                             .width(220.dp)
-                            .height(40.dp)
-                            .padding(bottom = 16.dp),
+                            .height(40.dp) ,
                         colors = ButtonDefaults.buttonColors(
                             containerColor = colorResource(R.color.colorPrimary)
                         ),
@@ -140,8 +139,7 @@ fun SendParcelDeliveryScreen(
                         onClick = { viewModel.sendParcel(macAddress, pin, size) },
                         modifier = Modifier
                             .width(220.dp)
-                            .height(40.dp)
-                            .padding(bottom = 16.dp),
+                            .height(40.dp) ,
                         colors = ButtonDefaults.buttonColors(
                             containerColor = colorResource(R.color.colorPrimary)
                         ),

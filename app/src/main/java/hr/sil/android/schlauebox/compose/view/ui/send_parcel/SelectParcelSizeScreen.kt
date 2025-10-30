@@ -129,14 +129,8 @@ fun SelectParcelSizeScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.weight(1f).border(2.dp, Color.Blue, RectangleShape))
-            Box(
-                modifier = Modifier.wrapContentSize()
-                    .padding(15.dp).border(2.dp, Color.Green, RectangleShape),
-                contentAlignment = Alignment.BottomCenter
-            ) {
-
-
+            Spacer(modifier = Modifier.weight(1f))
+ 
             // Next Button
             //if (uiState.showNextButton) {
                 Button(
@@ -157,8 +151,7 @@ fun SelectParcelSizeScreen(
                     enabled = uiState.selectedSize != RLockerSize.UNKNOWN && !uiState.isLoading,
                     modifier = Modifier
                         .width(220.dp)
-                        .height(40.dp)
-                        .padding(bottom = 16.dp),
+                        .height(40.dp) ,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = colorResource(R.color.colorPrimary)
                     ),
@@ -170,11 +163,9 @@ fun SelectParcelSizeScreen(
                     )
                 }
 
+                Spacer(modifier = Modifier.height(25.dp))
             }
            // }
-
-            Spacer(modifier = Modifier.height(16.dp))
-        }
     }
 }
 
