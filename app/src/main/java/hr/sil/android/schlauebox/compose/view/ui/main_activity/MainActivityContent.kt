@@ -14,6 +14,8 @@ import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
@@ -22,6 +24,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -39,8 +42,7 @@ import hr.sil.android.schlauebox.R
 data class BottomNavigationBarItem(
     val title: String,
     val route: String,
-    val selectedIcon: ImageVector,
-    val unselectedIcon: ImageVector,
+    val icon: Int,
     val badgeAmount: Int? = null
 )
 
@@ -49,26 +51,22 @@ fun bottomNavigationItems(): List<BottomNavigationBarItem> {
     // setting up the individual tabs
     val homeTab = BottomNavigationBarItem(
         title = "Home",
-        route =  MainDestinations.HOME,
-        selectedIcon = Icons.Filled.Home,
-        unselectedIcon = Icons.Outlined.Home
+        route = MainDestinations.HOME,
+        icon = R.drawable.ic_bottom_home
     )
-    val alertsTab = BottomNavigationBarItem(
-        title = "Alerts",
-        route =  MainDestinations.TERMS_AND_CONDITION_SCREEN,
-        selectedIcon = Icons.Filled.Email,
-        unselectedIcon = Icons.Outlined.Email,
-        badgeAmount = 7
+    val tcTab = BottomNavigationBarItem(
+        title = "Privacy Policy",
+        route = MainDestinations.TERMS_AND_CONDITION_SCREEN,
+        icon = R.drawable.ic_bottom_tc
     )
     val settingsTab = BottomNavigationBarItem(
         title = "Settings",
-        route =  MainDestinations.SETTINGS,
-        selectedIcon = Icons.Filled.Person,
-        unselectedIcon = Icons.Outlined.Person
+        route = MainDestinations.SETTINGS,
+        icon = R.drawable.ic_bottom_settings
     )
 
     // creating a list of all the tabs
-    val tabBarItems = listOf(homeTab, alertsTab, settingsTab )
+    val tabBarItems = listOf(homeTab, tcTab, settingsTab)
     return tabBarItems
 }
 
@@ -170,14 +168,14 @@ fun MainActivityContent(
                 !systemState.bluetoothAvailable -> {
                     SystemOverlay(
                         message = stringResource(R.string.app_generic_no_ble),
-                        backgroundColor = Color(0xFF1E88E5) // Blue for Bluetooth
+                        backgroundDrawable = R.drawable.bg_bluetooth
                     )
                 }
 
                 !systemState.networkAvailable -> {
                     SystemOverlay(
                         message = stringResource(R.string.app_generic_no_network),
-                        backgroundColor = Color(0xFFE53935) // Red for Network
+                        backgroundDrawable = R.drawable.bg_wifi_internet
                     )
                 }
 
@@ -193,15 +191,22 @@ fun MainActivityContent(
 @Composable
 fun SystemOverlay(
     message: String,
-    backgroundColor: Color,
+    backgroundDrawable: Int,
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(backgroundColor.copy(alpha = 0.8f)),
+        modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
+        Image(
+            painter = painterResource(id = backgroundDrawable),
+            contentDescription = "Background",
+            modifier = Modifier
+                .fillMaxSize()
+                .alpha(0.8f),
+            contentScale = ContentScale.Crop
+        )
+
         Text(
             text = message.uppercase(),
             color = Color.White,
@@ -218,14 +223,22 @@ fun LocationGPSOverlay(
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.8f)),
+        modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
+        Image(
+            painter = painterResource(id = R.drawable.rectangle_transparent_dark),
+            contentDescription = "Background",
+            modifier = Modifier
+                .fillMaxSize()
+                .alpha(0.8f),
+            contentScale = ContentScale.Crop
+        )
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.padding(horizontal = 32.dp)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_no_location_services),
@@ -240,8 +253,7 @@ fun LocationGPSOverlay(
                 color = Color.White,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 32.dp)
+                textAlign = TextAlign.Center
             )
         }
     }

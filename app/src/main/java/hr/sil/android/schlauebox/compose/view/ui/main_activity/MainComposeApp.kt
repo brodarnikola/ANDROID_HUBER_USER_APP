@@ -9,12 +9,15 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavBackStackEntry
@@ -33,77 +36,62 @@ import hr.sil.android.schlauebox.compose.view.ui.home_screens.SettingsScreen
 import hr.sil.android.schlauebox.compose.view.ui.pickup_parcel.PickupParcelScreen
 import kotlin.collections.forEachIndexed
 
+import hr.sil.android.schlauebox.R
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStackEntry?>) {
-
-//    Surface(
-//        modifier = Modifier.fillMaxSize(),
-//        //color = MaterialTheme.colorScheme.background
-//    ) {
-
-//        Scaffold(
-//            bottomBar = {
-//                if (showBottomBar.value) {
-//                    TabView(
-//                        bottomNavigationItems,
-//                        navBackStackEntry)
-//                    { route ->
-//                        Log.d("MENU", "route is: $route")
-//                        appState.navigateToRoute(route)
-//                    }
-//                }
-//            },
-//        ) { paddingValues ->
-            NavHost(
-                navController = appState.navController,
-                startDestination = MainDestinations.HOME,
-                //modifier = Modifier.padding(paddingValues)
-            ) {
-                mainNavGraph(
-                    navBackStackEntry = navBackStackEntry,
-                    goToPickup =  { route, macAddress ->
-                        appState.goToPickup(route = route, macAddress)
-                    },
-                    goToDeviceDetails =  { route, deviceId, nameOfDevice ->
-                        appState.navigateToDeviceDetails(route = route, deviceId = deviceId, nameOfDevice = nameOfDevice)
-                    },
-                    goToHelp = {
-                        appState.goToHelp(it)
-                    },
-                    goToHelpContent = {
-                        appState.goToHelpContent(it)
-                    },
-                    goToAccessSharing = { route, macAddress, nameOfDevice ->
-                        appState.goToAccessSharing(
-                            route = route,
-                            macAddress = macAddress,
-                            nameOfDevice = nameOfDevice
-                        )
-                    },
-                    goToAccessSharingAddUser = { route, macAddress, nameOfDevice ->
-                        appState.goToAccessSharingAddUser(
-                            route = route,
-                            macAddress = macAddress,
-                            nameOfDevice = nameOfDevice
-                        )
-                    },
-                    goToAccessSharingForgetPreviousScreen = { route, macAddress, nameOfDevice ->
-                        appState.goToAccessSharingForgetPreviousScreen(
-                            route = route,
-                            macAddress = macAddress,
-                            nameOfDevice = nameOfDevice
-                        )
-                    },
-                    navigateUp = {
-                        appState.upPress()
-                    }
+    NavHost(
+        navController = appState.navController,
+        startDestination = MainDestinations.HOME,
+        //modifier = Modifier.padding(paddingValues)
+    ) {
+        mainNavGraph(
+            navBackStackEntry = navBackStackEntry,
+            goToPickup = { route, macAddress ->
+                appState.goToPickup(route = route, macAddress)
+            },
+            goToDeviceDetails = { route, deviceId, nameOfDevice ->
+                appState.navigateToDeviceDetails(
+                    route = route,
+                    deviceId = deviceId,
+                    nameOfDevice = nameOfDevice
                 )
+            },
+            goToHelp = {
+                appState.goToHelp(it)
+            },
+            goToHelpContent = {
+                appState.goToHelpContent(it)
+            },
+            goToAccessSharing = { route, macAddress, nameOfDevice ->
+                appState.goToAccessSharing(
+                    route = route,
+                    macAddress = macAddress,
+                    nameOfDevice = nameOfDevice
+                )
+            },
+            goToAccessSharingAddUser = { route, macAddress, nameOfDevice ->
+                appState.goToAccessSharingAddUser(
+                    route = route,
+                    macAddress = macAddress,
+                    nameOfDevice = nameOfDevice
+                )
+            },
+            goToAccessSharingForgetPreviousScreen = { route, macAddress, nameOfDevice ->
+                appState.goToAccessSharingForgetPreviousScreen(
+                    route = route,
+                    macAddress = macAddress,
+                    nameOfDevice = nameOfDevice
+                )
+            },
+            navigateUp = {
+                appState.upPress()
             }
-        //}
-    //}
+        )
+    }
 }
 
 fun NavGraphBuilder.mainNavGraph(
@@ -111,11 +99,11 @@ fun NavGraphBuilder.mainNavGraph(
     goToDeviceDetails: (route: String, deviceId: String, nameOfDevice: String) -> Unit,
     goToPickup: (route: String, macAddress: String) -> Unit,
     goToHelp: (route: String) -> Unit,
-    goToHelpContent: (route: String ) -> Unit,
+    goToHelpContent: (route: String) -> Unit,
     goToAccessSharing: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
     goToAccessSharingAddUser: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
     goToAccessSharingForgetPreviousScreen: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
-    navigateUp:() -> Unit
+    navigateUp: () -> Unit
 ) {
     composable(MainDestinations.HOME) {
         NavHomeScreen(
@@ -192,7 +180,11 @@ fun NavGraphBuilder.mainNavGraph(
             nameOfDevice = it.arguments?.getString(NavArguments.NAME_OF_DEVICE) ?: "CHANGE_THIS",
             viewModel = hiltViewModel(),
             onNavigateToAddUser = { macAddress, nameOfDevice ->
-                goToAccessSharingAddUser(MainDestinations.ACCESS_SHARING_ADD_USER_SCREEN, macAddress, nameOfDevice )
+                goToAccessSharingAddUser(
+                    MainDestinations.ACCESS_SHARING_ADD_USER_SCREEN,
+                    macAddress,
+                    nameOfDevice
+                )
             }
         )
     }
@@ -213,7 +205,11 @@ fun NavGraphBuilder.mainNavGraph(
             nameOfDevice = it.arguments?.getString(NavArguments.NAME_OF_DEVICE) ?: "CHANGE_THIS",
             viewModel = hiltViewModel(),
             navigateToAccessSharingActivity = { macAddress, nameOfDevice ->
-                goToAccessSharingForgetPreviousScreen(MainDestinations.ACCESS_SHARING_SCREEN, macAddress, nameOfDevice)
+                goToAccessSharingForgetPreviousScreen(
+                    MainDestinations.ACCESS_SHARING_SCREEN,
+                    macAddress,
+                    nameOfDevice
+                )
             }
         )
     }
@@ -269,6 +265,9 @@ fun NavGraphBuilder.mainNavGraph(
 // ----------------------------------------
 // This is a wrapper view that allows us to easily and cleanly
 // reuse this component in any future project
+// ----------------------------------------
+// This is a wrapper view that allows us to easily and cleanly
+// reuse this component in any future project
 @Composable
 fun TabView(
     tabBarItems: List<BottomNavigationBarItem>,
@@ -276,7 +275,9 @@ fun TabView(
     goToNextScreen: (route: String) -> Unit
 ) {
 
-    NavigationBar {
+    NavigationBar(
+        containerColor = colorResource(R.color.colorWhite)
+    ) {
         // looping over each tab to generate the views and navigation for each item
         tabBarItems.forEachIndexed { _, tabBarItem ->
             NavigationBarItem(
@@ -287,13 +288,17 @@ fun TabView(
                 icon = {
                     TabBarIconView(
                         isSelected = tabBarItem.title == navBackStackEntry.value?.destination?.route, // selectedTabIndex == index,
-                        selectedIcon = tabBarItem.selectedIcon,
-                        unselectedIcon = tabBarItem.unselectedIcon,
+                        icon = tabBarItem.icon,
                         title = tabBarItem.title,
                         badgeAmount = tabBarItem.badgeAmount
                     )
                 },
-                label = { Text(tabBarItem.title) })
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = colorResource(R.color.colorPrimary),
+                    unselectedIconColor = colorResource(R.color.colorGray),
+                    indicatorColor = colorResource(R.color.colorPrimary).copy(alpha = 0.1f)
+                )
+            )
         }
     }
 }
@@ -304,8 +309,7 @@ fun TabView(
 @Composable
 fun TabBarIconView(
     isSelected: Boolean,
-    selectedIcon: ImageVector,
-    unselectedIcon: ImageVector,
+    icon: Int,
     title: String,
     badgeAmount: Int? = null
 ) {
@@ -313,12 +317,13 @@ fun TabBarIconView(
         TabBarBadgeView(badgeAmount)
     }) {
         Icon(
-            imageVector = if (isSelected) {
-                selectedIcon
+            painter = painterResource(id = icon),
+            contentDescription = title,
+            tint = if (isSelected) {
+                colorResource(R.color.colorPrimary)
             } else {
-                unselectedIcon
-            },
-            contentDescription = title
+                colorResource(R.color.colorGray)
+            }
         )
     }
 }
