@@ -28,16 +28,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import hr.sil.android.schlauebox.R
-import hr.sil.android.schlauebox.compose.view.ui.main_activity.MainActivity
 import hr.sil.android.schlauebox.core.remote.model.RLanguage
 import hr.sil.android.schlauebox.util.backend.UserUtil
 import hr.sil.android.schlauebox.view.ui.LoginActivity
 import hr.sil.android.schlauebox.view.ui.MainActivity1
-import hr.sil.android.schlauebox.view.ui.dialog.LogoutDialog
 
 @Composable
 fun SettingsScreen(
@@ -49,13 +49,10 @@ fun SettingsScreen(
     var showLogoutDialog by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
 
-    val appVersionValue = stringResource(R.string.nav_settings_app_version, stringResource(R.string.app_version))
-
     LaunchedEffect(Unit) {
         try {
             val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-            //viewModel.setAppVersion("Version: ${packageInfo.versionName}")
-            viewModel.setAppVersion(appVersionValue)
+            viewModel.setAppVersion("Version: ${packageInfo.versionName}")
         } catch (e: PackageManager.NameNotFoundException) {
             viewModel.setAppVersion("Version: Unknown")
         }
@@ -93,8 +90,10 @@ fun SettingsScreen(
 
                 Image(
                     painter = painterResource(R.drawable.ic_logout),
-                    contentDescription = null,
-                    modifier = Modifier.clickable { showLogoutDialog = true }
+                    contentDescription = "Logout",
+                    modifier = Modifier.clickable {
+                        showLogoutDialog = true
+                    }
                 )
             }
 
@@ -190,8 +189,6 @@ fun SettingsScreen(
                 onLanguageSelected = { viewModel.onLanguageSelected(it) }
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
-
             Text(
                 text = stringResource(R.string.nav_settings_change_password).uppercase(),
                 style = MaterialTheme.typography.bodyMedium,
@@ -231,7 +228,7 @@ fun SettingsScreen(
                 onClick = {
                     viewModel.saveSettings(
                         onSuccess = {
-                            val intent = Intent(context, MainActivity::class.java)
+                            val intent = Intent(context, MainActivity1::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                             (context as? Activity)?.finish()
                             context.startActivity(intent)
@@ -266,8 +263,6 @@ fun SettingsScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
-
             Text(
                 text = uiState.appVersion,
                 style = MaterialTheme.typography.bodyMedium,
@@ -278,7 +273,7 @@ fun SettingsScreen(
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center
             )
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(16.dp))
         }
 
         if (showLogoutDialog) {
@@ -310,6 +305,91 @@ fun SettingsScreen(
 }
 
 @Composable
+private fun CustomTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    placeholder: String,
+    icon: Int,
+    enabled: Boolean = true
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp)
+                .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                .background(colorResource(R.color.colorPrimary))
+        )
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(46.dp)
+                .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                .background(
+                    if (enabled) colorResource(R.color.colorWhite)
+                    else colorResource(R.color.colorGray)
+                )
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = 10.dp),
+                verticalAlignment = Alignment.Top
+            ) {
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .padding(start = 5.dp, top = 8.dp, bottom = 4.dp),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    BasicTextField(
+                        value = value,
+                        onValueChange = onValueChange,
+                        enabled = enabled,
+                        textStyle = TextStyle(
+                            fontSize = 14.sp,
+                            color = colorResource(R.color.colorBlack)
+                        ),
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true,
+                        decorationBox = { innerTextField ->
+                            if (value.isEmpty()) {
+                                Text(
+                                    text = placeholder,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = colorResource(R.color.colorGray)
+                                )
+                            }
+                            innerTextField()
+                        }
+                    )
+                }
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(end = 10.dp, bottom = 12.dp),
+                    contentAlignment = Alignment.BottomCenter
+
+                ) {
+                    Icon(
+                        painter = painterResource(icon),
+                        contentDescription = null,
+                        tint = colorResource(R.color.colorGray)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
 private fun PasswordTextField(
     value: String,
     onValueChange: (String) -> Unit,
@@ -321,49 +401,74 @@ private fun PasswordTextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
-                .clip(RoundedCornerShape(4.dp))
-                .border(
-                    width = 1.dp,
-                    color = colorResource(R.color.colorGray),
-                    shape = RoundedCornerShape(4.dp)
-                )
-                .background(colorResource(R.color.colorWhite))
         ) {
-            Row(
+            Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 10.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                BasicTextField(
-                    value = value,
-                    onValueChange = onValueChange,
-                    textStyle = TextStyle(
-                        fontSize = 14.sp,
-                        color = colorResource(R.color.colorBlack)
-                    ),
-                    visualTransformation = PasswordVisualTransformation(),
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Password
-                    ),
-                    modifier = Modifier.weight(1f),
-                    decorationBox = { innerTextField ->
-                        if (value.isEmpty()) {
-                            Text(
-                                text = placeholder,
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = colorResource(R.color.colorGray)
-                            )
-                        }
-                        innerTextField()
-                    }
-                )
+                    .fillMaxWidth()
+                    .height(48.dp)
+                    .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                    .background(colorResource(R.color.colorPrimary))
+            )
 
-                Icon(
-                    painter = painterResource(R.drawable.ic_password),
-                    contentDescription = null,
-                    tint = colorResource(R.color.colorGray)
-                )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(46.dp)
+                    .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                    .background(colorResource(R.color.colorWhite))
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(start = 10.dp),
+                    verticalAlignment = Alignment.Top
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight()
+                            .padding(start = 5.dp, top = 8.dp, bottom = 4.dp),
+                        contentAlignment = Alignment.CenterStart
+                    ) {
+                        BasicTextField(
+                            value = value,
+                            onValueChange = onValueChange,
+                            textStyle = TextStyle(
+                                fontSize = 14.sp,
+                                color = colorResource(R.color.colorBlack)
+                            ),
+                            visualTransformation = PasswordVisualTransformation(),
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.Password
+                            ),
+                            modifier = Modifier.fillMaxWidth(),
+                            singleLine = true,
+                            decorationBox = { innerTextField ->
+                                if (value.isEmpty()) {
+                                    Text(
+                                        text = placeholder,
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = colorResource(R.color.colorGray)
+                                    )
+                                }
+                                innerTextField()
+                            }
+                        )
+                    }
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .padding(end = 10.dp, bottom = 12.dp),
+                        contentAlignment = Alignment.BottomCenter
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_password),
+                            contentDescription = null,
+                            tint = colorResource(R.color.colorGray)
+                        )
+                    }
+                }
             }
         }
 
@@ -381,143 +486,91 @@ private fun PasswordTextField(
 }
 
 @Composable
-private fun CustomTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    placeholder: String,
-    icon: Int,
-    enabled: Boolean = true
-) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(48.dp)
-            .clip(RoundedCornerShape(4.dp))
-            .border(
-                width = 1.dp,
-                color = colorResource(R.color.colorGray),
-                shape = RoundedCornerShape(4.dp)
-            )
-            .background(
-                if (enabled) colorResource(R.color.colorWhite)
-                else colorResource(R.color.colorPinkishGray)
-            )
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 10.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            BasicTextField(
-                value = value,
-                onValueChange = onValueChange,
-                enabled = enabled,
-                textStyle = TextStyle(
-                    fontSize = 14.sp,
-                    color = colorResource(R.color.colorBlack)
-                ),
-                modifier = Modifier.weight(1f),
-                decorationBox = { innerTextField ->
-                    if (value.isEmpty()) {
-                        Text(
-                            text = placeholder,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = colorResource(R.color.colorGray)
-                        )
-                    }
-                    innerTextField()
-                }
-            )
-
-            Icon(
-                painter = painterResource(icon),
-                contentDescription = null,
-                tint = colorResource(R.color.colorGray)
-            )
-        }
-    }
-}
-
-@Composable
 private fun GroupNameSection(
     groupNameRow1: String,
     groupNameRow2: String,
     onRow1Changed: (String) -> Unit,
     onRow2Changed: (String) -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(4.dp))
-            .border(
-                width = 1.dp,
-                color = colorResource(R.color.colorGray),
-                shape = RoundedCornerShape(4.dp)
-            )
-            .background(colorResource(R.color.colorWhite))
-            .padding(4.dp)
+    Box(
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
-            text = stringResource(R.string.app_generic_group),
-            style = MaterialTheme.typography.labelSmall,
-            color = colorResource(R.color.colorBlack),
-            modifier = Modifier.padding(start = 5.dp, top = 4.dp)
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
-
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(4.dp))
-                .background(colorResource(R.color.colorGray))
-                .padding(horizontal = 10.dp, vertical = 10.dp)
+                .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                .background(colorResource(R.color.colorPrimary))
+                .padding(4.dp)
+        )
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                .background(colorResource(R.color.colorWhite))
+                .padding(2.dp)
         ) {
-            Column {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    BasicTextField(
-                        value = groupNameRow1,
-                        onValueChange = onRow1Changed,
-                        textStyle = TextStyle(
-                            fontSize = 14.sp,
-                            color = colorResource(R.color.colorBlack)
-                        ),
-                        modifier = Modifier.weight(1f)
-                    )
-                    Text(
-                        text = "${groupNameRow1.length}/15",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = colorResource(R.color.colorBlack)
-                    )
-                }
+            Text(
+                text = stringResource(R.string.app_generic_group),
+                style = MaterialTheme.typography.labelSmall,
+                color = colorResource(R.color.colorBlack),
+                modifier = Modifier.padding(start = 5.dp, top = 4.dp)
+            )
 
-                Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    BasicTextField(
-                        value = groupNameRow2,
-                        onValueChange = onRow2Changed,
-                        textStyle = TextStyle(
-                            fontSize = 14.sp,
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(4.dp))
+                    .background(colorResource(R.color.colorGray))
+                    .padding(horizontal = 10.dp, vertical = 10.dp)
+            ) {
+                Column {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        BasicTextField(
+                            value = groupNameRow1,
+                            onValueChange = onRow1Changed,
+                            textStyle = TextStyle(
+                                fontSize = 14.sp,
+                                color = colorResource(R.color.colorBlack)
+                            ),
+                            modifier = Modifier.weight(1f)
+                        )
+                        Text(
+                            text = "${groupNameRow1.length}/15",
+                            style = MaterialTheme.typography.labelSmall,
                             color = colorResource(R.color.colorBlack)
-                        ),
-                        modifier = Modifier.weight(1f),
-                        enabled = groupNameRow1.length >= 15 || groupNameRow2.isNotEmpty()
-                    )
-                    Text(
-                        text = "${groupNameRow2.length}/15",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = colorResource(R.color.colorBlack)
-                    )
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        BasicTextField(
+                            value = groupNameRow2,
+                            onValueChange = onRow2Changed,
+                            textStyle = TextStyle(
+                                fontSize = 14.sp,
+                                color = colorResource(R.color.colorBlack)
+                            ),
+                            modifier = Modifier.weight(1f),
+                            enabled = groupNameRow1.length >= 15 || groupNameRow2.isNotEmpty()
+                        )
+                        Text(
+                            text = "${groupNameRow2.length}/15",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = colorResource(R.color.colorBlack)
+                        )
+                    }
                 }
             }
         }
@@ -530,30 +583,50 @@ private fun CheckboxRow(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) {
-    Row(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(4.dp))
-            .background(colorResource(R.color.colorWhite))
-            .padding(horizontal = 10.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+            .height(48.dp)
     ) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.bodyMedium,
-            color = colorResource(R.color.colorBlack),
-            modifier = Modifier.weight(1f)
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp)
+                .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                .background(colorResource(R.color.colorPrimary))
         )
 
-        Checkbox(
-            checked = checked,
-            onCheckedChange = onCheckedChange,
-            colors = CheckboxDefaults.colors(
-                checkedColor = colorResource(R.color.colorPrimary),
-                uncheckedColor = colorResource(R.color.colorGray)
-            )
-        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(46.dp)
+                .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                .background(colorResource(R.color.colorWhite))
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 10.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = colorResource(R.color.colorBlack),
+                    modifier = Modifier.weight(1f)
+                )
+
+                Checkbox(
+                    checked = checked,
+                    onCheckedChange = onCheckedChange,
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = colorResource(R.color.colorPrimary),
+                        uncheckedColor = colorResource(R.color.colorGray)
+                    )
+                )
+            }
+        }
     }
 
     Spacer(modifier = Modifier.height(3.dp))
@@ -570,36 +643,32 @@ private fun LanguageDropdown(
     Box(
         modifier = Modifier.fillMaxWidth()
     ) {
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(4.dp))
-                .border(
-                    width = 1.dp,
-                    color = colorResource(R.color.colorGray),
-                    shape = RoundedCornerShape(4.dp)
-                )
-                .background(colorResource(R.color.colorWhite))
-                .padding(top = 1.dp, bottom = 15.dp)
+                .height(50.dp)
         ) {
-            Text(
-                text = stringResource(R.string.nav_settings_language),
-                style = MaterialTheme.typography.bodySmall,
-                color = colorResource(R.color.colorBlack),
-                modifier = Modifier.padding(start = 15.dp, top = 4.dp)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
+                    .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                    .background(colorResource(R.color.colorPrimary))
             )
 
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(40.dp)
+                    .height(48.dp)
+                    .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                    .background(colorResource(R.color.colorWhite))
+                    .padding(4.dp)
                     .clickable { expanded = !expanded }
-                    .padding(horizontal = 5.dp, vertical = 10.dp)
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(start = 10.dp),
+                        .padding(horizontal = 10.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
@@ -614,29 +683,29 @@ private fun LanguageDropdown(
                         tint = colorResource(R.color.colorBlack)
                     )
                 }
-            }
 
-            DropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false },
-                modifier = Modifier
-                    .fillMaxWidth(0.9f)
-                    .background(Color.Transparent)
-            ) {
-                languages.forEach { language ->
-                    DropdownMenuItem(
-                        text = {
-                            Text(
-                                text = language.name,
-                                style = MaterialTheme.typography.bodyMedium
-                            )
-                        },
-                        onClick = {
-                            onLanguageSelected(language)
-                            expanded = false
-                        },
-                        modifier = Modifier.background(Color.Transparent)
-                    )
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .background(Color.Transparent)
+                ) {
+                    languages.forEach { language ->
+                        DropdownMenuItem(
+                            text = {
+                                Text(
+                                    text = language.name,
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            },
+                            onClick = {
+                                onLanguageSelected(language)
+                                expanded = false
+                            },
+                            modifier = Modifier.background(Color.Transparent)
+                        )
+                    }
                 }
             }
         }
@@ -649,28 +718,51 @@ private fun LogoutConfirmationDialog(
     onDismiss: () -> Unit
 ) {
     AlertDialog(
-        onDismissRequest = onDismiss,
-        title = {
-            Text(
-                text = stringResource(R.string.are_you_sure_logout),
-                style = MaterialTheme.typography.titleMedium
-            )
-        },
+        onDismissRequest = { onDismiss() },
+        containerColor = colorResource(R.color.colorWhite),
         text = {
-//            Text(
-//                text = stringResource(R.string.logout_confirmation_message),
-//                style = MaterialTheme.typography.bodyMedium
-//            )
-        },
-        confirmButton = {
-            TextButton(onClick = onConfirm) {
-                Text(stringResource(R.string.app_generic_confirm))
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth() ,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = stringResource(R.string.are_you_sure_logout),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = colorResource(R.color.colorBlack),
+                    modifier = Modifier.padding(vertical = 10.dp)
+                )
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 10.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    TextButton(
+                        onClick = onConfirm,
+                        modifier = Modifier.padding(horizontal = 10.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.app_generic_confirm),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = colorResource(R.color.colorBlack)
+                        )
+                    }
+
+                    TextButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.padding(horizontal = 10.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.app_generic_cancel),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = colorResource(R.color.colorBlack)
+                        )
+                    }
+                }
             }
         },
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text(stringResource(R.string.app_generic_cancel))
-            }
-        }
+        confirmButton = {}
     )
 }
