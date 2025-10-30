@@ -38,6 +38,7 @@ import kotlin.collections.forEachIndexed
 
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.home_screens.TccScreen
+import hr.sil.android.schlauebox.compose.view.ui.send_parcel.SelectParcelSizeScreen
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -88,6 +89,9 @@ fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStack
                     nameOfDevice = nameOfDevice
                 )
             },
+            goToSelectParcelSize = { route, macAddress ->
+                appState.goToSelectParcelSize(route, macAddress)
+            },
             navigateUp = {
                 appState.upPress()
             }
@@ -104,6 +108,7 @@ fun NavGraphBuilder.mainNavGraph(
     goToAccessSharing: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
     goToAccessSharingAddUser: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
     goToAccessSharingForgetPreviousScreen: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
+    goToSelectParcelSize: (route: String, macAddress: String) -> Unit,
     navigateUp: () -> Unit
 ) {
     composable(MainDestinations.HOME) {
@@ -150,9 +155,24 @@ fun NavGraphBuilder.mainNavGraph(
             onNavigateToHelp = {
                 goToHelp(MainDestinations.HELP_SCREEN)
             },
+            onNavigateToSelectParcelSize = { macAddress ->
+                goToSelectParcelSize(MainDestinations.SELECT_PARCEL_SIZE, macAddress)
+            },
             onNavigateToAccessSharing = { macAddress, nameOfDevice ->
                 goToAccessSharing(MainDestinations.ACCESS_SHARING_SCREEN, macAddress, nameOfDevice)
             }
+        )
+    }
+
+    composable(
+        "${MainDestinations.SELECT_PARCEL_SIZE}/{${NavArguments.MAC_ADDRESS}}",
+        arguments = listOf(navArgument(NavArguments.MAC_ADDRESS) {
+            type = NavType.StringType
+        })
+    ) {
+        SelectParcelSizeScreen(
+            macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
+            viewModel = hiltViewModel(),
         )
     }
 

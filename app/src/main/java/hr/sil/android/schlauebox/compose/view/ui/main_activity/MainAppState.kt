@@ -12,6 +12,7 @@ object MainDestinations {
     const val HOME = "Home"
     const val TERMS_AND_CONDITION_SCREEN = "TermsAndConditionScreen"
     const val HELP_SCREEN = "HelpScreen"
+    const val SELECT_PARCEL_SIZE = "SelectParcelSize"
     const val ACCESS_SHARING_SCREEN = "AccessSharingScreen"
     const val ACCESS_SHARING_ADD_USER_SCREEN = "AccessSharingAddUserScreen"
     const val HELP_CONTENT_SCREEN = "HelpContentScreen"
@@ -95,6 +96,15 @@ class MainAppState(
     fun goToAccessSharing(route: String, macAddress: String, nameOfDevice: String) {
         if (route != currentRoute) {
             navController.navigate("$route/$macAddress/$nameOfDevice") {
+                launchSingleTop = true
+                restoreState = true
+            }
+        }
+    }
+
+    fun goToSelectParcelSize(route: String, macAddress: String) {
+        if (route != currentRoute) {
+            navController.navigate("$route/$macAddress") {
                 launchSingleTop = true
                 restoreState = true
             }
