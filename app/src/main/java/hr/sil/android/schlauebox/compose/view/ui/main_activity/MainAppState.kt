@@ -13,6 +13,7 @@ object MainDestinations {
     const val TERMS_AND_CONDITION_SCREEN = "TermsAndConditionScreen"
     const val HELP_SCREEN = "HelpScreen"
     const val SELECT_PARCEL_SIZE = "SelectParcelSize"
+    const val SEND_PARCEL_SIZE = "SendParcelSize"
     const val ACCESS_SHARING_SCREEN = "AccessSharingScreen"
     const val ACCESS_SHARING_ADD_USER_SCREEN = "AccessSharingAddUserScreen"
     const val HELP_CONTENT_SCREEN = "HelpContentScreen"
@@ -25,6 +26,8 @@ object NavArguments {
     const val DEVICE_ID = "deviceId"
     const val MAC_ADDRESS = "macAddress"
     const val NAME_OF_DEVICE = "nameOfDevice"
+    const val PIN_OF_DEVICE = "pinOfDevice"
+    const val SIZE_OF_DEVICE = "sizeOfDevice"
     const val TITLE_HELP = "titleHelp"
     const val CONTENT_HELP = "contentHelp"
     const val PICTURE_POSITION = "picturePosition"
@@ -110,6 +113,16 @@ class MainAppState(
             }
         }
     }
+
+    fun goToSendParcelSize(route: String, macAddress: String, pin: Int, size: String) {
+        if (route != currentRoute) {
+            navController.navigate("$route/$macAddress/$pin/$size") {
+                launchSingleTop = true
+                restoreState = true
+            }
+        }
+    }
+
 
     fun goToAccessSharingAddUser(route: String, macAddress: String, nameOfDevice: String) {
         if (route != currentRoute) {

@@ -39,6 +39,7 @@ import kotlin.collections.forEachIndexed
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.home_screens.TccScreen
 import hr.sil.android.schlauebox.compose.view.ui.send_parcel.SelectParcelSizeScreen
+import hr.sil.android.schlauebox.compose.view.ui.send_parcel.SendParcelDeliveryScreen
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -92,6 +93,9 @@ fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStack
             goToSelectParcelSize = { route, macAddress ->
                 appState.goToSelectParcelSize(route, macAddress)
             },
+            goToSendParcelSize = { route, macAddress, pin, size ->
+                appState.goToSendParcelSize(route, macAddress, pin, size)
+            },
             navigateUp = {
                 appState.upPress()
             }
@@ -109,6 +113,7 @@ fun NavGraphBuilder.mainNavGraph(
     goToAccessSharingAddUser: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
     goToAccessSharingForgetPreviousScreen: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
     goToSelectParcelSize: (route: String, macAddress: String) -> Unit,
+    goToSendParcelSize: (route: String, macAddress: String, pin: Int, size: String) -> Unit,
     navigateUp: () -> Unit
 ) {
     composable(MainDestinations.HOME) {
@@ -173,6 +178,36 @@ fun NavGraphBuilder.mainNavGraph(
         SelectParcelSizeScreen(
             macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
             viewModel = hiltViewModel(),
+            onNavigateToDelivery = { macAddress, pin, size ->
+                goToSendParcelSize(
+                    MainDestinations.SEND_PARCEL_SIZE,
+                    macAddress,
+                    pin,
+                    size
+                )
+            }
+        )
+    }
+
+    composable(
+        "${MainDestinations.SEND_PARCEL_SIZE}/{${NavArguments.MAC_ADDRESS}}/{${NavArguments.PIN_OF_DEVICE}}/{${NavArguments.SIZE_OF_DEVICE}}",
+        arguments = listOf(
+            navArgument(NavArguments.MAC_ADDRESS) {
+                type = NavType.StringType
+            },
+            navArgument(NavArguments.PIN_OF_DEVICE) {
+                type = NavType.IntType
+            },
+            navArgument(NavArguments.SIZE_OF_DEVICE) {
+                type = NavType.StringType
+            }
+        )
+    ) {
+        SendParcelDeliveryScreen(
+            macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
+            pin = it.arguments?.getInt(NavArguments.PIN_OF_DEVICE) ?: 0,
+            size = it.arguments?.getString(NavArguments.SIZE_OF_DEVICE) ?: "",
+            viewModel = hiltViewModel()
         )
     }
 

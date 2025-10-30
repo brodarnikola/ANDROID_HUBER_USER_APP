@@ -27,7 +27,6 @@ fun SendParcelDeliveryScreen(
     macAddress: String,
     pin: Int,
     size: String,
-    onNavigateBack: () -> Unit = {},
     onFinish: () -> Unit = {},
     onNavigateToLogin: () -> Unit = {},
     viewModel: SendParcelDeliveryViewModel = viewModel()
@@ -57,8 +56,7 @@ fun SendParcelDeliveryScreen(
         )
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp),
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             HorizontalDivider(

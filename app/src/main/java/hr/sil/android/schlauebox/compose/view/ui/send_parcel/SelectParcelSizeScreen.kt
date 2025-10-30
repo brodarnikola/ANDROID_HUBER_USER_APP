@@ -30,13 +30,13 @@ import hr.sil.android.schlauebox.core.util.logger
 @Composable
 fun SelectParcelSizeScreen(
     macAddress: String,
-    onNavigateBack: () -> Unit = {},
-    onNavigateToGeneratedPinDialog: (macAddress: String, lockerSize: RLockerSize) -> Unit = { _, _ -> },
-    onNavigateToPinManagement: (macAddress: String, lockerSize: RLockerSize) -> Unit = { _, _ -> },
     onNavigateToLogin: () -> Unit = {},
+    onNavigateToDelivery: (macAddress: String, pin: Int, size: String) -> Unit = { _, _, _ -> },
     viewModel: SelectParcelSizeViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    var showGeneratedPinDialog by remember { mutableStateOf(false) }
+    var showPinManagementDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(macAddress) {
         logger().info("select parcel size activity, mac address is: $macAddress")
@@ -47,6 +47,30 @@ fun SelectParcelSizeScreen(
         if (uiState.isUnauthorized) {
             onNavigateToLogin()
         }
+    }
+
+    if (showGeneratedPinDialog) {
+        GeneratedPinDialog(
+            macAddress = macAddress,
+            lockerSize = uiState.selectedSize,
+            onDismiss = { showGeneratedPinDialog = false },
+            onConfirm = { mac, pin, size ->
+                showGeneratedPinDialog = false
+                onNavigateToDelivery(mac, pin, size)
+            }
+        )
+    }
+
+    if (showPinManagementDialog) {
+        PinManagementDialog(
+            macAddress = macAddress,
+            lockerSize = uiState.selectedSize,
+            onDismiss = { showPinManagementDialog = false },
+            onConfirm = { mac, pin, size ->
+                showPinManagementDialog = false
+                onNavigateToDelivery(mac, pin, size)
+            }
+        )
     }
 
     Box(
@@ -106,16 +130,18 @@ fun SelectParcelSizeScreen(
             Spacer(modifier = Modifier.weight(1f))
 
             // Next Button
-            if (uiState.showNextButton) {
+            //if (uiState.showNextButton) {
                 Button(
                     onClick = {
                         val device = uiState.device
                         val selectedSize = uiState.selectedSize
                         if (device != null && selectedSize != RLockerSize.UNKNOWN) {
                             if (device.pinManagementAllowed == false) {
-                                onNavigateToGeneratedPinDialog(macAddress, selectedSize)
+                                showGeneratedPinDialog = true
+                                //onNavigateToGeneratedPinDialog(macAddress, selectedSize)
                             } else {
-                                onNavigateToPinManagement(macAddress, selectedSize)
+                                showPinManagementDialog = true
+                                //onNavigateToPinManagement(macAddress, selectedSize)
                             }
                         }
                     },
@@ -134,7 +160,7 @@ fun SelectParcelSizeScreen(
                         color = Color.White
                     )
                 }
-            }
+           // }
 
             Spacer(modifier = Modifier.height(16.dp))
         }
