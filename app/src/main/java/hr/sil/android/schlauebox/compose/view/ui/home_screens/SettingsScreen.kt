@@ -39,6 +39,7 @@ import hr.sil.android.schlauebox.core.remote.model.RLanguage
 import hr.sil.android.schlauebox.util.backend.UserUtil
 import hr.sil.android.schlauebox.view.ui.LoginActivity
 import hr.sil.android.schlauebox.view.ui.MainActivity1
+import hr.sil.android.schlauebox.view.ui.home.activities.HelpActivity
 
 @Composable
 fun SettingsScreen(
@@ -281,7 +282,7 @@ fun SettingsScreen(
             LogoutConfirmationDialog(
                 onConfirm = {
                     UserUtil.logout()
-                    val intent = Intent(context, LoginActivity::class.java)
+                    val intent = Intent(context, SignUpOnboardingActivity::class.java)
                     context.startActivity(intent)
                     (context as? Activity)?.finish()
                     showLogoutDialog = false

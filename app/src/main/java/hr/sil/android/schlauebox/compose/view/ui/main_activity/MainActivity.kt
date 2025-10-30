@@ -16,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.BaseComponentActivity
+import hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity.SignUpOnboardingActivity
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTheme
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.databinding.ActivityMainBinding
@@ -48,7 +49,7 @@ class MainActivity : ComponentActivity() {
                 MainActivityContent(
                     systemStateViewModel = systemStateViewModel,
                     onNavigateToLogin = {
-                        val intent = Intent(this, LoginActivity::class.java)
+                        val intent = Intent(this, SignUpOnboardingActivity::class.java)
                         startActivity(intent)
                         finish()
                     }
@@ -108,7 +109,7 @@ class MainActivity : ComponentActivity() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMplDeviceNotify(event: UnauthorizedUserEvent) {
         log.info("Received unauthorized event, user will now be logged out")
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(this, SignUpOnboardingActivity::class.java)
         startActivity(intent)
         finish()
     }
