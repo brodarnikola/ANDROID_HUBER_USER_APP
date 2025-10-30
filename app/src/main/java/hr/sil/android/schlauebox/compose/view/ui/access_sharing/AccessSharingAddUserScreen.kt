@@ -116,7 +116,7 @@ fun AccessSharingAddUserScreen(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    //.background(colorResource(R.color.colorPinkishGray))
+                //.background(colorResource(R.color.colorPinkishGray))
             ) {
                 Column(
                     modifier = Modifier
@@ -134,52 +134,12 @@ fun AccessSharingAddUserScreen(
 
                     Spacer(modifier = Modifier.height(20.dp))
 
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                            .height(48.dp)
-                            .clip(RoundedCornerShape(4.dp))
-                            .border(
-                                width = 1.dp,
-                                color = colorResource(R.color.colorGray),
-                                shape = RoundedCornerShape(4.dp)
-                            )
-                            .background(colorResource(R.color.colorWhite))
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(horizontal = 10.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            BasicTextField(
-                                value = uiState.email,
-                                onValueChange = { viewModel.onEmailChanged(it) },
-                                textStyle = TextStyle(
-                                    fontSize = 14.sp,
-                                    color = colorResource(R.color.colorBlack)
-                                ),
-                                modifier = Modifier.weight(1f),
-                                decorationBox = { innerTextField ->
-                                    if (uiState.email.isEmpty()) {
-                                        Text(
-                                            text = stringResource(R.string.app_generic_email),
-                                            style = MaterialTheme.typography.bodyMedium,
-                                            color = colorResource(R.color.colorGray)
-                                        )
-                                    }
-                                    innerTextField()
-                                }
-                            )
-
-                            Icon(
-                                painter = painterResource(R.drawable.ic_register_email),
-                                contentDescription = "Email",
-                                tint = colorResource(R.color.colorGray)
-                            )
-                        }
-                    }
+                    EmailTextField(
+                        value = uiState.email,
+                        onValueChange = { viewModel.onEmailChanged(it) },
+                        placeholder = stringResource(R.string.app_generic_email),
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
 
                     Spacer(modifier = Modifier.height(10.dp))
 
@@ -289,41 +249,41 @@ private fun GroupSelectionDropdown(
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
     ) {
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(4.dp))
-                .border(
-                    width = 1.dp,
-                    color = colorResource(R.color.colorGray),
-                    shape = RoundedCornerShape(4.dp)
-                )
-                .background(colorResource(R.color.colorWhite))
-                .padding(top = 1.dp, bottom = 15.dp)
+                .height(50.dp)
         ) {
-            Text(
-                text = label,
-                style = MaterialTheme.typography.bodySmall,
-                color = colorResource(R.color.colorBlack),
-                modifier = Modifier.padding(start = 15.dp, top = 4.dp)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
+                    .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                    .background(colorResource(R.color.colorPrimary))
             )
 
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(40.dp)
+                    .height(48.dp)
+                    .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                    .background(colorResource(R.color.colorWhite))
+                    .padding(4.dp)
                     .clickable { expanded = !expanded }
-                    .padding(horizontal = 5.dp, vertical = 10.dp)
             ) {
                 Row(
-                    modifier = Modifier.fillMaxSize().padding(start = 10.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 10.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = selectedGroup?.groupOwnerName ?: "",
+                        text = selectedGroup?.groupOwnerName ?: label,
                         style = MaterialTheme.typography.bodyMedium,
-                        color = colorResource(R.color.colorBlack)
+                        color = colorResource(
+                            if (selectedGroup != null) R.color.colorBlack else R.color.colorGray
+                        )
                     )
                     Icon(
                         imageVector = Icons.Default.ArrowDropDown,
@@ -331,30 +291,34 @@ private fun GroupSelectionDropdown(
                         tint = colorResource(R.color.colorBlack)
                     )
                 }
-            }
 
-            DropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false },
-                modifier = Modifier.fillMaxWidth(0.9f)
-            ) {
-                groups.forEach { group ->
-                    DropdownMenuItem(
-                        text = {
-                            Text(
-                                text = group.groupOwnerName,
-                                style = MaterialTheme.typography.bodyMedium
-                            )
-                        },
-                        onClick = {
-                            onGroupSelected(group)
-                            expanded = false
-                        }
-                    )
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .background(Color.Transparent)
+                ) {
+                    groups.forEach { group ->
+                        DropdownMenuItem(
+                            text = {
+                                Text(
+                                    text = group.groupOwnerName,
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            },
+                            onClick = {
+                                onGroupSelected(group)
+                                expanded = false
+                            }
+                        )
+                    }
                 }
             }
         }
     }
+
+    Spacer(modifier = Modifier.height(3.dp))
 }
 
 @Composable
@@ -376,39 +340,37 @@ private fun RoleSelectionDropdown(
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
     ) {
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(4.dp))
-                .border(
-                    width = 1.dp,
-                    color = colorResource(R.color.colorGray),
-                    shape = RoundedCornerShape(4.dp)
-                )
-                .background(colorResource(R.color.colorWhite))
-                .padding(top = 1.dp, bottom = 15.dp)
+                .height(50.dp)
         ) {
-            Text(
-                text = label,
-                style = MaterialTheme.typography.bodySmall,
-                color = colorResource(R.color.colorBlack),
-                modifier = Modifier.padding(start = 15.dp, top = 4.dp)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
+                    .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                    .background(colorResource(R.color.colorPrimary))
             )
 
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(40.dp)
+                    .height(48.dp)
+                    .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                    .background(colorResource(R.color.colorWhite))
+                    .padding(4.dp)
                     .clickable { expanded = !expanded }
-                    .padding(horizontal = 5.dp, vertical = 10.dp)
             ) {
                 Row(
-                    modifier = Modifier.fillMaxSize().padding(start = 10.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 10.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = roles.find { it.first == selectedRole }?.second ?: "",
+                        text = roles.find { it.first == selectedRole }?.second ?: label,
                         style = MaterialTheme.typography.bodyMedium,
                         color = colorResource(R.color.colorBlack)
                     )
@@ -418,25 +380,108 @@ private fun RoleSelectionDropdown(
                         tint = colorResource(R.color.colorBlack)
                     )
                 }
-            }
 
-            DropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false },
-                modifier = Modifier.fillMaxWidth(0.9f)
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .background(Color.Transparent)
+                ) {
+                    roles.forEach { (role, roleName) ->
+                        DropdownMenuItem(
+                            text = {
+                                Text(
+                                    text = roleName,
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            },
+                            onClick = {
+                                onRoleSelected(role)
+                                expanded = false
+                            }
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    Spacer(modifier = Modifier.height(3.dp))
+}
+
+@Composable
+private fun EmailTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    placeholder: String,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(48.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp)
+                .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                .background(colorResource(R.color.colorPrimary))
+        )
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(46.dp)
+                .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                .background(colorResource(R.color.colorWhite))
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = 10.dp),
+                verticalAlignment = Alignment.Top
             ) {
-                roles.forEach { (role, roleName) ->
-                    DropdownMenuItem(
-                        text = {
-                            Text(
-                                text = roleName,
-                                style = MaterialTheme.typography.bodyMedium
-                            )
-                        },
-                        onClick = {
-                            onRoleSelected(role)
-                            expanded = false
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .padding(start = 5.dp, top = 8.dp, bottom = 4.dp),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    BasicTextField(
+                        value = value,
+                        onValueChange = onValueChange,
+                        textStyle = TextStyle(
+                            fontSize = 14.sp,
+                            color = colorResource(R.color.colorBlack)
+                        ),
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true,
+                        decorationBox = { innerTextField ->
+                            if (value.isEmpty()) {
+                                Text(
+                                    text = placeholder,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = colorResource(R.color.colorGray)
+                                )
+                            }
+                            innerTextField()
                         }
+                    )
+                }
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(end = 10.dp, bottom = 12.dp),
+                    contentAlignment = Alignment.BottomCenter
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_register_email),
+                        contentDescription = null,
+                        tint = colorResource(R.color.colorGray)
                     )
                 }
             }
