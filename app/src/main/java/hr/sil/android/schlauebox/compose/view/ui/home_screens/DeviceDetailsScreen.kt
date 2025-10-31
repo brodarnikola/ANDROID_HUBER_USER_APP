@@ -92,35 +92,26 @@ fun DeviceDetailsScreen(
                         onNavigateToPickup(macAddress)
                     },
                     onSendParcelClick = {
-                        onNavigateToSendParcelsOverviewActivity(macAddress)
-//                        val device = MPLDeviceStore.devices[macAddress]
-//                        val isPaHListAvailable = hasUserShareKeys(uiState)
-//
-//                        if (isPaHListAvailable) {
-//                            onNavigateToSendParcelsOverviewActivity(macAddress)
-//                        } else {
-//                            if (device?.masterUnitType == RMasterUnitType.MPL ||
-//                                device?.installationType == hr.sil.android.schlauebox.core.remote.model.InstalationType.TABLET ||
-//                                (device?.type == MPLDeviceType.SPL_PLUS &&
-//                                        device?.keypadType != hr.sil.android.ble.scanner.scan_multi.properties.advv2.common.ParcelLockerKeyboardType.SPL)) {
-//                                onNavigateToSelectParcelSize(macAddress)
-//                            }
-//                        }
-                    },
-                    onAccessSharingClick = {
+                        val device = MPLDeviceStore.devices[macAddress]
+                        val isPaHListAvailable = hasUserShareKeys(uiState)
 
+                        if (isPaHListAvailable) {
+                            onNavigateToSendParcelsOverviewActivity(macAddress)
+                        } else {
+                            if (device?.masterUnitType == RMasterUnitType.MPL ||
+                                device?.installationType == hr.sil.android.schlauebox.core.remote.model.InstalationType.TABLET ||
+                                (device?.type == MPLDeviceType.SPL_PLUS &&
+                                        device?.keypadType != hr.sil.android.ble.scanner.scan_multi.properties.advv2.common.ParcelLockerKeyboardType.SPL)) {
+                                onNavigateToSelectParcelSize(macAddress)
+                            }
+                        }
+                    },
+                    onAccessSharingClick = { 
                         print("Name of device is 22: $nameOfDevice")
                         onNavigateToAccessSharing(macAddress, nameOfDevice)
-//                        val startIntent = Intent(context, AccessSharingActivity::class.java)
-//                        startIntent.putExtra("rMacAddress", macAddress)
-//                        startIntent.putExtra("nameOfDevice", nameOfDevice)
-//                        context.startActivity(startIntent)
                     },
                     onHelpClick = {
                         onNavigateToHelp()
-//                        val startIntent = Intent(context, HelpActivity::class.java)
-//                        startIntent.putExtra("rMacAddress", macAddress)
-//                        context.startActivity(startIntent)
                     },
                     modifier = Modifier.padding(top = 16.dp)
                 )
