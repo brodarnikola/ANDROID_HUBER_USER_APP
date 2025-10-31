@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -82,42 +83,46 @@ class SignUpOnboardingActivity : ComponentActivity() {
                     delay(2000)
                 }
             }
-            if (!isConnected.value) {
-                NoInternetScreen()
-            } else {
-                startApp()
+            Box(
+                modifier = Modifier,
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.bg_splash),
+                    modifier = Modifier.fillMaxSize(),
+                    contentDescription = "bg splash",
+                    contentScale = ContentScale.FillBounds
+                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Bottom,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(bottom = 60.dp, start = 20.dp, end = 20.dp)
+                ) {
+                    CircularProgressIndicator(
+                        color = colorResource(R.color.colorPrimary),
+                        modifier = Modifier.size(40.dp)
+                    )
+                    if (!isConnected.value) {
+                        NoInternetScreen()
+                    } else {
+                        startApp()
+                    }
+                }
             }
         }
     }
 
     @Composable
     private fun NoInternetScreen() {
-        Box(
-            modifier = Modifier,
-            contentAlignment = Alignment.Center
-        ) {
-            Image(
-                painter = painterResource(R.drawable.bg_splash),
-                modifier = Modifier.fillMaxSize(),
-                contentDescription = "bg splash",
-                contentScale = ContentScale.FillBounds
-            )
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Bottom,
-                modifier = Modifier
-                    .fillMaxSize()
-            ) {
-                Text(
-                    text = "Please check internet connection", //stringResource(R.string.app_generic_no_network),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = colorResource(R.color.colorPrimary),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(bottom = 60.dp, start = 20.dp, end = 20.dp)
-                )
-            }
-        }
+        Text(
+            text = "Please check internet connection", //stringResource(R.string.app_generic_no_network),
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = colorResource(R.color.colorPrimary),
+            textAlign = TextAlign.Center 
+        )
     }
 
     @SuppressLint("ServiceCast")
@@ -135,7 +140,7 @@ class SignUpOnboardingActivity : ComponentActivity() {
         }
     }
 
-    private fun startApp( ) {
+    private fun startApp() {
 
         GlobalScope.launch(Dispatchers.Main) {
             checkSplashDelay()
