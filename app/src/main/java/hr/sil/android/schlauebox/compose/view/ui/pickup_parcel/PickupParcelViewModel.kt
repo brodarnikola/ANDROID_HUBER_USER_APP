@@ -85,7 +85,7 @@ class PickupParcelViewModel  : ViewModel() {
                 this.masterAddress = it.masterAddress
                 this.masterName = it.masterName
                 this.lockerSize = it.lockerSize
-                this.timeCreated = it.timeCreated ?: ""
+                this.timeCreated = it.timeCreated
             }
         }?.toMutableList() ?: mutableListOf()
 

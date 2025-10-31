@@ -46,7 +46,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
@@ -56,13 +56,13 @@ dependencies {
     //kotlin stdlib
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.22"
     //coroutines
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0"
     //retrofit2 coroutine extensions
     api 'ru.gildor.coroutines:kotlin-coroutines-retrofit:1.1.0'
 
     // androidx
-    implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'androidx.preference:preference-ktx:1.2.1'
 
     //SIL libraries
     api('hr.sil.android.ble.scanner:scan_multi:2.6.2')// { changing = true }
