@@ -36,7 +36,9 @@ import hr.sil.android.schlauebox.view.ui.home.activities.SendParcelDeliveryActiv
 @Composable
 fun SendParcelsOverviewScreen(
     macAddress: String,
-    viewModel: SendParcelsOverviewViewModel = viewModel()
+    viewModel: SendParcelsOverviewViewModel = viewModel(),
+    onNavigateToSelectParcelSize: (macAddress: String) -> Unit = {},
+    onNavigateToDelivery: (macAddress: String, pin: Int, size: String) -> Unit = { _, _, _ -> },
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
@@ -93,6 +95,7 @@ fun SendParcelsOverviewScreen(
                             if (uiState.device?.masterUnitType == RMasterUnitType.MPL ||
                                 uiState.device?.type == MPLDeviceType.SPL_PLUS
                             ) {
+                                onNavigateToSelectParcelSize(macAddress)
                                 // Navigate to SelectParcelSizeScreen
                             } else {
                                 if (uiState.device?.pinManagementAllowed == false) {
@@ -126,6 +129,7 @@ fun SendParcelsOverviewScreen(
             lockerSize = RLockerSize.S,
             onDismiss = { showPinDialog = false },
             onConfirm = { mac, pin, size ->
+                onNavigateToDelivery(mac, pin, size)
 //                val intent = Intent(context, SendParcelDeliveryActivity::class.java).apply {
 //                    putExtra("rMacAddress", mac)
 //                    putExtra("pin", pin)
@@ -141,6 +145,7 @@ fun SendParcelsOverviewScreen(
             lockerSize = RLockerSize.S,
             onDismiss = { showPinManagementDialog = false },
             onConfirm = { mac, pin, size ->
+                onNavigateToDelivery(mac, pin, size)
 //                val intent = Intent(context, SendParcelDeliveryActivity::class.java).apply {
 //                    putExtra("rMacAddress", mac)
 //                    putExtra("pin", pin)

@@ -155,6 +155,17 @@ fun NavGraphBuilder.mainNavGraph(
         SendParcelsOverviewScreen(
             macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
             viewModel = hiltViewModel(),
+            onNavigateToSelectParcelSize = { macAddress ->
+                goToSelectParcelSize(MainDestinations.SELECT_PARCEL_SIZE, macAddress)
+            },
+            onNavigateToDelivery = { macAddress, pin, size ->
+                goToSendParcelSize(
+                    MainDestinations.SEND_PARCEL_SIZE,
+                    macAddress,
+                    pin,
+                    size
+                )
+            }
         )
     }
 
