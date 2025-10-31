@@ -156,12 +156,6 @@ open class BaseActivity(noBleViewId: Int = 0, noWifiViewId: Int = 0, noLocationG
         loger.info("Base actitvity started on create")
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        loger.info("Base actitvity started on Intent")
-
-    }
-
     open fun onBluetoothStateUpdated(available: Boolean) {}
 
     open fun onNetworkStateUpdated(available: Boolean) {}
