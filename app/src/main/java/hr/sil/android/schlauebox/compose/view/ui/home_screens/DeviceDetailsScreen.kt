@@ -106,7 +106,7 @@ fun DeviceDetailsScreen(
                             }
                         }
                     },
-                    onAccessSharingClick = { 
+                    onAccessSharingClick = {
                         print("Name of device is 22: $nameOfDevice")
                         onNavigateToAccessSharing(macAddress, nameOfDevice)
                     },

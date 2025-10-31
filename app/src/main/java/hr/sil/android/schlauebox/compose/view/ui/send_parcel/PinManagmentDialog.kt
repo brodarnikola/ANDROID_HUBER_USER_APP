@@ -45,7 +45,10 @@ fun PinManagementDialog(
     }
 
     Dialog(
-        onDismissRequest = { /* Prevent dismiss on outside click */ },
+        onDismissRequest = {
+            onDismiss()
+        /* Prevent dismiss on outside click */
+        },
         properties = DialogProperties(
             dismissOnBackPress = false,
             dismissOnClickOutside = false

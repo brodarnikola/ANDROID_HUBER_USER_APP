@@ -33,7 +33,11 @@ fun GeneratedPinDialog(
         viewModel.loadGeneratedPin(macAddress)
     }
 
-    Dialog(onDismissRequest = { }) {
+    Dialog(
+        onDismissRequest = {
+            onDismiss()
+        }
+    ) {
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
