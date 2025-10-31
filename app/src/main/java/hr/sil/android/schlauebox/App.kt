@@ -102,9 +102,9 @@ class App : Application(), BLEScannerStateHolder {
     //event bus initialization
     val eventBus: EventBus by lazy {
         EventBus.builder()
-                .logNoSubscriberMessages(false)
-                .sendNoSubscriberEvent(false)
-                .build()
+            .logNoSubscriberMessages(false)
+            .sendNoSubscriberEvent(false)
+            .build()
     }
 
     @Volatile
@@ -122,19 +122,20 @@ class App : Application(), BLEScannerStateHolder {
     private val deviceScanner by lazy {
         BLEDeviceScanner.create(
             GlobalScope,
-                this,
-                {
-                    if (permissionCheckDone) {
-                        log.error("Error during BLE scan!", it)
-                    }
+            this,
+            {
+                if (permissionCheckDone) {
+                    log.error("Error during BLE scan!", it)
+                }
 
-                    var showError = true
-                    if (!permissionCheckDone && (it.errorCode == BLEScanException.ErrorCode.SCAN_FAILED_BLUETOOTH_DISABLED
-                                    || it.errorCode == BLEScanException.ErrorCode.SCAN_FAILED_LOCATION_PERMISSION_MISSING)) {
-                        showError = false
-                    }
+                var showError = true
+                if (!permissionCheckDone && (it.errorCode == BLEScanException.ErrorCode.SCAN_FAILED_BLUETOOTH_DISABLED
+                            || it.errorCode == BLEScanException.ErrorCode.SCAN_FAILED_LOCATION_PERMISSION_MISSING)
+                ) {
+                    showError = false
+                }
 
-                    if (showError) {
+                if (showError) {
 //                        runOnUiThread {
 //                            val now = System.currentTimeMillis()
 //                            if (now - errorLastShownAt >= 10000L) {
@@ -142,9 +143,9 @@ class App : Application(), BLEScannerStateHolder {
 //                                errorLastShownAt = now
 //                            }
 //                        }
-                    }
-                },
-                BLEGenericDeviceDataFactory()
+                }
+            },
+            BLEGenericDeviceDataFactory()
         )
     }
 
@@ -170,22 +171,27 @@ class App : Application(), BLEScannerStateHolder {
         WSConfig.initialize(this.applicationContext)
 
 
-
         //ActionStatusHandler.run()
 
         deviceScanner.setAdvertisementFilters(BLEDeviceType.MPL_MASTER.filters() + BLEDeviceType.MPL_SLAVE.filters() + BLEDeviceType.SPL.filters() + BLEDeviceType.SPL_PLUS.filters() + BLEDeviceType.MPL_TABLET.filters())
         deviceScanner.addDeviceEventListener { events ->
-            MPLDeviceStore.updateFromBLE(deviceScanner.devices.values.filter { !it.data.manufacturer.isSILBootloader() }.toList())
+            MPLDeviceStore.updateFromBLE(deviceScanner.devices.values.filter { !it.data.manufacturer.isSILBootloader() }
+                .toList())
 
             if (debugMode) {
-                log.info("BLE device events: ${events.joinToString(", ") {
-                    val device = it.bleDevice.deviceAddress
-                    val deviceType = it.bleDevice.data.deviceType
-                    val eventType = it.eventType.toString()
-                    val time = Date(it.bleDevice.lastPacketTimestampMillis).format("HH:mm:ss")
+                log.info(
+                    "BLE device events: ${
+                        events.joinToString(", ") {
+                            val device = it.bleDevice.deviceAddress
+                            val deviceType = it.bleDevice.data.deviceType
+                            val eventType = it.eventType.toString()
+                            val time =
+                                Date(it.bleDevice.lastPacketTimestampMillis).format("HH:mm:ss")
 
-                    "$device [$deviceType]->[$eventType]@$time"
-                }}")
+                            "$device [$deviceType]->[$eventType]@$time"
+                        }
+                    }"
+                )
             }
         }
 
@@ -204,17 +210,22 @@ class App : Application(), BLEScannerStateHolder {
         // Use a proper scope instead of GlobalScope
         CoroutineScope(Dispatchers.IO).launch {
             //delay(3000)
-            val task = FirebaseMessaging.getInstance().token.awaitForResult()
-            if (!task.isSuccessful) {
-                log.info("getInstanceId failed", task.exception)
-            }
-            // Get new Instance ID token
-            val token = task.result
-            if (token != null) {
-                log.info("FCM token: $token")
-                MPLFireBaseMessagingService.sendRegistrationToServer(token)
-            } else {
-                log.error("Error while fetching the FCM token!")
+            try {
+                val task = FirebaseMessaging.getInstance().token.awaitForResult()
+                if (!task.isSuccessful) {
+                    log.info("getInstanceId failed", task.exception)
+                }
+                // Get new Instance ID token
+                val token = task.result
+                if (token != null) {
+                    log.info("FCM token: $token")
+                    MPLFireBaseMessagingService.sendRegistrationToServer(token)
+                } else {
+                    log.error("Error while fetching the FCM token!")
+                }
+            } catch (e: Exception) {
+                log.error("Failed to get FCM token: ${e.message}")
+                // Don't crash - just log and continue
             }
         }
 
@@ -247,8 +258,8 @@ class App : Application(), BLEScannerStateHolder {
         val version = BuildConfig.VERSION_CODE.toString() + "_" + BuildConfig.VERSION_NAME
         log.info("Current app version $version")
 
-        val firstRun =  SettingsHelper.firstRun
-        return if ( firstRun ) {
+        val firstRun = SettingsHelper.firstRun
+        return if (firstRun) {
             log.info("First time app startup...")
             true
         } else {

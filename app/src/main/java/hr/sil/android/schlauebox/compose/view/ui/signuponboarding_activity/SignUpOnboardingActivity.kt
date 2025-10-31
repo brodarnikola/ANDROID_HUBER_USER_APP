@@ -1,6 +1,10 @@
 package hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -8,9 +12,40 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import hr.sil.android.schlauebox.App
+import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.main_activity.MainActivity
 import hr.sil.android.schlauebox.compose.view.ui.theme.AppTheme
 import hr.sil.android.schlauebox.core.util.logger
@@ -38,55 +73,69 @@ class SignUpOnboardingActivity : ComponentActivity() {
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
-        //val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-
-//        var phoneNumberFromContacts: String? = null
-//        val intent = intent
-//        if (intent.data != null) {
-//            phoneNumberFromContacts = intent.data.toString().substringAfter(":")
-//        }
-
-        // This app draws behind the system bars, so we want to handle fitting system windows
-//         WindowCompat.setDecorFitsSystemWindows(window, true)
-
-        //splashScreen.setKeepOnScreenCondition { showSplashScreenState }
-        lifecycleScope.launch {
-            viewModel.updateFcmToken()
-            delay(dismissSplashScreenDelay)
-            showSplashScreenState = false
+        setContent {
+            var isConnected = remember { mutableStateOf(true) }
+            LaunchedEffect(Unit) {
+                while (true) {
+                    isConnected.value = isNetworkAvailable(this@SignUpOnboardingActivity)
+                    delay(2000)
+                }
+            }
+            if (!isConnected.value) {
+                NoInternetScreen()
+            } else {
+                startApp()
+            }
         }
-
-
-        startApp(true)
-
-//            Timber.d("Device-NotRooted")
-//            if (viewModel.isUserLoggedIn()) {
-//                val intent = Intent(this, MainActivity1::class.java).apply {
-//                flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP) }
-//                startActivity(intent)
-//                finish()
-//            } else {
-//                setContent {
-//                    AppTheme {
-//                        SignUpOnboardingApp(viewModel)
-//                    }
-//                }
-//            }
-
-        //viewModel.onInit()
     }
 
-    private fun startApp(isInitial: Boolean = false) {
+    @Composable
+    private fun NoInternetScreen() {
+        Box(
+            modifier = Modifier,
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(R.drawable.bg_splash),
+                modifier = Modifier.fillMaxSize(),
+                contentDescription = "bg splash",
+                contentScale = ContentScale.FillBounds
+            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Bottom,
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                Text(
+                    text = "Please check internet connection", //stringResource(R.string.app_generic_no_network),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = colorResource(R.color.colorPrimary),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(bottom = 60.dp, start = 20.dp, end = 20.dp)
+                )
+            }
+        }
+    }
 
-//        if (!checkPermissions()) {
-//            if (isInitial) {
-//                requestPermission()
-//            } else {
-//                showError(R.string.allow_permission)
-//            }
-//            return
-//        }
+    @SuppressLint("ServiceCast")
+    private fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+            capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+        } else {
+            val networkInfo = connectivityManager.activeNetworkInfo
+            networkInfo?.isConnected == true
+        }
+    }
+
+    private fun startApp( ) {
 
         GlobalScope.launch(Dispatchers.Main) {
             checkSplashDelay()
@@ -104,7 +153,6 @@ class SignUpOnboardingActivity : ComponentActivity() {
                         SignUpOnboardingApp(viewModel)
                     }
                 }
-                //startupClass = IntroductionSlidePagerActivity::class.java
             } else {
 
                 if (!PreferenceStore.userHash.isNullOrBlank() && SettingsHelper.userRegisterOrLogin) {
@@ -136,16 +184,10 @@ class SignUpOnboardingActivity : ComponentActivity() {
                             SignUpOnboardingApp(viewModel)
                         }
                     }
-                    //LoginActivity::class.java
                 }
                 Log.i("SplashActivity", "This is second start")
                 App.Companion.ref.isFirstStart = false
             }
-
-//            val startIntent = Intent(this@SignUpOnboardingActivity, startupClass)
-//            startIntent.putExtra(SPLASH_START, App.ref.isFirstStart)
-//            startActivity(startIntent)
-//            finish()
         }
     }
 
