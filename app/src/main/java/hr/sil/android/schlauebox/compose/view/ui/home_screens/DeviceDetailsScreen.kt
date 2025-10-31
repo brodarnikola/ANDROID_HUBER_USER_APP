@@ -41,6 +41,7 @@ fun DeviceDetailsScreen(
     onNavigateToHelp: () -> Unit = {},
     onNavigateToEdit: () -> Unit = {},
     onNavigateToSelectParcelSize: (macAddress: String) -> Unit,
+    onNavigateToSendParcelsOverviewActivity: (macAddress: String) -> Unit = {},
     onNavigateToLogin: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -91,11 +92,20 @@ fun DeviceDetailsScreen(
                         onNavigateToPickup(macAddress)
                     },
                     onSendParcelClick = {
-                        onNavigateToSelectParcelSize(macAddress)
-//                        val startIntent = Intent(context, PickupParcelActivity::class.java)
-//                        startIntent.putExtra("rMacAddress", macAddress)
-//                        context.startActivity(startIntent)
-                        //handleSendParcelClick(context, macAddress, uiState)
+                        onNavigateToSendParcelsOverviewActivity(macAddress)
+//                        val device = MPLDeviceStore.devices[macAddress]
+//                        val isPaHListAvailable = hasUserShareKeys(uiState)
+//
+//                        if (isPaHListAvailable) {
+//                            onNavigateToSendParcelsOverviewActivity(macAddress)
+//                        } else {
+//                            if (device?.masterUnitType == RMasterUnitType.MPL ||
+//                                device?.installationType == hr.sil.android.schlauebox.core.remote.model.InstalationType.TABLET ||
+//                                (device?.type == MPLDeviceType.SPL_PLUS &&
+//                                        device?.keypadType != hr.sil.android.ble.scanner.scan_multi.properties.advv2.common.ParcelLockerKeyboardType.SPL)) {
+//                                onNavigateToSelectParcelSize(macAddress)
+//                            }
+//                        }
                     },
                     onAccessSharingClick = {
 

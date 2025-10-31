@@ -27,65 +27,6 @@ data class PinManagementDialogUiState(
     val errorMessage: String? = null
 )
 
-fun createDummyPins(): List<RPinManagement> {
-    return listOf(
-        // Generated pin (first one)
-        RPinManagement().apply {
-            pin = "1234"
-            pinGenerated = true
-            position = 0
-            pinId = 0
-            isSelected = true
-            isExtendedToDelete = false
-            isExtendedToName = false
-        },
-        // Saved pin 1
-        RPinManagement().apply {
-            pin = "5678"
-            pinName = "Home Locker"
-            pinGenerated = false
-            position = 1
-            pinId = 1
-            isSelected = false
-            isExtendedToDelete = false
-            isExtendedToName = false
-        },
-        // Saved pin 2
-        RPinManagement().apply {
-            pin = "9012"
-            pinName = "Office Delivery"
-            pinGenerated = false
-            position = 2
-            pinId = 2
-            isSelected = false
-            isExtendedToDelete = false
-            isExtendedToName = false
-        },
-        // Saved pin 3
-        RPinManagement().apply {
-            pin = "3456"
-            pinName = "Gym Locker"
-            pinGenerated = false
-            position = 3
-            pinId = 3
-            isSelected = false
-            isExtendedToDelete = false
-            isExtendedToName = false
-        },
-        // Saved pin 4
-        RPinManagement().apply {
-            pin = "7890"
-            pinName = "Apartment Building"
-            pinGenerated = false
-            position = 4
-            pinId = 4
-            isSelected = false
-            isExtendedToDelete = false
-            isExtendedToName = false
-        }
-    )
-}
-
 class PinManagementDialogViewModel : ViewModel() {
 
     private val log = logger()
@@ -96,23 +37,79 @@ class PinManagementDialogViewModel : ViewModel() {
         _uiState.update { it.copy(isLoading = true, errorMessage = null) }
 
         viewModelScope.launch {
-            // Simulate network delay
-            kotlinx.coroutines.delay(1000)
+            try {
+                val device = MPLDeviceStore.devices[macAddress]
+                val userGroup = UserUtil.userGroup
 
-            // Load dummy pins instead of real data
-            val dummyPins = createDummyPins()
+                if (device == null || userGroup == null) {
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            errorMessage = "Device or user group not found"
+                        )
+                    }
+                    return@launch
+                }
 
-            val firstPin = dummyPins.firstOrNull()
-            if (firstPin != null) {
-                App.ref.pinManagementSelectedItem = firstPin
-            }
+                val combinedListOfPins = mutableListOf<RPinManagement>()
 
-            _uiState.update {
-                it.copy(
-                    isLoading = false,
-                    pins = dummyPins,
-                    selectedPin = firstPin
-                )
+                // Get generated pin from backend
+                val generatedPinFromBackend = withContext(Dispatchers.IO) {
+                    WSUser.getGeneratedPinForSendParcel(device.masterUnitId) ?: ""
+                }
+
+                if (generatedPinFromBackend.isNotEmpty()) {
+                    val generatedPin = RPinManagement().apply {
+                        pin = generatedPinFromBackend
+                        pinGenerated = true
+                        position = 0
+                        pinId = 0
+                        isSelected = true
+                        isExtendedToDelete = false
+                        isExtendedToName = false
+                    }
+                    combinedListOfPins.add(generatedPin)
+                }
+
+                // Get saved pins from group
+                val pinsFromGroup = withContext(Dispatchers.IO) {
+                    WSUser.getPinManagementForSendParcel(userGroup.id, device.masterUnitId)
+                }
+
+                pinsFromGroup?.forEachIndexed { index, item ->
+                    val savedPin = RPinManagement().apply {
+                        pin = item.pin
+                        pinName = item.name
+                        pinGenerated = false
+                        position = combinedListOfPins.size
+                        pinId = item.id
+                        isSelected = false
+                        isExtendedToDelete = false
+                        isExtendedToName = false
+                    }
+                    combinedListOfPins.add(savedPin)
+                }
+
+                val firstPin = combinedListOfPins.firstOrNull()
+                if (firstPin != null) {
+                    App.ref.pinManagementSelectedItem = firstPin
+                }
+
+                _uiState.update {
+                    it.copy(
+                        isLoading = false,
+                        pins = combinedListOfPins,
+                        selectedPin = firstPin
+                    )
+                }
+            } catch (e: Exception) {
+                log.error("Failed to load pins: ${e.message}")
+                _uiState.update {
+                    it.copy(
+                        isLoading = false,
+                        errorMessage = "Failed to load pins: ${e.message}"
+                    )
+                }
             }
         }
     }

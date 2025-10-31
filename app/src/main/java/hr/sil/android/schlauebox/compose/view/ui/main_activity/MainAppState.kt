@@ -14,6 +14,7 @@ object MainDestinations {
     const val HELP_SCREEN = "HelpScreen"
     const val SELECT_PARCEL_SIZE = "SelectParcelSize"
     const val SEND_PARCEL_SIZE = "SendParcelSize"
+    const val SELECT_PARCEL_OVERVIEW = "SelectParcelOverview"
     const val ACCESS_SHARING_SCREEN = "AccessSharingScreen"
     const val ACCESS_SHARING_ADD_USER_SCREEN = "AccessSharingAddUserScreen"
     const val HELP_CONTENT_SCREEN = "HelpContentScreen"
@@ -106,6 +107,15 @@ class MainAppState(
     }
 
     fun goToSelectParcelSize(route: String, macAddress: String) {
+        if (route != currentRoute) {
+            navController.navigate("$route/$macAddress") {
+                launchSingleTop = true
+                restoreState = true
+            }
+        }
+    }
+
+    fun goToSendParcelOverview(route: String, macAddress: String) {
         if (route != currentRoute) {
             navController.navigate("$route/$macAddress") {
                 launchSingleTop = true

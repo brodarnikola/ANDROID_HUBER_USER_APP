@@ -40,6 +40,7 @@ import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.home_screens.TccScreen
 import hr.sil.android.schlauebox.compose.view.ui.send_parcel.SelectParcelSizeScreen
 import hr.sil.android.schlauebox.compose.view.ui.send_parcel.SendParcelDeliveryScreen
+import hr.sil.android.schlauebox.compose.view.ui.send_parcel.SendParcelsOverviewScreen
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -93,6 +94,9 @@ fun MainComposeApp(appState: MainAppState, navBackStackEntry: State<NavBackStack
             goToSelectParcelSize = { route, macAddress ->
                 appState.goToSelectParcelSize(route, macAddress)
             },
+            goToSendParcelOverview = { route, macAddress ->
+                appState.goToSendParcelOverview(route, macAddress)
+            },
             goToSendParcelSize = { route, macAddress, pin, size ->
                 appState.goToSendParcelSize(route, macAddress, pin, size)
             },
@@ -114,6 +118,7 @@ fun NavGraphBuilder.mainNavGraph(
     goToAccessSharingForgetPreviousScreen: (route: String, macAddress: String, nameOfDevice: String) -> Unit,
     goToSelectParcelSize: (route: String, macAddress: String) -> Unit,
     goToSendParcelSize: (route: String, macAddress: String, pin: Int, size: String) -> Unit,
+    goToSendParcelOverview: (route: String, macAddress: String) -> Unit,
     navigateUp: () -> Unit
 ) {
     composable(MainDestinations.HOME) {
@@ -140,6 +145,20 @@ fun NavGraphBuilder.mainNavGraph(
     }
 
     composable(
+        "${MainDestinations.SELECT_PARCEL_OVERVIEW}/{${NavArguments.MAC_ADDRESS}}",
+        arguments = listOf(
+            navArgument(NavArguments.MAC_ADDRESS) {
+                type = NavType.StringType
+            }
+        )
+    ) {
+        SendParcelsOverviewScreen(
+            macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
+            viewModel = hiltViewModel(),
+        )
+    }
+
+    composable(
         "${MainDestinations.DEVICE_DETAILS}/{${NavArguments.DEVICE_ID}}/{${NavArguments.NAME_OF_DEVICE}}",
         arguments = listOf(
             navArgument(NavArguments.DEVICE_ID) {
@@ -162,6 +181,9 @@ fun NavGraphBuilder.mainNavGraph(
             },
             onNavigateToSelectParcelSize = { macAddress ->
                 goToSelectParcelSize(MainDestinations.SELECT_PARCEL_SIZE, macAddress)
+            },
+            onNavigateToSendParcelsOverviewActivity = { macAddress ->
+                goToSendParcelOverview(MainDestinations.SELECT_PARCEL_OVERVIEW, macAddress)
             },
             onNavigateToAccessSharing = { macAddress, nameOfDevice ->
                 goToAccessSharing(MainDestinations.ACCESS_SHARING_SCREEN, macAddress, nameOfDevice)
