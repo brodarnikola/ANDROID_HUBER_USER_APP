@@ -217,30 +217,6 @@ open class BaseComponentActivity(noBleViewId: Int = 0, noWifiViewId: Int = 0, no
         fun isValid() = this == VALID
     }
 
-    protected fun attachValidator(editText: EditText, validator: () -> Unit) {
-        editText.afterTextChangeDelay(500L) {
-            validator()
-        }
-    }
-
-
-    private fun EditText.afterTextChangeDelay(duration: Long, run: () -> Unit) {
-        var job: Job? = null
-//        this.textChangedListener {
-//            afterTextChanged {
-//                job?.cancel()
-//                job = GlobalScope.launch(Dispatchers.Main) {
-//                    try {
-//                        delay(duration)
-//                        run.invoke()
-//                    } catch (e: Exception) {
-//                        //ignore
-//                    }
-//                }
-//            }
-//        }
-    }
-
 
     protected fun validateSetError(emailInputLayout: TextView?, result: ValidationResult): ValidationResult {
         val errorText = if (!result.isValid()) result.getText(this) else null

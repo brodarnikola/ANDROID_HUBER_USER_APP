@@ -125,7 +125,7 @@ class AccessSharingAddUserViewModel @Inject constructor() : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val correctMasterId = MPLDeviceStore.devices[macAddress]?.masterUnitId as? Int ?: return@launch
+                val correctMasterId = MPLDeviceStore.devices[macAddress]?.masterUnitId ?: 0 //as? Int ?: return@launch
                 val selectedGroup = currentState.selectedGroup ?: return@launch
 
                 val userAccess = RUserAccess().apply {
@@ -140,7 +140,7 @@ class AccessSharingAddUserViewModel @Inject constructor() : ViewModel() {
                 if (result) {
                     val userGroup = UserUtil.userGroup
                     if (userGroup?.name != selectedGroup.groupOwnerName) {
-                        selectedGroup.groupId?.toLong()?.let {
+                        selectedGroup.groupId.toLong().let {
                             WSUser.getGroupMembershipsById(it)
                         }
                     } else {
