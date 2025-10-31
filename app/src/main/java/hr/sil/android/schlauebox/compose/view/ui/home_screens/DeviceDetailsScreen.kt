@@ -47,6 +47,7 @@ fun DeviceDetailsScreen(
     val context = LocalContext.current
 
     print("Name of device is : $nameOfDevice")
+    print("Name of mac address is : $macAddress")
 
     LaunchedEffect(macAddress) {
         viewModel.loadDeviceDetails(macAddress)

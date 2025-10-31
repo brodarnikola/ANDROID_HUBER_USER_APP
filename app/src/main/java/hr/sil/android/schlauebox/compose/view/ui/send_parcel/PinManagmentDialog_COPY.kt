@@ -1,5 +1,3 @@
-package hr.sil.android.schlauebox.compose.view.ui.send_parcel
-
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,16 +24,17 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.send_parcel.PinManagementDialogViewModel
+import hr.sil.android.schlauebox.compose.view.ui.send_parcel.PinManagementDialogViewModel_COPY
 import hr.sil.android.schlauebox.core.remote.model.RLockerSize
 import hr.sil.android.schlauebox.core.remote.model.RPinManagement
 
 @Composable
-fun PinManagementDialog(
+fun PinManagementDialog_COPY(
     macAddress: String,
     lockerSize: RLockerSize,
     onDismiss: () -> Unit,
     onConfirm: (String, Int, String) -> Unit,
-    viewModel: PinManagementDialogViewModel = viewModel()
+    viewModel: PinManagementDialogViewModel_COPY = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 

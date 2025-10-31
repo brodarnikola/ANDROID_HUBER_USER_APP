@@ -130,7 +130,7 @@ fun SelectParcelSizeScreen(
             }
 
             Spacer(modifier = Modifier.weight(1f))
- 
+
             // Next Button
             //if (uiState.showNextButton) {
                 Button(
@@ -163,7 +163,7 @@ fun SelectParcelSizeScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(25.dp))
+                Spacer(modifier = Modifier.height(30.dp))
             }
            // }
     }
