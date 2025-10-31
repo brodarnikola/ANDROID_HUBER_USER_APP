@@ -216,9 +216,9 @@ dependencies {
     implementation 'androidx.compose.material3:material3-window-size-class:1.4.0'
 
     //
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0'
 
     //FAB
     implementation 'com.github.clans:fab:1.6.4'
