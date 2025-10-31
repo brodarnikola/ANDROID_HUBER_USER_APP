@@ -121,7 +121,7 @@ class SignUpOnboardingActivity : ComponentActivity() {
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = colorResource(R.color.colorPrimary),
-            textAlign = TextAlign.Center 
+            textAlign = TextAlign.Center
         )
     }
 
