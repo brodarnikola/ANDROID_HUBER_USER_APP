@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity.SignUpOnboardingSections
 //import hr.sil.android.schlauebox.cache.DataCache
@@ -18,10 +17,8 @@ import hr.sil.android.schlauebox.utils.UiEvent.*
 import hr.sil.android.schlauebox.utils.isEmailValid
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class ForgotPasswordViewModel @Inject constructor()  : BaseViewModel<ForgotPasswordUiState, ForgotPasswordEvent>() {
+class ForgotPasswordViewModel  : BaseViewModel<ForgotPasswordUiState, ForgotPasswordEvent>() {
 
     val log = logger()
 

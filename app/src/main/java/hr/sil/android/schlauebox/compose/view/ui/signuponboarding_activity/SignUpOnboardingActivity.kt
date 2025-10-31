@@ -44,7 +44,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.main_activity.MainActivity
@@ -58,7 +57,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class SignUpOnboardingActivity : ComponentActivity() {
 
     private val log = logger()

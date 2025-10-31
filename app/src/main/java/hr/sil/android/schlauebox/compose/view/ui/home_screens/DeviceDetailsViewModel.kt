@@ -3,7 +3,6 @@ package hr.sil.android.schlauebox.compose.view.ui.home_screens
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.core.model.MPLDeviceType
 import hr.sil.android.schlauebox.core.remote.WSUser
@@ -26,10 +25,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import javax.inject.Inject
 
-@HiltViewModel
-class DeviceDetailsViewModel @Inject constructor() : ViewModel() {
+class DeviceDetailsViewModel : ViewModel() {
 
     val log = logger()
 

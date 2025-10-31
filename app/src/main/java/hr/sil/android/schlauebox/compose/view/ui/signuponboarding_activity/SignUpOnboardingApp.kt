@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
@@ -117,7 +117,7 @@ fun NavigationStack(routeFirstScreen: String, modifier: Modifier) {
         ) {
             LoginScreen(
                 modifier = modifier,
-                viewModel = hiltViewModel(),
+                viewModel = viewModel(),
                 navigateUp = {
                     navController.popBackStack()
                 },
@@ -133,7 +133,7 @@ fun NavigationStack(routeFirstScreen: String, modifier: Modifier) {
         ) {
             ForgotPasswordScreen(
                 modifier = modifier,
-                viewModel = hiltViewModel(),
+                viewModel = viewModel(),
                 navigateUp = {
                     navController.popBackStack()
                 },
@@ -156,7 +156,7 @@ fun NavigationStack(routeFirstScreen: String, modifier: Modifier) {
         ) {
             ForgotPasswordUpdateScreen(
                 modifier = modifier,
-                viewModel = hiltViewModel(),
+                viewModel = viewModel(),
                 navigateUp = {
                     navController.popBackStack()
                 },
@@ -183,46 +183,46 @@ fun NavGraphBuilder.navGraph(
     goToSecondOnboardingScreen: (route: String) -> Unit,
     navigateUp:() -> Unit
 ) {
-    composable(
-        SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route,
-    ) {
-        HorizontalPager(
-            modifier = modifier,
-            nextScreen = { route ->
-                nextScreen(route, navBackStackEntry)
-            }
-        )
-    }
-
-    composable(
-        SignUpOnboardingSections.LOGIN_SCREEN.route,
-    ) {
-        LoginScreen(
-             modifier = modifier,
-             viewModel = LoginViewModel(),
-             navigateUp = {
-                 navigateUp()
-             },
-             nextScreen = { route ->
-                nextScreen(route, navBackStackEntry)
-             }
-        )
-    }
-
-    composable(
-        SignUpOnboardingSections.FORGOT_PASSWORD_SCREEN.route,
-    ) {
-        ForgotPasswordScreen(
-            modifier = modifier,
-            viewModel = ForgotPasswordViewModel(),
-            navigateUp = {
-                navigateUp()
-            },
-            nextScreen = { route ->
-                nextScreen(route, navBackStackEntry )
-            }
-        )
-    }
+//    composable(
+//        SignUpOnboardingSections.FIRST_ONBOARDING_SCREEN.route,
+//    ) {
+//        HorizontalPager(
+//            modifier = modifier,
+//            nextScreen = { route ->
+//                nextScreen(route, navBackStackEntry)
+//            }
+//        )
+//    }
+//
+//    composable(
+//        SignUpOnboardingSections.LOGIN_SCREEN.route,
+//    ) {
+//        LoginScreen(
+//             modifier = modifier,
+//             viewModel = LoginViewModel(),
+//             navigateUp = {
+//                 navigateUp()
+//             },
+//             nextScreen = { route ->
+//                nextScreen(route, navBackStackEntry)
+//             }
+//        )
+//    }
+//
+//    composable(
+//        SignUpOnboardingSections.FORGOT_PASSWORD_SCREEN.route,
+//    ) {
+//        ForgotPasswordScreen(
+//            modifier = modifier,
+//            viewModel = ForgotPasswordViewModel(),
+//            navigateUp = {
+//                navigateUp()
+//            },
+//            nextScreen = { route ->
+//                nextScreen(route, navBackStackEntry )
+//            }
+//        )
+//    }
 
 //    composable(
 //        SignUpOnboardingSections.FORGOT_PASSWORD_UPDATE_SCREEN.route,

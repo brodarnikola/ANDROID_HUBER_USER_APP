@@ -1,7 +1,6 @@
 package hr.sil.android.schlauebox.compose.view.ui.help
 
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.events.UnauthorizedUserEvent
@@ -10,10 +9,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import javax.inject.Inject
 
-@HiltViewModel
-class HelpContentViewModel @Inject constructor() : ViewModel() {
+class HelpContentViewModel  : ViewModel() {
 
     val log = logger()
 

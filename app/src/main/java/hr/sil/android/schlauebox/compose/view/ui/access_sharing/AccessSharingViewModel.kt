@@ -2,7 +2,6 @@ package hr.sil.android.schlauebox.compose.view.ui.access_sharing
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.remote.model.*
@@ -20,10 +19,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import javax.inject.Inject
 
-@HiltViewModel
-class AccessSharingViewModel @Inject constructor() : ViewModel() {
+class AccessSharingViewModel : ViewModel() {
 
     val log = logger()
 

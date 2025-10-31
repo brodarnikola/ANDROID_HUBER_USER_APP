@@ -3,7 +3,6 @@ package hr.sil.android.schlauebox.compose.view.ui.pickup_parcel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.BuildConfig
 import hr.sil.android.schlauebox.R
@@ -31,11 +30,9 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
-import javax.inject.Inject
 import kotlin.math.abs
 
-@HiltViewModel
-class PickupParcelViewModel @Inject constructor() : ViewModel() {
+class PickupParcelViewModel  : ViewModel() {
 
     val log = logger()
 

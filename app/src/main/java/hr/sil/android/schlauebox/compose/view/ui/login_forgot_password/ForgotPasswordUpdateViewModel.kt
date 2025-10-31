@@ -8,7 +8,6 @@ import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.core.util.logger
 import hr.sil.android.schlauebox.util.backend.UserUtil
@@ -18,11 +17,8 @@ import hr.sil.android.schlauebox.utils.UiEvent.ShowToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class ForgotPasswordUpdateViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle)  : BaseViewModel<ForgotPasswordUpdateUiState, ForgotPasswordUpdateEvent>() {
+class ForgotPasswordUpdateViewModel (savedStateHandle: SavedStateHandle)  : BaseViewModel<ForgotPasswordUpdateUiState, ForgotPasswordUpdateEvent>() {
 
     val log = logger()
     private var email: String = ""

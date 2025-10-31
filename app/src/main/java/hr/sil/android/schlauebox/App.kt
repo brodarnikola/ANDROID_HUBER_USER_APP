@@ -31,7 +31,6 @@ import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
-import dagger.hilt.android.HiltAndroidApp
 import hr.sil.android.ble.scanner.BLEDeviceScanner
 import hr.sil.android.ble.scanner.exception.BLEScanException
 import hr.sil.android.ble.scanner.scan_multi.BLEGenericDeviceDataFactory
@@ -67,7 +66,6 @@ import java.util.*
 /**
  * @author mfatiga
  */
-@HiltAndroidApp
 class App : Application(), BLEScannerStateHolder {
     private val log = logger()
 

@@ -12,7 +12,6 @@ import android.os.Looper
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
-import dagger.hilt.android.AndroidEntryPoint
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.BaseComponentActivity
@@ -28,7 +27,6 @@ import hr.sil.android.view_util.permission.DroidPermission
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val log = logger()

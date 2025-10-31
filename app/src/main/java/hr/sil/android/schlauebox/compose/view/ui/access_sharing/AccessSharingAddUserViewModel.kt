@@ -2,7 +2,6 @@ package hr.sil.android.schlauebox.compose.view.ui.access_sharing
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.core.remote.WSUser
 import hr.sil.android.schlauebox.core.remote.model.RGroupInfo
@@ -20,7 +19,6 @@ import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import javax.inject.Inject
 
 data class AccessSharingAddUserUiState(
     val email: String = "",
@@ -34,8 +32,7 @@ data class AccessSharingAddUserUiState(
     val shareAppEmail: String = ""
 )
 
-@HiltViewModel
-class AccessSharingAddUserViewModel @Inject constructor() : ViewModel() {
+class AccessSharingAddUserViewModel : ViewModel() {
 
     private val log = logger()
 

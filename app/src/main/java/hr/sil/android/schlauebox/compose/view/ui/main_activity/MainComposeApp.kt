@@ -18,8 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
@@ -37,6 +37,8 @@ import hr.sil.android.schlauebox.compose.view.ui.pickup_parcel.PickupParcelScree
 import kotlin.collections.forEachIndexed
 
 import hr.sil.android.schlauebox.R
+import hr.sil.android.schlauebox.compose.view.ui.home_screens.NavHomeViewModel
+import hr.sil.android.schlauebox.compose.view.ui.home_screens.SettingsViewModel
 import hr.sil.android.schlauebox.compose.view.ui.home_screens.TccScreen
 import hr.sil.android.schlauebox.compose.view.ui.send_parcel.SelectParcelSizeScreen
 import hr.sil.android.schlauebox.compose.view.ui.send_parcel.SendParcelDeliveryScreen
@@ -123,7 +125,7 @@ fun NavGraphBuilder.mainNavGraph(
 ) {
     composable(MainDestinations.HOME) {
         NavHomeScreen(
-            viewModel = hiltViewModel(), // viewModel,
+            viewModel = viewModel(), // viewModel,
             onDeviceClick = { deviceId, nameOfDevice ->
                 if (navBackStackEntry.value?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
                     goToDeviceDetails(MainDestinations.DEVICE_DETAILS, deviceId, nameOfDevice)
@@ -134,13 +136,13 @@ fun NavGraphBuilder.mainNavGraph(
 
     composable(MainDestinations.SETTINGS) {
         SettingsScreen(
-            viewModel = hiltViewModel()
+            viewModel = viewModel()
         )
     }
 
     composable(MainDestinations.TERMS_AND_CONDITION_SCREEN) {
         TccScreen(
-            viewModel = hiltViewModel()
+            viewModel =  viewModel()
         )
     }
 
@@ -154,7 +156,7 @@ fun NavGraphBuilder.mainNavGraph(
     ) {
         SendParcelsOverviewScreen(
             macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
-            viewModel = hiltViewModel(),
+            viewModel = viewModel(),
             onNavigateToSelectParcelSize = { macAddress ->
                 goToSelectParcelSize(MainDestinations.SELECT_PARCEL_SIZE, macAddress)
             },
@@ -183,7 +185,7 @@ fun NavGraphBuilder.mainNavGraph(
         DeviceDetailsScreen(
             macAddress = it.arguments?.getString(NavArguments.DEVICE_ID) ?: "",
             nameOfDevice = it.arguments?.getString(NavArguments.NAME_OF_DEVICE) ?: "",
-            viewModel = hiltViewModel(),
+            viewModel = viewModel(),
             onNavigateToPickup = { macAddress ->
                 goToPickup(MainDestinations.PARCEL_PICKUP, macAddress)
             },
@@ -210,7 +212,7 @@ fun NavGraphBuilder.mainNavGraph(
     ) {
         SelectParcelSizeScreen(
             macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
-            viewModel = hiltViewModel(),
+            viewModel = viewModel(),
             onNavigateToDelivery = { macAddress, pin, size ->
                 goToSendParcelSize(
                     MainDestinations.SEND_PARCEL_SIZE,
@@ -240,7 +242,7 @@ fun NavGraphBuilder.mainNavGraph(
             macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
             pin = it.arguments?.getInt(NavArguments.PIN_OF_DEVICE) ?: 0,
             size = it.arguments?.getString(NavArguments.SIZE_OF_DEVICE) ?: "",
-            viewModel = hiltViewModel()
+            viewModel = viewModel()
         )
     }
 
@@ -252,7 +254,7 @@ fun NavGraphBuilder.mainNavGraph(
     ) {
         PickupParcelScreen(
             macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
-            viewModel = hiltViewModel(),
+            viewModel = viewModel(),
             onFinish = {
                 navigateUp()
             }
@@ -273,7 +275,7 @@ fun NavGraphBuilder.mainNavGraph(
         AccessSharingScreen(
             macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
             nameOfDevice = it.arguments?.getString(NavArguments.NAME_OF_DEVICE) ?: "CHANGE_THIS",
-            viewModel = hiltViewModel(),
+            viewModel = viewModel(),
             onNavigateToAddUser = { macAddress, nameOfDevice ->
                 goToAccessSharingAddUser(
                     MainDestinations.ACCESS_SHARING_ADD_USER_SCREEN,
@@ -298,7 +300,7 @@ fun NavGraphBuilder.mainNavGraph(
         AccessSharingAddUserScreen(
             macAddress = it.arguments?.getString(NavArguments.MAC_ADDRESS) ?: "",
             nameOfDevice = it.arguments?.getString(NavArguments.NAME_OF_DEVICE) ?: "CHANGE_THIS",
-            viewModel = hiltViewModel(),
+            viewModel = viewModel(),
             navigateToAccessSharingActivity = { macAddress, nameOfDevice ->
                 goToAccessSharingForgetPreviousScreen(
                     MainDestinations.ACCESS_SHARING_SCREEN,
@@ -313,7 +315,7 @@ fun NavGraphBuilder.mainNavGraph(
         MainDestinations.HELP_SCREEN
     ) {
         HelpScreen(
-            viewModel = hiltViewModel(),
+            viewModel = viewModel(),
             onNavigateToHelpContent = { titleResId, contentResId, picturePosition ->
                 goToHelpContent("${MainDestinations.HELP_CONTENT_SCREEN}/$titleResId/$contentResId/$picturePosition")
             }
@@ -339,7 +341,7 @@ fun NavGraphBuilder.mainNavGraph(
             titleResId,
             contentResId,
             picturePosition,
-            viewModel = hiltViewModel()
+            viewModel = viewModel()
         )
     }
 

@@ -132,20 +132,19 @@ fun SelectParcelSizeScreen(
             Spacer(modifier = Modifier.weight(1f))
 
             // Next Button
-            //if (uiState.showNextButton) {
+            if (uiState.showNextButton) {
                 Button(
                     onClick = {
                         val device = uiState.device
                         val selectedSize = uiState.selectedSize
                         if (device != null && selectedSize != RLockerSize.UNKNOWN) {
-                            showPinManagementDialog = true
-//                            if (device.pinManagementAllowed == false) {
-//                                showGeneratedPinDialog = true
-//                                //onNavigateToGeneratedPinDialog(macAddress, selectedSize)
-//                            } else {
-//                                showPinManagementDialog = true
-//                                //onNavigateToPinManagement(macAddress, selectedSize)
-//                            }
+                            if (device.pinManagementAllowed == false) {
+                                showGeneratedPinDialog = true
+                                //onNavigateToGeneratedPinDialog(macAddress, selectedSize)
+                            } else {
+                                showPinManagementDialog = true
+                                //onNavigateToPinManagement(macAddress, selectedSize)
+                            }
                         }
                     },
                     enabled = uiState.selectedSize != RLockerSize.UNKNOWN && !uiState.isLoading,
@@ -165,7 +164,7 @@ fun SelectParcelSizeScreen(
 
                 Spacer(modifier = Modifier.height(30.dp))
             }
-           // }
+        }
     }
 }
 

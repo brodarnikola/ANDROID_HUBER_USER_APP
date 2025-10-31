@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import hr.sil.android.schlauebox.R
 import hr.sil.android.schlauebox.compose.view.ui.signuponboarding_activity.SignUpOnboardingSections
 //import hr.sil.android.schlauebox.cache.DataCache
@@ -18,7 +17,6 @@ import hr.sil.android.schlauebox.utils.UiEvent.*
 import hr.sil.android.schlauebox.utils.isEmailValid
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 import hr.sil.android.schlauebox.App
 import hr.sil.android.schlauebox.core.model.MPLDeviceType
@@ -33,8 +31,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-@HiltViewModel
-class NavHomeViewModel @Inject constructor()  : BaseViewModel<NavHomeUiState, HomeScreenEvent>() {
+class NavHomeViewModel : BaseViewModel<NavHomeUiState, HomeScreenEvent>() {
 
     val log = logger()
 
