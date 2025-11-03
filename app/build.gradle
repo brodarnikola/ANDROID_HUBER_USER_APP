@@ -40,7 +40,7 @@ android {
         }
 
         versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
-        versionName "0.29.1-alphaMajor.0.29.1-alphaMinor.0.29.1-alphaPatch"
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
