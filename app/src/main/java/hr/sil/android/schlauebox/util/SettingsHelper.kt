@@ -45,18 +45,13 @@ object SettingsHelper {
 
     private fun updateResources(context: Context, language: String): Context {
         var context = context
-        val locale = Locale(language)
+        val locale = Locale(language.lowercase())
         Locale.setDefault(locale)
 
         val res = context.resources
         val config = Configuration(res.configuration)
-        if(  Build.VERSION.SDK_INT >=  JELLY_BEAN_MR1 ) {
-            config.setLocale(locale)
-            context = context.createConfigurationContext(config)
-        } else {
-            config.locale = locale
-            res.updateConfiguration(config, res.displayMetrics)
-        }
+        config.setLocale(locale)
+        context = context.createConfigurationContext(config)
         return context
     }
 

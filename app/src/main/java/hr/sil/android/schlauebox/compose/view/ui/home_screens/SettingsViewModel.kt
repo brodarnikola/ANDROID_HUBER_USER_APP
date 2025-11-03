@@ -234,6 +234,7 @@ open class SettingsViewModel() : ViewModel() {
                 )
 
                 if (result) {
+                    log.info("Settings saved successfully, applying language: ${selectedLang.code}")
                     SettingsHelper.languageName = selectedLang.code
                     SettingsHelper.pushEnabled = currentState.pushNotifications
                     SettingsHelper.emailEnabled = currentState.emailNotifications
@@ -257,6 +258,7 @@ open class SettingsViewModel() : ViewModel() {
                     }
 
                     _uiState.update { it.copy(isLoading = false, isSaveEnabled = false) }
+                    log.info("Restarting app to apply language change")
                     onSuccess()
                 } else {
                     _uiState.update { it.copy(isLoading = false) }

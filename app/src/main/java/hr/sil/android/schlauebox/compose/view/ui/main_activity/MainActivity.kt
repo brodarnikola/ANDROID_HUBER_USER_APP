@@ -4,6 +4,7 @@ package hr.sil.android.schlauebox.compose.view.ui.main_activity
 import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -27,6 +28,8 @@ import hr.sil.android.view_util.permission.DroidPermission
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
+import hr.sil.android.schlauebox.util.SettingsHelper
+
 class MainActivity : ComponentActivity() {
 
     private val log = logger()
@@ -34,6 +37,10 @@ class MainActivity : ComponentActivity() {
 
     // State holders for overlays
     private val systemStateViewModel = SystemStateViewModel()
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(SettingsHelper.setLocale(newBase))
+    }
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {

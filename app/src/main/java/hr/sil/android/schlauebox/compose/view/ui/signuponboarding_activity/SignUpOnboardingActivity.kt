@@ -70,6 +70,10 @@ class SignUpOnboardingActivity : ComponentActivity() {
     private var showSplashScreenState = true
     private val dismissSplashScreenDelay = 200L
 
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(SettingsHelper.setLocale(newBase))
+    }
+
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
